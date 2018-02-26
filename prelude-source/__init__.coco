@@ -1,0 +1,477 @@
+# Imports:
+if TYPE_CHECKING:
+    import typing as _t
+    _T = _t.TypeVar("_T")
+    _U = _t.TypeVar("_U")
+    _V = _t.TypeVar("_V")
+
+# Standard types, classes, and related functions:
+
+## Basic data types:
+
+#### Bool:
+Bool = bool
+
+otherwise = True
+
+#### Maybe:
+class Maybe
+
+data Nothing() from Maybe
+nothing = Nothing()
+
+data Just(x) from Maybe
+
+if TYPE_CHECKING:
+    def maybe(default: _T, func: _t.Any -> _T, x: Maybe) -> _T =
+        ...  # type: ignore
+
+else:
+    def maybe(default, _, Nothing()) = default
+
+    @addpattern(maybe)
+    def maybe(_, func, Just(x)) = func(x)
+
+#### Either:
+class Either
+
+data Left(x) from Either
+
+data Right(x) from Either
+
+if TYPE_CHECKING:
+    def either(left_func: _t.Any -> _T, right_func: _t.Any -> _T, x: Either) -> _T =
+        ...  # type: ignore
+
+else:
+    def either(left_func, _, Left(x)) = left_func(x)
+
+    @addpattern(either)
+    def either(_, right_func, Right(x)) = right_func(x)
+
+#### Ordering:
+class Ordering
+
+data LT() from Ordering
+lt = LT()
+
+data EQ() from Ordering
+eq = EQ()
+
+data GT() from Ordering
+gt = GT()
+
+#### Char/String:
+Char = String = str
+
+
+### Tuples:
+fst = .[0]
+
+snd = .[1]
+
+def curry(func: (_T, _U) -> _V) -> _T -> _U -> _V =
+    func$  # type: ignore
+
+def uncurry(func: _T -> _U -> _V) -> (_T, _U) -> _V =
+    (x, y) -> func(x)(y)
+
+
+
+## Basic type classes:
+
+#### Ord:
+if TYPE_CHECKING:
+    def compare(x, y) -> Ordering =
+        ...  # type: ignore
+
+else:
+    def compare(x, y if x == y) = eq
+
+    @addpattern(compare)
+    def compare(x, y if x < y) = lt
+
+    @addpattern(compare)
+    def compare(x, y if x > y) = gt
+
+#### Enum:
+succ = (+)$(1)
+
+pred = (-)$(?, 1)
+
+
+
+## Numbers:
+
+### Numeric types:
+Integer = int
+
+Double = float
+
+
+### Numeric type classes:
+
+#### Num:
+negate = (-)
+
+if TYPE_CHECKING:
+    def signum(x) -> int =
+        ...  # type: ignore
+
+else:
+    def signum(0) = 0
+
+    @addpattern(signum)
+    def signum(x if x > 0) = 1
+
+    @addpattern(signum)
+    def signum(x if x < 0) = -1
+
+#### Integral:
+def quot(x: int, y: int) -> int =
+    divxy = x // y
+    divxy + (1 if divxy < 0 and x % y != 0 else 0)
+
+def rem(x: int, y: int) -> int =
+    modxy = x % y
+    modxy - (y if modxy != 0 and x // y < 0 else 0)
+
+div = (//)
+
+mod = (%)
+
+def quotRem(x: int, y: int) -> _t.Tuple[int, int] =
+    divxy, modxy = divmod(x, y)
+    divxy + (1 if modxy < 0 else 0), modxy - (y if modxy < 0 else 0)
+
+divMod = divmod
+
+#### Fractional:
+recip = (/)$(1)
+
+#### Floating:
+from math import (
+    pi,
+    exp,
+    log,
+    sqrt,
+    sin,
+    cos,
+    tan,
+    asin,
+    acos,
+    atan,
+    sinh,
+    cosh,
+    tanh,
+    asinh,
+    acosh,
+    atanh,
+)
+
+def logBase(base: float, x: float) -> float =
+    log(x, base)
+
+#### RealFrac:
+truncate = int
+
+round = round  # type: ignore
+
+from math import (
+    ceil as ceiling,
+    floor,
+)
+
+#### RealFloat:
+from math import (
+    isnan as isNaN,
+    isinf as isInfinite,
+    atan2,
+)
+
+
+### Numeric functions:
+def even(x: int) -> bool =
+    x % 2 == 0
+
+def odd(x: int) -> bool =
+    x % 2 == 1
+
+def gcd(x: int, y: int) -> int =
+    if y == 0:
+        return abs(x)
+    abs_y = abs(y)
+    gcd(abs_y, abs(x) % abs_y)  # tail recursive
+
+if TYPE_CHECKING:
+    def lcm(x: int, y: int) -> int =
+        ...  # type: ignore
+
+else:
+    def lcm(_, 0) = 0
+
+    @addpattern(lcm)
+    def lcm(0, _) = 0
+
+    @addpattern(lcm)
+    def lcm(x, y) =
+        (x `quot` gcd(x, y))*y |> abs
+
+
+
+## Folds and traversals:
+def foldr(func: (_T, _U) -> _T, init: _T, xs: _U$[]) -> _T =
+    reduce(func, xs, init)
+
+def foldl(func: (_T, _U) -> _T, init: _T, xs: _U[]) -> _T =
+    reduce(func, reversed(xs), init)
+
+foldr1 = reduce
+
+def foldl1(func: (_T, _T) -> _T, xs: _T[]) =
+    reduce(func, reversed(xs))
+
+def null(xs: _T[]) -> bool = len(xs) == 0
+
+length = len
+
+def elem(e: _T, xs: _T[]) -> bool = e in xs
+
+maximum = max
+
+minimum = min
+
+sum = sum  # type: ignore
+
+product = reduce$(*)
+
+
+
+## Miscellaneous functions:
+def id(x: _T) -> _T = x
+
+def const(x: _T, _) -> _T = x
+
+def flip(func: (_T, _U) -> _V) -> (_U, _T) -> _V =
+    (x, y) -> func(y, x)
+
+def until(cond: _T -> bool, func: _T -> _T, x: _T) -> _T =
+    if cond(x):
+        return x
+    until(cond, func, func(x))  # tail recursive
+
+def error(msg: str) -> None: raise Exception(msg)
+
+undefined = None
+
+
+
+
+# List operations:
+map = map  # type: ignore
+
+filter = filter  # type: ignore
+
+head = .$[0]
+
+last = .$[-1]
+
+tail = .$[1:]
+
+init = .$[:-1]
+
+reverse = reversed
+
+
+
+## Special folds:
+and_: _T$[] -> bool
+and_ = all  # type: ignore
+
+or_: _T$[] -> bool
+or_ = any  # type: ignore
+
+any = or_..map
+
+all = and_..map
+
+concat: _T$[]$[] -> _T$[]
+concat = reduce$(::)  # type: ignore
+
+concatMap = concat..map
+
+
+
+## Building lists:
+
+### Scans:
+def scanl(func: (_T, _U) -> _T, init: _T, xs: _U[]) -> _T$[] =
+    scan(func, reversed(xs), init)
+
+def scanl1(func: (_T, _T) -> _T, xs: _T[]) -> _T$[] =
+    scan(func, reversed(xs))
+
+def scanr(func: (_T, _U) -> _T, init: _T, xs: _U$[]) -> _T$[] =
+    scan(func, xs, init)
+
+scanr1 = scan
+
+### Infinite lists:
+@recursive_iterator
+def iterate(func: _T -> _T, x: _T) -> _T$[] =
+    [x] :: iterate(func, func(x))
+
+@recursive_iterator
+def repeat(x: _T) -> _T$[] =
+    [x] :: repeat(x)
+
+def replicate(n: int, x: _T) -> _T$[] =
+    repeat(x)$[:n]
+
+if TYPE_CHECKING:
+    def cycle(xs: _T$[]) -> _T$[] =
+        ...  # type: ignore
+
+else:
+    @recursive_iterator
+    def cycle(xs if len(xs) > 0) =
+        xs :: cycle(xs)
+
+
+
+## Sublists:
+def take(n: int, xs: _T$[]) -> _T$[] =
+    xs$[:n]
+
+def drop(n: int, xs: _T$[]) -> _T$[] =
+    xs$[n:]
+
+def splitAt(n: int, xs: _T$[]) -> _t.Tuple[_T$[], _T$[]] =
+    reit = reiterable(xs)
+    reit$[:n], reit$[n:]
+
+takeWhile = takewhile
+
+dropWhile = dropwhile
+
+if TYPE_CHECKING:
+    def span(cond: _T -> bool, xs: _T[]) -> _T[] =
+        ...  # type: ignore
+
+else:
+    def span(_, []) = ([], [])
+
+    @addpattern(span)
+    def span(cond, [x] + t as xs if cond(x)) =
+        ys, zs = span(cond, t)
+        ([x] + ys, zs)
+
+    @addpattern(span)
+    def span(cond, xs) =
+        ([], xs)
+
+def break_(cond: _T -> bool, xs: _T[]) -> _T[] =
+    span((not)..cond, xs)
+
+
+
+## Searching lists:
+def notElem(e: _T, xs: _T[]) -> bool =
+    e not in xs
+
+def lookup(key: _T, assocs: _t.Tuple[_T, _U]$[]) -> Maybe:
+    try:
+        return (
+            assocs
+            |> dropwhile$(pair -> pair[0] != key)
+            |> .$[0]
+            |> .[1]
+            |> Just
+        )
+    except StopIteration:
+        return nothing
+
+
+
+## Zipping and unzipping lists:
+zip = zip3 = zip  # type: ignore
+
+def zipWith(func: -> _T, *iters) -> _T$[] =
+    starmap(func, zip(*iters))
+
+zipWith3 = zipWith
+
+def unzip(xs: _T$[]$[]) -> _T$[]$[] =
+    zip(*xs)
+
+unzip3 = unzip
+
+
+
+## Functions on strings:
+lines = .split("\n")  # type: ignore
+
+words = .split()  # type: ignore
+
+unlines = "\n".join
+
+unwords = " ".join
+
+
+
+
+# Converting to and from String:
+
+## Converting to String:
+show = str
+
+
+
+
+# Basic input and output:
+
+## Simple I/O operations:
+
+### Output functions:
+putChar = putStr = print$(end="")
+
+putStrLn = print
+
+
+### Input functions:
+import sys as _sys
+
+getChar = _sys.stdin.read$(1)
+
+getLine = input
+
+getContents = _sys.stdin.read
+
+def interact(func: str -> str) -> None:
+    while True:
+        input() |> func |> print
+
+
+### Files:
+FilePath = str
+
+def readFile(fpath: str) -> str:
+    with open(fpath, "r+") as f:
+        return f.read()
+
+def writeFile(fpath: str, fstr: str) -> None:
+    with open(fpath, "w+") as f:
+        f.write(fstr)
+
+def appendFile(fpath: str, fstr: str) -> None:
+    with open(fpath, "a+") as f:
+        f.write(fstr)
+
+
+
+## Exception handling:
+IOError = IOError  # type: ignore
+
+def ioError() -> None: raise IOError()
+
+def userError(msg: str) -> None: raise IOError(msg)
