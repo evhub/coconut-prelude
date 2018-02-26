@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x546150cc
+# __coconut_hash__ = 0xb1559b01
 
-# Compiled with Coconut version 1.3.1-post_dev24 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev25 [Dead Parrot]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -20,11 +20,16 @@ _coconut_sys.path.remove(_coconut_file_path)
 # Compiled Coconut: -----------------------------------------------------------
 
 # Imports:
+_sys = _coconut_sys
+
 if TYPE_CHECKING:
     import typing as _t
     _T = _t.TypeVar("_T")
     _U = _t.TypeVar("_U")
     _V = _t.TypeVar("_V")
+
+
+
 
 # Standard types, classes, and related functions:
 
@@ -33,7 +38,7 @@ if TYPE_CHECKING:
 #### Bool:
 Bool = bool
 
-otherwise = True
+otherwise = True  # type: bool
 
 #### Maybe:
 class Maybe(_coconut.object): pass
@@ -41,9 +46,9 @@ class Maybe(_coconut.object): pass
 class Nothing(_coconut.collections.namedtuple("Nothing", ""), Maybe):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
-nothing = Nothing()
+nothing = Nothing()  # type: Maybe
 
-class Just(_coconut.collections.namedtuple("Just", "x"), Maybe):
+class Just(_coconut_NamedTuple("Just", [("x", '_t.Any')]), Maybe):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
 
@@ -91,11 +96,11 @@ else:
 #### Either:
 class Either(_coconut.object): pass
 
-class Left(_coconut.collections.namedtuple("Left", "x"), Either):
+class Left(_coconut_NamedTuple("Left", [("x", '_t.Any')]), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
 
-class Right(_coconut.collections.namedtuple("Right", "x"), Either):
+class Right(_coconut_NamedTuple("Right", [("x", '_t.Any')]), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
 
@@ -147,26 +152,26 @@ class Ordering(_coconut.object): pass
 class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
-lt = LT()
+lt = LT()  # type: Ordering
 
 class EQ(_coconut.collections.namedtuple("EQ", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
-eq = EQ()
+eq = EQ()  # type: Ordering
 
 class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
-gt = GT()
+gt = GT()  # type: Ordering
 
 #### Char/String:
-Char = String = str
+String = string = str
 
 
 ### Tuples:
-fst = _coconut.operator.itemgetter(0)
+fst = _coconut.operator.itemgetter(0)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _T]
 
-snd = _coconut.operator.itemgetter(1)
+snd = _coconut.operator.itemgetter(1)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _T]
 
 def curry(func  # type: _coconut.typing.Callable[[_T, _U], _V]
     ):
@@ -249,23 +254,27 @@ else:
         return gt
 
 #### Enum:
-succ = _coconut.functools.partial(_coconut.operator.add, 1)
+succ = _coconut.functools.partial(_coconut.operator.add, 1)  # type: _coconut.typing.Callable[[_t.Any], _t.Any]
 
-pred = _coconut_partial(_coconut_minus, {1: 1}, 2)
+pred = _coconut_partial(_coconut_minus, {1: 1}, 2)  # type: _coconut.typing.Callable[[_t.Any], _t.Any]
 
 
 
 ## Numbers:
 
 ### Numeric types:
-Integer = int
+Integer = integer = int
 
-Double = float
+Double = double = float
 
 
 ### Numeric type classes:
 
 #### Num:
+if TYPE_CHECKING:
+    Num = _t.Union[float, int]
+num = (float, int)
+
 negate = _coconut_minus
 
 if TYPE_CHECKING:
@@ -338,9 +347,9 @@ def rem(x,  # type: int
     modxy = x % y
     return modxy - (y if modxy != 0 and x // y < 0 else 0)
 
-div = _coconut.operator.floordiv
+div = _coconut.operator.floordiv  # type: _coconut.typing.Callable[[int, int], int]
 
-mod = _coconut.operator.mod
+mod = _coconut.operator.mod  # type: _coconut.typing.Callable[[int, int], int]
 
 def quotRem(x,  # type: int
      y  # type: int
@@ -352,7 +361,7 @@ def quotRem(x,  # type: int
 divMod = divmod
 
 #### Fractional:
-recip = _coconut.functools.partial(_coconut.operator.truediv, 1)
+recip = _coconut.functools.partial(_coconut.operator.truediv, 1)  # type: _coconut.typing.Callable[[Num], Num]
 
 #### Floating:
 from math import pi
@@ -372,8 +381,8 @@ from math import asinh
 from math import acosh
 from math import atanh
 
-def logBase(base,  # type: float
-     x  # type: float
+def logBase(base,  # type: Num
+     x  # type: Num
     ):
 # type: (...) -> float
     return log(x, base)
@@ -501,7 +510,7 @@ minimum = min
 
 sum = sum  # type: ignore
 
-product = _coconut.functools.partial(reduce, _coconut.operator.mul)
+product = _coconut.functools.partial(reduce, _coconut.operator.mul)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _T]
 
 
 
@@ -542,7 +551,7 @@ def error(msg  # type: str
 # type: (...) -> None
     raise Exception(msg)
 
-undefined = None
+undefined = None  # type: _t.Any
 
 
 
@@ -552,13 +561,15 @@ map = map  # type: ignore
 
 filter = filter  # type: ignore
 
-head = _coconut.functools.partial(_coconut_igetitem, index=0)
+head = _coconut.functools.partial(_coconut_igetitem, index=0)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _T]
 
-last = _coconut.functools.partial(_coconut_igetitem, index=-1)
+last = _coconut.functools.partial(_coconut_igetitem, index=-1)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _T]
 
-tail = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(1, None))
+tail = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _coconut.typing.Iterable[_T]]
+tail = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(1, None))  # type: ignore
 
-init = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(None, -1))
+init = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _coconut.typing.Iterable[_T]]
+init = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(None, -1))  # type: ignore
 
 reverse = reversed
 
@@ -571,14 +582,14 @@ and_ = all  # type: ignore
 or_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_T]], bool]
 or_ = any  # type: ignore
 
-any = _coconut_forward_compose(map, or_)
+any = _coconut_forward_compose(map, or_)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_T], bool]), _coconut.typing.Iterable[_T]], bool]
 
-all = _coconut_forward_compose(map, and_)
+all = _coconut_forward_compose(map, and_)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_T], bool]), _coconut.typing.Iterable[_T]], bool]
 
 concat = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_coconut.typing.Iterable[_T]]], _coconut.typing.Iterable[_T]]
 concat = _coconut.functools.partial(reduce, _coconut.itertools.chain)  # type: ignore
 
-concatMap = _coconut_forward_compose(map, concat)
+concatMap = _coconut_forward_compose(map, concat)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_coconut.typing.Iterable[_T]], _coconut.typing.Iterable[_U]]), _coconut.typing.Iterable[_coconut.typing.Iterable[_T]]], _coconut.typing.Iterable[_U]]
 
 
 
@@ -772,13 +783,15 @@ unzip3 = unzip
 
 
 ## Functions on strings:
+lines = None  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]
 lines = _coconut.operator.methodcaller("split", "\n")  # type: ignore
 
+words = None  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]
 words = _coconut.operator.methodcaller("split")  # type: ignore
 
-unlines = "\n".join
+unlines = "\n".join  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[str]], str]
 
-unwords = " ".join
+unwords = " ".join  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[str]], str]
 
 
 
@@ -796,19 +809,18 @@ show = str
 ## Simple I/O operations:
 
 ### Output functions:
-putChar = putStr = _coconut.functools.partial(print, end="")
+putStr = _coconut.functools.partial(print, end="")  # type: _coconut.typing.Callable[[str], None]
+putChar = putStr
 
 putStrLn = print
 
 
 ### Input functions:
-_sys = _coconut_sys
-
-getChar = _coconut.functools.partial(_sys.stdin.read, 1)
+getChar = _coconut.functools.partial(_sys.stdin.read, 1)  # type: _coconut.typing.Callable[[], str]
 
 getLine = input
 
-getContents = _sys.stdin.read
+getContents = _sys.stdin.read  # type: _coconut.typing.Callable[[], str]
 
 def interact(func  # type: _coconut.typing.Callable[[str], str]
     ):
@@ -831,14 +843,14 @@ def writeFile(fpath,  # type: str
     ):
 # type: (...) -> None
     with open(fpath, "w+") as f:
-        f.write(fstr)
+        f.write(fstr)  # type: ignore
 
 def appendFile(fpath,  # type: str
      fstr  # type: str
     ):
 # type: (...) -> None
     with open(fpath, "a+") as f:
-        f.write(fstr)
+        f.write(fstr)  # type: ignore
 
 
 

@@ -1,9 +1,14 @@
 # Imports:
+import sys as _sys
+
 if TYPE_CHECKING:
     import typing as _t
     _T = _t.TypeVar("_T")
     _U = _t.TypeVar("_U")
     _V = _t.TypeVar("_V")
+
+
+
 
 # Standard types, classes, and related functions:
 
@@ -12,15 +17,15 @@ if TYPE_CHECKING:
 #### Bool:
 Bool = bool
 
-otherwise = True
+otherwise: bool = True
 
 #### Maybe:
 class Maybe
 
 data Nothing() from Maybe
-nothing = Nothing()
+nothing: Maybe = Nothing()
 
-data Just(x) from Maybe
+data Just(x: _t.Any) from Maybe
 
 if TYPE_CHECKING:
     def maybe(default: _T, func: _t.Any -> _T, x: Maybe) -> _T =
@@ -35,9 +40,9 @@ else:
 #### Either:
 class Either
 
-data Left(x) from Either
+data Left(x: _t.Any) from Either
 
-data Right(x) from Either
+data Right(x: _t.Any) from Either
 
 if TYPE_CHECKING:
     def either(left_func: _t.Any -> _T, right_func: _t.Any -> _T, x: Either) -> _T =
@@ -53,22 +58,22 @@ else:
 class Ordering
 
 data LT() from Ordering
-lt = LT()
+lt: Ordering = LT()
 
 data EQ() from Ordering
-eq = EQ()
+eq: Ordering = EQ()
 
 data GT() from Ordering
-gt = GT()
+gt: Ordering = GT()
 
 #### Char/String:
-Char = String = str
+String = string = str
 
 
 ### Tuples:
-fst = .[0]
+fst: _T$[] -> _T = .[0]
 
-snd = .[1]
+snd: _T$[] -> _T = .[1]
 
 def curry(func: (_T, _U) -> _V) -> _T -> _U -> _V =
     func$  # type: ignore
@@ -95,23 +100,27 @@ else:
     def compare(x, y if x > y) = gt
 
 #### Enum:
-succ = (+)$(1)
+succ: _t.Any -> _t.Any = (+)$(1)
 
-pred = (-)$(?, 1)
+pred: _t.Any -> _t.Any = (-)$(?, 1)
 
 
 
 ## Numbers:
 
 ### Numeric types:
-Integer = int
+Integer = integer = int
 
-Double = float
+Double = double = float
 
 
 ### Numeric type classes:
 
 #### Num:
+if TYPE_CHECKING:
+    Num = _t.Union[float, int]
+num = (float, int)
+
 negate = (-)
 
 if TYPE_CHECKING:
@@ -136,9 +145,9 @@ def rem(x: int, y: int) -> int =
     modxy = x % y
     modxy - (y if modxy != 0 and x // y < 0 else 0)
 
-div = (//)
+div: (int, int) -> int = (//)
 
-mod = (%)
+mod: (int, int) -> int = (%)
 
 def quotRem(x: int, y: int) -> _t.Tuple[int, int] =
     divxy, modxy = divmod(x, y)
@@ -147,7 +156,7 @@ def quotRem(x: int, y: int) -> _t.Tuple[int, int] =
 divMod = divmod
 
 #### Fractional:
-recip = (/)$(1)
+recip: Num -> Num = (/)$(1)
 
 #### Floating:
 from math import (
@@ -169,7 +178,7 @@ from math import (
     atanh,
 )
 
-def logBase(base: float, x: float) -> float =
+def logBase(base: Num, x: Num) -> float =
     log(x, base)
 
 #### RealFrac:
@@ -243,7 +252,7 @@ minimum = min
 
 sum = sum  # type: ignore
 
-product = reduce$(*)
+product: _T$[] -> _T = reduce$(*)
 
 
 
@@ -262,7 +271,7 @@ def until(cond: _T -> bool, func: _T -> _T, x: _T) -> _T =
 
 def error(msg: str) -> None: raise Exception(msg)
 
-undefined = None
+undefined: _t.Any = None
 
 
 
@@ -272,13 +281,15 @@ map = map  # type: ignore
 
 filter = filter  # type: ignore
 
-head = .$[0]
+head: _T$[] -> _T = .$[0]
 
-last = .$[-1]
+last: _T$[] -> _T = .$[-1]
 
-tail = .$[1:]
+tail: _T$[] -> _T$[]
+tail = .$[1:]  # type: ignore
 
-init = .$[:-1]
+init: _T$[] -> _T$[]
+init = .$[:-1]  # type: ignore
 
 reverse = reversed
 
@@ -291,14 +302,14 @@ and_ = all  # type: ignore
 or_: _T$[] -> bool
 or_ = any  # type: ignore
 
-any = or_..map
+any: ((_T -> bool), _T$[]) -> bool = or_..map
 
-all = and_..map
+all: ((_T -> bool), _T$[]) -> bool = and_..map
 
 concat: _T$[]$[] -> _T$[]
 concat = reduce$(::)  # type: ignore
 
-concatMap = concat..map
+concatMap: ((_T$[] -> _U$[]), _T$[]$[]) -> _U$[] = concat..map
 
 
 
@@ -409,13 +420,15 @@ unzip3 = unzip
 
 
 ## Functions on strings:
+lines: str -> str[]
 lines = .split("\n")  # type: ignore
 
+words: str -> str[]
 words = .split()  # type: ignore
 
-unlines = "\n".join
+unlines: str[] -> str = "\n".join
 
-unwords = " ".join
+unwords: str[] -> str = " ".join
 
 
 
@@ -433,19 +446,18 @@ show = str
 ## Simple I/O operations:
 
 ### Output functions:
-putChar = putStr = print$(end="")
+putStr: str -> None = print$(end="")
+putChar = putStr
 
 putStrLn = print
 
 
 ### Input functions:
-import sys as _sys
-
-getChar = _sys.stdin.read$(1)
+getChar: () -> str = _sys.stdin.read$(1)
 
 getLine = input
 
-getContents = _sys.stdin.read
+getContents: () -> str = _sys.stdin.read
 
 def interact(func: str -> str) -> None:
     while True:
@@ -461,11 +473,11 @@ def readFile(fpath: str) -> str:
 
 def writeFile(fpath: str, fstr: str) -> None:
     with open(fpath, "w+") as f:
-        f.write(fstr)
+        f.write(fstr)  # type: ignore
 
 def appendFile(fpath: str, fstr: str) -> None:
     with open(fpath, "a+") as f:
-        f.write(fstr)
+        f.write(fstr)  # type: ignore
 
 
 

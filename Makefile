@@ -1,3 +1,7 @@
+.PHONY: stubgen
+stubgen: install
+	stubgen -o . prelude
+
 .PHONY: install
 install: build
 	pip install -e .
