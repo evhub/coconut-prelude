@@ -1,12 +1,61 @@
 # Imports:
 import sys as _sys
-from collections import abc as _abc  # type: ignore
+import typing as _t
+import functools as _functools
 
-if TYPE_CHECKING:
-    import typing as _t
-    _T = _t.TypeVar("_T")
-    _U = _t.TypeVar("_U")
-    _V = _t.TypeVar("_V")
+
+
+
+# Type variables:
+_a = _t.TypeVar("_a")
+_b = _t.TypeVar("_b")
+_c = _t.TypeVar("_c")
+
+
+
+
+
+# Helper functions:
+
+## Type class helpers:
+def derivingEqOrd(*valueConstructors: _t.NamedTuple) -> None:
+    """
+    The expression
+        derivingEqOrd(valueConstructor1, valueConstructor2, ...)
+    is equivalent to stating that for any data type defined as
+        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
+    we should add
+        deriving (Eq, Ord)
+    """
+    ind = valueConstructors.index..type
+    for valCon in valueConstructors:
+        def valCon.__eq__(x, y) =
+            type(x) is type(y) and tuple.__eq__(x, y)
+        def valCon.__lt__(x, y) =
+            tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
+        def valCon.__le__(x, y) =
+            tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y)
+        def valCon.__ge__(x, y) =
+            tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y)
+        def valCon.__gt__(x, y) =
+            tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
+
+def derivingEnum(*valueConstructors: _t.NamedTuple) -> None:
+    """
+    The expression
+        derivingEnum(valueConstructor1, valueConstructor2, ...)
+    is equivalent to stating that for any data type defined as
+        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
+    we should add
+        deriving (Enum)
+    """
+    ind = valueConstructors.index..type
+    for valCon in valueConstructors:
+        valCon.__int__ = ind
+        def valCon.__add__(self, x is int) =
+            valueConstructors[ind(self) + x]()
+        def valCon.__sub__(self, x is int) =
+            valueConstructors[ind(self) - x]()
 
 
 
@@ -18,6 +67,9 @@ if TYPE_CHECKING:
 #### Bool:
 Bool = bool
 
+not_: bool -> bool
+not_ = (not)
+
 otherwise: bool = True
 
 #### Maybe:
@@ -26,12 +78,13 @@ class Maybe
 data Nothing() from Maybe
 nothing: Maybe = Nothing()
 
-data Just(x: _t.Any) from Maybe
+data Just(x) from Maybe
+
+derivingEqOrd(Nothing, Just)
 
 if TYPE_CHECKING:
-    def maybe(default: _T, func: _t.Any -> _T, x: Maybe) -> _T =
+    def maybe(default: _b, func: _t.Any -> _b, x: Maybe) -> _b =
         ...  # type: ignore
-
 else:
     def maybe(default, _, Nothing()) = default
 
@@ -41,14 +94,15 @@ else:
 #### Either:
 class Either
 
-data Left(x: _t.Any) from Either
+data Left(x) from Either
 
-data Right(x: _t.Any) from Either
+data Right(x) from Either
+
+derivingEqOrd(Left, Right)
 
 if TYPE_CHECKING:
-    def either(left_func: _t.Any -> _T, right_func: _t.Any -> _T, x: Either) -> _T =
+    def either(left_func: _t.Any -> _c, right_func: _t.Any -> _c, x: Either) -> _c =
         ...  # type: ignore
-
 else:
     def either(left_func, _, Left(x)) = left_func(x)
 
@@ -67,30 +121,42 @@ eq: Ordering = EQ()
 data GT() from Ordering
 gt: Ordering = GT()
 
-#### Char/String:
-String = string = str
+derivingEqOrd(LT, EQ, GT)
+derivingEnum(LT, EQ, GT)
+
+#### Char:
+Char = str
+
+#### String:
+String = str
 
 
 ### Tuples:
-fst: _T$[] -> _T = .[0]
+fst: _t.Tuple[_a, _b] -> _a
+fst = .[0]
 
-snd: _T$[] -> _T = .[1]
+snd: _t.Tuple[_a, _b] -> _b
+snd = .[1]
 
-def curry(func: (_T, _U) -> _V) -> _T -> _U -> _V =
+def curry(func: (_a, _b) -> _c) -> _a -> _b -> _c =
     func$  # type: ignore
 
-def uncurry(func: _T -> _U -> _V) -> (_T, _U) -> _V =
+def uncurry(func: _a -> _b -> _c) -> (_a, _b) -> _c =
     (x, y) -> func(x)(y)
 
 
 
 ## Basic type classes:
 
-#### Ord:
-if TYPE_CHECKING:
-    def compare(x, y) -> Ordering =
-        ...  # type: ignore
+#### Eq:
+Eq = _t.Any
 
+#### Ord:
+Ord = Eq
+
+if TYPE_CHECKING:
+    def compare(x: Ord, y: Ord) -> Ordering =
+        ...  # type: ignore
 else:
     def compare(x, y if x == y) = eq
 
@@ -100,35 +166,89 @@ else:
     @addpattern(compare)
     def compare(x, y if x > y) = gt
 
-#### Enum:
-succ: _t.Any -> _t.Any = (+)$(1)
+max: (_a, _a) -> _a
+max = max  # type: ignore
 
-pred: _t.Any -> _t.Any = (-)$(?, 1)
+min: (_a, _a) -> _a
+min = min  # type: ignore
+
+#### Enum:
+Enum = _t.SupportsInt
+_E = _t.TypeVar("_E", bound=Enum)
+
+succ: _E -> _E
+succ = (+)$(1)
+
+pred: _E -> _E
+pred = (-)$(?, 1)
+
+toEnum = NotImplemented
+
+fromEnum: Enum -> int
+fromEnum = int
+
+def enumFrom(first: _E) -> _E$[] =
+    iterate(succ, first)
+
+def enumFromThen(first: _E, second: _E) -> _E$[] =
+    step = fromEnum(second) - fromEnum(first)
+    iterate((+)$(step), first)
+
+def enumFromTo(first: _E, last: _E) -> _E$[] =
+    dist = fromEnum(last) - fromEnum(first)
+    iterate(succ, first)$[:dist] if dist >= 0 else iterate(pred, first)$[:-dist]
+
+def enumFromThenTo(first: _E, second: _E, last: _E) -> _E$[] =
+    step = fromEnum(second) - fromEnum(first)
+    iterate((+)$(step), first) |> takewhile$(-> _ <= last if step >= 0 else _ >= last)
+
+
+#### Bounded:
+Bounded = NotImplemented
+
+minBound = NotImplemented
+
+maxBound = NotImplemented
 
 
 
 ## Numbers:
 
 ### Numeric types:
-Integer = integer = int
 
-Double = double = float
+#### Int:
+Int = int
+
+#### Integer:
+Integer = int
+
+#### Float:
+Float = float
+
+#### Double:
+Double = float
+
+#### Rational:
+from fractions import Fraction as Rational
+
+#### Word:
+Word = Int
 
 
 ### Numeric type classes:
 
 #### Num:
-if TYPE_CHECKING:
-    Num = _t.Union[float, int]
-else:
-    Num = (float, int)
+Num = _t.Union[int, float, Rational]
+_N = _t.TypeVar("_N", bound=Num)
 
 negate = (-)
+
+abs: _a -> _a
+abs = abs  # type: ignore
 
 if TYPE_CHECKING:
     def signum(x) -> int =
         ...  # type: ignore
-
 else:
     def signum(0) = 0
 
@@ -138,7 +258,17 @@ else:
     @addpattern(signum)
     def signum(x if x < 0) = -1
 
+def fromInteger(x: Integer) -> Num = x
+
+#### Real:
+Real = Num
+
+toRational: Real -> Rational
+toRational = Rational
+
 #### Integral:
+Integral = int
+
 def quot(x: int, y: int) -> int =
     divxy = x // y
     divxy + (1 if divxy < 0 and x % y != 0 else 0)
@@ -147,9 +277,11 @@ def rem(x: int, y: int) -> int =
     modxy = x % y
     modxy - (y if modxy != 0 and x // y < 0 else 0)
 
-div: (int, int) -> int = (//)
+div: (int, int) -> int
+div = (//)
 
-mod: (int, int) -> int = (%)
+mod: (int, int) -> int
+mod = (%)
 
 def quotRem(x: int, y: int) -> _t.Tuple[int, int] =
     divxy, modxy = divmod(x, y)
@@ -157,10 +289,20 @@ def quotRem(x: int, y: int) -> _t.Tuple[int, int] =
 
 divMod = divmod
 
+toInteger: Integral -> Integer
+toInteger = int
+
 #### Fractional:
-recip: Num -> Num = (/)$(1)
+Fractional = Rational
+
+recip: Fractional -> Fractional
+recip = (/)$(1)
+
+def fromRational(x: Rational) -> Fractional = x
 
 #### Floating:
+Floating = float
+
 from math import (
     pi,
     exp,
@@ -184,40 +326,79 @@ def logBase(base: Num, x: Num) -> float =
     log(x, base)
 
 #### RealFrac:
+RealFrac = Rational
+
+def properFraction(x: Rational) -> (int, Rational) =
+    floor_x = floor(x)
+    floor_x + (x - floor_x)
+
+truncate: Rational -> int
 truncate = int
 
+round: Rational -> int
 round = round  # type: ignore
 
 from math import (
-    ceil as ceiling,
-    floor,
+    ceil as _ceil,
+    floor as _floor,
 )
 
+ceiling: Rational -> int
+ceiling = _ceil
+
+floor: Rational -> int
+floor = _floor
+
 #### RealFloat:
+RealFloat = float
+
+def floatRadix(x: float) -> int = 2
+
+floatDigits = NotImplemented
+
+floatRange = NotImplemented
+
+decodeFloat = NotImplemented
+
+encodeFloat = NotImplemented
+
+exponent = NotImplemented
+
+significand = NotImplemented
+
+def scaleFloat(power: int, x: float) -> float =
+    x * 2**power
+
 from math import (
     isnan as isNaN,
     isinf as isInfinite,
     atan2,
 )
 
+isDenormalized = NotImplemented
+
+isNegativeZero = NotImplemented
+
+isIEEE = NotImplemented
+
 
 ### Numeric functions:
+def subtract(x, y) = x - y
+
 def even(x: int) -> bool =
     x % 2 == 0
 
 def odd(x: int) -> bool =
     x % 2 == 1
 
-def gcd(x: int, y: int) -> int =
-    if y == 0:
-        return abs(x)
-    abs_y = abs(y)
-    gcd(abs_y, abs(x) % abs_y)  # tail recursive
+from fractions import gcd as gcd_
+
+gcd: (int, int) -> int
+gcd = abs..gcd_
 
 if TYPE_CHECKING:
     def lcm(x: int, y: int) -> int =
         ...  # type: ignore
-
 else:
     def lcm(_, 0) = 0
 
@@ -226,153 +407,336 @@ else:
 
     @addpattern(lcm)
     def lcm(x, y) =
-        (x `quot` gcd(x, y))*y |> abs
+        abs_x = abs(x)
+        abs_y = abs(y)
+        abs_y * (abs_x // gcd_(abs_x, abs_y))
+
+fromIntegral: Integral -> Num
+fromIntegral = fromInteger
+
+realToFrac: Real -> Fractional
+realToFrac = Rational
+
+
+
+## Monoids:
+Monoid = NotImplemented
+
+mempty = NotImplemented
+
+mappend = NotImplemented
+
+mconcat = NotImplemented
 
 
 
 ## Monads and functors:
 
 #### Functor:
-if TYPE_CHECKING:
-    Functor = _t.Iterable
-else:
-    Functor = _abc.Iterable
+Functor = _t.Iterable
 
 fmap = fmap  # type: ignore
 
-#### Monad:
-if TYPE_CHECKING:
-    Monad = _t.Sequence
-else:
-    Monad = _abc.Sequence
+def fmapConst(x: _a, xs: Functor) -> Functor[_a] =
+    """
+    fmapConst :: Functor f => (a -> b) -> f a -> f b
+    fmapConst = (<$)
+    """
+    fmap(-> x, xs)
 
-def bind(m: Monad[_T], func: _T -> Monad[_U]) -> Monad[_U] =
+#### Applicative:
+Applicative = _t.Collection
+_A = _t.TypeVar("_A", bound=Applicative)
+
+pure = NotImplemented
+
+def ap(fs: Applicative[_a -> _b], xs: Applicative[_a]) -> Applicative[_b] =
+    """
+    ap :: Applicative f => f (a -> b) -> f a -> f b
+    ap = (<*>)
+    """
+    fs `bind` fmap$(?, xs)
+
+def seqAr(f1: Applicative, f2: _A) -> _A =
+    """
+    seqAr :: Applicative f => f a -> f b -> f b
+    seqAr = (*>)
+    """
+    ap(fmap(x1 -> x2 -> x2, f1), f2)
+
+def seqAl(f1: _A, f2: Applicative) -> _A =
+    """
+    seqAl :: Applicative f => f a -> f b -> f a
+    seqAl = (<*)
+    """
+    ap(fmap(x1 -> x2 -> x1, f1), f2)
+
+def liftA2(func: (_a, _b) -> _c, f1: Applicative[_a], f2: Applicative[_b]) -> Applicative[_c] =
+    """Lift a binary function to actions."""
+    ap(fmap(func$, f1), f2)
+
+#### Monad:
+Monad = Applicative
+_M = _t.TypeVar("_M", bound=Monad)
+
+def bind(m: Monad[_a], func: _a -> _M) -> _M =
+    """
+    bind :: Monad m => m a -> (a -> m b) -> m b
+    bind = (>>=)
+    """
     join(fmap(func, m))
 
-def join(m: Monad[Monad[_T]]) -> Monad[_T] =
-    m |> reduce$(+) |*> makedata$(m.__class__) if m else m  # type: ignore
+def seqM(m1: Monad, m2: _M) -> _M =
+    """
+    seqM :: Monad m => m a -> m b -> m b
+    seqM = (>>)
+    """
+    m1 `bind` x -> m2
+
+return_ = NotImplemented
+
+fail = NotImplemented
+
+def sequence_(ms: Traversable[Monad[_a]]) -> None:
+    reduce(seqM, ms)
+
+mapM_: (_a -> Monad[_b], Traversable[_a]) -> None
+mapM_ = sequence_..fmap
+
+def bindFrom(func: _a -> Monad[_b], m: Monad[_a]) =
+    """
+    bindFrom :: Monad m => (a -> m b) -> m a -> m b
+    bindFrom = (=<<)
+    """
+    m `bind` func
+
+if TYPE_CHECKING:
+    def join(m: Monad[_M]) -> _M =
+        ...  # type: ignore
+else:
+    def join(m if len(m) == 0) = m
+
+    @addpattern(join)
+    def join(m if len(m) == 1) = m[0]
+
+    @addpattern(join)
+    def join(m) =
+        """The conventional monad join operator."""
+        m |> reduce$(+) |*> makedata$(type(m))
+
+if TYPE_CHECKING:
+    def do(func: -> _M, *monads: _M) -> _M =
+        ...  # type: ignore
+else:
+    def do(func) = func()
+
+    @addpattern(do)
+    def do(func, m1, *ms) =
+        """
+        The call
+            do(func, m1, m2, ...)
+        is equivalent to the do notation
+            x1 <- m1
+            x2 <- m2
+            ...
+            func(x1, x2, ...)
+        which is equivalent to the sequence of binds
+            m1 `bind` x1 ->
+                m2 `bind` x2 ->
+                    ...
+                        func(x1, x2, ...)
+        """
+        m1 `bind` x -> do(func$(x), *ms)
 
 
 
 ## Folds and traversals:
 
 #### Foldable:
-Foldable = Functor
+Foldable = _t.Sequence
 
-def foldr(func: (_T, _U) -> _T, init: _T, xs: _U$[]) -> _T =
+foldMap = NotImplemented
+
+def foldr(func: (_a, _b) -> _a, init: _a, xs: Foldable[_a]) -> _a =
     reduce(func, xs, init)
 
-def foldl(func: (_T, _U) -> _T, init: _T, xs: _U[]) -> _T =
+def foldl(func: (_a, _b) -> _a, init: _a, xs: Foldable[_a]) -> _a =
     reduce(func, reversed(xs), init)
 
+foldr1: ((_a, _a) -> _a, Foldable[_a]) -> _a
 foldr1 = reduce
 
-def foldl1(func: (_T, _T) -> _T, xs: _T[]) =
+def foldl1(func: (_a, _a) -> _a, xs: Foldable[_a]) -> _a =
     reduce(func, reversed(xs))
 
-def null(xs: _T[]) -> bool = len(xs) == 0
+def null(xs: Foldable[_a]) -> bool = len(xs) == 0
 
+length: Foldable -> int
 length = len
 
-def elem(e: _T, xs: _T[]) -> bool = e in xs
+def elem(e: _a, xs: Foldable[_a]) -> bool = e in xs
 
+maximum: Foldable[_a] -> _a
 maximum = max
 
+minimum: Foldable[_a] -> _a
 minimum = min
 
+sum: Foldable[_N] -> _N
 sum = sum  # type: ignore
 
-product: _T$[] -> _T = reduce$(*)
+product: Foldable[_N] -> _N
+product = reduce$(*)
+
+#### Traversable:
+Traversable = Functor
+
+def sequenceA(t: Traversable[Applicative[_a]]) -> Applicative[Traversable[_a]] =
+    reduce(seqAr, t)
+
+traverse: (_a -> Applicative[_b], Traversable[_a]) -> Applicative[Traversable[_b]]
+traverse = sequenceA..fmap
+
+def sequence(t: Traversable[_M]) -> _M =
+    reduce(seqM, t)
+
+mapM: (_a -> Monad[_b], Traversable[_a]) -> Monad[Traversable[_b]]
+mapM = sequence..fmap
 
 
 
 ## Miscellaneous functions:
-def id(x: _T) -> _T = x
+def id(x: _a) -> _a = x
 
-def const(x: _T, _) -> _T = x
+def const(x: _a, _) -> _a = x
 
-def flip(func: (_T, _U) -> _V) -> (_U, _T) -> _V =
+def dot(f: _b -> _c, g: _a -> _b) -> _a -> _c =
+    """
+    dot :: (b -> c) -> (a -> b) -> a -> c
+    dot = (.)
+    """
+    f..g
+
+def flip(func: (_a, _b) -> _c) -> (_b, _a) -> _c =
     (x, y) -> func(y, x)
 
-def until(cond: _T -> bool, func: _T -> _T, x: _T) -> _T =
+def apply(f: _a -> _b, x: _a) =
+    """
+    apply :: (a -> b) -> a -> b
+    apply = ($)
+    """
+    f(x)
+
+def until(cond: _a -> bool, func: _a -> _a, x: _a) -> _a =
     if cond(x):
         return x
     until(cond, func, func(x))  # tail recursive
 
+asTypeOf: (_a, _a) -> _a
+asTypeOf = const
+
 def error(msg: str) -> None: raise Exception(msg)
 
+errorWithoutStackTrace = NotImplemented
+
 undefined: _t.Any = None
+
+def seq(x, y: _b) -> _b = y
+
+def cbv(func: _a -> _b, arg: _a) -> _b =
+    """
+    cbv :: (a -> b) -> a -> b
+    cbv = ($!)
+    """
+    func(arg)
 
 
 
 
 # List operations:
+map: (_a -> _b, _a$[]) -> _b$[]
 map = map  # type: ignore
 
+def append(xs: _a$[], ys: _a$[]) -> _a$[] =
+    """
+    append :: [a] -> [a] -> [a]
+    append = (++)
+    """
+    (::)(xs, ys)
+
+filter: (_a -> bool, _a$[]) -> _a$[]
 filter = filter  # type: ignore
 
-head: _T$[] -> _T = .$[0]
+head: _a$[] -> _a
+head = .$[0]
 
-last: _T$[] -> _T = .$[-1]
+last: _a$[] -> _a
+last = .$[-1]
 
-tail: _T$[] -> _T$[]
+tail: _a$[] -> _a$[]
 tail = .$[1:]  # type: ignore
 
-init: _T$[] -> _T$[]
+init: _a$[] -> _a$[]
 init = .$[:-1]  # type: ignore
 
+def index(xs: _a$[], i: int) -> _a =
+    xs$[i]
+
+reverse: _a[] -> _a[]
 reverse = reversed
 
 
 
 ## Special folds:
-and_: _T$[] -> bool
+and_: Foldable[bool] -> bool
 and_ = all  # type: ignore
 
-or_: _T$[] -> bool
+or_: Foldable[bool] -> bool
 or_ = any  # type: ignore
 
-any: ((_T -> bool), _T$[]) -> bool = or_..map
+any: ((_a -> bool), Foldable[_a]) -> bool
+any = or_..map
 
-all: ((_T -> bool), _T$[]) -> bool = and_..map
+all: ((_a -> bool), Foldable[_a]) -> bool
+all = and_..map
 
-concat: _T$[]$[] -> _T$[]
+concat: Foldable[_a$[]] -> _a$[]
 concat = reduce$(::)  # type: ignore
 
-concatMap: ((_T$[] -> _U$[]), _T$[]$[]) -> _U$[] = concat..map
+concatMap: ((_a -> _b$[]), Foldable[_a]) -> _b$[]
+concatMap = concat..map
 
 
 
 ## Building lists:
 
 ### Scans:
-def scanl(func: (_T, _U) -> _T, init: _T, xs: _U[]) -> _T$[] =
+def scanl(func: (_a, _b) -> _a, init: _a, xs: _b[]) -> _a$[] =
     scan(func, reversed(xs), init)
 
-def scanl1(func: (_T, _T) -> _T, xs: _T[]) -> _T$[] =
+def scanl1(func: (_a, _a) -> _a, xs: _a[]) -> _a$[] =
     scan(func, reversed(xs))
 
-def scanr(func: (_T, _U) -> _T, init: _T, xs: _U$[]) -> _T$[] =
+def scanr(func: (_a, _b) -> _a, init: _a, xs: _b$[]) -> _a$[] =
     scan(func, xs, init)
 
 scanr1 = scan
 
 ### Infinite lists:
 @recursive_iterator
-def iterate(func: _T -> _T, x: _T) -> _T$[] =
+def iterate(func: _a -> _a, x: _a) -> _a$[] =
     [x] :: iterate(func, func(x))
 
 @recursive_iterator
-def repeat(x: _T) -> _T$[] =
+def repeat(x: _a) -> _a$[] =
     [x] :: repeat(x)
 
-def replicate(n: int, x: _T) -> _T$[] =
+def replicate(n: int, x: _a) -> _a$[] =
     repeat(x)$[:n]
 
 if TYPE_CHECKING:
-    def cycle(xs: _T$[]) -> _T$[] =
+    def cycle(xs: _a$[]) -> _a$[] =
         ...  # type: ignore
-
 else:
     @recursive_iterator
     def cycle(xs if len(xs) > 0) =
@@ -381,13 +745,13 @@ else:
 
 
 ## Sublists:
-def take(n: int, xs: _T$[]) -> _T$[] =
+def take(n: int, xs: _a$[]) -> _a$[] =
     xs$[:n]
 
-def drop(n: int, xs: _T$[]) -> _T$[] =
+def drop(n: int, xs: _a$[]) -> _a$[] =
     xs$[n:]
 
-def splitAt(n: int, xs: _T$[]) -> _t.Tuple[_T$[], _T$[]] =
+def splitAt(n: int, xs: _a$[]) -> _t.Tuple[_a$[], _a$[]] =
     reit = reiterable(xs)
     reit$[:n], reit$[n:]
 
@@ -396,9 +760,8 @@ takeWhile = takewhile
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond: _T -> bool, xs: _T[]) -> _T[] =
+    def span(cond: _a -> bool, xs: _a[]) -> _a[] =
         ...  # type: ignore
-
 else:
     def span(_, []) = ([], [])
 
@@ -411,16 +774,16 @@ else:
     def span(cond, xs) =
         ([], xs)
 
-def break_(cond: _T -> bool, xs: _T[]) -> _T[] =
+def break_(cond: _a -> bool, xs: _a[]) -> _a[] =
     span((not)..cond, xs)
 
 
 
 ## Searching lists:
-def notElem(e: _T, xs: _T[]) -> bool =
+def notElem(e: _a, xs: _a[]) -> bool =
     e not in xs
 
-def lookup(key: _T, assocs: _t.Tuple[_T, _U]$[]) -> Maybe:
+def lookup(key: _a, assocs: _t.Tuple[_a, _b]$[]) -> Maybe:
     try:
         return (
             assocs
@@ -437,12 +800,12 @@ def lookup(key: _T, assocs: _t.Tuple[_T, _U]$[]) -> Maybe:
 ## Zipping and unzipping lists:
 zip = zip3 = zip  # type: ignore
 
-def zipWith(func: -> _T, *iters) -> _T$[] =
+def zipWith(func: -> _a, *iters) -> _a$[] =
     starmap(func, zip(*iters))
 
 zipWith3 = zipWith
 
-def unzip(xs: _T$[]$[]) -> _T$[]$[] =
+def unzip(xs: _a$[]$[]) -> _a$[]$[] =
     zip(*xs)
 
 unzip3 = unzip
@@ -456,9 +819,11 @@ lines = .split("\n")  # type: ignore
 words: str -> str[]
 words = .split()  # type: ignore
 
-unlines: str[] -> str = "\n".join
+unlines: str[] -> str
+unlines = "\n".join
 
-unwords: str[] -> str = " ".join
+unwords: str[] -> str
+unwords = " ".join
 
 
 
