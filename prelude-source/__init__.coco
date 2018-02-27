@@ -1,5 +1,6 @@
 # Imports:
 import sys as _sys
+from collections import abc as _abc  # type: ignore
 
 if TYPE_CHECKING:
     import typing as _t
@@ -119,7 +120,8 @@ Double = double = float
 #### Num:
 if TYPE_CHECKING:
     Num = _t.Union[float, int]
-num = (float, int)
+else:
+    Num = (float, int)
 
 negate = (-)
 
@@ -228,7 +230,35 @@ else:
 
 
 
+## Monads and functors:
+
+#### Functor:
+if TYPE_CHECKING:
+    Functor = _t.Iterable
+else:
+    Functor = _abc.Iterable
+
+fmap = fmap  # type: ignore
+
+#### Monad:
+if TYPE_CHECKING:
+    Monad = _t.Sequence
+else:
+    Monad = _abc.Sequence
+
+def bind(m: Monad[_T], func: _T -> Monad[_U]) -> Monad[_U] =
+    join(fmap(func, m))
+
+def join(m: Monad[Monad[_T]]) -> Monad[_T] =
+    m |> reduce$(+) |*> makedata$(m.__class__) if m else m  # type: ignore
+
+
+
 ## Folds and traversals:
+
+#### Foldable:
+Foldable = Functor
+
 def foldr(func: (_T, _U) -> _T, init: _T, xs: _U$[]) -> _T =
     reduce(func, xs, init)
 

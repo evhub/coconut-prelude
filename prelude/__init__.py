@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb1559b01
+# __coconut_hash__ = 0xcfaa51fa
 
 # Compiled with Coconut version 1.3.1-post_dev25 [Dead Parrot]
 
@@ -21,6 +21,10 @@ _coconut_sys.path.remove(_coconut_file_path)
 
 # Imports:
 _sys = _coconut_sys
+if _coconut_sys.version_info < (3, 3):  # type: ignore
+    import collections as _abc  # type: ignore
+else:  # type: ignore
+    from collections import abc as _abc  # type: ignore
 
 if TYPE_CHECKING:
     import typing as _t
@@ -273,7 +277,8 @@ Double = double = float
 #### Num:
 if TYPE_CHECKING:
     Num = _t.Union[float, int]
-num = (float, int)
+else:
+    Num = (float, int)
 
 negate = _coconut_minus
 
@@ -469,7 +474,40 @@ else:
 
 
 
+## Monads and functors:
+
+#### Functor:
+if TYPE_CHECKING:
+    Functor = _t.Iterable
+else:
+    Functor = _abc.Iterable
+
+fmap = fmap  # type: ignore
+
+#### Monad:
+if TYPE_CHECKING:
+    Monad = _t.Sequence
+else:
+    Monad = _abc.Sequence
+
+def bind(m,  # type: Monad[_T]
+     func  # type: _coconut.typing.Callable[[_T], Monad[_U]]
+    ):
+# type: (...) -> Monad[_U]
+    return join(fmap(func, m))
+
+def join(m  # type: Monad[Monad[_T]]
+    ):
+# type: (...) -> Monad[_T]
+    return makedata(m.__class__, *reduce(_coconut.operator.add, m)) if m else m  # type: ignore
+
+
+
 ## Folds and traversals:
+
+#### Foldable:
+Foldable = Functor
+
 def foldr(func,  # type: _coconut.typing.Callable[[_T, _U], _T]
      init,  # type: _T
      xs  # type: _coconut.typing.Iterable[_U]
@@ -538,14 +576,14 @@ def until(cond,  # type: _coconut.typing.Callable[[_T], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_27:  # tail recursive
+        if until is _coconut_recursive_func_29:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return until(cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_27 = until
+_coconut_recursive_func_29 = until
 def error(msg  # type: str
     ):
 # type: (...) -> None
