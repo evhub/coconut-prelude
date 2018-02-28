@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa7d387cb
+# __coconut_hash__ = 0xf86923a5
 
 # Compiled with Coconut version 1.3.1-post_dev25 [Dead Parrot]
 
@@ -19,27 +19,31 @@ _coconut_sys.path.remove(_coconut_file_path)
 
 # Compiled Coconut: -----------------------------------------------------------
 
-# Imports:
-_sys = _coconut_sys
+# Helpers:
+
+#### Imports:
+sys = _coconut_sys
 import typing as _t
-import functools as _functools
+from fractions import gcd as _gcd
+from math import ceil as _ceil
+from math import floor as _floor
 
+#### Untyped built-ins:
+_max = max  # type: _coconut.typing.Callable[..., _t.Any]
+_min = min  # type: _coconut.typing.Callable[..., _t.Any]
+_zip = zip  # type: _coconut.typing.Callable[..., _t.Any]
+_abs = abs  # type: _coconut.typing.Callable[..., _t.Any]
+_round = round  # type: _coconut.typing.Callable[..., _t.Any]
+_fmap = fmap  # type: _coconut.typing.Callable[..., _t.Any]
 
-
-
-# Type variables:
+#### TypeVars:
 _a = _t.TypeVar("_a")
 _b = _t.TypeVar("_b")
 _c = _t.TypeVar("_c")
+_d = _t.TypeVar("_d")
 
-
-
-
-
-# Helper functions:
-
-## Type class helpers:
-def derivingEqOrd(*valueConstructors  # type: _t.NamedTuple
+#### Deriving:
+def derivingEqOrd(*valueConstructors  # type: object
     ):
 # type: (...) -> None
     """
@@ -50,6 +54,8 @@ def derivingEqOrd(*valueConstructors  # type: _t.NamedTuple
     we should add
         deriving (Eq, Ord)
     """
+    if TYPE_CHECKING:
+        return
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
         def __eq__(x, y):
@@ -68,7 +74,7 @@ def derivingEqOrd(*valueConstructors  # type: _t.NamedTuple
             return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
         valCon.__gt__ = __gt__
-def derivingEnum(*valueConstructors  # type: _t.NamedTuple
+def derivingEnum(*valueConstructors  # type: object
     ):
 # type: (...) -> None
     """
@@ -79,42 +85,16 @@ def derivingEnum(*valueConstructors  # type: _t.NamedTuple
     we should add
         deriving (Enum)
     """
+    if TYPE_CHECKING:
+        return
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
         valCon.__int__ = ind
-        def __add__(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-            _coconut_match_check = False
-            if (_coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "self" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "x" in _coconut_match_to_kwargs)) == 1):
-                _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("self")
-                _coconut_match_temp_1 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("x")
-                if (_coconut.isinstance(_coconut_match_temp_1, int)) and (not _coconut_match_to_kwargs):
-                    self = _coconut_match_temp_0
-                    x = _coconut_match_temp_1
-                    _coconut_match_check = True
-            if not _coconut_match_check:
-                _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def valCon.__add__(self, x is int) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-                _coconut_match_err.pattern = 'def valCon.__add__(self, x is int) ='
-                _coconut_match_err.value = _coconut_match_to_args
-                raise _coconut_match_err
-
-            return valueConstructors[ind(self) + x]()
+        def __add__(x, y):
+            return valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y)
         valCon.__add__ = __add__
-        def __sub__(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-            _coconut_match_check = False
-            if (_coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "self" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "x" in _coconut_match_to_kwargs)) == 1):
-                _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("self")
-                _coconut_match_temp_1 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("x")
-                if (_coconut.isinstance(_coconut_match_temp_1, int)) and (not _coconut_match_to_kwargs):
-                    self = _coconut_match_temp_0
-                    x = _coconut_match_temp_1
-                    _coconut_match_check = True
-            if not _coconut_match_check:
-                _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def valCon.__sub__(self, x is int) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-                _coconut_match_err.pattern = 'def valCon.__sub__(self, x is int) ='
-                _coconut_match_err.value = _coconut_match_to_args
-                raise _coconut_match_err
-
-            return valueConstructors[ind(self) - x]()
+        def __sub__(x, y):
+            return valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
 
 
 
@@ -148,7 +128,7 @@ derivingEqOrd(Nothing, Just)
 
 if TYPE_CHECKING:
     def maybe(default,  # type: _b
-     func,  # type: _coconut.typing.Callable[[_t.Any], _b]
+     func,  # type: _coconut.typing.Callable[[_a], _b]
      x  # type: Maybe
     ):
 # type: (...) -> _b
@@ -200,8 +180,8 @@ class Right(_coconut.collections.namedtuple("Right", "x"), Either):
 derivingEqOrd(Left, Right)
 
 if TYPE_CHECKING:
-    def either(left_func,  # type: _coconut.typing.Callable[[_t.Any], _c]
-     right_func,  # type: _coconut.typing.Callable[[_t.Any], _c]
+    def either(left_func,  # type: _coconut.typing.Callable[[_a], _c]
+     right_func,  # type: _coconut.typing.Callable[[_b], _c]
      x  # type: Either
     ):
 # type: (...) -> _c
@@ -294,6 +274,7 @@ Eq = _t.Any
 
 #### Ord:
 Ord = Eq
+_O = _t.TypeVar("_O", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x,  # type: Ord
@@ -361,14 +342,14 @@ else:
 
         return gt
 
-max = None  # type: _coconut.typing.Callable[[_a, _a], _a]
-max = max  # type: ignore
+max = None  # type: _coconut.typing.Callable[[_O, _O], _O]
+max = _max
 
-min = None  # type: _coconut.typing.Callable[[_a, _a], _a]
-min = min  # type: ignore
+min = None  # type: _coconut.typing.Callable[[_O, _O], _O]
+min = _min
 
 #### Enum:
-Enum = _t.SupportsInt
+Enum = Ord
 _E = _t.TypeVar("_E", bound=Enum)
 
 succ = None  # type: _coconut.typing.Callable[[_E], _E]
@@ -407,7 +388,7 @@ def enumFromThenTo(first,  # type: _E
     ):
 # type: (...) -> _coconut.typing.Iterable[_E]
     step = fromEnum(second) - fromEnum(first)
-    return takewhile(lambda _=None: _ <= last if step >= 0 else _ >= last, iterate(_coconut.functools.partial(_coconut.operator.add, step), first))
+    return takewhile(lambda x: x <= last if step >= 0 else x >= last, iterate(_coconut.functools.partial(_coconut.operator.add, step), first))
 
 
 #### Bounded:
@@ -448,13 +429,15 @@ Word = Int
 Num = _t.Union[int, float, Rational]
 _N = _t.TypeVar("_N", bound=Num)
 
+negate = None  # type: _coconut.typing.Callable[[_N], _N]
 negate = _coconut_minus
 
-abs = None  # type: _coconut.typing.Callable[[_a], _a]
-abs = abs  # type: ignore
+abs = None  # type: _coconut.typing.Callable[[_N], _N]
+abs = _abs
 
 if TYPE_CHECKING:
-    def signum(x):
+    def signum(x  # type: Num
+    ):
 # type: (...) -> int
         return _coconut.Ellipsis  # type: ignore
 else:
@@ -516,7 +499,7 @@ def fromInteger(x  # type: Integer
 Real = Num
 
 toRational = None  # type: _coconut.typing.Callable[[Real], Rational]
-toRational = Rational
+toRational = Rational  # type: ignore
 
 #### Integral:
 Integral = int
@@ -551,7 +534,7 @@ def quotRem(x,  # type: int
 divMod = divmod
 
 toInteger = None  # type: _coconut.typing.Callable[[Integral], Integer]
-toInteger = int
+toInteger = int  # type: ignore
 
 #### Fractional:
 Fractional = Rational
@@ -584,8 +567,8 @@ from math import asinh
 from math import acosh
 from math import atanh
 
-def logBase(base,  # type: Num
-     x  # type: Num
+def logBase(base,  # type: float
+     x  # type: float
     ):
 # type: (...) -> float
     return log(x, base)
@@ -595,24 +578,21 @@ RealFrac = Rational
 
 def properFraction(x  # type: Rational
     ):
-# type: (...) -> (int, Rational)
+# type: (...) -> _t.Tuple[int, Rational]
     floor_x = floor(x)
     return floor_x + (x - floor_x)
 
 truncate = None  # type: _coconut.typing.Callable[[Rational], int]
-truncate = int
+truncate = int  # type: ignore
 
 round = None  # type: _coconut.typing.Callable[[Rational], int]
-round = round  # type: ignore
-
-from math import ceil as _ceil
-from math import floor as _floor
+round = _round
 
 ceiling = None  # type: _coconut.typing.Callable[[Rational], int]
-ceiling = _ceil
+ceiling = _ceil  # type: ignore
 
 floor = None  # type: _coconut.typing.Callable[[Rational], int]
-floor = _floor
+floor = _floor  # type: ignore
 
 #### RealFloat:
 RealFloat = float
@@ -665,10 +645,8 @@ def odd(x  # type: int
 # type: (...) -> bool
     return x % 2 == 1
 
-from fractions import gcd_
-
 gcd = None  # type: _coconut.typing.Callable[[int, int], int]
-gcd = _coconut_forward_compose(gcd_, abs)
+gcd = _coconut_forward_compose(_gcd, abs)
 
 if TYPE_CHECKING:
     def lcm(x,  # type: int
@@ -708,13 +686,36 @@ else:
     def lcm(x, y):
         abs_x = abs(x)
         abs_y = abs(y)
-        return abs_y * (abs_x // gcd_(abs_x, abs_y))
+        return abs_y * (abs_x // _gcd(abs_x, abs_y))
 
 fromIntegral = None  # type: _coconut.typing.Callable[[Integral], Num]
 fromIntegral = fromInteger
 
-realToFrac = None  # type: _coconut.typing.Callable[[Real], Fractional]
-realToFrac = Rational
+if TYPE_CHECKING:
+    def realToFrac(real  # type: Real
+    ):
+# type: (...) -> Fractional
+        return _coconut.Ellipsis  # type: ignore
+
+else:
+    def realToFrac(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "real" in _coconut_match_to_kwargs)) == 1):
+            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("real")
+            if (_coconut.isinstance(_coconut_match_temp_0, float)) and (not _coconut_match_to_kwargs):
+                real = _coconut_match_temp_0
+                _coconut_match_check = True
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def realToFrac(real is float) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def realToFrac(real is float) ='
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+
+        return Rational.from_float(real)
+
+    @addpattern(realToFrac)
+    def realToFrac(real):
+        return Rational(real)
 
 
 
@@ -734,7 +735,8 @@ mconcat = NotImplemented
 #### Functor:
 Functor = _t.Iterable
 
-fmap = fmap  # type: ignore
+fmap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _b], Functor[_a]], Functor[_b]]
+fmap = _fmap
 
 def fmapConst(x,  # type: _a
      xs  # type: Functor
@@ -744,10 +746,10 @@ def fmapConst(x,  # type: _a
     fmapConst :: Functor f => (a -> b) -> f a -> f b
     fmapConst = (<$)
     """
-    return fmap(lambda _=None: x, xs)
+    return _fmap(lambda _: x, xs)
 
 #### Applicative:
-Applicative = _t.Collection
+Applicative = _t.Sequence
 _A = _t.TypeVar("_A", bound=Applicative)
 
 pure = NotImplemented
@@ -760,7 +762,7 @@ def ap(fs,  # type: Applicative[_coconut.typing.Callable[[_a], _b]]
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
     """
-    return (bind)(fs, _coconut_partial(fmap, {1: xs}, 2))
+    return (bind)(fs, lambda f: _fmap(f, xs))
 
 def seqAr(f1,  # type: Applicative
      f2  # type: _A
@@ -770,7 +772,7 @@ def seqAr(f1,  # type: Applicative
     seqAr :: Applicative f => f a -> f b -> f b
     seqAr = (*>)
     """
-    return ap(fmap(lambda x1: lambda x2: x2, f1), f2)
+    return (ap)(_fmap(lambda x1: lambda x2: x2, f1), f2)  # type: ignore
 
 def seqAl(f1,  # type: _A
      f2  # type: Applicative
@@ -780,7 +782,7 @@ def seqAl(f1,  # type: _A
     seqAl :: Applicative f => f a -> f b -> f a
     seqAl = (<*)
     """
-    return ap(fmap(lambda x1: lambda x2: x1, f1), f2)
+    return (ap)(_fmap(lambda x1: lambda x2: x1, f1), f2)  # type: ignore
 
 def liftA2(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
      f1,  # type: Applicative[_a]
@@ -788,7 +790,7 @@ def liftA2(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
     ):
 # type: (...) -> Applicative[_c]
     """Lift a binary function to actions."""
-    return ap(fmap(_coconut.functools.partial(_coconut.functools.partial, func), f1), f2)
+    return (ap)(_fmap(_coconut.functools.partial(_coconut.functools.partial, func), f1), f2)
 
 #### Monad:
 Monad = Applicative
@@ -802,7 +804,7 @@ def bind(m,  # type: Monad[_a]
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
     """
-    return join(fmap(func, m))
+    return join(_fmap(func, m))
 
 def seqM(m1,  # type: Monad
      m2  # type: _M
@@ -818,15 +820,9 @@ return_ = NotImplemented
 
 fail = NotImplemented
 
-def sequence_(ms  # type: Traversable[Monad[_a]]
-    ):
-# type: (...) -> None
-    reduce(seqM, ms)
+# sequence_ and mapM_ defined in Foldable
 
-mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad[_b]], Traversable[_a]], None]
-mapM_ = _coconut_forward_compose(fmap, sequence_)
-
-def bindFrom(func,  # type: _coconut.typing.Callable[[_a], Monad[_b]]
+def bindFrom(func,  # type: _coconut.typing.Callable[[_a], Monad]
      m  # type: Monad[_a]
     ):
     """
@@ -882,20 +878,32 @@ else:
         return makedata(type(m), *reduce(_coconut.operator.add, m))
 
 if TYPE_CHECKING:
-    def do(func,  # type: _coconut.typing.Callable[..., _M]
-     *monads  # type: _M
+    def do(monads,  # type: _coconut.typing.Sequence[_M]
+     func  # type: _coconut.typing.Callable[..., _M]
     ):
 # type: (...) -> _M
         return _coconut.Ellipsis  # type: ignore
 else:
-    def do(func):
+    def do(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "func" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) == 0):
+            _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("func")
+            if not _coconut_match_to_kwargs:
+                func = _coconut_match_temp_0
+                _coconut_match_check = True
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def do([], func) = func()'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def do([], func) = func()'
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+
         return func()
 
     @addpattern(do)
-    def do(func, m1, *ms):
+    def do(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         """
         The call
-            do(func, m1, m2, ...)
+            do([m1, m2, ...], func)
         is equivalent to the do notation
             x1 <- m1
             x2 <- m2
@@ -907,6 +915,20 @@ else:
                     ...
                         func(x1, x2, ...)
         """
+        _coconut_match_check = False
+        if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "func" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) >= 1):
+            _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("func")
+            ms = _coconut.list(_coconut_match_to_args[0][1:])
+            m1 = _coconut_match_to_args[0][0]
+            if not _coconut_match_to_kwargs:
+                func = _coconut_match_temp_0
+                _coconut_match_check = True
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def do([m1] + ms, func) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def do([m1] + ms, func) ='
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+
         return (bind)(m1, lambda x: do(_coconut.functools.partial(func, x), *ms))
 
 
@@ -916,6 +938,14 @@ else:
 #### Foldable:
 Foldable = _t.Sequence
 
+def sequence_(ms  # type: Foldable[_M]
+    ):
+# type: (...) -> _M
+    return reduce(seqM, ms)
+
+mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _M], Foldable[_a]], _M]
+mapM_ = _coconut_forward_compose(fmap, sequence_)
+
 foldMap = NotImplemented
 
 def foldr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
@@ -923,14 +953,14 @@ def foldr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
      xs  # type: Foldable[_a]
     ):
 # type: (...) -> _a
-    return reduce(func, xs, init)
+    return reduce(func, xs, init)  # type: ignore
 
 def foldl(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
      init,  # type: _a
      xs  # type: Foldable[_a]
     ):
 # type: (...) -> _a
-    return reduce(func, reversed(xs), init)
+    return reduce(func, reversed(xs), init)  # type: ignore
 
 foldr1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], Foldable[_a]], _a]
 foldr1 = reduce
@@ -955,11 +985,11 @@ def elem(e,  # type: _a
 # type: (...) -> bool
     return e in xs
 
-maximum = None  # type: _coconut.typing.Callable[[Foldable[_a]], _a]
-maximum = max
+maximum = None  # type: _coconut.typing.Callable[[Foldable[_O]], _O]
+maximum = _max
 
-minimum = None  # type: _coconut.typing.Callable[[Foldable[_a]], _a]
-minimum = min
+minimum = None  # type: _coconut.typing.Callable[[Foldable[_O]], _O]
+minimum = _min
 
 sum = None  # type: _coconut.typing.Callable[[Foldable[_N]], _N]
 sum = sum  # type: ignore
@@ -968,20 +998,18 @@ product = None  # type: _coconut.typing.Callable[[Foldable[_N]], _N]
 product = _coconut.functools.partial(reduce, _coconut.operator.mul)
 
 #### Traversable:
-Traversable = Functor
+Traversable = Foldable
 
-def sequenceA(t  # type: Traversable[Applicative[_a]]
+def sequenceA(fs  # type: Traversable[Applicative[_a]]
     ):
 # type: (...) -> Applicative[Traversable[_a]]
-    return reduce(seqAr, t)
+    return do(fs, lambda *xs: makedata(type(fs[0]), makedata(type(fs), *xs)))  # type: ignore
 
 traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Applicative[_b]], Traversable[_a]], Applicative[Traversable[_b]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)
 
-def sequence(t  # type: Traversable[_M]
-    ):
-# type: (...) -> _M
-    return reduce(seqM, t)
+sequence = None  # type: _coconut.typing.Callable[[Traversable[Monad[_a]]], Monad[Traversable[_a]]]
+sequence = sequenceA
 
 mapM = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad[_b]], Traversable[_a]], Monad[Traversable[_b]]]
 mapM = _coconut_forward_compose(fmap, sequence)
@@ -1031,14 +1059,14 @@ def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_62:  # tail recursive
+        if until is _coconut_recursive_func_63:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return until(cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_62 = until
+_coconut_recursive_func_63 = until
 asTypeOf = None  # type: _coconut.typing.Callable[[_a, _a], _a]
 asTypeOf = const
 
@@ -1105,7 +1133,7 @@ def index(xs,  # type: _coconut.typing.Iterable[_a]
     return _coconut_igetitem(xs, i)
 
 reverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[_a]], _coconut.typing.Sequence[_a]]
-reverse = reversed
+reverse = reversed  # type: ignore
 
 
 
@@ -1153,6 +1181,7 @@ def scanr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
 # type: (...) -> _coconut.typing.Iterable[_a]
     return scan(func, xs, init)
 
+scanr1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
 scanr1 = scan
 
 ### Infinite lists:
@@ -1221,8 +1250,10 @@ def splitAt(n,  # type: int
     reit = reiterable(xs)
     return _coconut_igetitem(reit, _coconut.slice(None, n)), _coconut_igetitem(reit, _coconut.slice(n, None))
 
+takeWhile = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
 takeWhile = takewhile
 
+dropWhile = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
@@ -1299,21 +1330,36 @@ def lookup(key,  # type: _a
 
 
 ## Zipping and unzipping lists:
-zip = zip3 = zip  # type: ignore
+zip = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a], _coconut.typing.Iterable[_b]], _coconut.typing.Iterable[_t.Tuple[_a, _b]]]
+zip = _zip
 
-def zipWith(func,  # type: _coconut.typing.Callable[..., _a]
-     *iters):
-# type: (...) -> _coconut.typing.Iterable[_a]
-    return starmap(func, zip(*iters))
+zip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a], _coconut.typing.Iterable[_b], _coconut.typing.Iterable[_c]], _coconut.typing.Iterable[_t.Tuple[_a, _b, _c]]]
+zip3 = _zip
 
-zipWith3 = zipWith
-
-def unzip(xs  # type: _coconut.typing.Iterable[_coconut.typing.Iterable[_a]]
+def zipWith(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
+     xs1,  # type: _coconut.typing.Iterable[_a]
+     xs2  # type: _coconut.typing.Iterable[_b]
     ):
-# type: (...) -> _coconut.typing.Iterable[_coconut.typing.Iterable[_a]]
-    return zip(*xs)
+# type: (...) -> _coconut.typing.Iterable[_c]
+    return starmap(func, zip(xs1, xs2))
 
-unzip3 = unzip
+def zipWith3(func,  # type: _coconut.typing.Callable[[_a, _b, _c], _d]
+     xs1,  # type: _coconut.typing.Iterable[_a]
+     xs2,  # type: _coconut.typing.Iterable[_b]
+     xs3  # type: _coconut.typing.Iterable[_c]
+    ):
+# type: (...) -> _coconut.typing.Iterable[_d]
+    return starmap(func, _zip(xs1, xs2, xs3))
+
+def unzip(xs  # type: _coconut.typing.Iterable[_t.Tuple[_a, _b]]
+    ):
+# type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b]]
+    return (tuple)(_zip(*xs))  # type: ignore
+
+def unzip3(xs  # type: _coconut.typing.Iterable[_t.Tuple[_a, _b, _c]]
+    ):
+# type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b], _coconut.typing.Sequence[_c]]
+    return (tuple)(_zip(*xs))  # type: ignore
 
 
 
@@ -1336,6 +1382,7 @@ unwords = " ".join
 # Converting to and from String:
 
 ## Converting to String:
+show = None  # type: _coconut.typing.Callable[[_a], str]
 show = str
 
 
@@ -1346,18 +1393,25 @@ show = str
 ## Simple I/O operations:
 
 ### Output functions:
-putStr = _coconut.functools.partial(print, end="")  # type: _coconut.typing.Callable[[str], None]
+putStr = None  # type: _coconut.typing.Callable[[str], None]
+putStr = _coconut.functools.partial(print, end="")
+
+putChar = None  # type: _coconut.typing.Callable[[Char], None]
 putChar = putStr
 
+putStrLn = None  # type: _coconut.typing.Callable[[str], None]
 putStrLn = print
 
 
 ### Input functions:
-getChar = _coconut.functools.partial(_sys.stdin.read, 1)  # type: _coconut.typing.Callable[[], str]
+getChar = None  # type: _coconut.typing.Callable[[], str]
+getChar = _coconut.functools.partial(sys.stdin.read, 1)
 
+getLine = None  # type: _coconut.typing.Callable[[], str]
 getLine = input
 
-getContents = _sys.stdin.read  # type: _coconut.typing.Callable[[], str]
+getContents = None  # type: _coconut.typing.Callable[[], str]
+getContents = sys.stdin.read
 
 def interact(func  # type: _coconut.typing.Callable[[str], str]
     ):
@@ -1367,27 +1421,27 @@ def interact(func  # type: _coconut.typing.Callable[[str], str]
 
 
 ### Files:
-FilePath = str
+FilePath = _t.NewType("FilePath", str)
 
-def readFile(fpath  # type: str
+def readFile(fpath  # type: FilePath
     ):
 # type: (...) -> str
     with open(fpath, "r+") as f:
         return f.read()
 
-def writeFile(fpath,  # type: str
-     fstr  # type: str
+def writeFile(fpath,  # type: FilePath
+     text  # type: str
     ):
 # type: (...) -> None
     with open(fpath, "w+") as f:
-        f.write(fstr)  # type: ignore
+        f.write(text)  # type: ignore
 
-def appendFile(fpath,  # type: str
-     fstr  # type: str
+def appendFile(fpath,  # type: FilePath
+     text  # type: str
     ):
 # type: (...) -> None
     with open(fpath, "a+") as f:
-        f.write(fstr)  # type: ignore
+        f.write(text)  # type: ignore
 
 
 

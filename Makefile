@@ -1,20 +1,21 @@
-.PHONY: stubgen
-stubgen: install
-	stubgen -o . prelude
-
 .PHONY: install
 install: build
 	pip install -e .
+
+.PHONY: build
+build:
+	coconut setup.coco --no-tco --strict
+	coconut "prelude-source" prelude --no-tco --strict --jobs sys --mypy --python-version 3.6
+
+.PHONY: build2
+build2:
+	coconut setup.coco --no-tco --strict
+	coconut "prelude-source" prelude --no-tco --strict --jobs sys --mypy
 
 .PHONY: setup
 setup:
 	pip install -U setuptools pip pytest
 	pip install -U "coconut-develop[watch,cPyparsing]"
-
-.PHONY: build
-build:
-	coconut setup.coco --no-tco --strict
-	coconut "prelude-source" prelude --no-tco --strict --jobs sys --mypy
 
 .PHONY: upload
 upload: clean install
@@ -39,4 +40,4 @@ wipe: clean
 
 .PHONY: watch
 watch: install
-	coconut "prelude-source" prelude --watch --no-tco --strict
+	coconut "prelude-source" prelude --watch --no-tco --strict --mypy
