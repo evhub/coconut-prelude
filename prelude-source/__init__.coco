@@ -16,6 +16,11 @@ _zip: -> _t.Any = zip
 _abs: -> _t.Any = abs
 _round: -> _t.Any = round
 _fmap: -> _t.Any = fmap
+_reduce: -> _t.Any = reduce
+_all: -> _t.Any = all
+_any: -> _t.Any = any
+_map: -> _t.Any = map
+_filter: -> _t.Any = filter
 
 #### TypeVars:
 _a = _t.TypeVar("_a")
@@ -520,19 +525,23 @@ def bindFrom(func: _a -> Monad, m: Monad[_a]) =
     """
     m `bind` func
 
+def typeChain(fs: Applicative[_a]$[]) -> _t.Tuple[_t.Type[Applicative], _a$[]] =
+    """Chain applicatives together while collecting their final type."""
+    _reduce(def ((_, vals), f) ->
+        (type(f), (vals :: f) if f else f),
+    fs, (undefined, ()))
+
 if TYPE_CHECKING:
-    def join(m: Monad[_M]) -> _M =
+    def join(ms: Monad[_M]) -> _M =
         ...  # type: ignore
 else:
-    def join(m if len(m) == 0) = m
+    def join(ms if ms) = ms
 
     @addpattern(join)
-    def join(m if len(m) == 1) = m[0]
-
-    @addpattern(join)
-    def join(m) =
+    def join(ms) =
         """The conventional monad join operator."""
-        m |> reduce$(+) |*> makedata$(type(m))
+        valCons, vals = typeChain(ms)
+        makedata(valCons, *vals)
 
 if TYPE_CHECKING:
     def do(monads: _M[], func: -> _M) -> _M =
@@ -574,10 +583,10 @@ mapM_ = sequence_..fmap
 foldMap = NotImplemented
 
 def foldr(func: (_a, _b) -> _a, init: _a, xs: Foldable[_a]) -> _a =
-    reduce(func, xs, init)  # type: ignore
+    _reduce(func, xs, init)
 
 def foldl(func: (_a, _b) -> _a, init: _a, xs: Foldable[_a]) -> _a =
-    reduce(func, reversed(xs), init)  # type: ignore
+    _reduce(func, reversed(xs), init)
 
 foldr1: ((_a, _a) -> _a, Foldable[_a]) -> _a
 foldr1 = reduce
@@ -608,10 +617,8 @@ product = reduce$(*)
 Traversable = Foldable
 
 def sequenceA(fs: Traversable[Applicative[_a]]) -> Applicative[Traversable[_a]] =
-    do(fs, (*xs) -> xs
-        |*> makedata$(type(fs))
-        |> makedata$(type(fs[0]))
-    )  # type: ignore
+    valCons, vals = typeChain(fs)
+    makedata(valCons, makedata(type(fs), *vals))
 
 traverse: (_a -> Applicative[_b], Traversable[_a]) -> Applicative[Traversable[_b]]
 traverse = sequenceA..fmap
@@ -674,17 +681,17 @@ def cbv(func: _a -> _b, arg: _a) -> _b =
 
 # List operations:
 map: (_a -> _b, _a$[]) -> _b$[]
-map = map  # type: ignore
+map = _map
 
 def append(xs: _a$[], ys: _a$[]) -> _a$[] =
     """
     append :: [a] -> [a] -> [a]
     append = (++)
     """
-    (::)(xs, ys)
+    xs :: ys
 
 filter: (_a -> bool, _a$[]) -> _a$[]
-filter = filter  # type: ignore
+filter = _filter
 
 head: _a$[] -> _a
 head = .$[0]
@@ -708,10 +715,10 @@ reverse = reversed  # type: ignore
 
 ## Special folds:
 and_: Foldable[bool] -> bool
-and_ = all  # type: ignore
+and_ = _all
 
 or_: Foldable[bool] -> bool
-or_ = any  # type: ignore
+or_ = _any
 
 any: ((_a -> bool), Foldable[_a]) -> bool
 any = or_..map
@@ -720,10 +727,10 @@ all: ((_a -> bool), Foldable[_a]) -> bool
 all = and_..map
 
 concat: Foldable[_a$[]] -> _a$[]
-concat = reduce$(::)  # type: ignore
+concat = _reduce$(::)
 
-concatMap: ((_a -> _b$[]), Foldable[_a]) -> _b$[]
-concatMap = concat..map
+concatMap: (_a -> _b$[], Foldable[_a]) -> _b$[]
+concatMap = concat.._map  # type: ignore
 
 
 

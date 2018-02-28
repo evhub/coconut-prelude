@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xf86923a5
+# __coconut_hash__ = 0x78e14a09
 
 # Compiled with Coconut version 1.3.1-post_dev25 [Dead Parrot]
 
@@ -35,6 +35,11 @@ _zip = zip  # type: _coconut.typing.Callable[..., _t.Any]
 _abs = abs  # type: _coconut.typing.Callable[..., _t.Any]
 _round = round  # type: _coconut.typing.Callable[..., _t.Any]
 _fmap = fmap  # type: _coconut.typing.Callable[..., _t.Any]
+_reduce = reduce  # type: _coconut.typing.Callable[..., _t.Any]
+_all = all  # type: _coconut.typing.Callable[..., _t.Any]
+_any = any  # type: _coconut.typing.Callable[..., _t.Any]
+_map = map  # type: _coconut.typing.Callable[..., _t.Any]
+_filter = filter  # type: _coconut.typing.Callable[..., _t.Any]
 
 #### TypeVars:
 _a = _t.TypeVar("_a")
@@ -831,51 +836,54 @@ def bindFrom(func,  # type: _coconut.typing.Callable[[_a], Monad]
     """
     return (bind)(m, func)
 
+def typeChain(fs  # type: _coconut.typing.Iterable[Applicative[_a]]
+    ):
+# type: (...) -> _t.Tuple[_t.Type[Applicative], _coconut.typing.Iterable[_a]]
+    """Chain applicatives together while collecting their final type."""
+    def _coconut_lambda_0(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "f" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) == 2):
+            _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("f")
+            vals = _coconut_match_to_args[0][1]
+            if not _coconut_match_to_kwargs:
+                f = _coconut_match_temp_0
+                _coconut_match_check = True
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'_reduce(def ((_, vals), f) ->         (type(f), (vals :: f) if f else f),     fs, (undefined, ()))'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = '_reduce(def ((_, vals), f) ->         (type(f), (vals :: f) if f else f),     fs, (undefined, ()))'
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+        return (type(f), (_coconut.itertools.chain.from_iterable((f() for f in (lambda: vals, lambda: f)))) if f else f), fs, (undefined, ())
+    return _reduce(_coconut_lambda_0)
+
 if TYPE_CHECKING:
-    def join(m  # type: Monad[_M]
+    def join(ms  # type: Monad[_M]
     ):
 # type: (...) -> _M
         return _coconut.Ellipsis  # type: ignore
 else:
     def join(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "m" in _coconut_match_to_kwargs)) == 1):
-            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("m")
+        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "ms" in _coconut_match_to_kwargs)) == 1):
+            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("ms")
             if not _coconut_match_to_kwargs:
-                m = _coconut_match_temp_0
+                ms = _coconut_match_temp_0
                 _coconut_match_check = True
-        if _coconut_match_check and not (len(m) == 0):
+        if _coconut_match_check and not (ms):
             _coconut_match_check = False
         if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def join(m if len(m) == 0) = m'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def join(m if len(m) == 0) = m'
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def join(ms if ms) = ms'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def join(ms if ms) = ms'
             _coconut_match_err.value = _coconut_match_to_args
             raise _coconut_match_err
 
-        return m
+        return ms
 
     @addpattern(join)
-    def join(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-        _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "m" in _coconut_match_to_kwargs)) == 1):
-            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("m")
-            if not _coconut_match_to_kwargs:
-                m = _coconut_match_temp_0
-                _coconut_match_check = True
-        if _coconut_match_check and not (len(m) == 1):
-            _coconut_match_check = False
-        if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def join(m if len(m) == 1) = m[0]'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def join(m if len(m) == 1) = m[0]'
-            _coconut_match_err.value = _coconut_match_to_args
-            raise _coconut_match_err
-
-        return m[0]
-
-    @addpattern(join)
-    def join(m):
+    def join(ms):
         """The conventional monad join operator."""
-        return makedata(type(m), *reduce(_coconut.operator.add, m))
+        valCons, vals = typeChain(ms)
+        return makedata(valCons, *vals)
 
 if TYPE_CHECKING:
     def do(monads,  # type: _coconut.typing.Sequence[_M]
@@ -953,14 +961,14 @@ def foldr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
      xs  # type: Foldable[_a]
     ):
 # type: (...) -> _a
-    return reduce(func, xs, init)  # type: ignore
+    return _reduce(func, xs, init)
 
 def foldl(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
      init,  # type: _a
      xs  # type: Foldable[_a]
     ):
 # type: (...) -> _a
-    return reduce(func, reversed(xs), init)  # type: ignore
+    return _reduce(func, reversed(xs), init)
 
 foldr1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], Foldable[_a]], _a]
 foldr1 = reduce
@@ -1003,7 +1011,8 @@ Traversable = Foldable
 def sequenceA(fs  # type: Traversable[Applicative[_a]]
     ):
 # type: (...) -> Applicative[Traversable[_a]]
-    return do(fs, lambda *xs: makedata(type(fs[0]), makedata(type(fs), *xs)))  # type: ignore
+    valCons, vals = typeChain(fs)
+    return makedata(valCons, makedata(type(fs), *vals))
 
 traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Applicative[_b]], Traversable[_a]], Applicative[Traversable[_b]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)
@@ -1059,14 +1068,14 @@ def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_63:  # tail recursive
+        if until is _coconut_recursive_func_64:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return until(cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_63 = until
+_coconut_recursive_func_64 = until
 asTypeOf = None  # type: _coconut.typing.Callable[[_a, _a], _a]
 asTypeOf = const
 
@@ -1099,7 +1108,7 @@ def cbv(func,  # type: _coconut.typing.Callable[[_a], _b]
 
 # List operations:
 map = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _b], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_b]]
-map = map  # type: ignore
+map = _map
 
 def append(xs,  # type: _coconut.typing.Iterable[_a]
      ys  # type: _coconut.typing.Iterable[_a]
@@ -1109,10 +1118,10 @@ def append(xs,  # type: _coconut.typing.Iterable[_a]
     append :: [a] -> [a] -> [a]
     append = (++)
     """
-    return _coconut.itertools.chain(xs, ys)
+    return _coconut.itertools.chain.from_iterable((f() for f in (lambda: xs, lambda: ys)))
 
 filter = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
-filter = filter  # type: ignore
+filter = _filter
 
 head = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a]], _a]
 head = _coconut.functools.partial(_coconut_igetitem, index=0)
@@ -1139,10 +1148,10 @@ reverse = reversed  # type: ignore
 
 ## Special folds:
 and_ = None  # type: _coconut.typing.Callable[[Foldable[bool]], bool]
-and_ = all  # type: ignore
+and_ = _all
 
 or_ = None  # type: _coconut.typing.Callable[[Foldable[bool]], bool]
-or_ = any  # type: ignore
+or_ = _any
 
 any = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_a], bool]), Foldable[_a]], bool]
 any = _coconut_forward_compose(map, or_)
@@ -1151,10 +1160,10 @@ all = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_a], bo
 all = _coconut_forward_compose(map, and_)
 
 concat = None  # type: _coconut.typing.Callable[[Foldable[_coconut.typing.Iterable[_a]]], _coconut.typing.Iterable[_a]]
-concat = _coconut.functools.partial(reduce, _coconut.itertools.chain)  # type: ignore
+concat = _coconut.functools.partial(_reduce, _coconut.itertools.chain)
 
-concatMap = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_a], _coconut.typing.Iterable[_b]]), Foldable[_a]], _coconut.typing.Iterable[_b]]
-concatMap = _coconut_forward_compose(map, concat)
+concatMap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _coconut.typing.Iterable[_b]], Foldable[_a]], _coconut.typing.Iterable[_b]]
+concatMap = _coconut_forward_compose(_map, concat)  # type: ignore
 
 
 
