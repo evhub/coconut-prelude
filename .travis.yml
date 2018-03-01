@@ -1,0 +1,23 @@
+language: python
+notifications:
+  email:
+    on_failure: change
+sudo: false
+cache: pip
+python:
+- '3.6'
+install:
+- make setup
+script:
+- make build2
+- make test
+deploy:
+  provider: pypi
+  edge:
+    branch: v1.8.45
+  user: evhub-develop
+  password:
+    secure: sOytt6Q4hlVqfq6+IyRG9ReO3MYp7sNRs9FSyKj57zWKJ6GVjKhwwg/UQwmFLp0KHU+180k2C9Ps77OHdn80Hywf/jpQj2nfhb0FLyU//TksExWXwkrYFymLLdu92Lr2vFlSgT6XuwKeqLRyU5S5BOxnVbBkFMiBBaNT59XxKYy77JcSacgS3dSczcOM+ZOEg+5lD/SGMxEzlrzHRFsiYDoqu25RAjqU8TXNSU3xvKkF+GvDbiILIzDTPc3s3YiM3b2eKadJk6oAqnhtrDDziRbOVoi4vFROq33G5o4jrCxo2ZKIkSImAAIdFkeUwhoGjPArClOnQxO4OC3wRt1tcasORRA0sRMRoCD2GVYxLimSxUzC63OyM6gRzRRqEziU12bTRgrUVNi/VsSsCqH4txTwuzX/K5wVQ9fPVvj23xvXMB3gApihGPjC+PbdrN/6NJAO9B+aKqua/D6d6YAmZ3V2eTe4lgKF0uVDLyUzlut7bNXORQXYLdMSJ+9QH+pOGBgiFvkRcSGS8CdeJzBGwVfAnkRY41PysSCRi6dO6rt0ajJdopvWcJWK8zVu9OvmMJGd8+g1NM1kpcxbLIDg4uyZYDsQ9m3wIEqnxKFaXTNaE9EkpQPdZcz0EE52It6CN50je8qrgR9PHiS8nu+YxnIpiWLk55OyThpwqaiTnL8=
+  on:
+    distributions: sdist bdist_wheel
+    repo: evhub/coconut-prelude
