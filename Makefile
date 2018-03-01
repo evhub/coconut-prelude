@@ -8,13 +8,13 @@ install: build
 
 .PHONY: build
 build:
-	coconut setup.coco --no-tco --strict
-	coconut "prelude-source" prelude --no-tco --strict --jobs sys --mypy --python-version 3.6
+	coconut setup.coco --strict
+	coconut "prelude-source" prelude --strict --jobs sys --mypy --python-version 3.6
 
 .PHONY: build2
 build2:
-	coconut setup.coco --no-tco --strict
-	coconut "prelude-source" prelude --no-tco --strict --jobs sys --mypy
+	coconut setup.coco --strict
+	coconut "prelude-source" prelude --strict --jobs sys --mypy
 
 .PHONY: setup
 setup:
@@ -36,4 +36,4 @@ clean:
 
 .PHONY: watch
 watch: install
-	coconut "prelude-source" prelude --watch --no-tco --strict --mypy
+	coconut "prelude-source" prelude --watch --strict --mypy

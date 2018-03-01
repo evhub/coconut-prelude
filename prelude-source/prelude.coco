@@ -33,7 +33,7 @@ def derivingEqOrd(*valueConstructors: object) -> None:
     """
     The expression
         derivingEqOrd(valueConstructor1, valueConstructor2, ...)
-    is equivalent to stating that for any data type defined as
+    is equivalent to stating that for some data type defined as
         data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
     we should add
         deriving (Eq, Ord)
@@ -56,7 +56,7 @@ def derivingEnum(*valueConstructors: object) -> None:
     """
     The expression
         derivingEnum(valueConstructor1, valueConstructor2, ...)
-    is equivalent to stating that for any data type defined as
+    is equivalent to stating that for some data type defined as
         data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
     we should add
         deriving (Enum)
@@ -532,14 +532,14 @@ def bind(m: Monad[_a], func: _a -> _M) -> _M =
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
     """
-    join(_fmap(func, m))
+    join(_fmap(func, m))  # type: ignore
 
 def seqM(m1: Monad, m2: _M) -> _M =
     """
     seqM :: Monad m => m a -> m b -> m b
     seqM = (>>)
     """
-    m1 `bind` x -> m2
+    m1 `bind` x -> m2  # type: ignore
 
 return_ = NotImplemented
 
