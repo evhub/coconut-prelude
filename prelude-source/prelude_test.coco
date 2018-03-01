@@ -1,0 +1,159 @@
+from prelude import *  # type: ignore
+
+def test_Bool():
+    assert True `isinstance` Bool
+    assert `not_` True == False
+    assert otherwise == True
+
+def test_Maybe():
+    assert nothing `isinstance` Maybe
+    assert Just(2) `isinstance` Maybe
+    assert nothing == Nothing()
+    assert nothing < Just(1) < Just(2)
+    assert nothing <= Just(1) <= Just(1)
+    assert Just(2) > Just(1) > nothing
+    assert Just(1) >= Just(1) >= nothing
+    assert Just(1) == Just(1)
+    assert maybe(1, (+)$(1), nothing) == 1
+    assert maybe(1, (+)$(1), Just(1)) == 2
+
+def test_Either():
+    assert Left(1) `isinstance` Either
+    assert Right(1) `isinstance` Either
+    assert Left(10) < Right(1)
+    assert Left(1) != Right(1)
+    assert Left(1) < Left(2) < Right(0) < Right(1)
+    assert Left(2) == Left(2)
+    assert either(->_+1, ->_*2, Left(2)) == 3
+    assert either(->_+1, ->_*2, Right(2)) == 4
+
+def test_Ordering():
+    assert and_(x `isinstance` Ordering for x in (lt, eq, gt))
+    assert lt == LT()
+    assert eq == EQ()
+    assert gt == GT()
+    assert lt < eq < gt
+    assert [fromEnum(x) for x in (lt, eq, gt)] == [0, 1, 2]
+    assert `succ` lt == eq == `pred` gt
+    assert `succ` eq == gt
+    assert `pred` eq == lt
+
+def test_Tuples():
+    assert `fst` (1, 2) == 1 == `snd` (2, 1)
+    assert curry(+)(1)(2) == 3 == uncurry((+)$)(1, 2)
+    assert uncurry(curry(-))(3, 2) == 1
+
+def test_Ord():
+    assert and_(x `isinstance` Ord and x `isinstance` Eq for x in (
+        True, nothing, Left(3), lt, 5, (1, 2),
+    ))
+    assert compare(1, 2) == lt == compare(nothing, Just(1))
+    assert compare(2, 2) == eq == compare(Left(2), Left(2))
+    assert compare(2, 1) == gt == compare(Right(1), Left(0))
+    assert max(1, 2) == 2 == min(2, 3)
+    assert min(eq, gt) == eq == max(lt, eq)
+
+def test_Enum():
+    assert and_(x `isinstance` Enum for x in (
+        True, lt, 5,
+    ))
+    assert `succ` 5 == 6 == `pred` 7
+    assert fromEnum(10) == 10
+    assert enumFrom(2)$[:2] |> list == [2, 3]
+    assert enumFromThen(2, 4)$[:3] |> list == [2, 4, 6]
+    assert enumFromTo(2, 4) |> list == [2, 3, 4]
+    assert enumFromThenTo(2, 4, 8) |> list == [2,4,6,8] == enumFromThenTo(2, 4, 9) |> list
+    assert enumFromThenTo(2, 4, 1) |> list == []
+    assert enumFromThen(10, 1) |> list == []
+    assert enumFromThenTo(4, 3, 1) |> list == [4,3,2,1]
+    assert enumFromThen(1, 1)$[:3] |> list == [1,1,1] == enumFromThenTo(1, 1, 1)$[:3] |> list
+    assert enumFromTo(1, 1) |> list == [1]
+
+def test_Bounded():
+    assert minBound(True) is False
+    assert maxBound(False) is True
+    assert minBound(eq) == lt
+    assert maxBound(eq) == gt
+
+def test_Num():
+    assert negate(2) == -2 == negate(2 `over` 1)
+    assert abs(-10) == 10 == abs(10 `over` 1)
+    assert signum(0) == 0
+    assert signum(-2) == -1 == signum(-2.5)
+    assert signum(10) == 1 == signum(2 `over` 2)
+    assert fromInteger(10) == 10
+
+def test_Real():
+    assert toRational(10) == 10 `over` 1
+    assert toRational(1 `over` 3) == 1 `over` 3
+    assert toRational(1.5) == 3 `over` 2
+
+def test_Integral():
+    assert 10 `isinstance` Integral
+    assert quot(10, 3) == 3 == div(10, 3)
+    assert rem(10, 3) == 1 == mod(10, 3)
+    assert div(-10, 3) == -4 == div(10, -3)
+    assert quot(-10, 3) == -3 == quot(10, -3)
+    assert mod(-10, 3) == 2
+    assert mod(10, -3) == -2
+    assert rem(-10, 3) == -1
+    assert rem(10, -3) == 1
+    assert quotRem(-10, -3) == (3, -1) == divMod(-10, -3)
+    assert quotRem(10, -3) == (-3, 1)
+    assert quotRem(-10, 3) == (-3, -1)
+    assert toInteger(10) == 10
+
+def test_Fractional():
+    assert 2 `over` 3 |> recip == 3 `over` 2
+    assert fromRational <| 1 `over` 3 == 1 `over` 3
+
+def test_RealFrac():
+    assert properFraction(10 `over` 3) == (3, 1 `over` 3)
+    assert 4 `over` 3 |> truncate == 1
+    assert 5 `over` 3 |> round == 2
+    assert -4 `over` 3 |> truncate == -1
+    assert -4 `over` 3 |> floor == -2
+    assert -4 `over` 3 |> round == -1
+    assert -4 `over` 3 |> ceiling == -1
+    assert 4 `over` 3 |> ceiling == 2
+    assert 4 `over` 3 |> floor == 1
+
+def test_RealFloat():
+    assert floatRadix(1.2) == 2
+    assert floatDigits(0.5) == 53
+    assert floatRange(0.1) == (-1021, 1024)
+    assert scaleFloat(1, 1.5) == 3
+    assert not isNegativeZero(0.0)
+    assert isNegativeZero(float("-0"))
+    assert isIEEE(0.9) is True
+
+def test_Numeric_functions():
+    assert subtract(2, 1) == -1
+    assert even(2)
+    assert not even(3)
+    assert odd(3)
+    assert not odd(2)
+    assert gcd(4, 6) == 2 == gcd(-4, -6)
+    assert lcm(0, 2) == 0 == lcm(2, 0)
+    assert lcm(4, 6) == 12 == lcm(-4, -6)
+    assert fromIntegral(10) == 10
+    assert realToFrac(0.5) == 1 `over` 2
+
+def test_Monoids():
+    pass
+
+def test_Functor():
+    assert error `fmap` nothing == nothing
+    assert (+)$(1) `fmap` Just(2) == Just(3)
+    assert (+)$(1) `fmap` Left(1) == Left(2)
+    assert (+)$(1) `fmap` [1, 2, 3] == [2, 3, 4]
+    assert 10 `fmapConst` [1, 2, 3] == [10, 10, 10]
+    assert (+)$(1) `fmap` f{1, 2} == f{2, 3}
+
+def test_Applicative():
+    assert nothing `ap` Just(10) == nothing
+    assert Just((+)$(1)) `ap` Just(2) == Just(3)
+    assert [(+)$(1), (*)$(3)] `ap` [10,20,30] == [11,21,31,30,60,90]
+    assert ((+)$(1), (*)$(3)) `ap` (10,20,30) == (11,21,31,30,60,90)
+    assert ((+)$(1), (*)$(3)) `ap` f{10,20,30} == f{11,21,31,30,60,90}
+    pass

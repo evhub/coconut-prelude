@@ -1,3 +1,7 @@
+.PHONY: test
+test: install
+	pytest --strict -s ./prelude
+
 .PHONY: install
 install: build
 	pip install -e .
@@ -23,19 +27,11 @@ upload: clean install
 	pip3 install -U twine
 	twine upload ./dist/*
 
-.PHONY: test
-test: install
-	pytest --strict -s ./prelude/tests
-
 .PHONY: clean
 clean:
-	rm -rf ./dist ./build
+	rm -rf ./dist ./build ./prelude
 	find . -name '*.pyc' -delete
 	find . -name '__pycache__' -delete
-
-.PHONY: wipe
-wipe: clean
-	rm -rf ./prelude
 	find . -name '*.py' -delete
 
 .PHONY: watch
