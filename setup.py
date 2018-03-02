@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x35889049
+# __coconut_hash__ = 0xc501c429
 
-# Compiled with Coconut version 1.3.1-post_dev25 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -657,4 +657,4 @@ import setuptools
 
 VERSION = "0.1.1"
 
-setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages())
+setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages(), extras_require={":python_version<'3.5'": ["typing"]})

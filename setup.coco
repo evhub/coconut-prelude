@@ -10,4 +10,7 @@ setuptools.setup(
     author="Evan Hubinger",
     author_email="evanjhub@gmail.com",
     packages=setuptools.find_packages(),
+    extras_require={
+        ":python_version<'3.5'": ["typing"],
+    }
 )

@@ -19,8 +19,11 @@ _any: -> _t.Any = any
 _map: -> _t.Any = map
 _filter: -> _t.Any = filter
 _int: -> _t.Any = int
+_sum: -> _t.Any = sum
+_reversed: -> _t.Any = reversed
 _ceil: -> _t.Any = _math.ceil
 _floor: -> _t.Any = _math.floor
+_IOError: _t.Any = IOError
 
 #### TypeVars:
 _a = _t.TypeVar("_a")
@@ -493,7 +496,7 @@ def fmapConst(x: _a, xs: Functor) -> Functor[_a] =
     _fmap(_ -> x, xs)
 
 #### Applicative:
-Applicative = _t.Sequence
+Applicative = Functor
 _A = _t.TypeVar("_A", bound=Applicative)
 
 pure = NotImplemented
@@ -510,14 +513,14 @@ def seqAr(f1: Applicative, f2: _A) -> _A =
     seqAr :: Applicative f => f a -> f b -> f b
     seqAr = (*>)
     """
-    _fmap(x1 -> x2 -> x2, f1) `ap` f2  # type: ignore
+    _fmap(x1 -> x2 -> x2, f1) `ap` f2
 
 def seqAl(f1: _A, f2: Applicative) -> _A =
     """
     seqAl :: Applicative f => f a -> f b -> f a
     seqAl = (<*)
     """
-    _fmap(x1 -> x2 -> x1, f1) `ap` f2  # type: ignore
+    _fmap(x1 -> x2 -> x1, f1) `ap` f2
 
 def liftA2(func: (_a, _b) -> _c, f1: Applicative[_a], f2: Applicative[_b]) -> Applicative[_c] =
     """Lift a binary function to actions."""
@@ -532,14 +535,14 @@ def bind(m: Monad[_a], func: _a -> _M) -> _M =
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
     """
-    join(_fmap(func, m))  # type: ignore
+    join(_fmap(func, m))
 
 def seqM(m1: Monad, m2: _M) -> _M =
     """
     seqM :: Monad m => m a -> m b -> m b
     seqM = (>>)
     """
-    m1 `bind` x -> m2  # type: ignore
+    m1 `bind` x -> m2
 
 return_ = NotImplemented
 
@@ -554,23 +557,19 @@ def bindFrom(func: _a -> Monad, m: Monad[_a]) =
     """
     m `bind` func
 
-def typeChain(fs: Applicative[_a]$[]) -> _t.Tuple[_t.Type[Applicative], _a$[]] =
+def typeChain(fs: Applicative[_a]$[]) -> _t.Tuple[_t.Optional[_t.Type[Applicative]], _a$[]] =
     """Chain applicatives together and collect the type of the last one."""
     _reduce((def ((_, vals), f) ->
         (type(f), (vals :: f))
-    ), fs, (undefined, ()))
+    ), fs, (None, ()))
 
-if TYPE_CHECKING:
-    def join(ms: Monad[_M]) -> _M =
-        ...  # type: ignore
-else:
-    def join(ms if not ms) = ms
-
-    @addpattern(join)
-    def join(ms) =
-        """The conventional monad join operator."""
-        valCons, vals = typeChain(ms)
-        makedata(valCons, *vals)
+def join(ms: Monad[_M]) -> _M =
+    """
+    import Control.Monad
+    join :: Monad m => m (m a) -> m a
+    """
+    valCons, vals = typeChain(ms)  # type: ignore
+    makedata(valCons, *vals) if valCons is not None else ms  # type: ignore
 
 if TYPE_CHECKING:
     def do(monads: _M[], func: -> _M) -> _M =
@@ -637,7 +636,7 @@ minimum: Foldable[_O] -> _O
 minimum = _min
 
 sum: Foldable[_N] -> _N
-sum = sum  # type: ignore
+sum = _sum
 
 product: Foldable[_N] -> _N
 product = reduce$(*)
@@ -647,6 +646,8 @@ Traversable = Foldable
 
 def sequenceA(fs: Traversable[Applicative[_a]]) -> Applicative[Traversable[_a]] =
     valCons, vals = typeChain(fs)
+    if valCons is None:
+        raise ValueError("sequenceA requires a non-empty traversable; got {}".format(fs))
     makedata(valCons, makedata(type(fs), *vals))
 
 traverse: (_a -> Applicative[_b], Traversable[_a]) -> Applicative[Traversable[_b]]
@@ -738,7 +739,7 @@ def index(xs: _a$[], i: int) -> _a =
     xs$[i]
 
 reverse: _a[] -> _a[]
-reverse = reversed  # type: ignore
+reverse = _reversed
 
 
 
@@ -949,7 +950,8 @@ def appendFile(fpath: FilePath, text: str) -> None:
 
 
 ## Exception handling:
-IOError = IOError  # type: ignore
+IOError: _t.Type[Exception]
+IOError = _IOError
 
 def ioError() -> None: raise IOError()
 
