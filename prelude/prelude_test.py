@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x7c8affc7
+# __coconut_hash__ = 0xaeb50c4c
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -162,7 +162,7 @@ def test_Monoids():
 def test_Functor():
     assert (fmap)(error, nothing) == nothing
     assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), Just(2)) == Just(3)
-    assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), Left(1)) == Left(2)
+    assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), Left(10)) == Left(10)
     assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), [1, 2, 3]) == [2, 3, 4]
     assert (fmapConst)(10, [1, 2, 3]) == [10, 10, 10]
     assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))
@@ -173,7 +173,59 @@ def test_Applicative():
     assert (ap)([_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)], [10, 20, 30]) == [11, 21, 31, 30, 60, 90]
     assert (ap)((_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)), (10, 20, 30)) == (11, 21, 31, 30, 60, 90)
     assert (ap)((_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)), _coconut.frozenset((10, 20, 30))) == _coconut.frozenset((11, 21, 31, 30, 60, 90))
-    pass
+    assert (seqAr)(nothing, Just(1)) == nothing
+    assert (seqAl)(Just(1), nothing) == nothing
+    assert (seqAr)(Just(1), Just(2)) == Just(2) == (seqAl)(Just(2), Just(1))
+    assert liftA2(_coconut.operator.add, [1, 2, 3], [10, 20, 30]) == [11, 21, 31, 12, 22, 32, 13, 23, 33]
+    assert (ap)(pure(error), nothing) == nothing
+    assert (ap)(pure(lambda _=None: _ + 1), Just(2)) == Just(3)
+    assert (ap)(pure(lambda _=None: _ + 1), Left(10)) == Left(10)
+    assert (ap)(pure(lambda _=None: _ + 1), [1, 2, 3]) == [2, 3, 4]
+    assert (ap)(pure(lambda _=None: _ + 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))
+
+def test_Monad():
+    assert nothing == (bind)(nothing, Just)
+    assert nothing == (bindFrom)(Just, nothing)
+    assert Just(2) == (bind)(Just(1), lambda x: Just(x + 1))
+    assert Left(2) == (bind)(Left(2), Right)
+    assert Left(2) == (bindFrom)(Right, Left(2))
+    assert Left(2) == (bind)(Right(2), Left)
+    assert Left(2) == (bindFrom)(Left, Right(2))
+    assert Just(2) == (seqM)(Just(1), Just(2))
+    assert nothing == (seqM)(nothing, Just(2))
+    assert Right(2) == (seqM)(Right(1), Right(2))
+    assert Left(1) == (seqM)(Left(1), Right(2))
+    assert [] == (seqM)([], [1])
+    assert Just(1) == (bind)(Just(1), return_)
+    assert Just(2) == (bind)(Just(1), lambda _=None: return_(2))
+    assert nothing == (bind)(nothing, return_)
+    assert [1] == (bind)([1], return_)
+    assert [2, 3] == (bind)([1, 2], lambda x: return_(x + 1))
+    assert [] == (bind)([], return_)
+    assert Right(1) == (bind)(Right(1), return_)
+    assert Left(1) == (bind)(Left(1), return_(2))
+    assert Right(2) == (bind)(Right(1), lambda x: return_(x + 1))
+    assert Just(1) == join(Just(Just(1)))
+    assert nothing == join(Just(nothing))
+    assert nothing == join(nothing)
+    assert [1, 2, 3, 4, 5, 6] == join([[1, 2, 3], [], [4], [5, 6]])
+    assert Left(3) == do([Right(1), Right(2), Left(3), Right(4),], lambda *xs: error(repr(xs)))
+
+def test_Foldable():
+    assert sequence_([[1], [2], [3]]) == [()]
+    assert sequence_([[1], [], [3]]) == []
+    assert sequence_([Just(1), Just(2), Just(3)]) == Just(())
+    assert sequence_([Just(1), nothing, Just(3)]) == nothing
+    assert sequence_([Right(1), Right(2), Right(3)]) == Right(())
+    assert sequence_([Right(1), Left(2), Right(3)]) == Left(2)
+    assert foldr(_coconut.operator.pow, 2, [1, 2, 3]) == 1
+    assert foldl(_coconut.operator.pow, 2, [1, 2, 3]) == 64
+    assert (list)(foldr(cons, [], [2, 3, 4])) == [2, 3, 4]
+    assert (list)(foldl(flip(cons), [], [2, 3, 4])) == [4, 3, 2]
+
+def test_Traversable():
+    assert sequenceA([Right(1), Right(2), Left(3), Right(4)]) == Left(3)
+    assert sequenceA([[1, 2, 3], [], [4], [5, 6]]) == []
 
 if __name__ == "__main__":
     for var, val in globals().items():

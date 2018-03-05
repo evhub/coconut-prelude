@@ -111,7 +111,9 @@ else:
 #### Either:
 class Either
 
-data Left(x) from Either
+data Left(x) from Either:
+    def __fmap__(self, func) = self
+    def __bool__(self) = False
 
 data Right(x) from Either
 
@@ -499,7 +501,7 @@ def fmapConst(x: _a, xs: Functor) -> Functor[_a] =
 Applicative = Functor
 _A = _t.TypeVar("_A", bound=Applicative)
 
-pure = NotImplemented
+data pure(val)
 
 def ap(fs: Applicative[_a -> _b], xs: Applicative[_a]) -> Applicative[_b] =
     """
@@ -523,7 +525,10 @@ def seqAl(f1: _A, f2: Applicative) -> _A =
     _fmap(x1 -> x2 -> x1, f1) `ap` f2
 
 def liftA2(func: (_a, _b) -> _c, f1: Applicative[_a], f2: Applicative[_b]) -> Applicative[_c] =
-    """Lift a binary function to actions."""
+    """
+    import Control.Applicative
+    liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+    """
     _fmap(func$, f1) `ap` f2
 
 #### Monad:
@@ -544,9 +549,9 @@ def seqM(m1: Monad, m2: _M) -> _M =
     """
     m1 `bind` x -> m2
 
-return_ = NotImplemented
+return_ = pure
 
-fail = NotImplemented
+fail = Left
 
 # sequence_ and mapM_ defined in Foldable
 
@@ -557,19 +562,25 @@ def bindFrom(func: _a -> Monad, m: Monad[_a]) =
     """
     m `bind` func
 
-def typeChain(fs: Applicative[_a]$[]) -> _t.Tuple[_t.Optional[_t.Type[Applicative]], _a$[]] =
-    """Chain applicatives together and collect the type of the last one."""
-    _reduce((def ((_, vals), f) ->
-        (type(f), (vals :: f))
-    ), fs, (None, ()))
+if TYPE_CHECKING:
+    def join(ms: Monad[_M]) -> _M =
+        ...  # type: ignore
+else:
+    def join(ms if not ms) = ms
 
-def join(ms: Monad[_M]) -> _M =
-    """
-    import Control.Monad
-    join :: Monad m => m (m a) -> m a
-    """
-    valCons, vals = typeChain(ms)  # type: ignore
-    makedata(valCons, *vals) if valCons is not None else ms  # type: ignore
+    @addpattern(join)
+    def join(ms) =
+        """
+        import Control.Monad
+        join :: Monad m => m (m a) -> m a
+        """
+        valCons = type(ms)
+        vals = None
+        for m in ms:
+            if not m `isinstance` pure:
+                valCons = type(m)
+            vals = (::)(vals, m) if vals is not None else m
+        makedata(valCons, *vals) if vals is not None else ms
 
 if TYPE_CHECKING:
     def do(monads: _M[], func: -> _M) -> _M =
@@ -578,22 +589,22 @@ else:
     def do([], func) = func()
 
     @addpattern(do)
-    def do([m1] + ms, func) =
+    def do([m] + ms, func) =
         """
         The call
             do([m1, m2, ...], func)
-        is equivalent to the do notation
-            x1 <- m1
-            x2 <- m2
-            ...
-            func(x1, x2, ...)
-        which is equivalent to the sequence of binds
+        is equivalent to the sequence of binds
             m1 `bind` x1 ->
                 m2 `bind` x2 ->
                     ...
                         func(x1, x2, ...)
+        which is meant to mimic the do notation
+            x1 <- m1
+            x2 <- m2
+            ...
+            func(x1, x2, ...)
         """
-        m1 `bind` x -> do(func$(x), *ms)
+        m `bind` x -> do(ms, func$(x))
 
 
 
@@ -602,25 +613,27 @@ else:
 #### Foldable:
 Foldable = _t.Sequence
 
-def sequence_(ms: Foldable[_M]) -> _M =
-    reduce(seqM, ms)
+def sequence_(ms: Foldable[Monad]) -> Monad =
+    do(ms, (*xs) -> pure(()))
 
-mapM_: (_a -> _M, Foldable[_a]) -> _M
+mapM_: (_a -> Monad, Foldable[_a]) -> Monad
 mapM_ = sequence_..fmap
+
+fold = NotImplemented
 
 foldMap = NotImplemented
 
-def foldr(func: (_a, _b) -> _a, init: _a, xs: Foldable[_a]) -> _a =
+def foldl(func: (_b, _a) -> _b, init: _b, xs: Foldable[_a]) -> _b =
     _reduce(func, xs, init)
 
-def foldl(func: (_a, _b) -> _a, init: _a, xs: Foldable[_a]) -> _a =
-    _reduce(func, reversed(xs), init)
+def foldr(func: (_a, _b) -> _b, init: _b, xs: Foldable[_a]) -> _b =
+    _reduce((x, y) -> func(y, x), reversed(xs), init)
 
-foldr1: ((_a, _a) -> _a, Foldable[_a]) -> _a
-foldr1 = reduce
+foldl1: ((_a, _a) -> _a, Foldable[_a]) -> _a
+foldl1 = reduce
 
-def foldl1(func: (_a, _a) -> _a, xs: Foldable[_a]) -> _a =
-    reduce(func, reversed(xs))
+def foldr1(func: (_a, _a) -> _a, xs: Foldable[_a]) -> _a =
+    reduce((x, y) -> func(y, x), reversed(xs))
 
 def null(xs: Foldable[_a]) -> bool = len(xs) == 0
 
@@ -642,13 +655,10 @@ product: Foldable[_N] -> _N
 product = reduce$(*)
 
 #### Traversable:
-Traversable = Foldable
+Traversable = _t.Iterable
 
 def sequenceA(fs: Traversable[Applicative[_a]]) -> Applicative[Traversable[_a]] =
-    valCons, vals = typeChain(fs)
-    if valCons is None:
-        raise ValueError("sequenceA requires a non-empty traversable; got {}".format(fs))
-    makedata(valCons, makedata(type(fs), *vals))
+    fs `do` (*xs) -> xs |> makedata$(type(fs)) |> pure
 
 traverse: (_a -> Applicative[_b], Traversable[_a]) -> Applicative[Traversable[_b]]
 traverse = sequenceA..fmap
@@ -676,12 +686,12 @@ def dot(f: _b -> _c, g: _a -> _b) -> _a -> _c =
 def flip(func: (_a, _b) -> _c) -> (_b, _a) -> _c =
     (x, y) -> func(y, x)
 
-def apply(f: _a -> _b, x: _a) =
+def apply(func: _a -> _b, arg: _a) -> _b =
     """
     apply :: (a -> b) -> a -> b
     apply = ($)
     """
-    f(x)
+    func(arg)
 
 def until(cond: _a -> bool, func: _a -> _a, x: _a) -> _a =
     if cond(x):
@@ -710,6 +720,13 @@ def cbv(func: _a -> _b, arg: _a) -> _b =
 
 
 # List operations:
+def cons(x: _a, xs: _a$[]) -> _a$[] =
+    """
+    cons :: a -> [a] -> [a]
+    cons = (:)
+    """
+    (::)([x], xs)
+
 map: (_a -> _b, _a$[]) -> _b$[]
 map = _map
 
@@ -718,7 +735,7 @@ def append(xs: _a$[], ys: _a$[]) -> _a$[] =
     append :: [a] -> [a] -> [a]
     append = (++)
     """
-    xs :: ys
+    (::)(xs, ys)
 
 filter: (_a -> bool, _a$[]) -> _a$[]
 filter = _filter
@@ -760,7 +777,7 @@ concat: Foldable[_a$[]] -> _a$[]
 concat = _reduce$(::)
 
 concatMap: (_a -> _b$[], Foldable[_a]) -> _b$[]
-concatMap = concat.._map  # type: ignore
+concatMap = concat..map  # type: ignore
 
 
 
@@ -825,8 +842,8 @@ else:
     def span(_, []) = ([], [])
 
     @addpattern(span)
-    def span(cond, [x] + t as xs if cond(x)) =
-        ys, zs = span(cond, t)
+    def span(cond, [x] + xs if cond(x)) =
+        ys, zs = span(cond, xs)
         ([x] + ys, zs)
 
     @addpattern(span)

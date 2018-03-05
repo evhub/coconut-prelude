@@ -145,7 +145,7 @@ def test_Monoids():
 def test_Functor():
     assert error `fmap` nothing == nothing
     assert (+)$(1) `fmap` Just(2) == Just(3)
-    assert (+)$(1) `fmap` Left(1) == Left(2)
+    assert (+)$(1) `fmap` Left(10) == Left(10)
     assert (+)$(1) `fmap` [1, 2, 3] == [2, 3, 4]
     assert 10 `fmapConst` [1, 2, 3] == [10, 10, 10]
     assert (+)$(1) `fmap` f{1, 2} == f{2, 3}
@@ -156,7 +156,64 @@ def test_Applicative():
     assert [(+)$(1), (*)$(3)] `ap` [10,20,30] == [11,21,31,30,60,90]
     assert ((+)$(1), (*)$(3)) `ap` (10,20,30) == (11,21,31,30,60,90)
     assert ((+)$(1), (*)$(3)) `ap` f{10,20,30} == f{11,21,31,30,60,90}
-    pass
+    assert nothing `seqAr` Just(1) == nothing
+    assert Just(1) `seqAl` nothing == nothing
+    assert Just(1) `seqAr` Just(2) == Just(2) == Just(2) `seqAl` Just(1)
+    assert liftA2((+), [1,2,3], [10,20,30]) == [11,21,31,12,22,32,13,23,33]
+    assert pure(error) `ap` nothing == nothing
+    assert pure(->_+1) `ap` Just(2) == Just(3)
+    assert pure(->_+1) `ap` Left(10) == Left(10)
+    assert pure(->_+1) `ap` [1, 2, 3] == [2, 3, 4]
+    assert pure(->_+1) `ap` f{1, 2} == f{2, 3}
+
+def test_Monad():
+    assert nothing == nothing `bind` Just
+    assert nothing == Just `bindFrom` nothing
+    assert Just(2) == Just(1) `bind` x -> Just(x+1)
+    assert Left(2) == Left(2) `bind` Right
+    assert Left(2) == Right `bindFrom` Left(2)
+    assert Left(2) == Right(2) `bind` Left
+    assert Left(2) == Left `bindFrom` Right(2)
+    assert Just(2) == Just(1) `seqM` Just(2)
+    assert nothing == nothing `seqM` Just(2)
+    assert Right(2) == Right(1) `seqM` Right(2)
+    assert Left(1) == Left(1) `seqM` Right(2)
+    assert [] == [] `seqM` [1]
+    assert Just(1) == Just(1) `bind` return_
+    assert Just(2) == Just(1) `bind` -> return_(2)
+    assert nothing == nothing `bind` return_
+    assert [1] == [1] `bind` return_
+    assert [2,3] == [1,2] `bind` x -> return_(x+1)
+    assert [] == [] `bind` return_
+    assert Right(1) == Right(1) `bind` return_
+    assert Left(1) == Left(1) `bind` return_(2)
+    assert Right(2) == Right(1) `bind` x -> return_(x+1)
+    assert Just(1) == join(Just(Just(1)))
+    assert nothing == join(Just(nothing))
+    assert nothing == join(nothing)
+    assert [1,2,3,4,5,6] == join([[1,2,3], [], [4], [5,6]])
+    assert Left(3) == do([
+        Right(1),
+        Right(2),
+        Left(3),
+        Right(4),
+    ], (*xs) -> error(repr(xs)))
+
+def test_Foldable():
+    assert sequence_([[1], [2], [3]]) == [()]
+    assert sequence_([[1], [], [3]]) == []
+    assert sequence_([Just(1), Just(2), Just(3)]) == Just(())
+    assert sequence_([Just(1), nothing, Just(3)]) == nothing
+    assert sequence_([Right(1), Right(2), Right(3)]) == Right(())
+    assert sequence_([Right(1), Left(2), Right(3)]) == Left(2)
+    assert foldr((**), 2, [1, 2, 3]) == 1
+    assert foldl((**), 2, [1, 2, 3]) == 64
+    assert foldr(cons, [], [2, 3, 4]) |> list == [2, 3, 4]
+    assert foldl(flip(cons), [], [2, 3, 4]) |> list == [4, 3, 2]
+
+def test_Traversable():
+    assert sequenceA([Right(1), Right(2), Left(3), Right(4)]) == Left(3)
+    assert sequenceA([[1,2,3], [], [4], [5,6]]) == []
 
 if __name__ == "__main__":
     for var, val in globals().items():

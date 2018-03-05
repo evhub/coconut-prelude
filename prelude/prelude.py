@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x80dc9577
+# __coconut_hash__ = 0xb6b43fe5
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -189,6 +189,10 @@ class Either(_coconut.object): pass
 class Left(_coconut.collections.namedtuple("Left", "x"), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __fmap__(self, func):
+        return self
+    def __bool__(self):
+        return False
 
 class Right(_coconut.collections.namedtuple("Right", "x"), Either):
     __slots__ = ()
@@ -873,7 +877,9 @@ def fmapConst(x,  # type: _a
 Applicative = Functor
 _A = _t.TypeVar("_A", bound=Applicative)
 
-pure = NotImplemented
+class pure(_coconut.collections.namedtuple("pure", "val"), _coconut.object):
+    __slots__ = ()
+    __ne__ = _coconut.object.__ne__
 
 @_coconut_tco
 def ap(fs,  # type: Applicative[_coconut.typing.Callable[[_a], _b]]
@@ -914,7 +920,10 @@ def liftA2(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
      f2  # type: Applicative[_b]
     ):
 # type: (...) -> Applicative[_c]
-    """Lift a binary function to actions."""
+    """
+    import Control.Applicative
+    liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
+    """
     return _coconut_tail_call((ap), _fmap(_coconut.functools.partial(_coconut.functools.partial, func), f1), f2)
 
 #### Monad:
@@ -943,9 +952,9 @@ def seqM(m1,  # type: Monad
     """
     return _coconut_tail_call((bind), m1, lambda x: m2)
 
-return_ = NotImplemented
+return_ = pure
 
-fail = NotImplemented
+fail = Left
 
 # sequence_ and mapM_ defined in Foldable
 
@@ -959,36 +968,42 @@ def bindFrom(func,  # type: _coconut.typing.Callable[[_a], Monad]
     """
     return _coconut_tail_call((bind), m, func)
 
-@_coconut_tco
-def typeChain(fs  # type: _coconut.typing.Iterable[Applicative[_a]]
-    ):
-# type: (...) -> _t.Tuple[_t.Optional[_t.Type[Applicative]], _coconut.typing.Iterable[_a]]
-    """Chain applicatives together and collect the type of the last one."""
-    def _coconut_lambda_0(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-        _coconut_match_check = False
-        if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "f" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) == 2):
-            _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("f")
-            vals = _coconut_match_to_args[0][1]
-            if not _coconut_match_to_kwargs:
-                f = _coconut_match_temp_0
-                _coconut_match_check = True
-        if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'_reduce((def ((_, vals), f) ->         (type(f), (vals :: f))     ), fs, (None, ()))'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = '_reduce((def ((_, vals), f) ->         (type(f), (vals :: f))     ), fs, (None, ()))'
-            _coconut_match_err.value = _coconut_match_to_args
-            raise _coconut_match_err
-        return (type(f), (_coconut.itertools.chain.from_iterable((f() for f in (lambda: vals, lambda: f)))))
-    return _coconut_tail_call(_reduce, (_coconut_lambda_0), fs, (None, ()))
-
-def join(ms  # type: Monad[_M]
+if TYPE_CHECKING:
+    def join(ms  # type: Monad[_M]
     ):
 # type: (...) -> _M
-    """
-    import Control.Monad
-    join :: Monad m => m (m a) -> m a
-    """
-    valCons, vals = typeChain(ms)  # type: ignore
-    return makedata(valCons, *vals) if valCons is not None else ms  # type: ignore
+        return _coconut.Ellipsis  # type: ignore
+else:
+    def join(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "ms" in _coconut_match_to_kwargs)) == 1):
+            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("ms")
+            if not _coconut_match_to_kwargs:
+                ms = _coconut_match_temp_0
+                _coconut_match_check = True
+        if _coconut_match_check and not (not ms):
+            _coconut_match_check = False
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def join(ms if not ms) = ms'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def join(ms if not ms) = ms'
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+
+        return ms
+
+    @addpattern(join)
+    def join(ms):
+        """
+        import Control.Monad
+        join :: Monad m => m (m a) -> m a
+        """
+        valCons = type(ms)
+        vals = None
+        for m in ms:
+            if not (isinstance)(m, pure):
+                valCons = type(m)
+            vals = _coconut.itertools.chain(vals, m) if vals is not None else m
+        return makedata(valCons, *vals) if vals is not None else ms
 
 if TYPE_CHECKING:
     def do(monads,  # type: _coconut.typing.Sequence[_M]
@@ -1019,32 +1034,32 @@ else:
         """
         The call
             do([m1, m2, ...], func)
-        is equivalent to the do notation
-            x1 <- m1
-            x2 <- m2
-            ...
-            func(x1, x2, ...)
-        which is equivalent to the sequence of binds
+        is equivalent to the sequence of binds
             m1 `bind` x1 ->
                 m2 `bind` x2 ->
                     ...
                         func(x1, x2, ...)
+        which is meant to mimic the do notation
+            x1 <- m1
+            x2 <- m2
+            ...
+            func(x1, x2, ...)
         """
         _coconut_match_check = False
         if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "func" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) >= 1):
             _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("func")
             ms = _coconut.list(_coconut_match_to_args[0][1:])
-            m1 = _coconut_match_to_args[0][0]
+            m = _coconut_match_to_args[0][0]
             if not _coconut_match_to_kwargs:
                 func = _coconut_match_temp_0
                 _coconut_match_check = True
         if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def do([m1] + ms, func) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def do([m1] + ms, func) ='
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def do([m] + ms, func) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def do([m] + ms, func) ='
             _coconut_match_err.value = _coconut_match_to_args
             raise _coconut_match_err
 
-        return _coconut_tail_call((bind), m1, lambda x: do(_coconut.functools.partial(func, x), *ms))
+        return _coconut_tail_call((bind), m, lambda x: do(ms, _coconut.functools.partial(func, x)))
 
 
 
@@ -1054,41 +1069,43 @@ else:
 Foldable = _t.Sequence
 
 @_coconut_tco
-def sequence_(ms  # type: Foldable[_M]
+def sequence_(ms  # type: Foldable[Monad]
     ):
-# type: (...) -> _M
-    return _coconut_tail_call(reduce, seqM, ms)
+# type: (...) -> Monad
+    return _coconut_tail_call(do, ms, lambda *xs: pure(()))
 
-mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _M], Foldable[_a]], _M]
+mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad], Foldable[_a]], Monad]
 mapM_ = _coconut_forward_compose(fmap, sequence_)
+
+fold = NotImplemented
 
 foldMap = NotImplemented
 
 @_coconut_tco
-def foldr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
-     init,  # type: _a
+def foldl(func,  # type: _coconut.typing.Callable[[_b, _a], _b]
+     init,  # type: _b
      xs  # type: Foldable[_a]
     ):
-# type: (...) -> _a
+# type: (...) -> _b
     return _coconut_tail_call(_reduce, func, xs, init)
 
 @_coconut_tco
-def foldl(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
-     init,  # type: _a
+def foldr(func,  # type: _coconut.typing.Callable[[_a, _b], _b]
+     init,  # type: _b
      xs  # type: Foldable[_a]
     ):
-# type: (...) -> _a
-    return _coconut_tail_call(_reduce, func, reversed(xs), init)
+# type: (...) -> _b
+    return _coconut_tail_call(_reduce, lambda x, y: func(y, x), reversed(xs), init)
 
-foldr1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], Foldable[_a]], _a]
-foldr1 = reduce
+foldl1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], Foldable[_a]], _a]
+foldl1 = reduce
 
 @_coconut_tco
-def foldl1(func,  # type: _coconut.typing.Callable[[_a, _a], _a]
+def foldr1(func,  # type: _coconut.typing.Callable[[_a, _a], _a]
      xs  # type: Foldable[_a]
     ):
 # type: (...) -> _a
-    return _coconut_tail_call(reduce, func, reversed(xs))
+    return _coconut_tail_call(reduce, lambda x, y: func(y, x), reversed(xs))
 
 def null(xs  # type: Foldable[_a]
     ):
@@ -1117,16 +1134,13 @@ product = None  # type: _coconut.typing.Callable[[Foldable[_N]], _N]
 product = _coconut.functools.partial(reduce, _coconut.operator.mul)
 
 #### Traversable:
-Traversable = Foldable
+Traversable = _t.Iterable
 
 @_coconut_tco
 def sequenceA(fs  # type: Traversable[Applicative[_a]]
     ):
 # type: (...) -> Applicative[Traversable[_a]]
-    valCons, vals = typeChain(fs)
-    if valCons is None:
-        raise ValueError("sequenceA requires a non-empty traversable; got {}".format(fs))
-    return _coconut_tail_call(makedata, valCons, makedata(type(fs), *vals))
+    return _coconut_tail_call((do), fs, lambda *xs: (pure)(makedata(type(fs), xs)))
 
 traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Applicative[_b]], Traversable[_a]], Applicative[Traversable[_b]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)
@@ -1167,14 +1181,15 @@ def flip(func  # type: _coconut.typing.Callable[[_a, _b], _c]
     return lambda x, y: func(y, x)
 
 @_coconut_tco
-def apply(f,  # type: _coconut.typing.Callable[[_a], _b]
-     x  # type: _a
+def apply(func,  # type: _coconut.typing.Callable[[_a], _b]
+     arg  # type: _a
     ):
+# type: (...) -> _b
     """
     apply :: (a -> b) -> a -> b
     apply = ($)
     """
-    return _coconut_tail_call(f, x)
+    return _coconut_tail_call(func, arg)
 
 @_coconut_tco
 def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
@@ -1185,14 +1200,14 @@ def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_74:  # tail recursive
+        if until is _coconut_recursive_func_76:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return _coconut_tail_call(until, cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_74 = until
+_coconut_recursive_func_76 = until
 asTypeOf = None  # type: _coconut.typing.Callable[[_a, _a], _a]
 asTypeOf = const
 
@@ -1225,6 +1240,17 @@ def cbv(func,  # type: _coconut.typing.Callable[[_a], _b]
 
 
 # List operations:
+@_coconut_tco
+def cons(x,  # type: _a
+     xs  # type: _coconut.typing.Iterable[_a]
+    ):
+# type: (...) -> _coconut.typing.Iterable[_a]
+    """
+    cons :: a -> [a] -> [a]
+    cons = (:)
+    """
+    return _coconut_tail_call(_coconut.itertools.chain, [x], xs)
+
 map = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _b], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_b]]
 map = _map
 
@@ -1237,7 +1263,7 @@ def append(xs,  # type: _coconut.typing.Iterable[_a]
     append :: [a] -> [a] -> [a]
     append = (++)
     """
-    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (f() for f in (lambda: xs, lambda: ys)))
+    return _coconut_tail_call(_coconut.itertools.chain, xs, ys)
 
 filter = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
 filter = _filter
@@ -1283,7 +1309,7 @@ concat = None  # type: _coconut.typing.Callable[[Foldable[_coconut.typing.Iterab
 concat = _coconut.functools.partial(_reduce, _coconut.itertools.chain)
 
 concatMap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _coconut.typing.Iterable[_b]], Foldable[_a]], _coconut.typing.Iterable[_b]]
-concatMap = _coconut_forward_compose(_map, concat)  # type: ignore
+concatMap = _coconut_forward_compose(map, concat)  # type: ignore
 
 
 
@@ -1323,14 +1349,14 @@ def iterate(func,  # type: _coconut.typing.Callable[[_a], _a]
      x  # type: _a
     ):
 # type: (...) -> _coconut.typing.Iterable[_a]
-    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (f() for f in (lambda: [x], lambda: iterate(func, func(x)))))
+    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: [x], lambda: iterate(func, func(x)))))
 
 @recursive_iterator
 @_coconut_tco
 def repeat(x  # type: _a
     ):
 # type: (...) -> _coconut.typing.Iterable[_a]
-    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (f() for f in (lambda: [x], lambda: repeat(x))))
+    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: [x], lambda: repeat(x))))
 
 @_coconut_tco
 def replicate(n,  # type: int
@@ -1362,7 +1388,7 @@ else:
             _coconut_match_err.value = _coconut_match_to_args
             raise _coconut_match_err
 
-        return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (f() for f in (lambda: xs, lambda: cycle(xs))))
+        return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: xs, lambda: cycle(xs))))
 
 
 
@@ -1417,24 +1443,22 @@ else:
     @addpattern(span)
     def span(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "cond" in _coconut_match_to_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "xs" in _coconut_match_to_kwargs)) == 1):
+        if (_coconut.len(_coconut_match_to_args) == 2) and ("cond" not in _coconut_match_to_kwargs) and (_coconut.isinstance(_coconut_match_to_args[1], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[1]) >= 1):
             _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("cond")
-            _coconut_match_temp_1 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("xs")
-            if (_coconut.isinstance(_coconut_match_temp_1, _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_temp_1) >= 1) and (not _coconut_match_to_kwargs):
+            xs = _coconut.list(_coconut_match_to_args[1][1:])
+            x = _coconut_match_to_args[1][0]
+            if not _coconut_match_to_kwargs:
                 cond = _coconut_match_temp_0
-                xs = _coconut_match_temp_1
-                t = _coconut.list(_coconut_match_temp_1[1:])
-                x = _coconut_match_temp_1[0]
                 _coconut_match_check = True
         if _coconut_match_check and not (cond(x)):
             _coconut_match_check = False
         if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def span(cond, [x] + t as xs if cond(x)) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def span(cond, [x] + t as xs if cond(x)) ='
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def span(cond, [x] + xs if cond(x)) ='" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def span(cond, [x] + xs if cond(x)) ='
             _coconut_match_err.value = _coconut_match_to_args
             raise _coconut_match_err
 
-        ys, zs = span(cond, t)
+        ys, zs = span(cond, xs)
         return ([x] + ys, zs)
 
     @addpattern(span)
