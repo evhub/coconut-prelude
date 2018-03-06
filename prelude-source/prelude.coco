@@ -551,7 +551,19 @@ def seqM(m1: Monad, m2: _M) -> _M =
 
 return_ = pure
 
-fail = Left
+data fail(msg)
+
+if TYPE_CHECKING:
+    def _failAs(f: fail, M: _t.Type[Monad]) =
+        ...  # type: ignore
+else:
+    def _failAs(_, M if M `issubclass` Maybe) = nothing
+
+    @addpattern(_failAs)
+    def _failAs(fail(msg), M if M `issubclass` Either) = Left(msg)
+
+    @addpattern(_failAs)
+    def _failAs(_, M) = makedata(M)
 
 # sequence_ and mapM_ defined in Foldable
 
@@ -577,6 +589,8 @@ else:
         valCons = type(ms)
         vals = None
         for m in ms:
+            if m `isinstance` fail:
+                return _failAs(m, valCons)
             if not m `isinstance` pure:
                 valCons = type(m)
             vals = (::)(vals, m) if vals is not None else m

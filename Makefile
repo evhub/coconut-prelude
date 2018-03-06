@@ -19,7 +19,7 @@ build2:
 .PHONY: setup
 setup:
 	pip install -U setuptools pip pytest
-	pip install -U "coconut-develop[watch,cPyparsing]"
+	pip install -U "coconut-develop[watch,cPyparsing,jobs,mypy]"
 
 .PHONY: upload
 upload: clean install

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb6b43fe5
+# __coconut_hash__ = 0x6b3d9f42
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -954,7 +954,57 @@ def seqM(m1,  # type: Monad
 
 return_ = pure
 
-fail = Left
+class fail(_coconut.collections.namedtuple("fail", "msg"), _coconut.object):
+    __slots__ = ()
+    __ne__ = _coconut.object.__ne__
+
+if TYPE_CHECKING:
+    def _failAs(f,  # type: fail
+     M  # type: _t.Type[Monad]
+    ):
+        return _coconut.Ellipsis  # type: ignore
+else:
+    def _failAs(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "M" in _coconut_match_to_kwargs)) == 1):
+            _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("M")
+            if not _coconut_match_to_kwargs:
+                M = _coconut_match_temp_0
+                _coconut_match_check = True
+        if _coconut_match_check and not ((issubclass)(M, Maybe)):
+            _coconut_match_check = False
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def _failAs(_, M if M `issubclass` Maybe) = nothing'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def _failAs(_, M if M `issubclass` Maybe) = nothing'
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+
+        return nothing
+
+    @addpattern(_failAs)
+    @_coconut_tco
+    def _failAs(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "M" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], fail)) and (_coconut.len(_coconut_match_to_args[0]) == 1):
+            _coconut_match_temp_0 = _coconut_match_to_args[1] if _coconut.len(_coconut_match_to_args) > 1 else _coconut_match_to_kwargs.pop("M")
+            msg = _coconut_match_to_args[0][0]
+            if not _coconut_match_to_kwargs:
+                M = _coconut_match_temp_0
+                _coconut_match_check = True
+        if _coconut_match_check and not ((issubclass)(M, Either)):
+            _coconut_match_check = False
+        if not _coconut_match_check:
+            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def _failAs(fail(msg), M if M `issubclass` Either) = Left(msg)'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
+            _coconut_match_err.pattern = 'def _failAs(fail(msg), M if M `issubclass` Either) = Left(msg)'
+            _coconut_match_err.value = _coconut_match_to_args
+            raise _coconut_match_err
+
+        return _coconut_tail_call(Left, msg)
+
+    @addpattern(_failAs)
+    @_coconut_tco
+    def _failAs(_, M):
+        return _coconut_tail_call(makedata, M)
 
 # sequence_ and mapM_ defined in Foldable
 
@@ -992,6 +1042,7 @@ else:
         return ms
 
     @addpattern(join)
+    @_coconut_tco
     def join(ms):
         """
         import Control.Monad
@@ -1000,6 +1051,8 @@ else:
         valCons = type(ms)
         vals = None
         for m in ms:
+            if (isinstance)(m, fail):
+                return _coconut_tail_call(_failAs, m, valCons)
             if not (isinstance)(m, pure):
                 valCons = type(m)
             vals = _coconut.itertools.chain(vals, m) if vals is not None else m
@@ -1200,14 +1253,14 @@ def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_76:  # tail recursive
+        if until is _coconut_recursive_func_78:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return _coconut_tail_call(until, cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_76 = until
+_coconut_recursive_func_78 = until
 asTypeOf = None  # type: _coconut.typing.Callable[[_a, _a], _a]
 asTypeOf = const
 

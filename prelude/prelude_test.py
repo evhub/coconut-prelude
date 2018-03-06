@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xaeb50c4c
+# __coconut_hash__ = 0xd7b16ad3
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -196,6 +196,10 @@ def test_Monad():
     assert Right(2) == (seqM)(Right(1), Right(2))
     assert Left(1) == (seqM)(Left(1), Right(2))
     assert [] == (seqM)([], [1])
+    assert nothing == (bind)(Just(1), _coconut_forward_compose(str, fail))
+    assert Left(1) == (bind)(Left(1), _coconut_forward_compose(str, fail))
+    assert Left("1") == (bind)(Right(1), _coconut_forward_compose(str, fail))
+    assert [] == (bind)([1, 2], _coconut_forward_compose(str, fail))
     assert Just(1) == (bind)(Just(1), return_)
     assert Just(2) == (bind)(Just(1), lambda _=None: return_(2))
     assert nothing == (bind)(nothing, return_)
