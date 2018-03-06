@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x6b3d9f42
+# __coconut_hash__ = 0x60d2b864
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -1193,7 +1193,7 @@ Traversable = _t.Iterable
 def sequenceA(fs  # type: Traversable[Applicative[_a]]
     ):
 # type: (...) -> Applicative[Traversable[_a]]
-    return _coconut_tail_call((do), fs, lambda *xs: (pure)(makedata(type(fs), xs)))
+    return _coconut_tail_call((do), fs, lambda *xs: (pure)(makedata(type(fs), *xs)))
 
 traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Applicative[_b]], Traversable[_a]], Applicative[Traversable[_b]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)

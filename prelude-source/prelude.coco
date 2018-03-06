@@ -672,7 +672,7 @@ product = reduce$(*)
 Traversable = _t.Iterable
 
 def sequenceA(fs: Traversable[Applicative[_a]]) -> Applicative[Traversable[_a]] =
-    fs `do` (*xs) -> xs |> makedata$(type(fs)) |> pure
+    fs `do` (*xs) -> xs |*> makedata$(type(fs)) |> pure
 
 traverse: (_a -> Applicative[_b], Traversable[_a]) -> Applicative[Traversable[_b]]
 traverse = sequenceA..fmap

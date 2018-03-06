@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xd7b16ad3
+# __coconut_hash__ = 0x8a3b707a
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -226,10 +226,24 @@ def test_Foldable():
     assert foldl(_coconut.operator.pow, 2, [1, 2, 3]) == 64
     assert (list)(foldr(cons, [], [2, 3, 4])) == [2, 3, 4]
     assert (list)(foldl(flip(cons), [], [2, 3, 4])) == [4, 3, 2]
+    assert null([])
+    assert not null([1])
+    assert length([]) == 0
+    assert length([1, 2, 3]) == 3
+    assert (elem)(1, [1, 2, 3])
+    assert not (elem)(1, [2, 3])
+    assert maximum([1, 2, 3]) == 3
+    assert minimum([1, 2, 3]) == 1
+    assert sum([2, 3, 4]) == 9
+    assert product([2, 3, 4]) == 24
 
 def test_Traversable():
+    assert sequenceA([Just(1), nothing, Just(3)]) == nothing
     assert sequenceA([Right(1), Right(2), Left(3), Right(4)]) == Left(3)
     assert sequenceA([[1, 2, 3], [], [4], [5, 6]]) == []
+    assert sequenceA([Just(1), Just(2), Just(3)]) == Just([1, 2, 3])
+    assert sequenceA([Right(1), Right(2), Right(3)]) == Right([1, 2, 3])
+    assert sequenceA([[1, 2], [3]]) == [[1, 3], [2, 3]]
 
 if __name__ == "__main__":
     for var, val in globals().items():
