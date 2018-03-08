@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x8eba35f8
+# __coconut_hash__ = 0x4f21dcc0
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -27,6 +27,9 @@ import typing as _t
 import fractions as _fractions
 import math as _math
 
+from .util import derivingEqOrd
+from .util import derivingEnum
+
 #### Untyped built-ins:
 _max = max  # type: _coconut.typing.Callable[..., _t.Any]
 _min = min  # type: _coconut.typing.Callable[..., _t.Any]
@@ -47,70 +50,10 @@ _floor = _math.floor  # type: _coconut.typing.Callable[..., _t.Any]
 _IOError = IOError  # type: _t.Any
 
 #### TypeVars:
-_a = _t.TypeVar("_a")
-_b = _t.TypeVar("_b")
-_c = _t.TypeVar("_c")
-_d = _t.TypeVar("_d")
-
-#### Deriving:
-def derivingEqOrd(*valueConstructors  # type: object
-    ):
-# type: (...) -> None
-    """
-    The expression
-        derivingEqOrd(valueConstructor1, valueConstructor2, ...)
-    is equivalent to stating that for some data type defined as
-        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
-    we should add
-        deriving (Eq, Ord)
-    """
-    if TYPE_CHECKING:
-        return
-    ind = _coconut_forward_compose(type, valueConstructors.index)
-    for valCon in valueConstructors:
-        def __eq__(x, y):
-            return type(x) is type(y) and tuple.__eq__(x, y)
-        valCon.__eq__ = __eq__
-        def __lt__(x, y):
-            return tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
-        valCon.__lt__ = __lt__
-        def __le__(x, y):
-            return tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y)
-        valCon.__le__ = __le__
-        def __ge__(x, y):
-            return tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y)
-        valCon.__ge__ = __ge__
-        def __gt__(x, y):
-            return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
-
-        valCon.__gt__ = __gt__
-def derivingEnum(*valueConstructors  # type: object
-    ):
-# type: (...) -> None
-    """
-    The expression
-        derivingEnum(valueConstructor1, valueConstructor2, ...)
-    is equivalent to stating that for some data type defined as
-        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
-    we should add
-        deriving (Enum)
-    """
-    if TYPE_CHECKING:
-        return
-    ind = _coconut_forward_compose(type, valueConstructors.index)
-    for valCon in valueConstructors:
-        @_coconut_tco
-        def __int__(x):
-            return _coconut_tail_call(ind, x)
-        valCon.__int__ = __int__
-        def __add__(x, y):
-            return valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y)
-        valCon.__add__ = __add__
-        def __radd__(x, y):
-            return x + y
-        valCon.__radd__ = __radd__
-        def __sub__(x, y):
-            return valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
+Ta = _t.TypeVar("Ta")
+Tb = _t.TypeVar("Tb")
+Tc = _t.TypeVar("Tc")
+Td = _t.TypeVar("Td")
 
 
 
@@ -120,7 +63,6 @@ def derivingEnum(*valueConstructors  # type: object
 ## Basic data types:
 
 #### Bool:
-        valCon.__sub__ = __sub__
 Bool = bool
 
 not_ = None  # type: _coconut.typing.Callable[[bool], bool]
@@ -143,11 +85,11 @@ class Just(_coconut.collections.namedtuple("Just", "x"), Maybe):
 derivingEqOrd(Nothing, Just)
 
 if TYPE_CHECKING:
-    def maybe(default,  # type: _b
-     func,  # type: _coconut.typing.Callable[[_a], _b]
+    def maybe(default,  # type: Tb
+     func,  # type: _coconut.typing.Callable[[Ta], Tb]
      x  # type: Maybe
     ):
-# type: (...) -> _b
+# type: (...) -> Tb
         return _coconut.Ellipsis  # type: ignore
 else:
     def maybe(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -201,11 +143,11 @@ class Right(_coconut.collections.namedtuple("Right", "x"), Either):
 derivingEqOrd(Left, Right)
 
 if TYPE_CHECKING:
-    def either(left_func,  # type: _coconut.typing.Callable[[_a], _c]
-     right_func,  # type: _coconut.typing.Callable[[_b], _c]
+    def either(left_func,  # type: _coconut.typing.Callable[[Ta], Tc]
+     right_func,  # type: _coconut.typing.Callable[[Tb], Tc]
      x  # type: Either
     ):
-# type: (...) -> _c
+# type: (...) -> Tc
         return _coconut.Ellipsis  # type: ignore
 else:
     @_coconut_tco
@@ -276,21 +218,21 @@ String = str
 
 
 ### Tuples:
-fst = None  # type: _coconut.typing.Callable[[_t.Tuple[_a, _b]], _a]
+fst = None  # type: _coconut.typing.Callable[[_t.Tuple[Ta, Tb]], Ta]
 fst = _coconut.operator.itemgetter(0)
 
-snd = None  # type: _coconut.typing.Callable[[_t.Tuple[_a, _b]], _b]
+snd = None  # type: _coconut.typing.Callable[[_t.Tuple[Ta, Tb]], Tb]
 snd = _coconut.operator.itemgetter(1)
 
 @_coconut_tco
-def curry(func  # type: _coconut.typing.Callable[[_a, _b], _c]
+def curry(func  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
     ):
-# type: (...) -> _coconut.typing.Callable[[_a], _coconut.typing.Callable[[_b], _c]]
+# type: (...) -> _coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]
     return _coconut_tail_call(_coconut.functools.partial, _coconut.functools.partial, func)  # type: ignore
 
-def uncurry(func  # type: _coconut.typing.Callable[[_a], _coconut.typing.Callable[[_b], _c]]
+def uncurry(func  # type: _coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]
     ):
-# type: (...) -> _coconut.typing.Callable[[_a, _b], _c]
+# type: (...) -> _coconut.typing.Callable[[Ta, Tb], Tc]
     return lambda x, y: func(x)(y)
 
 
@@ -302,7 +244,7 @@ Eq = object
 
 #### Ord:
 Ord = Eq
-_O = _t.TypeVar("_O", bound=Ord)
+TOrd = _t.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x,  # type: Ord
@@ -370,20 +312,20 @@ else:
 
         return gt
 
-max = None  # type: _coconut.typing.Callable[[_O, _O], _O]
+max = None  # type: _coconut.typing.Callable[[TOrd, TOrd], TOrd]
 max = _max
 
-min = None  # type: _coconut.typing.Callable[[_O, _O], _O]
+min = None  # type: _coconut.typing.Callable[[TOrd, TOrd], TOrd]
 min = _min
 
 #### Enum:
 Enum = Ord
-_E = _t.TypeVar("_E", bound=Enum)
+TEnum = _t.TypeVar("TEnum", bound=Enum)
 
-succ = None  # type: _coconut.typing.Callable[[_E], _E]
+succ = None  # type: _coconut.typing.Callable[[TEnum], TEnum]
 succ = _coconut.functools.partial(_coconut.operator.add, 1)
 
-pred = None  # type: _coconut.typing.Callable[[_E], _E]
+pred = None  # type: _coconut.typing.Callable[[TEnum], TEnum]
 pred = _coconut_partial(_coconut_minus, {1: 1}, 2)
 
 toEnum = NotImplemented
@@ -392,30 +334,30 @@ fromEnum = None  # type: _coconut.typing.Callable[[Enum], int]
 fromEnum = _int
 
 @_coconut_tco
-def enumFrom(first  # type: _E
+def enumFrom(first  # type: TEnum
     ):
-# type: (...) -> _coconut.typing.Iterable[_E]
+# type: (...) -> _coconut.typing.Iterable[TEnum]
     return _coconut_tail_call(iterate, succ, first)
 
-def enumFromThen(first,  # type: _E
-     second  # type: _E
+def enumFromThen(first,  # type: TEnum
+     second  # type: TEnum
     ):
-# type: (...) -> _coconut.typing.Iterable[_E]
+# type: (...) -> _coconut.typing.Iterable[TEnum]
     step = fromEnum(second) - fromEnum(first)
     return iterate(_coconut.functools.partial(_coconut.operator.add, step), first) if step >= 0 else ()  # type: ignore
 
-def enumFromTo(first,  # type: _E
-     last  # type: _E
+def enumFromTo(first,  # type: TEnum
+     last  # type: TEnum
     ):
-# type: (...) -> _coconut.typing.Iterable[_E]
+# type: (...) -> _coconut.typing.Iterable[TEnum]
     dist = fromEnum(last) - fromEnum(first)
     return _coconut_igetitem(iterate(succ, first), _coconut.slice(None, dist + 1)) if dist >= 0 else ()
 
-def enumFromThenTo(first,  # type: _E
-     second,  # type: _E
-     last  # type: _E
+def enumFromThenTo(first,  # type: TEnum
+     second,  # type: TEnum
+     last  # type: TEnum
     ):
-# type: (...) -> _coconut.typing.Iterable[_E]
+# type: (...) -> _coconut.typing.Iterable[TEnum]
     step = fromEnum(second) - fromEnum(first)
     dist = fromEnum(last) - fromEnum(first)
     steps = dist / step if step != 0 else 0
@@ -427,12 +369,12 @@ def enumFromThenTo(first,  # type: _E
 
 #### Bounded:
 Bounded = _t.Union[bool, Ordering]
-_B = _t.TypeVar("_B", bound=Bounded)
+TBounded = _t.TypeVar("TBounded", bound=Bounded)
 
 if TYPE_CHECKING:
-    def minBound(b  # type: _B
+    def minBound(b  # type: TBounded
     ):
-# type: (...) -> _B
+# type: (...) -> TBounded
         return _coconut.Ellipsis  # type: ignore
 else:
     def minBound(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -467,9 +409,9 @@ else:
         return lt
 
 if TYPE_CHECKING:
-    def maxBound(b  # type: _B
+    def maxBound(b  # type: TBounded
     ):
-# type: (...) -> _B
+# type: (...) -> TBounded
         return _coconut.Ellipsis  # type: ignore
 else:
     def maxBound(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -541,12 +483,12 @@ Word = Int
 
 #### Num:
 Num = _t.Union[int, float, Rational]
-_N = _t.TypeVar("_N", bound=Num)
+TNum = _t.TypeVar("TNum", bound=Num)
 
-negate = None  # type: _coconut.typing.Callable[[_N], _N]
+negate = None  # type: _coconut.typing.Callable[[TNum], TNum]
 negate = _coconut_minus
 
-abs = None  # type: _coconut.typing.Callable[[_N], _N]
+abs = None  # type: _coconut.typing.Callable[[TNum], TNum]
 abs = _abs
 
 if TYPE_CHECKING:
@@ -849,7 +791,7 @@ realToFrac = toRational
 
 ## Monoids:
 Monoid = _t.Iterable
-_MO = _t.TypeVar("_MO", bound=Monoid)
+TMonoid = _t.TypeVar("TMonoid", bound=Monoid)
 
 if TYPE_CHECKING:
     mempty = ()
@@ -860,10 +802,10 @@ else:
     mempty = mempty()
 
 @_coconut_tco
-def mappend(x,  # type: _MO
-     y  # type: _MO
+def mappend(x,  # type: TMonoid
+     y  # type: TMonoid
     ):
-# type: (...) -> _MO
+# type: (...) -> TMonoid
     if not x:
         return y
     elif not y:
@@ -874,9 +816,9 @@ def mappend(x,  # type: _MO
         return _coconut_tail_call(makedata, type(x), *_coconut.itertools.chain(x, y))
 
 @_coconut_tco
-def mconcat(ms  # type: _coconut.typing.Sequence[_MO]
+def mconcat(ms  # type: _coconut.typing.Sequence[TMonoid]
     ):
-# type: (...) -> _MO
+# type: (...) -> TMonoid
     return _coconut_tail_call(foldr, mappend, mempty, ms)
 
 
@@ -886,14 +828,14 @@ def mconcat(ms  # type: _coconut.typing.Sequence[_MO]
 #### Functor:
 Functor = _t.Iterable
 
-fmap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _b], Functor[_a]], Functor[_b]]
+fmap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], Functor[Ta]], Functor[Tb]]
 fmap = _fmap
 
 @_coconut_tco
-def fmapConst(x,  # type: _a
+def fmapConst(x,  # type: Ta
      xs  # type: Functor
     ):
-# type: (...) -> Functor[_a]
+# type: (...) -> Functor[Ta]
     """
     fmapConst :: Functor f => (a -> b) -> f a -> f b
     fmapConst = (<$)
@@ -902,17 +844,17 @@ def fmapConst(x,  # type: _a
 
 #### Applicative:
 Applicative = Functor
-_A = _t.TypeVar("_A", bound=Applicative)
+TApp = _t.TypeVar("TApp", bound=Applicative)
 
 class pure(_coconut.collections.namedtuple("pure", "val"), _coconut.object):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
 
 @_coconut_tco
-def ap(fs,  # type: Applicative[_coconut.typing.Callable[[_a], _b]]
-     xs  # type: Applicative[_a]
+def ap(fs,  # type: Applicative[_coconut.typing.Callable[[Ta], Tb]]
+     xs  # type: Applicative[Ta]
     ):
-# type: (...) -> Applicative[_b]
+# type: (...) -> Applicative[Tb]
     """
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
@@ -921,9 +863,9 @@ def ap(fs,  # type: Applicative[_coconut.typing.Callable[[_a], _b]]
 
 @_coconut_tco
 def seqAr(f1,  # type: Applicative
-     f2  # type: _A
+     f2  # type: TApp
     ):
-# type: (...) -> _A
+# type: (...) -> TApp
     """
     seqAr :: Applicative f => f a -> f b -> f b
     seqAr = (*>)
@@ -931,10 +873,10 @@ def seqAr(f1,  # type: Applicative
     return _coconut_tail_call((ap), _fmap(lambda x1: lambda x2: x2, f1), f2)
 
 @_coconut_tco
-def seqAl(f1,  # type: _A
+def seqAl(f1,  # type: TApp
      f2  # type: Applicative
     ):
-# type: (...) -> _A
+# type: (...) -> TApp
     """
     seqAl :: Applicative f => f a -> f b -> f a
     seqAl = (<*)
@@ -942,11 +884,11 @@ def seqAl(f1,  # type: _A
     return _coconut_tail_call((ap), _fmap(lambda x1: lambda x2: x1, f1), f2)
 
 @_coconut_tco
-def liftA2(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
-     f1,  # type: Applicative[_a]
-     f2  # type: Applicative[_b]
+def liftA2(func,  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
+     f1,  # type: Applicative[Ta]
+     f2  # type: Applicative[Tb]
     ):
-# type: (...) -> Applicative[_c]
+# type: (...) -> Applicative[Tc]
     """
     import Control.Applicative
     liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
@@ -955,13 +897,13 @@ def liftA2(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
 
 #### Monad:
 Monad = Applicative
-_M = _t.TypeVar("_M", bound=Monad)
+TMonad = _t.TypeVar("TMonad", bound=Monad)
 
 @_coconut_tco
-def bind(m,  # type: Monad[_a]
-     func  # type: _coconut.typing.Callable[[_a], _M]
+def bind(m,  # type: Monad[Ta]
+     func  # type: _coconut.typing.Callable[[Ta], TMonad]
     ):
-# type: (...) -> _M
+# type: (...) -> TMonad
     """
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
@@ -970,9 +912,9 @@ def bind(m,  # type: Monad[_a]
 
 @_coconut_tco
 def seqM(m1,  # type: Monad
-     m2  # type: _M
+     m2  # type: TMonad
     ):
-# type: (...) -> _M
+# type: (...) -> TMonad
     """
     seqM :: Monad m => m a -> m b -> m b
     seqM = (>>)
@@ -1036,8 +978,8 @@ else:
 # sequence_ and mapM_ defined in Foldable
 
 @_coconut_tco
-def bindFrom(func,  # type: _coconut.typing.Callable[[_a], Monad]
-     m  # type: Monad[_a]
+def bindFrom(func,  # type: _coconut.typing.Callable[[Ta], Monad]
+     m  # type: Monad[Ta]
     ):
     """
     bindFrom :: Monad m => (a -> m b) -> m a -> m b
@@ -1046,9 +988,9 @@ def bindFrom(func,  # type: _coconut.typing.Callable[[_a], Monad]
     return _coconut_tail_call((bind), m, func)
 
 if TYPE_CHECKING:
-    def join(ms  # type: Monad[_M]
+    def join(ms  # type: Monad[TMonad]
     ):
-# type: (...) -> _M
+# type: (...) -> TMonad
         return _coconut.Ellipsis  # type: ignore
 else:
     def join(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -1086,10 +1028,10 @@ else:
         return makedata(valCons, *vals) if vals is not None else ms
 
 if TYPE_CHECKING:
-    def do(monads,  # type: _coconut.typing.Sequence[_M]
-     func  # type: _coconut.typing.Callable[..., _M]
+    def do(monads,  # type: _coconut.typing.Sequence[TMonad]
+     func  # type: _coconut.typing.Callable[..., TMonad]
     ):
-# type: (...) -> _M
+# type: (...) -> TMonad
         return _coconut.Ellipsis  # type: ignore
 else:
     @_coconut_tco
@@ -1154,43 +1096,43 @@ def sequence_(ms  # type: Foldable[Monad]
 # type: (...) -> Monad
     return _coconut_tail_call(do, ms, lambda *xs: pure(()))
 
-mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad], Foldable[_a]], Monad]
+mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Monad], Foldable[Ta]], Monad]
 mapM_ = _coconut_forward_compose(fmap, sequence_)
 
 @_coconut_tco
-def foldMap(func,  # type: _coconut.typing.Callable[[_a], _MO]
-     xs  # type: Foldable[_a]
+def foldMap(func,  # type: _coconut.typing.Callable[[Ta], TMonoid]
+     xs  # type: Foldable[Ta]
     ):
-# type: (...) -> _MO
+# type: (...) -> TMonoid
     return _coconut_tail_call(mconcat, map(func, xs))
 
 @_coconut_tco
-def foldl(func,  # type: _coconut.typing.Callable[[_b, _a], _b]
-     init,  # type: _b
-     xs  # type: Foldable[_a]
+def foldl(func,  # type: _coconut.typing.Callable[[Tb, Ta], Tb]
+     init,  # type: Tb
+     xs  # type: Foldable[Ta]
     ):
-# type: (...) -> _b
+# type: (...) -> Tb
     return _coconut_tail_call(_reduce, func, xs, init)
 
 @_coconut_tco
-def foldr(func,  # type: _coconut.typing.Callable[[_a, _b], _b]
-     init,  # type: _b
-     xs  # type: Foldable[_a]
+def foldr(func,  # type: _coconut.typing.Callable[[Ta, Tb], Tb]
+     init,  # type: Tb
+     xs  # type: Foldable[Ta]
     ):
-# type: (...) -> _b
+# type: (...) -> Tb
     return _coconut_tail_call(_reduce, lambda x, y: func(y, x), reversed(xs), init)
 
-foldl1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], Foldable[_a]], _a]
+foldl1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta, Ta], Ta], Foldable[Ta]], Ta]
 foldl1 = reduce
 
 @_coconut_tco
-def foldr1(func,  # type: _coconut.typing.Callable[[_a, _a], _a]
-     xs  # type: Foldable[_a]
+def foldr1(func,  # type: _coconut.typing.Callable[[Ta, Ta], Ta]
+     xs  # type: Foldable[Ta]
     ):
-# type: (...) -> _a
+# type: (...) -> Ta
     return _coconut_tail_call(reduce, lambda x, y: func(y, x), reversed(xs))
 
-def null(xs  # type: Foldable[_a]
+def null(xs  # type: Foldable[Ta]
     ):
 # type: (...) -> bool
     return len(xs) == 0
@@ -1198,76 +1140,76 @@ def null(xs  # type: Foldable[_a]
 length = None  # type: _coconut.typing.Callable[[Foldable], int]
 length = len
 
-def elem(e,  # type: _a
-     xs  # type: Foldable[_a]
+def elem(e,  # type: Ta
+     xs  # type: Foldable[Ta]
     ):
 # type: (...) -> bool
     return e in xs
 
-maximum = None  # type: _coconut.typing.Callable[[Foldable[_O]], _O]
+maximum = None  # type: _coconut.typing.Callable[[Foldable[TOrd]], TOrd]
 maximum = _max
 
-minimum = None  # type: _coconut.typing.Callable[[Foldable[_O]], _O]
+minimum = None  # type: _coconut.typing.Callable[[Foldable[TOrd]], TOrd]
 minimum = _min
 
-sum = None  # type: _coconut.typing.Callable[[Foldable[_N]], _N]
+sum = None  # type: _coconut.typing.Callable[[Foldable[TNum]], TNum]
 sum = _sum
 
-product = None  # type: _coconut.typing.Callable[[Foldable[_N]], _N]
+product = None  # type: _coconut.typing.Callable[[Foldable[TNum]], TNum]
 product = _coconut.functools.partial(reduce, _coconut.operator.mul)
 
 #### Traversable:
 Traversable = _t.Iterable
 
 @_coconut_tco
-def sequenceA(fs  # type: Traversable[Applicative[_a]]
+def sequenceA(fs  # type: Traversable[Applicative[Ta]]
     ):
-# type: (...) -> Applicative[Traversable[_a]]
+# type: (...) -> Applicative[Traversable[Ta]]
     return _coconut_tail_call((do), fs, lambda *xs: (pure)(makedata(type(fs), *xs)))
 
-traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Applicative[_b]], Traversable[_a]], Applicative[Traversable[_b]]]
+traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Applicative[Tb]], Traversable[Ta]], Applicative[Traversable[Tb]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)
 
-sequence = None  # type: _coconut.typing.Callable[[Traversable[Monad[_a]]], Monad[Traversable[_a]]]
+sequence = None  # type: _coconut.typing.Callable[[Traversable[Monad[Ta]]], Monad[Traversable[Ta]]]
 sequence = sequenceA
 
-mapM = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad[_b]], Traversable[_a]], Monad[Traversable[_b]]]
+mapM = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Monad[Tb]], Traversable[Ta]], Monad[Traversable[Tb]]]
 mapM = traverse
 
 
 
 ## Miscellaneous functions:
-def id(x  # type: _a
+def id(x  # type: Ta
     ):
-# type: (...) -> _a
+# type: (...) -> Ta
     return x
 
-def const(x  # type: _a
+def const(x  # type: Ta
     ):
-# type: (...) -> _coconut.typing.Callable[[_b], _a]
+# type: (...) -> _coconut.typing.Callable[[Tb], Ta]
     return lambda y: x
 
 @_coconut_tco
-def dot(f,  # type: _coconut.typing.Callable[[_b], _c]
-     g  # type: _coconut.typing.Callable[[_a], _b]
+def dot(f,  # type: _coconut.typing.Callable[[Tb], Tc]
+     g  # type: _coconut.typing.Callable[[Ta], Tb]
     ):
-# type: (...) -> _coconut.typing.Callable[[_a], _c]
+# type: (...) -> _coconut.typing.Callable[[Ta], Tc]
     """
     dot :: (b -> c) -> (a -> b) -> a -> c
     dot = (.)
     """
     return _coconut_tail_call(_coconut_forward_compose, g, f)
 
-def flip(func  # type: _coconut.typing.Callable[[_a, _b], _c]
+def flip(func  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
     ):
-# type: (...) -> _coconut.typing.Callable[[_b, _a], _c]
+# type: (...) -> _coconut.typing.Callable[[Tb, Ta], Tc]
     return lambda x, y: func(y, x)
 
 @_coconut_tco
-def apply(func,  # type: _coconut.typing.Callable[[_a], _b]
-     arg  # type: _a
+def apply(func,  # type: _coconut.typing.Callable[[Ta], Tb]
+     arg  # type: Ta
     ):
-# type: (...) -> _b
+# type: (...) -> Tb
     """
     apply :: (a -> b) -> a -> b
     apply = ($)
@@ -1275,26 +1217,26 @@ def apply(func,  # type: _coconut.typing.Callable[[_a], _b]
     return _coconut_tail_call(func, arg)
 
 @_coconut_tco
-def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
-     func,  # type: _coconut.typing.Callable[[_a], _a]
-     x  # type: _a
+def until(cond,  # type: _coconut.typing.Callable[[Ta], bool]
+     func,  # type: _coconut.typing.Callable[[Ta], Ta]
+     x  # type: Ta
     ):
-# type: (...) -> _a
+# type: (...) -> Ta
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_83:  # tail recursive
+        if until is _coconut_recursive_func_72:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return _coconut_tail_call(until, cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_83 = until
-def asTypeOf(x,  # type: _a
-     y  # type: _a
+_coconut_recursive_func_72 = until
+def asTypeOf(x,  # type: Ta
+     y  # type: Ta
     ):
-# type: (...) -> _a
+# type: (...) -> Ta
     return x
 
 def error(msg  # type: str
@@ -1306,17 +1248,17 @@ errorWithoutStackTrace = NotImplemented
 
 undefined = None  # type: _t.Any
 
-def seq(x,  # type: _a
-     y  # type: _b
+def seq(x,  # type: Ta
+     y  # type: Tb
     ):
-# type: (...) -> _b
+# type: (...) -> Tb
     return y
 
 @_coconut_tco
-def cbv(func,  # type: _coconut.typing.Callable[[_a], _b]
-     arg  # type: _a
+def cbv(func,  # type: _coconut.typing.Callable[[Ta], Tb]
+     arg  # type: Ta
     ):
-# type: (...) -> _b
+# type: (...) -> Tb
     """
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
@@ -1328,57 +1270,57 @@ def cbv(func,  # type: _coconut.typing.Callable[[_a], _b]
 
 # List operations:
 @_coconut_tco
-def cons(x,  # type: _a
-     xs  # type: _coconut.typing.Iterable[_a]
+def cons(x,  # type: Ta
+     xs  # type: _coconut.typing.Iterable[Ta]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     """
     cons :: a -> [a] -> [a]
     cons = (:)
     """
     return _coconut_tail_call(_coconut.itertools.chain, [x], xs)
 
-map = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _b], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_b]]
+map = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]
 map = _map
 
 @_coconut_tco
-def chain(xs,  # type: _coconut.typing.Iterable[_a]
-     ys  # type: _coconut.typing.Iterable[_a]
+def chain(xs,  # type: _coconut.typing.Iterable[Ta]
+     ys  # type: _coconut.typing.Iterable[Ta]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     """
     chain :: [a] -> [a] -> [a]
     chain = (++)
     """
     return _coconut_tail_call(_coconut.itertools.chain, xs, ys)
 
-filter = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+filter = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]
 filter = _filter
 
-head = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a]], _a]
+head = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]
 head = _coconut.functools.partial(_coconut_igetitem, index=0)
 
-last = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a]], _a]
+last = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]
 last = _coconut.functools.partial(_coconut_igetitem, index=-1)
 
-tail = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+tail = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]
 tail = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(1, None))  # type: ignore
 
-init = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+init = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]
 init = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(None, -1))  # type: ignore
 
 @_coconut_tco
-def at(xs,  # type: _coconut.typing.Iterable[_a]
+def at(xs,  # type: _coconut.typing.Iterable[Ta]
      i  # type: int
     ):
-# type: (...) -> _a
+# type: (...) -> Ta
     """
     at :: [a] -> Int -> a
     at = (!!)
     """
     return _coconut_tail_call(_coconut_igetitem, xs, i)
 
-reverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[_a]], _coconut.typing.Sequence[_a]]
+reverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[Ta]], _coconut.typing.Sequence[Ta]]
 reverse = _reversed
 
 
@@ -1390,16 +1332,16 @@ and_ = _all
 or_ = None  # type: _coconut.typing.Callable[[Foldable[bool]], bool]
 or_ = _any
 
-any = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_a], bool]), Foldable[_a]], bool]
+any = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]
 any = _coconut_forward_compose(map, or_)
 
-all = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[_a], bool]), Foldable[_a]], bool]
+all = None  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]
 all = _coconut_forward_compose(map, and_)
 
-concat = None  # type: _coconut.typing.Callable[[Foldable[_coconut.typing.Iterable[_a]]], _coconut.typing.Iterable[_a]]
+concat = None  # type: _coconut.typing.Callable[[Foldable[_coconut.typing.Iterable[Ta]]], _coconut.typing.Iterable[Ta]]
 concat = _coconut.functools.partial(_reduce, _coconut.itertools.chain)
 
-concatMap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _coconut.typing.Iterable[_b]], Foldable[_a]], _coconut.typing.Iterable[_b]]
+concatMap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], _coconut.typing.Iterable[Tb]], Foldable[Ta]], _coconut.typing.Iterable[Tb]]
 concatMap = _coconut_forward_compose(map, concat)  # type: ignore
 
 
@@ -1408,58 +1350,58 @@ concatMap = _coconut_forward_compose(map, concat)  # type: ignore
 
 ### Scans:
 @_coconut_tco
-def scanl(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
-     init,  # type: _a
-     xs  # type: _coconut.typing.Iterable[_b]
+def scanl(func,  # type: _coconut.typing.Callable[[Ta, Tb], Ta]
+     init,  # type: Ta
+     xs  # type: _coconut.typing.Iterable[Tb]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(scan, func, xs, init)
 
-scanl1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+scanl1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta, Ta], Ta], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]
 scanl1 = scan
 
 @_coconut_tco
-def scanr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
-     init,  # type: _a
-     xs  # type: _coconut.typing.Sequence[_b]
+def scanr(func,  # type: _coconut.typing.Callable[[Ta, Tb], Ta]
+     init,  # type: Ta
+     xs  # type: _coconut.typing.Sequence[Tb]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut_igetitem, scan(func, reversed(xs), init), _coconut.slice(None, None, -1))
 
 @_coconut_tco
-def scanr1(func,  # type: _coconut.typing.Callable[[_a, _a], _a]
-     xs  # type: _coconut.typing.Sequence[_a]
+def scanr1(func,  # type: _coconut.typing.Callable[[Ta, Ta], Ta]
+     xs  # type: _coconut.typing.Sequence[Ta]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut_igetitem, scan(func, reversed(xs)), _coconut.slice(None, None, -1))
 
 ### Infinite lists:
 @recursive_iterator
 @_coconut_tco
-def iterate(func,  # type: _coconut.typing.Callable[[_a], _a]
-     x  # type: _a
+def iterate(func,  # type: _coconut.typing.Callable[[Ta], Ta]
+     x  # type: Ta
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: [x], lambda: iterate(func, func(x)))))
 
 @recursive_iterator
 @_coconut_tco
-def repeat(x  # type: _a
+def repeat(x  # type: Ta
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: [x], lambda: repeat(x))))
 
 @_coconut_tco
 def replicate(n,  # type: int
-     x  # type: _a
+     x  # type: Ta
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut_igetitem, repeat(x), _coconut.slice(None, n))
 
 if TYPE_CHECKING:
-    def cycle(xs  # type: _coconut.typing.Iterable[_a]
+    def cycle(xs  # type: _coconut.typing.Iterable[Ta]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
         return _coconut.Ellipsis  # type: ignore
 else:
     @recursive_iterator
@@ -1486,36 +1428,36 @@ else:
 ## Sublists:
 @_coconut_tco
 def take(n,  # type: int
-     xs  # type: _coconut.typing.Iterable[_a]
+     xs  # type: _coconut.typing.Iterable[Ta]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut_igetitem, xs, _coconut.slice(None, n))
 
 @_coconut_tco
 def drop(n,  # type: int
-     xs  # type: _coconut.typing.Iterable[_a]
+     xs  # type: _coconut.typing.Iterable[Ta]
     ):
-# type: (...) -> _coconut.typing.Iterable[_a]
+# type: (...) -> _coconut.typing.Iterable[Ta]
     return _coconut_tail_call(_coconut_igetitem, xs, _coconut.slice(n, None))
 
 def splitAt(n,  # type: int
-     xs  # type: _coconut.typing.Iterable[_a]
+     xs  # type: _coconut.typing.Iterable[Ta]
     ):
-# type: (...) -> _t.Tuple[_coconut.typing.Iterable[_a], _coconut.typing.Iterable[_a]]
+# type: (...) -> _t.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]]
     reit = reiterable(xs)
     return _coconut_igetitem(reit, _coconut.slice(None, n)), _coconut_igetitem(reit, _coconut.slice(n, None))
 
-takeWhile = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+takeWhile = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]
 takeWhile = takewhile
 
-dropWhile = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], bool], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+dropWhile = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond,  # type: _coconut.typing.Callable[[_a], bool]
-     xs  # type: _coconut.typing.Sequence[_a]
+    def span(cond,  # type: _coconut.typing.Callable[[Ta], bool]
+     xs  # type: _coconut.typing.Sequence[Ta]
     ):
-# type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_a]]
+# type: (...) -> _t.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]]
         return _coconut.Ellipsis  # type: ignore
 else:
     def span(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -1557,23 +1499,23 @@ else:
         return ([], xs)
 
 @_coconut_tco
-def break_(cond,  # type: _coconut.typing.Callable[[_a], bool]
-     xs  # type: _coconut.typing.Sequence[_a]
+def break_(cond,  # type: _coconut.typing.Callable[[Ta], bool]
+     xs  # type: _coconut.typing.Sequence[Ta]
     ):
-# type: (...) -> _coconut.typing.Sequence[_a]
+# type: (...) -> _coconut.typing.Sequence[Ta]
     return _coconut_tail_call(span, _coconut_forward_compose(cond, _coconut.operator.not_), xs)
 
 
 
 ## Searching lists:
-def notElem(e,  # type: _a
-     xs  # type: _coconut.typing.Sequence[_a]
+def notElem(e,  # type: Ta
+     xs  # type: _coconut.typing.Sequence[Ta]
     ):
 # type: (...) -> bool
     return e not in xs
 
-def lookup(key,  # type: _a
-     assocs  # type: _coconut.typing.Iterable[_t.Tuple[_a, _b]]
+def lookup(key,  # type: Ta
+     assocs  # type: _coconut.typing.Iterable[_t.Tuple[Ta, Tb]]
     ):
 # type: (...) -> Maybe
     try:
@@ -1584,36 +1526,36 @@ def lookup(key,  # type: _a
 
 
 ## Zipping and unzipping lists:
-zip = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a], _coconut.typing.Iterable[_b]], _coconut.typing.Iterable[_t.Tuple[_a, _b]]]
+zip = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[_t.Tuple[Ta, Tb]]]
 zip = _zip
 
-zip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a], _coconut.typing.Iterable[_b], _coconut.typing.Iterable[_c]], _coconut.typing.Iterable[_t.Tuple[_a, _b, _c]]]
+zip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[_t.Tuple[Ta, Tb, Tc]]]
 zip3 = _zip
 
 @_coconut_tco
-def zipWith(func,  # type: _coconut.typing.Callable[[_a, _b], _c]
-     xs1,  # type: _coconut.typing.Iterable[_a]
-     xs2  # type: _coconut.typing.Iterable[_b]
+def zipWith(func,  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
+     xs1,  # type: _coconut.typing.Iterable[Ta]
+     xs2  # type: _coconut.typing.Iterable[Tb]
     ):
-# type: (...) -> _coconut.typing.Iterable[_c]
+# type: (...) -> _coconut.typing.Iterable[Tc]
     return _coconut_tail_call(starmap, func, zip(xs1, xs2))
 
 @_coconut_tco
-def zipWith3(func,  # type: _coconut.typing.Callable[[_a, _b, _c], _d]
-     xs1,  # type: _coconut.typing.Iterable[_a]
-     xs2,  # type: _coconut.typing.Iterable[_b]
-     xs3  # type: _coconut.typing.Iterable[_c]
+def zipWith3(func,  # type: _coconut.typing.Callable[[Ta, Tb, Tc], Td]
+     xs1,  # type: _coconut.typing.Iterable[Ta]
+     xs2,  # type: _coconut.typing.Iterable[Tb]
+     xs3  # type: _coconut.typing.Iterable[Tc]
     ):
-# type: (...) -> _coconut.typing.Iterable[_d]
+# type: (...) -> _coconut.typing.Iterable[Td]
     return _coconut_tail_call(starmap, func, _zip(xs1, xs2, xs3))
 
 @_coconut_tco
-def unzip(xs  # type: _coconut.typing.Iterable[_t.Tuple[_a, _b]]
+def unzip(xs  # type: _coconut.typing.Iterable[_t.Tuple[Ta, Tb]]
     ):
-# type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b]]
+# type: (...) -> _t.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]
     return _coconut_tail_call((tuple), map(list, _zip(*xs)))  # type: ignore
 
-unzip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_t.Tuple[_a, _b, _c]]], _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b], _coconut.typing.Sequence[_c]]]
+unzip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_t.Tuple[Ta, Tb, Tc]]], _t.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]]]
 unzip3 = unzip  # type: ignore
 
 
@@ -1640,7 +1582,7 @@ unwords = " ".join
 # Converting to and from String:
 
 ## Converting to String:
-show = None  # type: _coconut.typing.Callable[[_a], str]
+show = None  # type: _coconut.typing.Callable[[Ta], str]
 show = repr
 
 

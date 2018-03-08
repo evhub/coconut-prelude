@@ -6,6 +6,8 @@ import typing as _t
 import fractions as _fractions
 import math as _math
 
+from .util import derivingEqOrd, derivingEnum
+
 #### Untyped built-ins:
 _max: -> _t.Any = max
 _min: -> _t.Any = min
@@ -26,53 +28,10 @@ _floor: -> _t.Any = _math.floor
 _IOError: _t.Any = IOError
 
 #### TypeVars:
-_a = _t.TypeVar("_a")
-_b = _t.TypeVar("_b")
-_c = _t.TypeVar("_c")
-_d = _t.TypeVar("_d")
-
-#### Deriving:
-def derivingEqOrd(*valueConstructors: object) -> None:
-    """
-    The expression
-        derivingEqOrd(valueConstructor1, valueConstructor2, ...)
-    is equivalent to stating that for some data type defined as
-        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
-    we should add
-        deriving (Eq, Ord)
-    """
-    if TYPE_CHECKING: return
-    ind = valueConstructors.index..type
-    for valCon in valueConstructors:
-        def valCon.__eq__(x, y) =
-            type(x) is type(y) and tuple.__eq__(x, y)
-        def valCon.__lt__(x, y) =
-            tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
-        def valCon.__le__(x, y) =
-            tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y)
-        def valCon.__ge__(x, y) =
-            tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y)
-        def valCon.__gt__(x, y) =
-            tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
-
-def derivingEnum(*valueConstructors: object) -> None:
-    """
-    The expression
-        derivingEnum(valueConstructor1, valueConstructor2, ...)
-    is equivalent to stating that for some data type defined as
-        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
-    we should add
-        deriving (Enum)
-    """
-    if TYPE_CHECKING: return
-    ind = valueConstructors.index..type
-    for valCon in valueConstructors:
-        def valCon.__int__(x) = ind(x)
-        def valCon.__add__(x, y) =
-            valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y)
-        def valCon.__radd__(x, y) = x + y
-        def valCon.__sub__(x, y) =
-            valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
+Ta = _t.TypeVar("Ta")
+Tb = _t.TypeVar("Tb")
+Tc = _t.TypeVar("Tc")
+Td = _t.TypeVar("Td")
 
 
 
@@ -100,7 +59,7 @@ data Just(x) from Maybe
 derivingEqOrd(Nothing, Just)
 
 if TYPE_CHECKING:
-    def maybe(default: _b, func: _a -> _b, x: Maybe) -> _b =
+    def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb =
         ...  # type: ignore
 else:
     def maybe(default, _, Nothing()) = default
@@ -120,7 +79,7 @@ data Right(x) from Either
 derivingEqOrd(Left, Right)
 
 if TYPE_CHECKING:
-    def either(left_func: _a -> _c, right_func: _b -> _c, x: Either) -> _c =
+    def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc =
         ...  # type: ignore
 else:
     def either(left_func, _, Left(x)) = left_func(x)
@@ -153,16 +112,16 @@ String = str
 
 
 ### Tuples:
-fst: _t.Tuple[_a, _b] -> _a
+fst: _t.Tuple[Ta, Tb] -> Ta
 fst = .[0]
 
-snd: _t.Tuple[_a, _b] -> _b
+snd: _t.Tuple[Ta, Tb] -> Tb
 snd = .[1]
 
-def curry(func: (_a, _b) -> _c) -> _a -> _b -> _c =
+def curry(func: (Ta, Tb) -> Tc) -> Ta -> Tb -> Tc =
     func$  # type: ignore
 
-def uncurry(func: _a -> _b -> _c) -> (_a, _b) -> _c =
+def uncurry(func: Ta -> Tb -> Tc) -> (Ta, Tb) -> Tc =
     (x, y) -> func(x)(y)
 
 
@@ -174,7 +133,7 @@ Eq = object
 
 #### Ord:
 Ord = Eq
-_O = _t.TypeVar("_O", bound=Ord)
+TOrd = _t.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x: Ord, y: Ord) -> Ordering =
@@ -188,20 +147,20 @@ else:
     @addpattern(compare)
     def compare(x, y if x > y) = gt
 
-max: (_O, _O) -> _O
+max: (TOrd, TOrd) -> TOrd
 max = _max
 
-min: (_O, _O) -> _O
+min: (TOrd, TOrd) -> TOrd
 min = _min
 
 #### Enum:
 Enum = Ord
-_E = _t.TypeVar("_E", bound=Enum)
+TEnum = _t.TypeVar("TEnum", bound=Enum)
 
-succ: _E -> _E
+succ: TEnum -> TEnum
 succ = (+)$(1)
 
-pred: _E -> _E
+pred: TEnum -> TEnum
 pred = (-)$(?, 1)
 
 toEnum = NotImplemented
@@ -209,18 +168,18 @@ toEnum = NotImplemented
 fromEnum: Enum -> int
 fromEnum = _int
 
-def enumFrom(first: _E) -> _E$[] =
+def enumFrom(first: TEnum) -> TEnum$[] =
     iterate(succ, first)
 
-def enumFromThen(first: _E, second: _E) -> _E$[] =
+def enumFromThen(first: TEnum, second: TEnum) -> TEnum$[] =
     step = fromEnum(second) - fromEnum(first)
     iterate((+)$(step), first) if step >= 0 else ()  # type: ignore
 
-def enumFromTo(first: _E, last: _E) -> _E$[] =
+def enumFromTo(first: TEnum, last: TEnum) -> TEnum$[] =
     dist = fromEnum(last) - fromEnum(first)
     iterate(succ, first)$[:dist+1] if dist >= 0 else ()
 
-def enumFromThenTo(first: _E, second: _E, last: _E) -> _E$[] =
+def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> TEnum$[] =
     step = fromEnum(second) - fromEnum(first)
     dist = fromEnum(last) - fromEnum(first)
     steps = dist/step if step != 0 else 0
@@ -232,10 +191,10 @@ def enumFromThenTo(first: _E, second: _E, last: _E) -> _E$[] =
 
 #### Bounded:
 Bounded = _t.Union[bool, Ordering]
-_B = _t.TypeVar("_B", bound=Bounded)
+TBounded = _t.TypeVar("TBounded", bound=Bounded)
 
 if TYPE_CHECKING:
-    def minBound(b: _B) -> _B =
+    def minBound(b: TBounded) -> TBounded =
         ...  # type: ignore
 else:
     def minBound(b is bool) = False
@@ -244,7 +203,7 @@ else:
     def minBound(b is Ordering) = lt
 
 if TYPE_CHECKING:
-    def maxBound(b: _B) -> _B =
+    def maxBound(b: TBounded) -> TBounded =
         ...  # type: ignore
 else:
     def maxBound(b is bool) = True
@@ -289,12 +248,12 @@ Word = Int
 
 #### Num:
 Num = _t.Union[int, float, Rational]
-_N = _t.TypeVar("_N", bound=Num)
+TNum = _t.TypeVar("TNum", bound=Num)
 
-negate: _N -> _N
+negate: TNum -> TNum
 negate = (-)
 
-abs: _N -> _N
+abs: TNum -> TNum
 abs = _abs
 
 if TYPE_CHECKING:
@@ -475,7 +434,7 @@ realToFrac = toRational
 
 ## Monoids:
 Monoid = _t.Iterable
-_MO = _t.TypeVar("_MO", bound=Monoid)
+TMonoid = _t.TypeVar("TMonoid", bound=Monoid)
 
 if TYPE_CHECKING:
     mempty = ()
@@ -483,7 +442,7 @@ else:
     data mempty()
     mempty = mempty()
 
-def mappend(x: _MO, y: _MO) -> _MO:
+def mappend(x: TMonoid, y: TMonoid) -> TMonoid:
     if not x:
         return y
     elif not y:
@@ -493,7 +452,7 @@ def mappend(x: _MO, y: _MO) -> _MO:
     else:
         return (::)(x, y) |*> makedata$(type(x))
 
-def mconcat(ms: _MO[]) -> _MO =
+def mconcat(ms: TMonoid[]) -> TMonoid =
     foldr(mappend, mempty, ms)
 
 
@@ -503,10 +462,10 @@ def mconcat(ms: _MO[]) -> _MO =
 #### Functor:
 Functor = _t.Iterable
 
-fmap: (_a -> _b, Functor[_a]) -> Functor[_b]
+fmap: (Ta -> Tb, Functor[Ta]) -> Functor[Tb]
 fmap = _fmap
 
-def fmapConst(x: _a, xs: Functor) -> Functor[_a] =
+def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
     """
     fmapConst :: Functor f => (a -> b) -> f a -> f b
     fmapConst = (<$)
@@ -515,32 +474,32 @@ def fmapConst(x: _a, xs: Functor) -> Functor[_a] =
 
 #### Applicative:
 Applicative = Functor
-_A = _t.TypeVar("_A", bound=Applicative)
+TApp = _t.TypeVar("TApp", bound=Applicative)
 
 data pure(val)
 
-def ap(fs: Applicative[_a -> _b], xs: Applicative[_a]) -> Applicative[_b] =
+def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
     """
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
     """
     fs `bind` f -> _fmap(f, xs)
 
-def seqAr(f1: Applicative, f2: _A) -> _A =
+def seqAr(f1: Applicative, f2: TApp) -> TApp =
     """
     seqAr :: Applicative f => f a -> f b -> f b
     seqAr = (*>)
     """
     _fmap(x1 -> x2 -> x2, f1) `ap` f2
 
-def seqAl(f1: _A, f2: Applicative) -> _A =
+def seqAl(f1: TApp, f2: Applicative) -> TApp =
     """
     seqAl :: Applicative f => f a -> f b -> f a
     seqAl = (<*)
     """
     _fmap(x1 -> x2 -> x1, f1) `ap` f2
 
-def liftA2(func: (_a, _b) -> _c, f1: Applicative[_a], f2: Applicative[_b]) -> Applicative[_c] =
+def liftA2(func: (Ta, Tb) -> Tc, f1: Applicative[Ta], f2: Applicative[Tb]) -> Applicative[Tc] =
     """
     import Control.Applicative
     liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
@@ -549,16 +508,16 @@ def liftA2(func: (_a, _b) -> _c, f1: Applicative[_a], f2: Applicative[_b]) -> Ap
 
 #### Monad:
 Monad = Applicative
-_M = _t.TypeVar("_M", bound=Monad)
+TMonad = _t.TypeVar("TMonad", bound=Monad)
 
-def bind(m: Monad[_a], func: _a -> _M) -> _M =
+def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     """
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
     """
     join(_fmap(func, m))
 
-def seqM(m1: Monad, m2: _M) -> _M =
+def seqM(m1: Monad, m2: TMonad) -> TMonad =
     """
     seqM :: Monad m => m a -> m b -> m b
     seqM = (>>)
@@ -583,7 +542,7 @@ else:
 
 # sequence_ and mapM_ defined in Foldable
 
-def bindFrom(func: _a -> Monad, m: Monad[_a]) =
+def bindFrom(func: Ta -> Monad, m: Monad[Ta]) =
     """
     bindFrom :: Monad m => (a -> m b) -> m a -> m b
     bindFrom = (=<<)
@@ -591,7 +550,7 @@ def bindFrom(func: _a -> Monad, m: Monad[_a]) =
     m `bind` func
 
 if TYPE_CHECKING:
-    def join(ms: Monad[_M]) -> _M =
+    def join(ms: Monad[TMonad]) -> TMonad =
         ...  # type: ignore
 else:
     def join(ms if not ms) = ms
@@ -613,7 +572,7 @@ else:
         makedata(valCons, *vals) if vals is not None else ms
 
 if TYPE_CHECKING:
-    def do(monads: _M[], func: -> _M) -> _M =
+    def do(monads: TMonad[], func: -> TMonad) -> TMonad =
         ...  # type: ignore
 else:
     def do([], func) = func()
@@ -646,89 +605,89 @@ Foldable = _t.Sequence
 def sequence_(ms: Foldable[Monad]) -> Monad =
     do(ms, (*xs) -> pure(()))
 
-mapM_: (_a -> Monad, Foldable[_a]) -> Monad
+mapM_: (Ta -> Monad, Foldable[Ta]) -> Monad
 mapM_ = sequence_..fmap
 
-def foldMap(func: _a -> _MO, xs: Foldable[_a]) -> _MO =
+def foldMap(func: Ta -> TMonoid, xs: Foldable[Ta]) -> TMonoid =
     mconcat(map(func, xs))
 
-def foldl(func: (_b, _a) -> _b, init: _b, xs: Foldable[_a]) -> _b =
+def foldl(func: (Tb, Ta) -> Tb, init: Tb, xs: Foldable[Ta]) -> Tb =
     _reduce(func, xs, init)
 
-def foldr(func: (_a, _b) -> _b, init: _b, xs: Foldable[_a]) -> _b =
+def foldr(func: (Ta, Tb) -> Tb, init: Tb, xs: Foldable[Ta]) -> Tb =
     _reduce((x, y) -> func(y, x), reversed(xs), init)
 
-foldl1: ((_a, _a) -> _a, Foldable[_a]) -> _a
+foldl1: ((Ta, Ta) -> Ta, Foldable[Ta]) -> Ta
 foldl1 = reduce
 
-def foldr1(func: (_a, _a) -> _a, xs: Foldable[_a]) -> _a =
+def foldr1(func: (Ta, Ta) -> Ta, xs: Foldable[Ta]) -> Ta =
     reduce((x, y) -> func(y, x), reversed(xs))
 
-def null(xs: Foldable[_a]) -> bool = len(xs) == 0
+def null(xs: Foldable[Ta]) -> bool = len(xs) == 0
 
 length: Foldable -> int
 length = len
 
-def elem(e: _a, xs: Foldable[_a]) -> bool = e in xs
+def elem(e: Ta, xs: Foldable[Ta]) -> bool = e in xs
 
-maximum: Foldable[_O] -> _O
+maximum: Foldable[TOrd] -> TOrd
 maximum = _max
 
-minimum: Foldable[_O] -> _O
+minimum: Foldable[TOrd] -> TOrd
 minimum = _min
 
-sum: Foldable[_N] -> _N
+sum: Foldable[TNum] -> TNum
 sum = _sum
 
-product: Foldable[_N] -> _N
+product: Foldable[TNum] -> TNum
 product = reduce$(*)
 
 #### Traversable:
 Traversable = _t.Iterable
 
-def sequenceA(fs: Traversable[Applicative[_a]]) -> Applicative[Traversable[_a]] =
+def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] =
     fs `do` (*xs) -> xs |*> makedata$(type(fs)) |> pure
 
-traverse: (_a -> Applicative[_b], Traversable[_a]) -> Applicative[Traversable[_b]]
+traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
 traverse = sequenceA..fmap
 
-sequence: Traversable[Monad[_a]] -> Monad[Traversable[_a]]
+sequence: Traversable[Monad[Ta]] -> Monad[Traversable[Ta]]
 sequence = sequenceA
 
-mapM: (_a -> Monad[_b], Traversable[_a]) -> Monad[Traversable[_b]]
+mapM: (Ta -> Monad[Tb], Traversable[Ta]) -> Monad[Traversable[Tb]]
 mapM = traverse
 
 
 
 ## Miscellaneous functions:
-def id(x: _a) -> _a = x
+def id(x: Ta) -> Ta = x
 
-def const(x: _a) -> _b -> _a =
+def const(x: Ta) -> Tb -> Ta =
     y -> x
 
-def dot(f: _b -> _c, g: _a -> _b) -> _a -> _c =
+def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     """
     dot :: (b -> c) -> (a -> b) -> a -> c
     dot = (.)
     """
     f..g
 
-def flip(func: (_a, _b) -> _c) -> (_b, _a) -> _c =
+def flip(func: (Ta, Tb) -> Tc) -> (Tb, Ta) -> Tc =
     (x, y) -> func(y, x)
 
-def apply(func: _a -> _b, arg: _a) -> _b =
+def apply(func: Ta -> Tb, arg: Ta) -> Tb =
     """
     apply :: (a -> b) -> a -> b
     apply = ($)
     """
     func(arg)
 
-def until(cond: _a -> bool, func: _a -> _a, x: _a) -> _a =
+def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
     if cond(x):
         return x
     until(cond, func, func(x))  # tail recursive
 
-def asTypeOf(x: _a, y: _a) -> _a = x
+def asTypeOf(x: Ta, y: Ta) -> Ta = x
 
 def error(msg: str) -> None: raise Exception(msg)
 
@@ -736,9 +695,9 @@ errorWithoutStackTrace = NotImplemented
 
 undefined: _t.Any = None
 
-def seq(x: _a, y: _b) -> _b = y
+def seq(x: Ta, y: Tb) -> Tb = y
 
-def cbv(func: _a -> _b, arg: _a) -> _b =
+def cbv(func: Ta -> Tb, arg: Ta) -> Tb =
     """
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
@@ -749,46 +708,46 @@ def cbv(func: _a -> _b, arg: _a) -> _b =
 
 
 # List operations:
-def cons(x: _a, xs: _a$[]) -> _a$[] =
+def cons(x: Ta, xs: Ta$[]) -> Ta$[] =
     """
     cons :: a -> [a] -> [a]
     cons = (:)
     """
     (::)([x], xs)
 
-map: (_a -> _b, _a$[]) -> _b$[]
+map: (Ta -> Tb, Ta$[]) -> Tb$[]
 map = _map
 
-def chain(xs: _a$[], ys: _a$[]) -> _a$[] =
+def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     """
     chain :: [a] -> [a] -> [a]
     chain = (++)
     """
     (::)(xs, ys)
 
-filter: (_a -> bool, _a$[]) -> _a$[]
+filter: (Ta -> bool, Ta$[]) -> Ta$[]
 filter = _filter
 
-head: _a$[] -> _a
+head: Ta$[] -> Ta
 head = .$[0]
 
-last: _a$[] -> _a
+last: Ta$[] -> Ta
 last = .$[-1]
 
-tail: _a$[] -> _a$[]
+tail: Ta$[] -> Ta$[]
 tail = .$[1:]  # type: ignore
 
-init: _a$[] -> _a$[]
+init: Ta$[] -> Ta$[]
 init = .$[:-1]  # type: ignore
 
-def at(xs: _a$[], i: int) -> _a =
+def at(xs: Ta$[], i: int) -> Ta =
     """
     at :: [a] -> Int -> a
     at = (!!)
     """
     xs$[i]
 
-reverse: _a[] -> _a[]
+reverse: Ta[] -> Ta[]
 reverse = _reversed
 
 
@@ -800,16 +759,16 @@ and_ = _all
 or_: Foldable[bool] -> bool
 or_ = _any
 
-any: ((_a -> bool), Foldable[_a]) -> bool
+any: ((Ta -> bool), Foldable[Ta]) -> bool
 any = or_..map
 
-all: ((_a -> bool), Foldable[_a]) -> bool
+all: ((Ta -> bool), Foldable[Ta]) -> bool
 all = and_..map
 
-concat: Foldable[_a$[]] -> _a$[]
+concat: Foldable[Ta$[]] -> Ta$[]
 concat = _reduce$(::)
 
-concatMap: (_a -> _b$[], Foldable[_a]) -> _b$[]
+concatMap: (Ta -> Tb$[], Foldable[Ta]) -> Tb$[]
 concatMap = concat..map  # type: ignore
 
 
@@ -817,32 +776,32 @@ concatMap = concat..map  # type: ignore
 ## Building lists:
 
 ### Scans:
-def scanl(func: (_a, _b) -> _a, init: _a, xs: _b$[]) -> _a$[] =
+def scanl(func: (Ta, Tb) -> Ta, init: Ta, xs: Tb$[]) -> Ta$[] =
     scan(func, xs, init)
 
-scanl1: ((_a, _a) -> _a, _a$[]) -> _a$[]
+scanl1: ((Ta, Ta) -> Ta, Ta$[]) -> Ta$[]
 scanl1 = scan
 
-def scanr(func: (_a, _b) -> _a, init: _a, xs: _b[]) -> _a$[] =
+def scanr(func: (Ta, Tb) -> Ta, init: Ta, xs: Tb[]) -> Ta$[] =
     scan(func, reversed(xs), init)$[::-1]
 
-def scanr1(func: (_a, _a) -> _a, xs: _a[]) -> _a$[] =
+def scanr1(func: (Ta, Ta) -> Ta, xs: Ta[]) -> Ta$[] =
     scan(func, reversed(xs))$[::-1]
 
 ### Infinite lists:
 @recursive_iterator
-def iterate(func: _a -> _a, x: _a) -> _a$[] =
+def iterate(func: Ta -> Ta, x: Ta) -> Ta$[] =
     [x] :: iterate(func, func(x))
 
 @recursive_iterator
-def repeat(x: _a) -> _a$[] =
+def repeat(x: Ta) -> Ta$[] =
     [x] :: repeat(x)
 
-def replicate(n: int, x: _a) -> _a$[] =
+def replicate(n: int, x: Ta) -> Ta$[] =
     repeat(x)$[:n]
 
 if TYPE_CHECKING:
-    def cycle(xs: _a$[]) -> _a$[] =
+    def cycle(xs: Ta$[]) -> Ta$[] =
         ...  # type: ignore
 else:
     @recursive_iterator
@@ -852,24 +811,24 @@ else:
 
 
 ## Sublists:
-def take(n: int, xs: _a$[]) -> _a$[] =
+def take(n: int, xs: Ta$[]) -> Ta$[] =
     xs$[:n]
 
-def drop(n: int, xs: _a$[]) -> _a$[] =
+def drop(n: int, xs: Ta$[]) -> Ta$[] =
     xs$[n:]
 
-def splitAt(n: int, xs: _a$[]) -> _t.Tuple[_a$[], _a$[]] =
+def splitAt(n: int, xs: Ta$[]) -> _t.Tuple[Ta$[], Ta$[]] =
     reit = reiterable(xs)
     reit$[:n], reit$[n:]
 
-takeWhile: (_a -> bool, _a$[]) -> _a$[]
+takeWhile: (Ta -> bool, Ta$[]) -> Ta$[]
 takeWhile = takewhile
 
-dropWhile: (_a -> bool, _a$[]) -> _a$[]
+dropWhile: (Ta -> bool, Ta$[]) -> Ta$[]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond: _a -> bool, xs: _a[]) -> _t.Tuple[_a[], _a[]] =
+    def span(cond: Ta -> bool, xs: Ta[]) -> _t.Tuple[Ta[], Ta[]] =
         ...  # type: ignore
 else:
     def span(_, []) = ([], [])
@@ -883,16 +842,16 @@ else:
     def span(cond, xs) =
         ([], xs)
 
-def break_(cond: _a -> bool, xs: _a[]) -> _a[] =
+def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
     span((not)..cond, xs)
 
 
 
 ## Searching lists:
-def notElem(e: _a, xs: _a[]) -> bool =
+def notElem(e: Ta, xs: Ta[]) -> bool =
     e not in xs
 
-def lookup(key: _a, assocs: _t.Tuple[_a, _b]$[]) -> Maybe:
+def lookup(key: Ta, assocs: _t.Tuple[Ta, Tb]$[]) -> Maybe:
     try:
         return (
             assocs
@@ -907,22 +866,22 @@ def lookup(key: _a, assocs: _t.Tuple[_a, _b]$[]) -> Maybe:
 
 
 ## Zipping and unzipping lists:
-zip: (_a$[], _b$[]) -> _t.Tuple[_a, _b]$[]
+zip: (Ta$[], Tb$[]) -> _t.Tuple[Ta, Tb]$[]
 zip = _zip
 
-zip3: (_a$[], _b$[], _c$[]) -> _t.Tuple[_a, _b, _c]$[]
+zip3: (Ta$[], Tb$[], Tc$[]) -> _t.Tuple[Ta, Tb, Tc]$[]
 zip3 = _zip
 
-def zipWith(func: (_a, _b) -> _c, xs1: _a$[], xs2: _b$[]) -> _c$[] =
+def zipWith(func: (Ta, Tb) -> Tc, xs1: Ta$[], xs2: Tb$[]) -> Tc$[] =
     starmap(func, zip(xs1, xs2))
 
-def zipWith3(func: (_a, _b, _c) -> _d, xs1: _a$[], xs2: _b$[], xs3: _c$[]) -> _d$[] =
+def zipWith3(func: (Ta, Tb, Tc) -> Td, xs1: Ta$[], xs2: Tb$[], xs3: Tc$[]) -> Td$[] =
     starmap(func, _zip(xs1, xs2, xs3))
 
-def unzip(xs: _t.Tuple[_a, _b]$[]) -> _t.Tuple[_a[], _b[]] =
+def unzip(xs: _t.Tuple[Ta, Tb]$[]) -> _t.Tuple[Ta[], Tb[]] =
     _zip(*xs) |> map$(list) |> tuple  # type: ignore
 
-unzip3: _t.Tuple[_a, _b, _c]$[] -> _t.Tuple[_a[], _b[], _c[]]
+unzip3: _t.Tuple[Ta, Tb, Tc]$[] -> _t.Tuple[Ta[], Tb[], Tc[]]
 unzip3 = unzip  # type: ignore
 
 
@@ -946,7 +905,7 @@ unwords = " ".join
 # Converting to and from String:
 
 ## Converting to String:
-show: _a -> str
+show: Ta -> str
 show = repr
 
 

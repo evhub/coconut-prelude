@@ -1,0 +1,43 @@
+# Deriving:
+
+def derivingEqOrd(*valueConstructors: object) -> None:
+    """
+    The expression
+        derivingEqOrd(valueConstructor1, valueConstructor2, ...)
+    is equivalent to stating that for some data type defined as
+        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
+    we should add
+        deriving (Eq, Ord)
+    """
+    if TYPE_CHECKING: return
+    ind = valueConstructors.index..type
+    for valCon in valueConstructors:
+        def valCon.__eq__(x, y) =
+            type(x) is type(y) and tuple.__eq__(x, y)
+        def valCon.__lt__(x, y) =
+            tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
+        def valCon.__le__(x, y) =
+            tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y)
+        def valCon.__ge__(x, y) =
+            tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y)
+        def valCon.__gt__(x, y) =
+            tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
+
+def derivingEnum(*valueConstructors: object) -> None:
+    """
+    The expression
+        derivingEnum(valueConstructor1, valueConstructor2, ...)
+    is equivalent to stating that for some data type defined as
+        data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
+    we should add
+        deriving (Enum)
+    """
+    if TYPE_CHECKING: return
+    ind = valueConstructors.index..type
+    for valCon in valueConstructors:
+        def valCon.__int__(x) = ind(x)
+        def valCon.__add__(x, y) =
+            valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y)
+        def valCon.__radd__(x, y) = x + y
+        def valCon.__sub__(x, y) =
+            valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
