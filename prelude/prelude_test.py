@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x530405bc
+# __coconut_hash__ = 0x7800be64
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -157,7 +157,14 @@ def test_Numeric_functions():
     assert realToFrac(0.5) == (over)(1, 2)
 
 def test_Monoids():
-    pass
+    assert mappend(Just([]), mempty) == Just([]) == mappend(mempty, Just([]))
+    assert mappend(nothing, Just([])) == Just([]) == mappend(Just([]), nothing)
+    assert mappend([1, 2], [3, 4]) == [1, 2, 3, 4]
+    assert mappend(Just([1, 2]), Just([3, 4])) == Just([1, 2, 3, 4])
+    assert mappend(lt, gt) == lt == mappend(eq, lt)
+    assert mappend(gt, lt) == gt == mappend(gt, eq)
+    assert mappend(([1], [2]), ([3], [4])) == ([1, 3], [2, 4])
+    assert mconcat([[1], [2, 3]]) == [1, 2, 3]
 
 def test_Functor():
     assert (fmap)(error, nothing) == nothing
@@ -222,6 +229,8 @@ def test_Foldable():
     assert sequence_([Just(1), nothing, Just(3)]) == nothing
     assert sequence_([Right(1), Right(2), Right(3)]) == Right(())
     assert sequence_([Right(1), Left(2), Right(3)]) == Left(2)
+    assert mapM_(Just, [1, 2, 3]) == Just(())
+    assert foldMap(lambda x: [x, x], [[1], [2, 3]]) == [[1], [1], [2, 3], [2, 3]]
     assert foldr(_coconut.operator.pow, 2, [1, 2, 3]) == 1
     assert foldl(_coconut.operator.pow, 2, [1, 2, 3]) == 64
     assert (list)(foldr(cons, [], [2, 3, 4])) == [2, 3, 4]
@@ -238,14 +247,16 @@ def test_Foldable():
     assert product([2, 3, 4]) == 24
 
 def test_Traversable():
-    assert sequenceA([Just(1), nothing, Just(3)]) == nothing
-    assert sequenceA([Right(1), Right(2), Left(3), Right(4)]) == Left(3)
-    assert sequenceA([[1, 2, 3], [], [4], [5, 6]]) == []
-    assert sequenceA([Just(1), Just(2), Just(3)]) == Just([1, 2, 3])
-    assert sequenceA([Right(1), Right(2), Right(3)]) == Right([1, 2, 3])
-    assert sequenceA([[1, 2], [3]]) == [[1, 3], [2, 3]]
-    assert traverse(lambda x: [x], [1, 2, 3]) == [[1, 2, 3]]
-    assert traverse(Just, [Just(1), nothing, Just(2)]) == Just([Just(1), nothing, Just(2)])
+    for _sequence in [sequenceA, sequence]:
+        assert _sequence([Just(1), nothing, Just(3)]) == nothing
+        assert _sequence([Right(1), Right(2), Left(3), Right(4)]) == Left(3)
+        assert _sequence([[1, 2, 3], [], [4], [5, 6]]) == []
+        assert _sequence([Just(1), Just(2), Just(3)]) == Just([1, 2, 3])
+        assert _sequence([Right(1), Right(2), Right(3)]) == Right([1, 2, 3])
+        assert _sequence([[1, 2], [3]]) == [[1, 3], [2, 3]]
+    for _traverse in [traverse, mapM]:
+        assert _traverse(lambda x: [x], [1, 2, 3]) == [[1, 2, 3]]
+        assert _traverse(Just, [Just(1), nothing, Just(2)]) == Just([Just(1), nothing, Just(2)])
 
 def test_Miscellaneous_functions():
     assert id(10) == 10

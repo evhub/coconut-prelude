@@ -131,13 +131,15 @@ else:
 #### Ordering:
 class Ordering
 
-data LT() from Ordering
+data LT() from Ordering:
+    def __bool__(self) = True
 lt: Ordering = LT()
 
 data EQ() from Ordering
 eq: Ordering = EQ()
 
-data GT() from Ordering
+data GT() from Ordering:
+    def __bool__(self) = True
 gt: Ordering = GT()
 
 derivingEqOrd(LT, EQ, GT)
@@ -472,13 +474,27 @@ realToFrac = toRational
 
 
 ## Monoids:
-Monoid = NotImplemented
+Monoid = _t.Iterable
+_MO = _t.TypeVar("_MO", bound=Monoid)
 
-mempty = NotImplemented
+if TYPE_CHECKING:
+    mempty = ()
+else:
+    data mempty()
+    mempty = mempty()
 
-mappend = NotImplemented
+def mappend(x: _MO, y: _MO) -> _MO:
+    if not x:
+        return y
+    elif not y:
+        return x
+    elif x `isinstance` tuple and y `isinstance` tuple:
+        return zipWith(mappend, x, y) |*> makedata$(type(x))
+    else:
+        return (::)(x, y) |*> makedata$(type(x))
 
-mconcat = NotImplemented
+def mconcat(ms: _MO[]) -> _MO =
+    foldr(mappend, mempty, ms)
 
 
 
@@ -633,9 +649,8 @@ def sequence_(ms: Foldable[Monad]) -> Monad =
 mapM_: (_a -> Monad, Foldable[_a]) -> Monad
 mapM_ = sequence_..fmap
 
-fold = NotImplemented
-
-foldMap = NotImplemented
+def foldMap(func: _a -> _MO, xs: Foldable[_a]) -> _MO =
+    mconcat(map(func, xs))
 
 def foldl(func: (_b, _a) -> _b, init: _b, xs: Foldable[_a]) -> _b =
     _reduce(func, xs, init)

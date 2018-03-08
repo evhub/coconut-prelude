@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x4589afbf
+# __coconut_hash__ = 0x8eba35f8
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -249,6 +249,8 @@ class Ordering(_coconut.object): pass
 class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __bool__(self):
+        return True
 lt = LT()  # type: Ordering
 
 class EQ(_coconut.collections.namedtuple("EQ", ""), Ordering):
@@ -259,6 +261,8 @@ eq = EQ()  # type: Ordering
 class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __bool__(self):
+        return True
 gt = GT()  # type: Ordering
 
 derivingEqOrd(LT, EQ, GT)
@@ -844,13 +848,36 @@ realToFrac = toRational
 
 
 ## Monoids:
-Monoid = NotImplemented
+Monoid = _t.Iterable
+_MO = _t.TypeVar("_MO", bound=Monoid)
 
-mempty = NotImplemented
+if TYPE_CHECKING:
+    mempty = ()
+else:
+    class mempty(_coconut.collections.namedtuple("mempty", ""), _coconut.object):
+        __slots__ = ()
+        __ne__ = _coconut.object.__ne__
+    mempty = mempty()
 
-mappend = NotImplemented
+@_coconut_tco
+def mappend(x,  # type: _MO
+     y  # type: _MO
+    ):
+# type: (...) -> _MO
+    if not x:
+        return y
+    elif not y:
+        return x
+    elif (isinstance)(x, tuple) and (isinstance)(y, tuple):
+        return _coconut_tail_call(makedata, type(x), *zipWith(mappend, x, y))
+    else:
+        return _coconut_tail_call(makedata, type(x), *_coconut.itertools.chain(x, y))
 
-mconcat = NotImplemented
+@_coconut_tco
+def mconcat(ms  # type: _coconut.typing.Sequence[_MO]
+    ):
+# type: (...) -> _MO
+    return _coconut_tail_call(foldr, mappend, mempty, ms)
 
 
 
@@ -1130,9 +1157,12 @@ def sequence_(ms  # type: Foldable[Monad]
 mapM_ = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad], Foldable[_a]], Monad]
 mapM_ = _coconut_forward_compose(fmap, sequence_)
 
-fold = NotImplemented
-
-foldMap = NotImplemented
+@_coconut_tco
+def foldMap(func,  # type: _coconut.typing.Callable[[_a], _MO]
+     xs  # type: Foldable[_a]
+    ):
+# type: (...) -> _MO
+    return _coconut_tail_call(mconcat, map(func, xs))
 
 @_coconut_tco
 def foldl(func,  # type: _coconut.typing.Callable[[_b, _a], _b]
@@ -1253,14 +1283,14 @@ def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_78:  # tail recursive
+        if until is _coconut_recursive_func_83:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return _coconut_tail_call(until, cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_78 = until
+_coconut_recursive_func_83 = until
 def asTypeOf(x,  # type: _a
      y  # type: _a
     ):
