@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x8a3b707a
+# __coconut_hash__ = 0x69f70b75
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -244,6 +244,47 @@ def test_Traversable():
     assert sequenceA([Just(1), Just(2), Just(3)]) == Just([1, 2, 3])
     assert sequenceA([Right(1), Right(2), Right(3)]) == Right([1, 2, 3])
     assert sequenceA([[1, 2], [3]]) == [[1, 3], [2, 3]]
+    assert traverse(lambda x: [x], [1, 2, 3]) == [[1, 2, 3]]
+    assert traverse(Just, [Just(1), nothing, Just(2)]) == Just([Just(1), nothing, Just(2)])
+
+def test_Miscellaneous_functions():
+    assert id(10) == 10
+    assert const(10)(5)
+    assert ((dot)(abs, _coconut.operator.add))(-2, -3) == 5
+    assert flip(_coconut_minus)(10, 5) == -5
+    assert (apply)(abs, -2) == 2
+    assert until(lambda x: x < 0, _coconut.functools.partial(subtract, 1), 10) == -1
+    assert asTypeOf(5, 10) == 5
+    assert seq(1, 2) == 2
+    assert (cbv)(abs, -2) == 2
+
+def test_List_operations():
+    assert (list)((cons)(1, [2, 3])) == [1, 2, 3]
+    assert (list)(map(_coconut.functools.partial(_coconut.operator.add, 1), [1, 2, 3])) == [2, 3, 4]
+    assert (list)((chain)([1, 2], [3, 4])) == [1, 2, 3, 4]
+    assert (list)(filter(lambda x: x > 1, [1, 2, 3])) == [2, 3]
+    assert head([1, 2, 3]) == 1
+    assert last([1, 2, 3]) == 3
+    assert tail([1, 2, 3]) == [2, 3]
+    assert init([1, 2, 3]) == [1, 2]
+    assert (at)([1, 2, 3], 1) == 2
+    assert (list)(reverse([1, 2, 3])) == [3, 2, 1]
+
+def test_Special_folds():
+    assert and_([True, True])
+    assert or_([False, True])
+    assert any(_coconut.functools.partial(_coconut.operator.eq, 2), [1, 2, 3])
+    assert not all(_coconut.functools.partial(_coconut.operator.eq, 2), [1, 2, 3])
+    assert (list)(concat([[1], [2, 3]])) == [1, 2, 3]
+    assert (list)(concatMap(lambda x: [x, x], [1, 2])) == [1, 1, 2, 2]
+
+def test_Scans():
+    assert (list)(scanl(_coconut.operator.add, 0, [1, 2, 3])) == [0, 1, 3, 6]
+    assert (list)(scanl1(_coconut.operator.add, [1, 2, 3])) == [1, 3, 6]
+    assert (list)(scanr(_coconut.operator.add, 0, [1, 2, 3])) == [6, 5, 3, 0]
+    assert (list)(scanr1(_coconut.operator.add, [1, 2, 3])) == [6, 5, 3]
+
+
 
 if __name__ == "__main__":
     for var, val in globals().items():

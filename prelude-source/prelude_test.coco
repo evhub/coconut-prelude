@@ -232,6 +232,45 @@ def test_Traversable():
     assert sequenceA([Just(1), Just(2), Just(3)]) == Just([1,2,3])
     assert sequenceA([Right(1), Right(2), Right(3)]) == Right([1,2,3])
     assert sequenceA([[1,2], [3]]) == [[1,3], [2,3]]
+    assert traverse(x -> [x], [1, 2, 3]) == [[1, 2, 3]]
+    assert traverse(Just, [Just(1), nothing, Just(2)]) == Just([Just(1), nothing, Just(2)])
+
+def test_Miscellaneous_functions():
+    assert id(10) == 10
+    assert const(10)(5)
+    assert (abs `dot` (+))(-2, -3) == 5
+    assert flip((-))(10, 5) == -5
+    assert abs `apply` -2 == 2
+    assert until(x -> x < 0, subtract$(1), 10) == -1
+    assert asTypeOf(5, 10) == 5
+    assert seq(1, 2) == 2
+    assert abs `cbv` -2 == 2
+
+def test_List_operations():
+    assert 1 `cons` [2, 3] |> list == [1, 2, 3]
+    assert map((+)$(1), [1, 2, 3]) |> list == [2, 3, 4]
+    assert [1, 2] `chain` [3, 4] |> list == [1, 2, 3, 4]
+    assert filter(x -> x > 1, [1, 2, 3]) |> list == [2, 3]
+    assert head([1, 2, 3]) == 1
+    assert last([1, 2, 3]) == 3
+    assert tail([1, 2, 3]) == [2, 3]
+    assert init([1, 2, 3]) == [1, 2]
+    assert [1, 2, 3] `at` 1 == 2
+    assert reverse([1, 2, 3]) |> list == [3, 2, 1]
+
+def test_Special_folds():
+    assert and_([True, True])
+    assert or_([False, True])
+    assert any((==)$(2), [1, 2, 3])
+    assert not all((==)$(2), [1, 2, 3])
+    assert concat([[1], [2, 3]]) |> list == [1, 2, 3]
+    assert concatMap(x -> [x,x], [1, 2]) |> list == [1,1,2,2]
+
+def test_Scans():
+    assert scanl((+), 0, [1, 2, 3]) |> list == [0, 1, 3, 6]
+    assert scanl1((+), [1, 2, 3]) |> list == [1, 3, 6]
+    assert scanr((+), 0, [1, 2, 3]) |> list == [6, 5, 3, 0]
+    assert scanr1((+), [1, 2, 3]) |> list == [6, 5, 3]
 
 if __name__ == "__main__":
     for var, val in globals().items():

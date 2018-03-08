@@ -681,14 +681,15 @@ sequence: Traversable[Monad[_a]] -> Monad[Traversable[_a]]
 sequence = sequenceA
 
 mapM: (_a -> Monad[_b], Traversable[_a]) -> Monad[Traversable[_b]]
-mapM = sequence..fmap
+mapM = traverse
 
 
 
 ## Miscellaneous functions:
 def id(x: _a) -> _a = x
 
-def const(x: _a, _) -> _a = x
+def const(x: _a) -> _b -> _a =
+    y -> x
 
 def dot(f: _b -> _c, g: _a -> _b) -> _a -> _c =
     """
@@ -712,8 +713,7 @@ def until(cond: _a -> bool, func: _a -> _a, x: _a) -> _a =
         return x
     until(cond, func, func(x))  # tail recursive
 
-asTypeOf: (_a, _a) -> _a
-asTypeOf = const
+def asTypeOf(x: _a, y: _a) -> _a = x
 
 def error(msg: str) -> None: raise Exception(msg)
 
@@ -721,7 +721,7 @@ errorWithoutStackTrace = NotImplemented
 
 undefined: _t.Any = None
 
-def seq(x, y: _b) -> _b = y
+def seq(x: _a, y: _b) -> _b = y
 
 def cbv(func: _a -> _b, arg: _a) -> _b =
     """
@@ -744,10 +744,10 @@ def cons(x: _a, xs: _a$[]) -> _a$[] =
 map: (_a -> _b, _a$[]) -> _b$[]
 map = _map
 
-def append(xs: _a$[], ys: _a$[]) -> _a$[] =
+def chain(xs: _a$[], ys: _a$[]) -> _a$[] =
     """
-    append :: [a] -> [a] -> [a]
-    append = (++)
+    chain :: [a] -> [a] -> [a]
+    chain = (++)
     """
     (::)(xs, ys)
 
@@ -766,7 +766,11 @@ tail = .$[1:]  # type: ignore
 init: _a$[] -> _a$[]
 init = .$[:-1]  # type: ignore
 
-def index(xs: _a$[], i: int) -> _a =
+def at(xs: _a$[], i: int) -> _a =
+    """
+    at :: [a] -> Int -> a
+    at = (!!)
+    """
     xs$[i]
 
 reverse: _a[] -> _a[]
@@ -798,17 +802,17 @@ concatMap = concat..map  # type: ignore
 ## Building lists:
 
 ### Scans:
-def scanl(func: (_a, _b) -> _a, init: _a, xs: _b[]) -> _a$[] =
-    scan(func, reversed(xs), init)
-
-def scanl1(func: (_a, _a) -> _a, xs: _a[]) -> _a$[] =
-    scan(func, reversed(xs))
-
-def scanr(func: (_a, _b) -> _a, init: _a, xs: _b$[]) -> _a$[] =
+def scanl(func: (_a, _b) -> _a, init: _a, xs: _b$[]) -> _a$[] =
     scan(func, xs, init)
 
-scanr1: ((_a, _a) -> _a, _a$[]) -> _a$[]
-scanr1 = scan
+scanl1: ((_a, _a) -> _a, _a$[]) -> _a$[]
+scanl1 = scan
+
+def scanr(func: (_a, _b) -> _a, init: _a, xs: _b[]) -> _a$[] =
+    scan(func, reversed(xs), init)$[::-1]
+
+def scanr1(func: (_a, _a) -> _a, xs: _a[]) -> _a$[] =
+    scan(func, reversed(xs))$[::-1]
 
 ### Infinite lists:
 @recursive_iterator

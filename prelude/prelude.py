@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x60d2b864
+# __coconut_hash__ = 0x31494a0b
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -1202,7 +1202,7 @@ sequence = None  # type: _coconut.typing.Callable[[Traversable[Monad[_a]]], Mona
 sequence = sequenceA
 
 mapM = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], Monad[_b]], Traversable[_a]], Monad[Traversable[_b]]]
-mapM = _coconut_forward_compose(fmap, sequence)
+mapM = traverse
 
 
 
@@ -1212,10 +1212,10 @@ def id(x  # type: _a
 # type: (...) -> _a
     return x
 
-def const(x,  # type: _a
-     _):
-# type: (...) -> _a
-    return x
+def const(x  # type: _a
+    ):
+# type: (...) -> _coconut.typing.Callable[[_b], _a]
+    return lambda y: x
 
 @_coconut_tco
 def dot(f,  # type: _coconut.typing.Callable[[_b], _c]
@@ -1261,8 +1261,11 @@ def until(cond,  # type: _coconut.typing.Callable[[_a], bool]
 
         return None
 _coconut_recursive_func_78 = until
-asTypeOf = None  # type: _coconut.typing.Callable[[_a, _a], _a]
-asTypeOf = const
+def asTypeOf(x,  # type: _a
+     y  # type: _a
+    ):
+# type: (...) -> _a
+    return x
 
 def error(msg  # type: str
     ):
@@ -1273,7 +1276,8 @@ errorWithoutStackTrace = NotImplemented
 
 undefined = None  # type: _t.Any
 
-def seq(x, y  # type: _b
+def seq(x,  # type: _a
+     y  # type: _b
     ):
 # type: (...) -> _b
     return y
@@ -1308,13 +1312,13 @@ map = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a], _b]
 map = _map
 
 @_coconut_tco
-def append(xs,  # type: _coconut.typing.Iterable[_a]
+def chain(xs,  # type: _coconut.typing.Iterable[_a]
      ys  # type: _coconut.typing.Iterable[_a]
     ):
 # type: (...) -> _coconut.typing.Iterable[_a]
     """
-    append :: [a] -> [a] -> [a]
-    append = (++)
+    chain :: [a] -> [a] -> [a]
+    chain = (++)
     """
     return _coconut_tail_call(_coconut.itertools.chain, xs, ys)
 
@@ -1334,10 +1338,14 @@ init = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_a]], _c
 init = _coconut.functools.partial(_coconut_igetitem, index=_coconut.slice(None, -1))  # type: ignore
 
 @_coconut_tco
-def index(xs,  # type: _coconut.typing.Iterable[_a]
+def at(xs,  # type: _coconut.typing.Iterable[_a]
      i  # type: int
     ):
 # type: (...) -> _a
+    """
+    at :: [a] -> Int -> a
+    at = (!!)
+    """
     return _coconut_tail_call(_coconut_igetitem, xs, i)
 
 reverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[_a]], _coconut.typing.Sequence[_a]]
@@ -1372,28 +1380,28 @@ concatMap = _coconut_forward_compose(map, concat)  # type: ignore
 @_coconut_tco
 def scanl(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
      init,  # type: _a
-     xs  # type: _coconut.typing.Sequence[_b]
-    ):
-# type: (...) -> _coconut.typing.Iterable[_a]
-    return _coconut_tail_call(scan, func, reversed(xs), init)
-
-@_coconut_tco
-def scanl1(func,  # type: _coconut.typing.Callable[[_a, _a], _a]
-     xs  # type: _coconut.typing.Sequence[_a]
-    ):
-# type: (...) -> _coconut.typing.Iterable[_a]
-    return _coconut_tail_call(scan, func, reversed(xs))
-
-@_coconut_tco
-def scanr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
-     init,  # type: _a
      xs  # type: _coconut.typing.Iterable[_b]
     ):
 # type: (...) -> _coconut.typing.Iterable[_a]
     return _coconut_tail_call(scan, func, xs, init)
 
-scanr1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
-scanr1 = scan
+scanl1 = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[_a, _a], _a], _coconut.typing.Iterable[_a]], _coconut.typing.Iterable[_a]]
+scanl1 = scan
+
+@_coconut_tco
+def scanr(func,  # type: _coconut.typing.Callable[[_a, _b], _a]
+     init,  # type: _a
+     xs  # type: _coconut.typing.Sequence[_b]
+    ):
+# type: (...) -> _coconut.typing.Iterable[_a]
+    return _coconut_tail_call(_coconut_igetitem, scan(func, reversed(xs), init), _coconut.slice(None, None, -1))
+
+@_coconut_tco
+def scanr1(func,  # type: _coconut.typing.Callable[[_a, _a], _a]
+     xs  # type: _coconut.typing.Sequence[_a]
+    ):
+# type: (...) -> _coconut.typing.Iterable[_a]
+    return _coconut_tail_call(_coconut_igetitem, scan(func, reversed(xs)), _coconut.slice(None, None, -1))
 
 ### Infinite lists:
 @recursive_iterator
