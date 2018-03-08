@@ -177,10 +177,10 @@ def _coconut_igetitem(iterable, index):
     if index.start is not None and index.start < 0 and (index.stop is None or index.stop < 0) and index.step is None:
         queue = _coconut.collections.deque(iterable, maxlen=-index.start)
         if index.stop is not None:
-            queue = _coconut.tuple(queue)[:index.stop - index.start]
+            queue = _coconut.list(queue)[:index.stop - index.start]
         return queue
     if (index.start is not None and index.start < 0) or (index.stop is not None and index.stop < 0) or (index.step is not None and index.step < 0):
-        return _coconut.tuple(iterable)[index]
+        return _coconut.list(iterable)[index]
     return _coconut.itertools.islice(iterable, index.start, index.stop, index.step)
 class _coconut_base_compose(object):
     __slots__ = ("func", "funcstars")
@@ -353,7 +353,7 @@ class parallel_map(map):
     def __iter__(self):
         from concurrent.futures import ProcessPoolExecutor
         with ProcessPoolExecutor() as executor:
-            return _coconut.iter(_coconut.tuple(executor.map(self.func, *self.iters)))
+            return _coconut.iter(_coconut.list(executor.map(self.func, *self.iters)))
     def __repr__(self):
         return "parallel_" + _coconut_map.__repr__(self)
 class concurrent_map(map):
@@ -363,7 +363,7 @@ class concurrent_map(map):
         from concurrent.futures import ThreadPoolExecutor
         from multiprocessing import cpu_count  # cpu_count() * 5 is the default Python 3.5 thread count
         with ThreadPoolExecutor(cpu_count() * 5) as executor:
-            return _coconut.iter(_coconut.tuple(executor.map(self.func, *self.iters)))
+            return _coconut.iter(_coconut.list(executor.map(self.func, *self.iters)))
     def __repr__(self):
         return "concurrent_" + _coconut_map.__repr__(self)
 class filter(_coconut.filter):

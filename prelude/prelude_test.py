@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x69f70b75
+# __coconut_hash__ = 0x530405bc
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -284,7 +284,47 @@ def test_Scans():
     assert (list)(scanr(_coconut.operator.add, 0, [1, 2, 3])) == [6, 5, 3, 0]
     assert (list)(scanr1(_coconut.operator.add, [1, 2, 3])) == [6, 5, 3]
 
+def test_Infinite_lists():
+    assert (list)(take(3, iterate(_coconut.functools.partial(subtract, 1), 3))) == [3, 2, 1]
+    assert (list)(_coconut_igetitem(repeat(1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(replicate(3, 1))
+    assert (list)(_coconut_igetitem(cycle([1, 2]), _coconut.slice(None, 4))) == [1, 2, 1, 2]
 
+def test_Sublists():
+    assert take(2, [1, 2, 3]) == [1, 2]
+    assert drop(2, [1, 2, 3]) == [3]
+    assert fmap(list, splitAt(2, [1, 2, 3, 4])) == ([1, 2], [3, 4])
+    assert (list)(takeWhile((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.gt))(2), [0, 1, 2, 3])) == [0, 1]
+    assert (list)(dropWhile((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.gt))(2), [0, 1, 2, 3])) == [2, 3]
+    assert span((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.gt))(2), [0, 1, 2, 3]) == ([0, 1], [2, 3])
+    assert break_((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.lt))(2), [1, 2, 3]) == ([1, 2], [3])
+
+def test_Searching_lists():
+    assert (notElem)(10, [1, 2, 3])
+    assert lookup("b", [("a", 1), ("b", 2), ("c", 3)]) == Just(2)
+    assert lookup("b", [("a", 1)]) == nothing
+    assert lookup("a", []) == nothing
+
+def test_Zipping_and_unzipping_lists():
+    assert (list)(zip([1, 2], [3, 4])) == [(1, 3), (2, 4)]
+    assert unzip([(1, 3), (2, 4)]) == ([1, 2], [3, 4])
+    assert (list)(zip3([1, 2], [3, 4], [5, 6])) == [(1, 3, 5), (2, 4, 6)]
+    assert unzip3([(1, 3, 5), (2, 4, 6)]) == ([1, 2], [3, 4], [5, 6])
+    assert (list)(zipWith(_coconut.operator.add, [1, 2], [10, 20])) == [11, 22]
+    assert (list)(zipWith3(lambda x, y, z: sum([x, y, z]), [1, 2], [10, 20], [100, 200])) == [111, 222]
+
+def test_Functions_on_strings():
+    assert lines("\nabc\ndef\n") == ["", "abc", "def"]
+    assert words(" abc def ") == ["abc", "def"]
+    assert unlines(["abc", "def"]) == "abc\ndef\n"
+    assert unlines(["abc"]) == "abc\n"
+    assert unlines([]) == ""
+    assert unwords(["abc", "def"]) == "abc def"
+    assert unwords(["abc"]) == "abc"
+    assert unwords([]) == ""
+
+def test_Converting_to_String():
+    assert show(1) == "1"
+    assert show("abc") == "'abc'"
 
 if __name__ == "__main__":
     for var, val in globals().items():

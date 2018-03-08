@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x31494a0b
+# __coconut_hash__ = 0x4589afbf
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -1485,7 +1485,7 @@ if TYPE_CHECKING:
     def span(cond,  # type: _coconut.typing.Callable[[_a], bool]
      xs  # type: _coconut.typing.Sequence[_a]
     ):
-# type: (...) -> _coconut.typing.Sequence[_a]
+# type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_a]]
         return _coconut.Ellipsis  # type: ignore
 else:
     def span(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -1581,25 +1581,25 @@ def zipWith3(func,  # type: _coconut.typing.Callable[[_a, _b, _c], _d]
 def unzip(xs  # type: _coconut.typing.Iterable[_t.Tuple[_a, _b]]
     ):
 # type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b]]
-    return _coconut_tail_call((tuple), _zip(*xs))  # type: ignore
+    return _coconut_tail_call((tuple), map(list, _zip(*xs)))  # type: ignore
 
-@_coconut_tco
-def unzip3(xs  # type: _coconut.typing.Iterable[_t.Tuple[_a, _b, _c]]
-    ):
-# type: (...) -> _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b], _coconut.typing.Sequence[_c]]
-    return _coconut_tail_call((tuple), _zip(*xs))  # type: ignore
+unzip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[_t.Tuple[_a, _b, _c]]], _t.Tuple[_coconut.typing.Sequence[_a], _coconut.typing.Sequence[_b], _coconut.typing.Sequence[_c]]]
+unzip3 = unzip  # type: ignore
 
 
 
 ## Functions on strings:
 lines = None  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]
-lines = _coconut.operator.methodcaller("split", "\n")  # type: ignore
+lines = _coconut.operator.methodcaller("splitlines")  # type: ignore
 
 words = None  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]
 words = _coconut.operator.methodcaller("split")  # type: ignore
 
-unlines = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[str]], str]
-unlines = "\n".join
+@_coconut_tco
+def unlines(strs  # type: _coconut.typing.Sequence[str]
+    ):
+# type: (...) -> str
+    return _coconut_tail_call("".join, (s + "\n" for s in strs))
 
 unwords = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[str]], str]
 unwords = " ".join
@@ -1611,7 +1611,7 @@ unwords = " ".join
 
 ## Converting to String:
 show = None  # type: _coconut.typing.Callable[[_a], str]
-show = str
+show = repr
 
 
 

@@ -854,7 +854,7 @@ dropWhile: (_a -> bool, _a$[]) -> _a$[]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond: _a -> bool, xs: _a[]) -> _a[] =
+    def span(cond: _a -> bool, xs: _a[]) -> _t.Tuple[_a[], _a[]] =
         ...  # type: ignore
 else:
     def span(_, []) = ([], [])
@@ -905,22 +905,22 @@ def zipWith3(func: (_a, _b, _c) -> _d, xs1: _a$[], xs2: _b$[], xs3: _c$[]) -> _d
     starmap(func, _zip(xs1, xs2, xs3))
 
 def unzip(xs: _t.Tuple[_a, _b]$[]) -> _t.Tuple[_a[], _b[]] =
-    _zip(*xs) |> tuple  # type: ignore
+    _zip(*xs) |> map$(list) |> tuple  # type: ignore
 
-def unzip3(xs: _t.Tuple[_a, _b, _c]$[]) -> _t.Tuple[_a[], _b[], _c[]] =
-    _zip(*xs) |> tuple  # type: ignore
+unzip3: _t.Tuple[_a, _b, _c]$[] -> _t.Tuple[_a[], _b[], _c[]]
+unzip3 = unzip  # type: ignore
 
 
 
 ## Functions on strings:
 lines: str -> str[]
-lines = .split("\n")  # type: ignore
+lines = .splitlines()  # type: ignore
 
 words: str -> str[]
 words = .split()  # type: ignore
 
-unlines: str[] -> str
-unlines = "\n".join
+def unlines(strs: str[]) -> str =
+    "".join(s + "\n" for s in strs)
 
 unwords: str[] -> str
 unwords = " ".join
@@ -932,7 +932,7 @@ unwords = " ".join
 
 ## Converting to String:
 show: _a -> str
-show = str
+show = repr
 
 
 
