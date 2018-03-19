@@ -49,7 +49,9 @@ not_ = (not)
 otherwise: bool = True
 
 #### Maybe:
-class Maybe
+class Maybe:
+    @staticmethod
+    def __fail__(msg) = nothing
 
 data Nothing() from Maybe
 nothing: Maybe = Nothing()
@@ -68,7 +70,9 @@ else:
     def maybe(_, func, Just(x)) = func(x)
 
 #### Either:
-class Either
+class Either:
+    @staticmethod
+    def __fail__(msg) = Left(msg)
 
 data Left(x) from Either:
     def __fmap__(self, func) = self
@@ -476,7 +480,11 @@ def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
 Applicative = Functor
 TApp = _t.TypeVar("TApp", bound=Applicative)
 
-data pure(val)
+data pure(val):
+    def pure_as(self, M: _t.Type[TApp]) -> TApp =
+        if M `hasattr` "__pure__":
+            return M.__pure__(self.val)  # type: ignore
+        makedata(M, self.val)
 
 def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
     """
@@ -526,23 +534,15 @@ def seqM(m1: Monad, m2: TMonad) -> TMonad =
 
 return_ = pure
 
-data fail(msg)
-
-if TYPE_CHECKING:
-    def _failAs(f: fail, M: _t.Type[Monad]) =
-        ...  # type: ignore
-else:
-    def _failAs(_, M if M `issubclass` Maybe) = nothing
-
-    @addpattern(_failAs)
-    def _failAs(fail(msg), M if M `issubclass` Either) = Left(msg)
-
-    @addpattern(_failAs)
-    def _failAs(_, M) = makedata(M)
+data fail(msg):
+    def fail_as(self, M: _t.Type[TMonad]) -> TMonad =
+        if M `hasattr` "__fail__":
+            return M.__fail__(self.msg)  # type: ignore
+        makedata(M)
 
 # sequence_ and mapM_ defined in Foldable
 
-def bindFrom(func: Ta -> Monad, m: Monad[Ta]) =
+def bindFrom(func: Ta -> TMonad, m: Monad[Ta]) -> TMonad =
     """
     bindFrom :: Monad m => (a -> m b) -> m a -> m b
     bindFrom = (=<<)
@@ -565,8 +565,10 @@ else:
         vals = None
         for m in ms:
             if m `isinstance` fail:
-                return _failAs(m, valCons)
-            if not m `isinstance` pure:
+                return m.fail_as(valCons)
+            elif m `isinstance` pure:
+                m = m.pure_as(valCons)
+            else:
                 valCons = type(m)
             vals = (::)(vals, m) if vals is not None else m
         makedata(valCons, *vals) if vals is not None else ms

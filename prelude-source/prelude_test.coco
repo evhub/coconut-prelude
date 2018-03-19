@@ -209,6 +209,9 @@ def test_Monad():
         Left(3),
         Right(4),
     ], (*xs) -> error(repr(xs)))
+    global glob = 1
+    assert nothing == nothing `bind` (def x -> global glob = 2; Just(glob))
+    assert glob == 1
 
 def test_Foldable():
     assert sequence_([[1], [2], [3]]) == [()]

@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x7800be64
+# __coconut_hash__ = 0xbfef642a
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -221,6 +221,14 @@ def test_Monad():
     assert nothing == join(nothing)
     assert [1, 2, 3, 4, 5, 6] == join([[1, 2, 3], [], [4], [5, 6]])
     assert Left(3) == do([Right(1), Right(2), Left(3), Right(4),], lambda *xs: error(repr(xs)))
+    global glob
+    glob = 1
+    def _coconut_lambda_0(x):
+        global glob
+        glob = 2
+        return Just(glob)
+    assert nothing == (bind)(nothing, (_coconut_lambda_0))
+    assert glob == 1
 
 def test_Foldable():
     assert sequence_([[1], [2], [3]]) == [()]
