@@ -50,6 +50,11 @@ def derivingEnum(*valueConstructors: TType) -> None:
 
 # Monads:
 def definesBind(dataType: TType) -> TType:
+    """
+    Decorator to declare that a data type defines __bind__
+    instead of __join__. Will also create an __fmap__ method
+    if none exists, though then a __pure__ method is required.
+    """
     if TYPE_CHECKING: return dataType
 
     if not dataType `hasattr` "__fmap__":

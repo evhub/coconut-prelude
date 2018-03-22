@@ -4,6 +4,7 @@
 import sys
 import fractions as _fractions
 import math as _math
+import ast as _ast
 
 from .util import *  # type: ignore
 
@@ -22,6 +23,7 @@ _filter: -> T.Any = filter
 _int: -> T.Any = int
 _sum: -> T.Any = sum
 _reversed: -> T.Any = reversed
+_print: -> None = print
 _ceil: -> T.Any = _math.ceil
 _floor: -> T.Any = _math.floor
 _IOError: T.Any = IOError
@@ -110,15 +112,15 @@ data GT() from Ordering:
     @staticmethod
     def __bool__() -> bool = True
 
+derivingEqOrd(LT, EQ, GT)
+derivingEnum(LT, EQ, GT)
+
 lt: Ordering = LT()
 eq: Ordering = EQ()
 gt: Ordering = GT()
 
-derivingEqOrd(LT, EQ, GT)
-derivingEnum(LT, EQ, GT)
-
 #### Char:
-Char = str
+Char = T.NewType("Char", str)
 
 #### String:
 String = str
@@ -905,7 +907,9 @@ else:
         ([], xs)
 
 def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
-    """break_ = break"""
+    """
+    break_ = break
+    """
     span((not)..cond, xs)
 
 
@@ -968,13 +972,72 @@ unwords = " ".join
 # Converting to and from String:
 
 ## Converting to String:
+ShowS = T.Callable[[str], str]
+
+Show = T.Any
+
+showsPrec = NotImplemented
+
 show: Ta -> str
 show = repr
+
+def shows(x: Show) -> ShowS =
+    s -> repr(x) + s
+
+showList: Show[] -> ShowS
+showList = shows
+
+def showString(x: str) -> ShowS =
+    s -> x + s
+
+showChar: Char -> ShowS
+showChar = showString
+
+def showParen(parens: bool, showFunc: ShowS) -> ShowS =
+    s -> (
+        "(" + showFunc("") + ")" + s if parens
+        else showFunc("") + s
+    )
+
+
+
+## Converting from String:
+ReadS = NotImplemented
+
+Read = T.Union[
+    str,
+    int,
+    float,
+    bool,
+    None,
+    tuple,
+    list,
+    dict,
+]
+
+readsPrec = NotImplemented
+
+readList = NotImplemented
+
+reads = NotImplemented
+
+readParen = NotImplemented
+
+def read(s: str) -> Read =
+    _ast.literal_eval(s)
+
+lex = NotImplemented
 
 
 
 
 # Basic input and output:
+
+#### IO:
+
+IO = NotImplemented
+
+
 
 ## Simple I/O operations:
 
@@ -988,10 +1051,13 @@ putChar = putStr
 putStrLn: str -> None
 putStrLn = print
 
+print: str -> None
+print = _print
+
 
 ### Input functions:
-getChar: () -> str
-getChar = sys.stdin.read$(1)
+getChar: () -> Char
+getChar = sys.stdin.read$(1)  # type: ignore
 
 getLine: () -> str
 getLine = input
@@ -1018,6 +1084,10 @@ def writeFile(fpath: FilePath, text: str) -> None:
 def appendFile(fpath: FilePath, text: str) -> None:
     with open(fpath, "a+") as f:
         f.write(text)  # type: ignore
+
+readIO = NotImplemented
+
+readLn = NotImplemented
 
 
 

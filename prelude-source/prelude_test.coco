@@ -332,6 +332,17 @@ def test_Functions_on_strings():
 def test_Converting_to_String():
     assert show(1) == "1"
     assert show("abc") == "'abc'"
+    assert 3 |> shows <| "abc" == "3abc"
+    assert [1] |> showList <| "abc" == "[1]abc"
+    assert "abc" |> showString <| "def" == "abcdef"
+    assert "a" |> showChar <| "bcd" == "abcd"
+    assert showString("abc") |> showParen$(True) <| "def" == "(abc)def"
+    assert showString("abc") |> showParen$(False) <| "def" == "abcdef"
+
+def test_Converting_from_String():
+    assert read("[]") == []
+    assert read("10") == 10
+    assert read('"abc"') == "abc"
 
 if __name__ == "__main__":
     for var, val in globals().items():

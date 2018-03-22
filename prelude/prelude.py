@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x365ce93d
+# __coconut_hash__ = 0x2eef9771
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -25,6 +25,7 @@ _coconut_sys.path.remove(_coconut_file_path)
 sys = _coconut_sys
 import fractions as _fractions
 import math as _math
+import ast as _ast
 
 from .util import *  # type: ignore
 
@@ -43,6 +44,7 @@ _filter = filter  # type: _coconut.typing.Callable[..., T.Any]
 _int = int  # type: _coconut.typing.Callable[..., T.Any]
 _sum = sum  # type: _coconut.typing.Callable[..., T.Any]
 _reversed = reversed  # type: _coconut.typing.Callable[..., T.Any]
+_print = print  # type: _coconut.typing.Callable[..., None]
 _ceil = _math.ceil  # type: _coconut.typing.Callable[..., T.Any]
 _floor = _math.floor  # type: _coconut.typing.Callable[..., T.Any]
 _IOError = IOError  # type: T.Any
@@ -239,15 +241,15 @@ class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
 # type: (...) -> bool
         return True
 
+derivingEqOrd(LT, EQ, GT)
+derivingEnum(LT, EQ, GT)
+
 lt = LT()  # type: Ordering
 eq = EQ()  # type: Ordering
 gt = GT()  # type: Ordering
 
-derivingEqOrd(LT, EQ, GT)
-derivingEnum(LT, EQ, GT)
-
 #### Char:
-Char = str
+Char = T.NewType("Char", str)
 
 #### String:
 String = str
@@ -1555,7 +1557,9 @@ def break_(cond,  # type: _coconut.typing.Callable[[Ta], bool]
      xs  # type: _coconut.typing.Sequence[Ta]
     ):
 # type: (...) -> _coconut.typing.Sequence[Ta]
-    """break_ = break"""
+    """
+    break_ = break
+    """
     return _coconut_tail_call(span, _coconut_forward_compose(cond, _coconut.operator.not_), xs)
 
 
@@ -1635,13 +1639,70 @@ unwords = " ".join
 # Converting to and from String:
 
 ## Converting to String:
+ShowS = T.Callable[[str], str]
+
+Show = T.Any
+
+showsPrec = NotImplemented
+
 show = None  # type: _coconut.typing.Callable[[Ta], str]
 show = repr
+
+def shows(x  # type: Show
+    ):
+# type: (...) -> ShowS
+    return lambda s: repr(x) + s
+
+showList = None  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[Show]], ShowS]
+showList = shows
+
+def showString(x  # type: str
+    ):
+# type: (...) -> ShowS
+    return lambda s: x + s
+
+showChar = None  # type: _coconut.typing.Callable[[Char], ShowS]
+showChar = showString
+
+def showParen(parens,  # type: bool
+     showFunc  # type: ShowS
+    ):
+# type: (...) -> ShowS
+    return lambda s: ("(" + showFunc("") + ")" + s if parens else showFunc("") + s)
+
+
+
+## Converting from String:
+ReadS = NotImplemented
+
+Read = T.Union[str, int, float, bool, None, tuple, list, dict]
+
+readsPrec = NotImplemented
+
+readList = NotImplemented
+
+reads = NotImplemented
+
+readParen = NotImplemented
+
+@_coconut_tco
+def read(s  # type: str
+    ):
+# type: (...) -> Read
+    return _coconut_tail_call(_ast.literal_eval, s)
+
+lex = NotImplemented
 
 
 
 
 # Basic input and output:
+
+#### IO:
+
+IO = NotImplemented
+
+
 
 ## Simple I/O operations:
 
@@ -1655,10 +1716,13 @@ putChar = putStr
 putStrLn = None  # type: _coconut.typing.Callable[[str], None]
 putStrLn = print
 
+print = None  # type: _coconut.typing.Callable[[str], None]
+print = _print
+
 
 ### Input functions:
-getChar = None  # type: _coconut.typing.Callable[[], str]
-getChar = _coconut.functools.partial(sys.stdin.read, 1)
+getChar = None  # type: _coconut.typing.Callable[[], Char]
+getChar = _coconut.functools.partial(sys.stdin.read, 1)  # type: ignore
 
 getLine = None  # type: _coconut.typing.Callable[[], str]
 getLine = input
@@ -1695,6 +1759,10 @@ def appendFile(fpath,  # type: FilePath
 # type: (...) -> None
     with open(fpath, "a+") as f:
         f.write(text)  # type: ignore
+
+readIO = NotImplemented
+
+readLn = NotImplemented
 
 
 

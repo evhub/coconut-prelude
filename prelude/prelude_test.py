@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x6a87b2aa
+# __coconut_hash__ = 0x8f883565
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -349,6 +349,17 @@ def test_Functions_on_strings():
 def test_Converting_to_String():
     assert show(1) == "1"
     assert show("abc") == "'abc'"
+    assert ((shows)(3))("abc") == "3abc"
+    assert ((showList)([1]))("abc") == "[1]abc"
+    assert ((showString)("abc"))("def") == "abcdef"
+    assert ((showChar)("a"))("bcd") == "abcd"
+    assert (showParen(True, showString("abc")))("def") == "(abc)def"
+    assert (showParen(False, showString("abc")))("def") == "abcdef"
+
+def test_Converting_from_String():
+    assert read("[]") == []
+    assert read("10") == 10
+    assert read('"abc"') == "abc"
 
 if __name__ == "__main__":
     for var, val in globals().items():

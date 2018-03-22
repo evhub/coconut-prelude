@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x857f9e52
+# __coconut_hash__ = 0xe691e71d
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -91,6 +91,11 @@ def derivingEnum(*valueConstructors  # type: TType
 def definesBind(dataType  # type: TType
     ):
 # type: (...) -> TType
+    """
+    Decorator to declare that a data type defines __bind__
+    instead of __join__. Will also create an __fmap__ method
+    if none exists, though then a __pure__ method is required.
+    """
     if TYPE_CHECKING:
         return dataType
 
