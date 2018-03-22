@@ -44,13 +44,13 @@ otherwise: bool = True
 #### Maybe:
 class Maybe:
     @staticmethod
-    def __pure__(obj) = Just(obj)
+    def __pure__(obj: Ta) -> Maybe = Just(obj)
 
     @staticmethod
-    def __fail__(msg) = nothing
+    def __fail__(msg: str) -> Maybe = nothing
 
     @staticmethod
-    def __mempty__() = nothing
+    def __mempty__() -> Maybe = nothing
 
 data Nothing() from Maybe
 nothing: Maybe = Nothing()
@@ -71,16 +71,16 @@ else:
 #### Either:
 class Either:
     @staticmethod
-    def __pure__(obj) = Right(obj)
+    def __pure__(obj: Ta) -> Either = Right(obj)
 
     @staticmethod
-    def __fail__(msg) = Left(msg)
+    def __fail__(msg: str) -> Either = Left(msg)
 
 data Left(x) from Either:
     @staticmethod
-    def __bool__() = False
+    def __bool__() -> bool = False
 
-    def __fmap__(self, func) = self
+    def __fmap__(self, func: Ta -> Tb) -> Either = self
 
 data Right(x) from Either
 
@@ -98,17 +98,17 @@ else:
 #### Ordering:
 class Ordering:
     @staticmethod
-    def __mempty__() = eq
+    def __mempty__() -> Ordering = eq
 
 data LT() from Ordering:
     @staticmethod
-    def __bool__() = True
+    def __bool__() -> bool = True
 
 data EQ() from Ordering
 
 data GT() from Ordering:
     @staticmethod
-    def __bool__() = True
+    def __bool__() -> bool = True
 
 lt: Ordering = LT()
 eq: Ordering = EQ()
@@ -451,13 +451,10 @@ TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
 data MEmpty():
     """
-    -- mempty is overridden by the __mempty__ method
+    -- mempty is overridden by the __mempty__ staticmethod
     """
     @staticmethod
-    def __mempty__() = mempty
-
-    @staticmethod
-    def __mappend__(other) = other
+    def __mempty__() -> MEmpty = mempty
 
     @staticmethod
     def mempty_as(M: T.Type[TMonoid]) -> TMonoid =
@@ -467,26 +464,30 @@ data MEmpty():
 
 mempty = MEmpty()
 
-def mappend(x: TMonoid, y: TMonoid) -> TMonoid:
+def mappend(x: TMonoid, y: TMonoid) -> TMonoid =
     """
     -- mappend is overridden by the __mappend__ method
+    -- you may also want to define a __mempty__ staticmethod
     -- the default implementation identifies identities using __bool__
     """
+    # Resolve memptys
     if x `isinstance` MEmpty:
         x = x.mempty_as(type(y))
     if y `isinstance` MEmpty:
         y = y.mempty_as(type(x))
 
+    # Check if overridden
     if x `hasattr` "__mappend__":
         return x.__mappend__(y)  # type: ignore
-    elif not x:
+
+    # Default implementation
+    if not x:
         return y
-    elif not y:
+    if not y:
         return x
-    elif x `isinstance` tuple and y `isinstance` tuple:
+    if x `isinstance` tuple and y `isinstance` tuple:
         return zipWith(mappend, x, y) |*> makedata$(type(x))
-    else:
-        return (::)(x, y) |*> makedata$(type(x))
+    (::)(x, y) |*> makedata$(type(x))
 
 def mconcat(ms: TMonoid[]) -> TMonoid =
     foldr(mappend, mempty, ms)
@@ -515,9 +516,9 @@ TApp = T.TypeVar("TApp", bound=Applicative)
 data pure(val):
     """
     return_ = return
-    -- pure/return is overridden by the __pure__ method
+    -- pure/return is overridden by the __pure__ staticmethod
     """
-    def __join__(self) = self.val
+    def __join__(self) -> T.Any = self.val
 
     def pure_as(self, M: T.Type[TApp]) -> TApp =
         if M `hasattr` "__pure__":
@@ -528,6 +529,8 @@ def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
     """
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
+    -- ap is overridden by overriding join (__join__) and fmap (__fmap__)
+    -- you may also want to define a __pure__ staticmethod
     """
     fs `bind` f -> _fmap(f, xs)
 
@@ -560,6 +563,7 @@ def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     """
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
+    -- bind is overridden by overriding fmap (__fmap__) and join (__join__)
     """
     join(_fmap(func, m))
 
@@ -577,7 +581,9 @@ data fail(msg):
     -- fail is overridden by the __fail__ method
     """
     @staticmethod
-    def __bool__() = False
+    def __bool__() -> bool = False
+
+    def __fmap__(self, func: Ta -> Tb) -> T.Any = self
 
     def fail_as(self, M: T.Type[TMonad]) -> TMonad =
         if M `hasattr` "__fail__":
@@ -593,23 +599,27 @@ def bindFrom(func: Ta -> TMonad, m: Monad[Ta]) -> TMonad =
     """
     m `bind` func
 
-def join(raw_ms: Monad[TMonad]) -> TMonad:
+def join(ms: Monad[TMonad]) -> TMonad =
     """
     import Control.Monad
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
+    -- you may also want to define __pure__ and __fail__ staticmethods (pure = return)
     -- the default implementation identifies failures using __bool__
     """
-    valCons = type(raw_ms)
-    ms = raw_ms |> fmap$(m ->
+    # Resolve pures and fails
+    valCons = type(ms)
+    ms = ms |> fmap$(m ->
         m.fail_as(valCons) if m `isinstance` fail
         else m.pure_as(valCons) if m `isinstance` pure
         else m
     )  # type: ignore
 
+    # Check if overridden
     if ms `hasattr` "__join__":
         return ms.__join__()  # type: ignore
 
+    # Default implementation
     if not ms:
         return ms  # type: ignore
     vals = []  # type: ignore
@@ -619,10 +629,9 @@ def join(raw_ms: Monad[TMonad]) -> TMonad:
             vals.extend(m)
         else:
             fallback = m
-    if vals:
-        return makedata(valCons, *vals)
-    else:
+    if not vals:
         return fallback  # type: ignore
+    makedata(valCons, *vals)
 
 if TYPE_CHECKING:
     def do(monads: TMonad[], func: -> TMonad) -> TMonad =

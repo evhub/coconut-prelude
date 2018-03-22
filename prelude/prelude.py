@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x5ef1eb8b
+# __coconut_hash__ = 0x365ce93d
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -66,15 +66,20 @@ otherwise = True  # type: bool
 class Maybe(_coconut.object):
     @staticmethod
     @_coconut_tco
-    def __pure__(obj):
+    def __pure__(obj  # type: Ta
+    ):
+# type: (...) -> Maybe
         return _coconut_tail_call(Just, obj)
 
     @staticmethod
-    def __fail__(msg):
+    def __fail__(msg  # type: str
+    ):
+# type: (...) -> Maybe
         return nothing
 
     @staticmethod
     def __mempty__():
+# type: (...) -> Maybe
         return nothing
 
 class Nothing(_coconut.collections.namedtuple("Nothing", ""), Maybe):
@@ -133,12 +138,16 @@ else:
 class Either(_coconut.object):
     @staticmethod
     @_coconut_tco
-    def __pure__(obj):
+    def __pure__(obj  # type: Ta
+    ):
+# type: (...) -> Either
         return _coconut_tail_call(Right, obj)
 
     @staticmethod
     @_coconut_tco
-    def __fail__(msg):
+    def __fail__(msg  # type: str
+    ):
+# type: (...) -> Either
         return _coconut_tail_call(Left, msg)
 
 class Left(_coconut.collections.namedtuple("Left", "x"), Either):
@@ -146,9 +155,12 @@ class Left(_coconut.collections.namedtuple("Left", "x"), Either):
     __ne__ = _coconut.object.__ne__
     @staticmethod
     def __bool__():
+# type: (...) -> bool
         return False
 
-    def __fmap__(self, func):
+    def __fmap__(self, func  # type: _coconut.typing.Callable[[Ta], Tb]
+    ):
+# type: (...) -> Either
         return self
 
 class Right(_coconut.collections.namedtuple("Right", "x"), Either):
@@ -204,6 +216,7 @@ else:
 class Ordering(_coconut.object):
     @staticmethod
     def __mempty__():
+# type: (...) -> Ordering
         return eq
 
 class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
@@ -211,6 +224,7 @@ class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
     __ne__ = _coconut.object.__ne__
     @staticmethod
     def __bool__():
+# type: (...) -> bool
         return True
 
 class EQ(_coconut.collections.namedtuple("EQ", ""), Ordering):
@@ -222,6 +236,7 @@ class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
     __ne__ = _coconut.object.__ne__
     @staticmethod
     def __bool__():
+# type: (...) -> bool
         return True
 
 lt = LT()  # type: Ordering
@@ -816,17 +831,14 @@ TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
 class MEmpty(_coconut.collections.namedtuple("MEmpty", ""), _coconut.object):
     """
-    -- mempty is overridden by the __mempty__ method
+    -- mempty is overridden by the __mempty__ staticmethod
     """
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     @staticmethod
     def __mempty__():
+# type: (...) -> MEmpty
         return mempty
-
-    @staticmethod
-    def __mappend__(other):
-        return other
 
     @staticmethod
     @_coconut_tco
@@ -846,23 +858,27 @@ def mappend(x,  # type: TMonoid
 # type: (...) -> TMonoid
     """
     -- mappend is overridden by the __mappend__ method
+    -- you may also want to define a __mempty__ staticmethod
     -- the default implementation identifies identities using __bool__
     """
+# Resolve memptys
     if (isinstance)(x, MEmpty):
         x = x.mempty_as(type(y))
     if (isinstance)(y, MEmpty):
         y = y.mempty_as(type(x))
 
+# Check if overridden
     if (hasattr)(x, "__mappend__"):
         return _coconut_tail_call(x.__mappend__, y)  # type: ignore
-    elif not x:
+
+# Default implementation
+    if not x:
         return y
-    elif not y:
+    if not y:
         return x
-    elif (isinstance)(x, tuple) and (isinstance)(y, tuple):
+    if (isinstance)(x, tuple) and (isinstance)(y, tuple):
         return _coconut_tail_call(makedata, type(x), *zipWith(mappend, x, y))
-    else:
-        return _coconut_tail_call(makedata, type(x), *_coconut.itertools.chain(x, y))
+    return _coconut_tail_call(makedata, type(x), *_coconut.itertools.chain(x, y))
 
 @_coconut_tco
 def mconcat(ms  # type: _coconut.typing.Sequence[TMonoid]
@@ -898,11 +914,12 @@ TApp = T.TypeVar("TApp", bound=Applicative)
 class pure(_coconut.collections.namedtuple("pure", "val"), _coconut.object):
     """
     return_ = return
-    -- pure/return is overridden by the __pure__ method
+    -- pure/return is overridden by the __pure__ staticmethod
     """
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __join__(self):
+# type: (...) -> T.Any
         return self.val
 
     @_coconut_tco
@@ -921,6 +938,8 @@ def ap(fs,  # type: Applicative[_coconut.typing.Callable[[Ta], Tb]]
     """
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
+    -- ap is overridden by overriding join (__join__) and fmap (__fmap__)
+    -- you may also want to define a __pure__ staticmethod
     """
     return _coconut_tail_call((bind), fs, lambda f: _fmap(f, xs))
 
@@ -970,6 +989,7 @@ def bind(m,  # type: Monad[Ta]
     """
     bind :: Monad m => m a -> (a -> m b) -> m b
     bind = (>>=)
+    -- bind is overridden by overriding fmap (__fmap__) and join (__join__)
     """
     return _coconut_tail_call(join, _fmap(func, m))
 
@@ -994,7 +1014,13 @@ class fail(_coconut.collections.namedtuple("fail", "msg"), _coconut.object):
     __ne__ = _coconut.object.__ne__
     @staticmethod
     def __bool__():
+# type: (...) -> bool
         return False
+
+    def __fmap__(self, func  # type: _coconut.typing.Callable[[Ta], Tb]
+    ):
+# type: (...) -> T.Any
+        return self
 
     @_coconut_tco
     def fail_as(self, M  # type: T.Type[TMonad]
@@ -1018,21 +1044,25 @@ def bindFrom(func,  # type: _coconut.typing.Callable[[Ta], TMonad]
     return _coconut_tail_call((bind), m, func)
 
 @_coconut_tco
-def join(raw_ms  # type: Monad[TMonad]
+def join(ms  # type: Monad[TMonad]
     ):
 # type: (...) -> TMonad
     """
     import Control.Monad
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
+    -- you may also want to define __pure__ and __fail__ staticmethods (pure = return)
     -- the default implementation identifies failures using __bool__
     """
-    valCons = type(raw_ms)
-    ms = fmap(lambda m: m.fail_as(valCons) if (isinstance)(m, fail) else m.pure_as(valCons) if (isinstance)(m, pure) else m, raw_ms)  # type: ignore
+# Resolve pures and fails
+    valCons = type(ms)
+    ms = fmap(lambda m: m.fail_as(valCons) if (isinstance)(m, fail) else m.pure_as(valCons) if (isinstance)(m, pure) else m, ms)  # type: ignore
 
+# Check if overridden
     if (hasattr)(ms, "__join__"):
         return _coconut_tail_call(ms.__join__)  # type: ignore
 
+# Default implementation
     if not ms:
         return ms  # type: ignore
     vals = []  # type: ignore
@@ -1042,10 +1072,9 @@ def join(raw_ms  # type: Monad[TMonad]
             vals.extend(m)
         else:
             fallback = m
-    if vals:
-        return _coconut_tail_call(makedata, valCons, *vals)
-    else:
+    if not vals:
         return fallback  # type: ignore
+    return _coconut_tail_call(makedata, valCons, *vals)
 
 if TYPE_CHECKING:
     def do(monads,  # type: _coconut.typing.Sequence[TMonad]
@@ -1245,14 +1274,14 @@ def until(cond,  # type: _coconut.typing.Callable[[Ta], bool]
     while True:
         if cond(x):
             return x
-        if until is _coconut_recursive_func_69:  # tail recursive
+        if until is _coconut_recursive_func_70:  # tail recursive
             cond, func, x = cond, func, func(x)  # tail recursive
             continue  # tail recursive
         else:  # tail recursive
             return _coconut_tail_call(until, cond, func, func(x))  # tail recursive
 
         return None
-_coconut_recursive_func_69 = until
+_coconut_recursive_func_70 = until
 def asTypeOf(x,  # type: Ta
      y  # type: Ta
     ):
