@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x5f39b2f1
+# __coconut_hash__ = 0x857f9e52
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -19,9 +19,12 @@ _coconut_sys.path.remove(_coconut_file_path)
 
 # Compiled Coconut: -----------------------------------------------------------
 
-# Deriving:
+# Imports:
+from .typevars import *  # type: ignore
 
-def derivingEqOrd(*valueConstructors  # type: object
+
+# Deriving:
+def derivingEqOrd(*valueConstructors  # type: TType
     ):
 # type: (...) -> None
     """
@@ -34,6 +37,7 @@ def derivingEqOrd(*valueConstructors  # type: object
     """
     if TYPE_CHECKING:
         return
+
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
         def __eq__(x, y):
@@ -52,7 +56,7 @@ def derivingEqOrd(*valueConstructors  # type: object
             return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
         valCon.__gt__ = __gt__
-def derivingEnum(*valueConstructors  # type: object
+def derivingEnum(*valueConstructors  # type: TType
     ):
 # type: (...) -> None
     """
@@ -65,6 +69,7 @@ def derivingEnum(*valueConstructors  # type: object
     """
     if TYPE_CHECKING:
         return
+
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
         @_coconut_tco
@@ -80,4 +85,28 @@ def derivingEnum(*valueConstructors  # type: object
         def __sub__(x, y):
             return valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
 
+
+# Monads:
         valCon.__sub__ = __sub__
+def definesBind(dataType  # type: TType
+    ):
+# type: (...) -> TType
+    if TYPE_CHECKING:
+        return dataType
+
+    if not (hasattr)(dataType, "__fmap__"):
+        if not (hasattr)(dataType, "__pure__"):
+            raise TypeError("data types which define __bind__ must define either __fmap__ or __pure__")
+        @_coconut_tco
+        def __fmap__(self, func):
+            return _coconut_tail_call(self.__bind__, lambda x: dataType.__pure__(func(x)))
+
+        dataType.__fmap__ = __fmap__
+    if (hasattr)(dataType, "__join__"):
+        raise TypeError("data types which define __bind__ cannot define __join__")
+    @_coconut_tco
+    def __join__(self):
+        return _coconut_tail_call(self.__bind__, lambda x: x)
+
+    dataType.__join__ = __join__
+    return dataType

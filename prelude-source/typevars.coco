@@ -1,0 +1,11 @@
+# Imports:
+import typing as T
+
+
+# TypeVars:
+Ta = T.TypeVar("Ta")
+Tb = T.TypeVar("Tb")
+Tc = T.TypeVar("Tc")
+Td = T.TypeVar("Td")
+
+TType = T.TypeVar("TType", bound=T.Type)

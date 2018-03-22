@@ -2,36 +2,29 @@
 
 #### Imports:
 import sys
-import typing as _t
 import fractions as _fractions
 import math as _math
 
-from .util import derivingEqOrd, derivingEnum
+from .util import *  # type: ignore
 
 #### Untyped built-ins:
-_max: -> _t.Any = max
-_min: -> _t.Any = min
-_zip: -> _t.Any = zip
-_abs: -> _t.Any = abs
-_round: -> _t.Any = round
-_fmap: -> _t.Any = fmap
-_reduce: -> _t.Any = reduce
-_all: -> _t.Any = all
-_any: -> _t.Any = any
-_map: -> _t.Any = map
-_filter: -> _t.Any = filter
-_int: -> _t.Any = int
-_sum: -> _t.Any = sum
-_reversed: -> _t.Any = reversed
-_ceil: -> _t.Any = _math.ceil
-_floor: -> _t.Any = _math.floor
-_IOError: _t.Any = IOError
-
-#### TypeVars:
-Ta = _t.TypeVar("Ta")
-Tb = _t.TypeVar("Tb")
-Tc = _t.TypeVar("Tc")
-Td = _t.TypeVar("Td")
+_max: -> T.Any = max
+_min: -> T.Any = min
+_zip: -> T.Any = zip
+_abs: -> T.Any = abs
+_round: -> T.Any = round
+_fmap: -> T.Any = fmap
+_reduce: -> T.Any = reduce
+_all: -> T.Any = all
+_any: -> T.Any = any
+_map: -> T.Any = map
+_filter: -> T.Any = filter
+_int: -> T.Any = int
+_sum: -> T.Any = sum
+_reversed: -> T.Any = reversed
+_ceil: -> T.Any = _math.ceil
+_floor: -> T.Any = _math.floor
+_IOError: T.Any = IOError
 
 
 
@@ -51,7 +44,13 @@ otherwise: bool = True
 #### Maybe:
 class Maybe:
     @staticmethod
+    def __pure__(obj) = Just(obj)
+
+    @staticmethod
     def __fail__(msg) = nothing
+
+    @staticmethod
+    def __mempty__() = nothing
 
 data Nothing() from Maybe
 nothing: Maybe = Nothing()
@@ -72,11 +71,16 @@ else:
 #### Either:
 class Either:
     @staticmethod
+    def __pure__(obj) = Right(obj)
+
+    @staticmethod
     def __fail__(msg) = Left(msg)
 
 data Left(x) from Either:
+    @staticmethod
+    def __bool__() = False
+
     def __fmap__(self, func) = self
-    def __bool__(self) = False
 
 data Right(x) from Either
 
@@ -92,17 +96,22 @@ else:
     def either(_, right_func, Right(x)) = right_func(x)
 
 #### Ordering:
-class Ordering
+class Ordering:
+    @staticmethod
+    def __mempty__() = eq
 
 data LT() from Ordering:
-    def __bool__(self) = True
-lt: Ordering = LT()
+    @staticmethod
+    def __bool__() = True
 
 data EQ() from Ordering
-eq: Ordering = EQ()
 
 data GT() from Ordering:
-    def __bool__(self) = True
+    @staticmethod
+    def __bool__() = True
+
+lt: Ordering = LT()
+eq: Ordering = EQ()
 gt: Ordering = GT()
 
 derivingEqOrd(LT, EQ, GT)
@@ -116,10 +125,10 @@ String = str
 
 
 ### Tuples:
-fst: _t.Tuple[Ta, Tb] -> Ta
+fst: T.Tuple[Ta, Tb] -> Ta
 fst = .[0]
 
-snd: _t.Tuple[Ta, Tb] -> Tb
+snd: T.Tuple[Ta, Tb] -> Tb
 snd = .[1]
 
 def curry(func: (Ta, Tb) -> Tc) -> Ta -> Tb -> Tc =
@@ -137,7 +146,7 @@ Eq = object
 
 #### Ord:
 Ord = Eq
-TOrd = _t.TypeVar("TOrd", bound=Ord)
+TOrd = T.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x: Ord, y: Ord) -> Ordering =
@@ -159,7 +168,7 @@ min = _min
 
 #### Enum:
 Enum = Ord
-TEnum = _t.TypeVar("TEnum", bound=Enum)
+TEnum = T.TypeVar("TEnum", bound=Enum)
 
 succ: TEnum -> TEnum
 succ = (+)$(1)
@@ -194,8 +203,8 @@ def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> TEnum$[] =
 
 
 #### Bounded:
-Bounded = _t.Union[bool, Ordering]
-TBounded = _t.TypeVar("TBounded", bound=Bounded)
+Bounded = T.Union[bool, Ordering]
+TBounded = T.TypeVar("TBounded", bound=Bounded)
 
 if TYPE_CHECKING:
     def minBound(b: TBounded) -> TBounded =
@@ -251,8 +260,8 @@ Word = Int
 ### Numeric type classes:
 
 #### Num:
-Num = _t.Union[int, float, Rational]
-TNum = _t.TypeVar("TNum", bound=Num)
+Num = T.Union[int, float, Rational]
+TNum = T.TypeVar("TNum", bound=Num)
 
 negate: TNum -> TNum
 negate = (-)
@@ -306,7 +315,7 @@ div = (//)
 mod: (int, int) -> int
 mod = (%)
 
-def quotRem(x: int, y: int) -> _t.Tuple[int, int] =
+def quotRem(x: int, y: int) -> T.Tuple[int, int] =
     divxy, modxy = divmod(x, y)
     adj = 1 if divxy < 0 and modxy != 0 else 0
     divxy + adj, modxy - y*adj
@@ -352,7 +361,7 @@ def logBase(base: float, x: float) -> float =
 #### RealFrac:
 RealFrac = Rational
 
-def properFraction(x: RealFrac) -> _t.Tuple[int, RealFrac] =
+def properFraction(x: RealFrac) -> T.Tuple[int, RealFrac] =
     floor_x = floor(x)
     floor_x, x - floor_x
 
@@ -375,7 +384,7 @@ def floatRadix(x: float) -> int = 2
 
 def floatDigits(x: float) -> int = 53
 
-def floatRange(x: float) -> _t.Tuple[int, int] = (-1021, 1024)
+def floatRange(x: float) -> T.Tuple[int, int] = (-1021, 1024)
 
 decodeFloat = NotImplemented
 
@@ -437,17 +446,40 @@ realToFrac = toRational
 
 
 ## Monoids:
-Monoid = _t.Iterable
-TMonoid = _t.TypeVar("TMonoid", bound=Monoid)
+Monoid = T.Iterable
+TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
-if TYPE_CHECKING:
-    mempty = ()
-else:
-    data mempty()
-    mempty = mempty()
+data MEmpty():
+    """
+    -- mempty is overridden by the __mempty__ method
+    """
+    @staticmethod
+    def __mempty__() = mempty
+
+    @staticmethod
+    def __mappend__(other) = other
+
+    @staticmethod
+    def mempty_as(M: T.Type[TMonoid]) -> TMonoid =
+        if M `hasattr` "__mempty__":
+            return M.__mempty__()  # type: ignore
+        makedata(M)
+
+mempty = MEmpty()
 
 def mappend(x: TMonoid, y: TMonoid) -> TMonoid:
-    if not x:
+    """
+    -- mappend is overridden by the __mappend__ method
+    -- the default implementation identifies identities using __bool__
+    """
+    if x `isinstance` MEmpty:
+        x = x.mempty_as(type(y))
+    if y `isinstance` MEmpty:
+        y = y.mempty_as(type(x))
+
+    if x `hasattr` "__mappend__":
+        return x.__mappend__(y)  # type: ignore
+    elif not x:
         return y
     elif not y:
         return x
@@ -464,7 +496,7 @@ def mconcat(ms: TMonoid[]) -> TMonoid =
 ## Monads and functors:
 
 #### Functor:
-Functor = _t.Iterable
+Functor = T.Iterable
 
 fmap: (Ta -> Tb, Functor[Ta]) -> Functor[Tb]
 fmap = _fmap
@@ -478,10 +510,16 @@ def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
 
 #### Applicative:
 Applicative = Functor
-TApp = _t.TypeVar("TApp", bound=Applicative)
+TApp = T.TypeVar("TApp", bound=Applicative)
 
 data pure(val):
-    def pure_as(self, M: _t.Type[TApp]) -> TApp =
+    """
+    return_ = return
+    -- pure/return is overridden by the __pure__ method
+    """
+    def __join__(self) = self.val
+
+    def pure_as(self, M: T.Type[TApp]) -> TApp =
         if M `hasattr` "__pure__":
             return M.__pure__(self.val)  # type: ignore
         makedata(M, self.val)
@@ -516,7 +554,7 @@ def liftA2(func: (Ta, Tb) -> Tc, f1: Applicative[Ta], f2: Applicative[Tb]) -> Ap
 
 #### Monad:
 Monad = Applicative
-TMonad = _t.TypeVar("TMonad", bound=Monad)
+TMonad = T.TypeVar("TMonad", bound=Monad)
 
 def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     """
@@ -535,7 +573,13 @@ def seqM(m1: Monad, m2: TMonad) -> TMonad =
 return_ = pure
 
 data fail(msg):
-    def fail_as(self, M: _t.Type[TMonad]) -> TMonad =
+    """
+    -- fail is overridden by the __fail__ method
+    """
+    @staticmethod
+    def __bool__() = False
+
+    def fail_as(self, M: T.Type[TMonad]) -> TMonad =
         if M `hasattr` "__fail__":
             return M.__fail__(self.msg)  # type: ignore
         makedata(M)
@@ -549,29 +593,36 @@ def bindFrom(func: Ta -> TMonad, m: Monad[Ta]) -> TMonad =
     """
     m `bind` func
 
-if TYPE_CHECKING:
-    def join(ms: Monad[TMonad]) -> TMonad =
-        ...  # type: ignore
-else:
-    def join(ms if not ms) = ms
+def join(raw_ms: Monad[TMonad]) -> TMonad:
+    """
+    import Control.Monad
+    join :: Monad m => m (m a) -> m a
+    -- join is overridden by the __join__ method
+    -- the default implementation identifies failures using __bool__
+    """
+    valCons = type(raw_ms)
+    ms = raw_ms |> fmap$(m ->
+        m.fail_as(valCons) if m `isinstance` fail
+        else m.pure_as(valCons) if m `isinstance` pure
+        else m
+    )  # type: ignore
 
-    @addpattern(join)
-    def join(ms) =
-        """
-        import Control.Monad
-        join :: Monad m => m (m a) -> m a
-        """
-        valCons = type(ms)
-        vals = None
-        for m in ms:
-            if m `isinstance` fail:
-                return m.fail_as(valCons)
-            elif m `isinstance` pure:
-                m = m.pure_as(valCons)
-            else:
-                valCons = type(m)
-            vals = (::)(vals, m) if vals is not None else m
-        makedata(valCons, *vals) if vals is not None else ms
+    if ms `hasattr` "__join__":
+        return ms.__join__()  # type: ignore
+
+    if not ms:
+        return ms  # type: ignore
+    vals = []  # type: ignore
+    fallback = ms
+    for m in ms:
+        if m:
+            vals.extend(m)
+        else:
+            fallback = m
+    if vals:
+        return makedata(valCons, *vals)
+    else:
+        return fallback  # type: ignore
 
 if TYPE_CHECKING:
     def do(monads: TMonad[], func: -> TMonad) -> TMonad =
@@ -602,7 +653,7 @@ else:
 ## Folds and traversals:
 
 #### Foldable:
-Foldable = _t.Sequence
+Foldable = T.Sequence
 
 def sequence_(ms: Foldable[Monad]) -> Monad =
     do(ms, (*xs) -> pure(()))
@@ -645,7 +696,7 @@ product: Foldable[TNum] -> TNum
 product = reduce$(*)
 
 #### Traversable:
-Traversable = _t.Iterable
+Traversable = T.Iterable
 
 def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] =
     fs `do` (*xs) -> xs |*> makedata$(type(fs)) |> pure
@@ -695,7 +746,7 @@ def error(msg: str) -> None: raise Exception(msg)
 
 errorWithoutStackTrace = NotImplemented
 
-undefined: _t.Any = None
+undefined: T.Any = None
 
 def seq(x: Ta, y: Tb) -> Tb = y
 
@@ -767,8 +818,8 @@ any = or_..map
 all: ((Ta -> bool), Foldable[Ta]) -> bool
 all = and_..map
 
-concat: Foldable[Ta$[]] -> Ta$[]
-concat = _reduce$(::)
+def concat(xs: Foldable[Ta$[]]) -> Ta$[] =
+    _reduce((::), xs, ())
 
 concatMap: (Ta -> Tb$[], Foldable[Ta]) -> Tb$[]
 concatMap = concat..map  # type: ignore
@@ -819,7 +870,7 @@ def take(n: int, xs: Ta$[]) -> Ta$[] =
 def drop(n: int, xs: Ta$[]) -> Ta$[] =
     xs$[n:]
 
-def splitAt(n: int, xs: Ta$[]) -> _t.Tuple[Ta$[], Ta$[]] =
+def splitAt(n: int, xs: Ta$[]) -> T.Tuple[Ta$[], Ta$[]] =
     reit = reiterable(xs)
     reit$[:n], reit$[n:]
 
@@ -830,7 +881,7 @@ dropWhile: (Ta -> bool, Ta$[]) -> Ta$[]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond: Ta -> bool, xs: Ta[]) -> _t.Tuple[Ta[], Ta[]] =
+    def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]] =
         ...  # type: ignore
 else:
     def span(_, []) = ([], [])
@@ -845,6 +896,7 @@ else:
         ([], xs)
 
 def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
+    """break_ = break"""
     span((not)..cond, xs)
 
 
@@ -853,7 +905,7 @@ def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
 def notElem(e: Ta, xs: Ta[]) -> bool =
     e not in xs
 
-def lookup(key: Ta, assocs: _t.Tuple[Ta, Tb]$[]) -> Maybe:
+def lookup(key: Ta, assocs: T.Tuple[Ta, Tb]$[]) -> Maybe:
     try:
         return (
             assocs
@@ -868,10 +920,10 @@ def lookup(key: Ta, assocs: _t.Tuple[Ta, Tb]$[]) -> Maybe:
 
 
 ## Zipping and unzipping lists:
-zip: (Ta$[], Tb$[]) -> _t.Tuple[Ta, Tb]$[]
+zip: (Ta$[], Tb$[]) -> T.Tuple[Ta, Tb]$[]
 zip = _zip
 
-zip3: (Ta$[], Tb$[], Tc$[]) -> _t.Tuple[Ta, Tb, Tc]$[]
+zip3: (Ta$[], Tb$[], Tc$[]) -> T.Tuple[Ta, Tb, Tc]$[]
 zip3 = _zip
 
 def zipWith(func: (Ta, Tb) -> Tc, xs1: Ta$[], xs2: Tb$[]) -> Tc$[] =
@@ -880,10 +932,10 @@ def zipWith(func: (Ta, Tb) -> Tc, xs1: Ta$[], xs2: Tb$[]) -> Tc$[] =
 def zipWith3(func: (Ta, Tb, Tc) -> Td, xs1: Ta$[], xs2: Tb$[], xs3: Tc$[]) -> Td$[] =
     starmap(func, _zip(xs1, xs2, xs3))
 
-def unzip(xs: _t.Tuple[Ta, Tb]$[]) -> _t.Tuple[Ta[], Tb[]] =
+def unzip(xs: T.Tuple[Ta, Tb]$[]) -> T.Tuple[Ta[], Tb[]] =
     _zip(*xs) |> map$(list) |> tuple  # type: ignore
 
-unzip3: _t.Tuple[Ta, Tb, Tc]$[] -> _t.Tuple[Ta[], Tb[], Tc[]]
+unzip3: T.Tuple[Ta, Tb, Tc]$[] -> T.Tuple[Ta[], Tb[], Tc[]]
 unzip3 = unzip  # type: ignore
 
 
@@ -944,7 +996,7 @@ def interact(func: str -> str) -> None:
 
 
 ### Files:
-FilePath = _t.NewType("FilePath", str)
+FilePath = T.NewType("FilePath", str)
 
 def readFile(fpath: FilePath) -> str:
     with open(fpath, "r+") as f:
@@ -961,7 +1013,7 @@ def appendFile(fpath: FilePath, text: str) -> None:
 
 
 ## Exception handling:
-IOError: _t.Type[Exception]
+IOError: T.Type[Exception]
 IOError = _IOError
 
 def ioError() -> None: raise IOError()

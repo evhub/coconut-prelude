@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xbfef642a
+# __coconut_hash__ = 0x6a87b2aa
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -19,8 +19,11 @@ _coconut_sys.path.remove(_coconut_file_path)
 
 # Compiled Coconut: -----------------------------------------------------------
 
+# Imports:
 from prelude import *  # type: ignore
 
+
+# Tests:
 def test_Bool():
     assert (isinstance)(True, Bool)
     assert (not_)(True) == False
@@ -179,7 +182,6 @@ def test_Applicative():
     assert (ap)(Just(_coconut.functools.partial(_coconut.operator.add, 1)), Just(2)) == Just(3)
     assert (ap)([_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)], [10, 20, 30]) == [11, 21, 31, 30, 60, 90]
     assert (ap)((_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)), (10, 20, 30)) == (11, 21, 31, 30, 60, 90)
-    assert (ap)((_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)), _coconut.frozenset((10, 20, 30))) == _coconut.frozenset((11, 21, 31, 30, 60, 90))
     assert (seqAr)(nothing, Just(1)) == nothing
     assert (seqAl)(Just(1), nothing) == nothing
     assert (seqAr)(Just(1), Just(2)) == Just(2) == (seqAl)(Just(2), Just(1))
@@ -220,6 +222,7 @@ def test_Monad():
     assert nothing == join(Just(nothing))
     assert nothing == join(nothing)
     assert [1, 2, 3, 4, 5, 6] == join([[1, 2, 3], [], [4], [5, 6]])
+    assert [1] == join([fail("derp"), pure(1)])
     assert Left(3) == do([Right(1), Right(2), Left(3), Right(4),], lambda *xs: error(repr(xs)))
     global glob
     glob = 1
@@ -294,6 +297,8 @@ def test_Special_folds():
     assert or_([False, True])
     assert any(_coconut.functools.partial(_coconut.operator.eq, 2), [1, 2, 3])
     assert not all(_coconut.functools.partial(_coconut.operator.eq, 2), [1, 2, 3])
+    assert (list)(concat([])) == []
+    assert (list)(concat([[]])) == []
     assert (list)(concat([[1], [2, 3]])) == [1, 2, 3]
     assert (list)(concatMap(lambda x: [x, x], [1, 2])) == [1, 1, 2, 2]
 

@@ -1,0 +1,20 @@
+# Imports:
+from prelude import *  # type: ignore
+
+
+# Tests:
+def test_definesBind():
+    @definesBind
+    data FunctionMonad(func):
+        @staticmethod
+        def __pure__(x: Ta) -> FunctionMonad =
+            FunctionMonad(e -> x)
+
+        def __bind__(x: FunctionMonad, f: Ta -> FunctionMonad) -> FunctionMonad =
+            FunctionMonad(r -> r |> x |> f <| r)
+
+        def __call__(FunctionMonad(func), *args, **kwargs) =
+            func(*args, **kwargs)
+
+    assert 8 == FunctionMonad((+)$(1)) |> fmap$((*)$(2)) <| 3
+    assert 6 == FunctionMonad(curry(+)) |> join <| 3

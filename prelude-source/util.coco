@@ -1,6 +1,9 @@
-# Deriving:
+# Imports:
+from .typevars import *  # type: ignore
 
-def derivingEqOrd(*valueConstructors: object) -> None:
+
+# Deriving:
+def derivingEqOrd(*valueConstructors: TType) -> None:
     """
     The expression
         derivingEqOrd(valueConstructor1, valueConstructor2, ...)
@@ -10,6 +13,7 @@ def derivingEqOrd(*valueConstructors: object) -> None:
         deriving (Eq, Ord)
     """
     if TYPE_CHECKING: return
+
     ind = valueConstructors.index..type
     for valCon in valueConstructors:
         def valCon.__eq__(x, y) =
@@ -23,7 +27,7 @@ def derivingEqOrd(*valueConstructors: object) -> None:
         def valCon.__gt__(x, y) =
             tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
-def derivingEnum(*valueConstructors: object) -> None:
+def derivingEnum(*valueConstructors: TType) -> None:
     """
     The expression
         derivingEnum(valueConstructor1, valueConstructor2, ...)
@@ -33,6 +37,7 @@ def derivingEnum(*valueConstructors: object) -> None:
         deriving (Enum)
     """
     if TYPE_CHECKING: return
+
     ind = valueConstructors.index..type
     for valCon in valueConstructors:
         def valCon.__int__(x) = ind(x)
@@ -41,3 +46,21 @@ def derivingEnum(*valueConstructors: object) -> None:
         def valCon.__radd__(x, y) = x + y
         def valCon.__sub__(x, y) =
             valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
+
+
+# Monads:
+def definesBind(dataType: TType) -> TType:
+    if TYPE_CHECKING: return dataType
+
+    if not dataType `hasattr` "__fmap__":
+        if not dataType `hasattr` "__pure__":
+            raise TypeError("data types which define __bind__ must define either __fmap__ or __pure__")
+        def dataType.__fmap__(self, func) =
+            self.__bind__(x -> dataType.__pure__(func(x)))
+
+    if dataType `hasattr` "__join__":
+        raise TypeError("data types which define __bind__ cannot define __join__")
+    def dataType.__join__(self) =
+        self.__bind__(x -> x)
+
+    return dataType
