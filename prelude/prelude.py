@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x2eef9771
+# __coconut_hash__ = 0xa7ecaf72
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -44,10 +44,9 @@ _filter = filter  # type: _coconut.typing.Callable[..., T.Any]
 _int = int  # type: _coconut.typing.Callable[..., T.Any]
 _sum = sum  # type: _coconut.typing.Callable[..., T.Any]
 _reversed = reversed  # type: _coconut.typing.Callable[..., T.Any]
-_print = print  # type: _coconut.typing.Callable[..., None]
+_print = print  # type: _coconut.typing.Callable[..., T.Any]
 _ceil = _math.ceil  # type: _coconut.typing.Callable[..., T.Any]
 _floor = _math.floor  # type: _coconut.typing.Callable[..., T.Any]
-_IOError = IOError  # type: T.Any
 
 
 
@@ -68,10 +67,10 @@ otherwise = True  # type: bool
 class Maybe(_coconut.object):
     @staticmethod
     @_coconut_tco
-    def __pure__(obj  # type: Ta
+    def __pure__(x  # type: Ta
     ):
 # type: (...) -> Maybe
-        return _coconut_tail_call(Just, obj)
+        return _coconut_tail_call(Just, x)
 
     @staticmethod
     def __fail__(msg  # type: str
@@ -101,7 +100,7 @@ if TYPE_CHECKING:
      x  # type: Maybe
     ):
 # type: (...) -> Tb
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     def maybe(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
@@ -140,10 +139,10 @@ else:
 class Either(_coconut.object):
     @staticmethod
     @_coconut_tco
-    def __pure__(obj  # type: Ta
+    def __pure__(x  # type: Ta
     ):
 # type: (...) -> Either
-        return _coconut_tail_call(Right, obj)
+        return _coconut_tail_call(Right, x)
 
     @staticmethod
     @_coconut_tco
@@ -177,7 +176,7 @@ if TYPE_CHECKING:
      x  # type: Either
     ):
 # type: (...) -> Tc
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     @_coconut_tco
     def either(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -242,7 +241,7 @@ class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
         return True
 
 derivingEqOrd(LT, EQ, GT)
-derivingEnum(LT, EQ, GT)
+derivingBoundedEnum(LT, EQ, GT)
 
 lt = LT()  # type: Ordering
 eq = EQ()  # type: Ordering
@@ -266,7 +265,7 @@ snd = _coconut.operator.itemgetter(1)
 def curry(func  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
     ):
 # type: (...) -> _coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]
-    return _coconut_tail_call(_coconut.functools.partial, _coconut.functools.partial, func)  # type: ignore
+    return _coconut_tail_call(_coconut.functools.partial, _coconut.functools.partial, func)
 
 def uncurry(func  # type: _coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]
     ):
@@ -289,7 +288,7 @@ if TYPE_CHECKING:
      y  # type: Ord
     ):
 # type: (...) -> Ordering
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     def compare(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
@@ -406,82 +405,46 @@ def enumFromThenTo(first,  # type: TEnum
 
 
 #### Bounded:
-Bounded = T.Union[bool, Ordering]
+Bounded = T.Union[bool, T.Iterable]
 TBounded = T.TypeVar("TBounded", bound=Bounded)
 
-if TYPE_CHECKING:
-    def minBound(b  # type: TBounded
+@_coconut_tco
+def minBound(b  # type: TBounded
     ):
 # type: (...) -> TBounded
-        return _coconut.Ellipsis  # type: ignore
-else:
-    def minBound(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-        _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "b" in _coconut_match_to_kwargs)) == 1):
-            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("b")
-            if (_coconut.isinstance(_coconut_match_temp_0, bool)) and (not _coconut_match_to_kwargs):
-                b = _coconut_match_temp_0
-                _coconut_match_check = True
-        if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def minBound(b is bool) = False'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def minBound(b is bool) = False'
-            _coconut_match_err.value = _coconut_match_to_args
-            raise _coconut_match_err
+    """
+    -- minBound is overridden by the __minBound__ method
+    -- the default implementation recursively calls fmap (__fmap__) with minBound
+    """
+# Check if bool
+    if (isinstance)(b, bool):
+        return False  # type: ignore
 
-        return False
+# Check if overridden
+    if (hasattr)(b, "__minBound__"):
+        return _coconut_tail_call(b.__minBound__)
 
-    @addpattern(minBound)
-    def minBound(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-        _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "b" in _coconut_match_to_kwargs)) == 1):
-            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("b")
-            if (_coconut.isinstance(_coconut_match_temp_0, Ordering)) and (not _coconut_match_to_kwargs):
-                b = _coconut_match_temp_0
-                _coconut_match_check = True
-        if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def minBound(b is Ordering) = lt'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def minBound(b is Ordering) = lt'
-            _coconut_match_err.value = _coconut_match_to_args
-            raise _coconut_match_err
+# Default implementation
+    return _coconut_tail_call(fmap, minBound, b)
 
-        return lt
-
-if TYPE_CHECKING:
-    def maxBound(b  # type: TBounded
+@_coconut_tco
+def maxBound(b  # type: TBounded
     ):
 # type: (...) -> TBounded
-        return _coconut.Ellipsis  # type: ignore
-else:
-    def maxBound(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-        _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "b" in _coconut_match_to_kwargs)) == 1):
-            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("b")
-            if (_coconut.isinstance(_coconut_match_temp_0, bool)) and (not _coconut_match_to_kwargs):
-                b = _coconut_match_temp_0
-                _coconut_match_check = True
-        if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def maxBound(b is bool) = True'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def maxBound(b is bool) = True'
-            _coconut_match_err.value = _coconut_match_to_args
-            raise _coconut_match_err
+    """
+    -- maxBound is overridden by the __maxBound__ method
+    -- the default implementation recursively calls fmap (__fmap__) with maxBound
+    """
+# Check if bool
+    if (isinstance)(b, bool):
+        return True  # type: ignore
 
-        return True
+# Check if overridden
+    if (hasattr)(b, "__maxBound__"):
+        return _coconut_tail_call(b.__maxBound__)
 
-    @addpattern(maxBound)
-    def maxBound(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-        _coconut_match_check = False
-        if (_coconut.len(_coconut_match_to_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 0, "b" in _coconut_match_to_kwargs)) == 1):
-            _coconut_match_temp_0 = _coconut_match_to_args[0] if _coconut.len(_coconut_match_to_args) > 0 else _coconut_match_to_kwargs.pop("b")
-            if (_coconut.isinstance(_coconut_match_temp_0, Ordering)) and (not _coconut_match_to_kwargs):
-                b = _coconut_match_temp_0
-                _coconut_match_check = True
-        if not _coconut_match_check:
-            _coconut_match_err = _coconut_MatchError("pattern-matching failed for " "'def maxBound(b is Ordering) = gt'" " in " + _coconut.repr(_coconut.repr(_coconut_match_to_args)))
-            _coconut_match_err.pattern = 'def maxBound(b is Ordering) = gt'
-            _coconut_match_err.value = _coconut_match_to_args
-            raise _coconut_match_err
-
-        return gt
+# Default implementation
+    return _coconut_tail_call(fmap, maxBound, b)
 
 
 
@@ -533,7 +496,7 @@ if TYPE_CHECKING:
     def signum(x  # type: Num
     ):
 # type: (...) -> int
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     def signum(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
@@ -596,7 +559,7 @@ if TYPE_CHECKING:
     def toRational(real  # type: Real
     ):
 # type: (...) -> Rational
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 
 else:
     @_coconut_tco
@@ -786,7 +749,7 @@ if TYPE_CHECKING:
      y  # type: int
     ):
 # type: (...) -> int
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     def lcm(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
@@ -833,7 +796,7 @@ TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
 class MEmpty(_coconut.collections.namedtuple("MEmpty", ""), _coconut.object):
     """
-    -- mempty is overridden by the __mempty__ staticmethod
+    -- mempty is overridden by the __mempty__ method
     """
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
@@ -844,14 +807,14 @@ class MEmpty(_coconut.collections.namedtuple("MEmpty", ""), _coconut.object):
 
     @staticmethod
     @_coconut_tco
-    def mempty_as(M  # type: T.Type[TMonoid]
+    def mempty_as(M  # type: TMonoid
     ):
 # type: (...) -> TMonoid
         if (hasattr)(M, "__mempty__"):
             return _coconut_tail_call(M.__mempty__)  # type: ignore
-        return _coconut_tail_call(makedata, M)
+        return _coconut_tail_call(makedata, type(M))
 
-mempty = MEmpty()
+mempty = MEmpty()  # type: T.Any
 
 @_coconut_tco
 def mappend(x,  # type: TMonoid
@@ -860,14 +823,12 @@ def mappend(x,  # type: TMonoid
 # type: (...) -> TMonoid
     """
     -- mappend is overridden by the __mappend__ method
-    -- you may also want to define a __mempty__ staticmethod
+    -- you may also want to define a __mempty__ method
     -- the default implementation identifies identities using __bool__
     """
 # Resolve memptys
-    if (isinstance)(x, MEmpty):
-        x = x.mempty_as(type(y))
-    if (isinstance)(y, MEmpty):
-        y = y.mempty_as(type(x))
+    x = (asTypeOf)(x, y)
+    y = (asTypeOf)(y, x)
 
 # Check if overridden
     if (hasattr)(x, "__mappend__"):
@@ -913,24 +874,30 @@ def fmapConst(x,  # type: Ta
 Applicative = Functor
 TApp = T.TypeVar("TApp", bound=Applicative)
 
-class pure(_coconut.collections.namedtuple("pure", "val"), _coconut.object):
-    """
-    return_ = return
-    -- pure/return is overridden by the __pure__ staticmethod
-    """
-    __slots__ = ()
-    __ne__ = _coconut.object.__ne__
-    def __join__(self):
+if TYPE_CHECKING:
+    def pure(x  # type: Ta
+    ):
 # type: (...) -> T.Any
-        return self.val
+        return _coconut.Ellipsis
+else:
+    class pure(_coconut.collections.namedtuple("pure", "val"), _coconut.object):
+        """
+        return_ = return
+        -- pure/return is overridden by the __pure__ method
+        """
+        __slots__ = ()
+        __ne__ = _coconut.object.__ne__
+        def __join__(self):
+# type: (...) -> T.Any
+            return self.val
 
-    @_coconut_tco
-    def pure_as(self, M  # type: T.Type[TApp]
+        @_coconut_tco
+        def pure_as(self, M  # type: TApp
     ):
 # type: (...) -> TApp
-        if (hasattr)(M, "__pure__"):
-            return _coconut_tail_call(M.__pure__, self.val)  # type: ignore
-        return _coconut_tail_call(makedata, M, self.val)
+            if (hasattr)(M, "__pure__"):
+                return _coconut_tail_call(M.__pure__, self.val)  # type: ignore
+            return _coconut_tail_call(makedata, type(M), self.val)
 
 @_coconut_tco
 def ap(fs,  # type: Applicative[_coconut.typing.Callable[[Ta], Tb]]
@@ -940,9 +907,19 @@ def ap(fs,  # type: Applicative[_coconut.typing.Callable[[Ta], Tb]]
     """
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
-    -- ap is overridden by overriding join (__join__) and fmap (__fmap__)
-    -- you may also want to define a __pure__ staticmethod
+    -- ap is overridden by the __ap__ method
+    -- you may also want to define a __pure__ method
+    -- the default implementation uses join (__join__) and fmap (__fmap__)
     """
+# Resolve pures
+    fs = (asTypeOf)(fs, xs)  # type: ignore
+    xs = (asTypeOf)(xs, fs)  # type: ignore
+
+# Check if overridden
+    if (hasattr)(fs, "__ap__"):
+        return _coconut_tail_call(fs.__ap__, xs)  # type: ignore
+
+# Default implementation
     return _coconut_tail_call((bind), fs, lambda f: _fmap(f, xs))
 
 @_coconut_tco
@@ -967,17 +944,14 @@ def seqAl(f1,  # type: TApp
     """
     return _coconut_tail_call((ap), _fmap(lambda x1: lambda x2: x1, f1), f2)
 
-@_coconut_tco
-def liftA2(func,  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
-     f1,  # type: Applicative[Ta]
-     f2  # type: Applicative[Tb]
+def liftA2(func  # type: _coconut.typing.Callable[[Ta, Tb], Tc]
     ):
-# type: (...) -> Applicative[Tc]
+# type: (...) -> _coconut.typing.Callable[[Applicative[Ta], Applicative[Tb]], Applicative[Tc]]
     """
     import Control.Applicative
     liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
     """
-    return _coconut_tail_call((ap), _fmap(_coconut.functools.partial(_coconut.functools.partial, func), f1), f2)
+    return lambda f1, f2: (ap)(_fmap(_coconut.functools.partial(_coconut.functools.partial, func), f1), f2)
 
 #### Monad:
 Monad = Applicative
@@ -1008,29 +982,35 @@ def seqM(m1,  # type: Monad
 
 return_ = pure
 
-class fail(_coconut.collections.namedtuple("fail", "msg"), _coconut.object):
-    """
-    -- fail is overridden by the __fail__ method
-    """
-    __slots__ = ()
-    __ne__ = _coconut.object.__ne__
-    @staticmethod
-    def __bool__():
-# type: (...) -> bool
-        return False
-
-    def __fmap__(self, func  # type: _coconut.typing.Callable[[Ta], Tb]
+if TYPE_CHECKING:
+    def fail(msg  # type: str
     ):
 # type: (...) -> T.Any
-        return self
+        return _coconut.Ellipsis
+else:
+    class fail(_coconut_NamedTuple("fail", [("msg", 'str')]), _coconut.object):
+        """
+        -- fail is overridden by the __fail__ method
+        """
+        __slots__ = ()
+        __ne__ = _coconut.object.__ne__
+        @staticmethod
+        def __bool__():
+# type: (...) -> bool
+            return False
 
-    @_coconut_tco
-    def fail_as(self, M  # type: T.Type[TMonad]
+        def __fmap__(self, func  # type: _coconut.typing.Callable[[Ta], Tb]
+    ):
+# type: (...) -> T.Any
+            return self
+
+        @_coconut_tco
+        def fail_as(self, M  # type: TMonad
     ):
 # type: (...) -> TMonad
-        if (hasattr)(M, "__fail__"):
-            return _coconut_tail_call(M.__fail__, self.msg)  # type: ignore
-        return _coconut_tail_call(makedata, M)
+            if (hasattr)(M, "__fail__"):
+                return _coconut_tail_call(M.__fail__, self.msg)  # type: ignore
+            return _coconut_tail_call(makedata, type(M))
 
 # sequence_ and mapM_ defined in Foldable
 
@@ -1053,12 +1033,11 @@ def join(ms  # type: Monad[TMonad]
     import Control.Monad
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
-    -- you may also want to define __pure__ and __fail__ staticmethods (pure = return)
+    -- you may also want to define __pure__ and __fail__ methods (pure = return)
     -- the default implementation identifies failures using __bool__
     """
 # Resolve pures and fails
-    valCons = type(ms)
-    ms = fmap(lambda m: m.fail_as(valCons) if (isinstance)(m, fail) else m.pure_as(valCons) if (isinstance)(m, pure) else m, ms)  # type: ignore
+    ms = fmap(lambda m: (asTypeOf)(m, ms), ms)  # type: ignore
 
 # Check if overridden
     if (hasattr)(ms, "__join__"):
@@ -1076,14 +1055,14 @@ def join(ms  # type: Monad[TMonad]
             fallback = m
     if not vals:
         return fallback  # type: ignore
-    return _coconut_tail_call(makedata, valCons, *vals)
+    return _coconut_tail_call(makedata, type(ms), *vals)
 
 if TYPE_CHECKING:
     def do(monads,  # type: _coconut.typing.Sequence[TMonad]
      func  # type: _coconut.typing.Callable[..., TMonad]
     ):
 # type: (...) -> TMonad
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     @_coconut_tco
     def do(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -1117,6 +1096,11 @@ else:
             x2 <- m2
             ...
             func(x1, x2, ...)
+        or equivalently, do can also be used as a decorator such that
+            @do$([m1, m2, ...])
+            def func(x1, x2, ...) =
+                ...
+        is the same as the above.
         """
         _coconut_match_check = False
         if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "func" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) >= 1):
@@ -1216,7 +1200,15 @@ Traversable = T.Iterable
 def sequenceA(fs  # type: Traversable[Applicative[Ta]]
     ):
 # type: (...) -> Applicative[Traversable[Ta]]
-    return _coconut_tail_call((do), fs, lambda *xs: (pure)(makedata(type(fs), *xs)))
+    """
+    -- sequenceA is overridden by the __sequenceA__ method
+    """
+# Check if overridden
+    if (hasattr)(fs, "__sequenceA__"):
+        return _coconut_tail_call(fs.__sequenceA__)  # type: ignore
+
+# Default implementation
+    return _coconut_tail_call(fmap, lambda xs: makedata(type(fs), *xs), reduce(liftA2(lambda xs, x: xs + [x]), fs, pure([])))
 
 traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Applicative[Tb]], Traversable[Ta]], Applicative[Traversable[Tb]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)
@@ -1284,11 +1276,25 @@ def until(cond,  # type: _coconut.typing.Callable[[Ta], bool]
 
         return None
 _coconut_recursive_func_70 = until
+@_coconut_tco
 def asTypeOf(x,  # type: Ta
      y  # type: Ta
     ):
 # type: (...) -> Ta
-    return x
+    """
+    -- use asTypeOf to resolve pure, fail, and mempty to the correct type
+    """
+    if TYPE_CHECKING:
+        return x
+
+    if (isinstance)(x, pure):
+        return _coconut_tail_call(x.pure_as, y)
+    elif (isinstance)(x, fail):
+        return _coconut_tail_call(x.fail_as, y)
+    elif (isinstance)(x, mempty):
+        return _coconut_tail_call(x.mempty_as, y)
+    else:
+        return x
 
 def error(msg  # type: str
     ):
@@ -1396,7 +1402,7 @@ def concat(xs  # type: Foldable[_coconut.typing.Iterable[Ta]]
     return _coconut_tail_call(_reduce, _coconut.itertools.chain, xs, ())
 
 concatMap = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], _coconut.typing.Iterable[Tb]], Foldable[Ta]], _coconut.typing.Iterable[Tb]]
-concatMap = _coconut_forward_compose(map, concat)  # type: ignore
+concatMap = _coconut_forward_compose(map, concat)
 
 
 
@@ -1456,7 +1462,7 @@ if TYPE_CHECKING:
     def cycle(xs  # type: _coconut.typing.Iterable[Ta]
     ):
 # type: (...) -> _coconut.typing.Iterable[Ta]
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     @recursive_iterator
     @_coconut_tco
@@ -1512,7 +1518,7 @@ if TYPE_CHECKING:
      xs  # type: _coconut.typing.Sequence[Ta]
     ):
 # type: (...) -> T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]]
-        return _coconut.Ellipsis  # type: ignore
+        return _coconut.Ellipsis
 else:
     def span(*_coconut_match_to_args, **_coconut_match_to_kwargs):
         _coconut_match_check = False
@@ -1610,7 +1616,7 @@ def zipWith3(func,  # type: _coconut.typing.Callable[[Ta, Tb, Tc], Td]
 def unzip(xs  # type: _coconut.typing.Iterable[T.Tuple[Ta, Tb]]
     ):
 # type: (...) -> T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]
-    return _coconut_tail_call((tuple), map(list, _zip(*xs)))  # type: ignore
+    return _coconut_tail_call((tuple), map(list, _zip(*xs)))
 
 unzip3 = None  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[T.Tuple[Ta, Tb, Tc]]], T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]]]
 unzip3 = unzip  # type: ignore
@@ -1619,10 +1625,10 @@ unzip3 = unzip  # type: ignore
 
 ## Functions on strings:
 lines = None  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]
-lines = _coconut.operator.methodcaller("splitlines")  # type: ignore
+lines = _coconut.operator.methodcaller("splitlines")
 
 words = None  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]
-words = _coconut.operator.methodcaller("split")  # type: ignore
+words = _coconut.operator.methodcaller("split")
 
 @_coconut_tco
 def unlines(strs  # type: _coconut.typing.Sequence[str]
@@ -1699,82 +1705,172 @@ lex = NotImplemented
 # Basic input and output:
 
 #### IO:
+class IO(_coconut.collections.namedtuple("IO", "io_func"), _coconut.object):
+    __slots__ = ()
+    __ne__ = _coconut.object.__ne__
+    @staticmethod
+    @_coconut_tco
+    def __pure__(x  # type: Ta
+    ):
+# type: (...) -> IO
+        return _coconut_tail_call(IO, lambda: x)
 
-IO = NotImplemented
+    @staticmethod
+    @_coconut_tco
+    def __fail__(msg  # type: str
+    ):
+# type: (...) -> IO
+        def _coconut_lambda_0():
+            raise IOError(msg)
+        return _coconut_tail_call(IO, _coconut_lambda_0)
+
+    @_coconut_tco
+    def __fmap__(self, func  # type: _coconut.typing.Callable[[Ta], Tb]
+    ):
+# type: (...) -> IO
+        return _coconut_tail_call(IO, _coconut_forward_compose(self.io_func, func))
+
+    @_coconut_tco
+    def __join__(self):
+# type: (...) -> IO
+        return _coconut_tail_call(fmap, unIO, self)
+
+    @staticmethod
+    @_coconut_tco
+    def __mempty__():
+# type: (...) -> IO
+        return _coconut_tail_call(IO, lambda: mempty)
+
+    @_coconut_tco
+    def __mappend__(self, other  # type: IO
+    ):
+# type: (...) -> IO
+        return _coconut_tail_call(IO, lambda: mappend(self.io_func(), other.io_func()))
+
+@_coconut_tco
+def unIO(io  # type: IO
+    ):
+# type: (...) -> Ta
+    """
+    The unIO function is an impure function which performs the
+    I/O contained in the given IO object and returns the result.
+    In particular, the recommendation is to write
+        @unIO
+        @do$([m1, m2, ...])
+        def main(x1, x2, ...) =
+            ...
+    which is equivalent to the Haskell code
+        main = do
+            x1 <- m1
+            x2 <- m2
+            ...
+    """
+    return _coconut_tail_call(io.io_func)
+
 
 
 
 ## Simple I/O operations:
 
 ### Output functions:
-putStr = None  # type: _coconut.typing.Callable[[str], None]
-putStr = _coconut.functools.partial(print, end="")
+@_coconut_tco
+def putStr(s  # type: str
+    ):
+# type: (...) -> IO
+    return _coconut_tail_call(IO, _coconut.functools.partial(_print, s, end=""))
 
-putChar = None  # type: _coconut.typing.Callable[[Char], None]
+putChar = None  # type: _coconut.typing.Callable[[Char], IO]
 putChar = putStr
 
-putStrLn = None  # type: _coconut.typing.Callable[[str], None]
-putStrLn = print
+@_coconut_tco
+def putStrLn(s  # type: str
+    ):
+# type: (...) -> IO
+    return _coconut_tail_call(IO, _coconut.functools.partial(_print, s))
 
-print = None  # type: _coconut.typing.Callable[[str], None]
-print = _print
+@_coconut_tco
+def print(x  # type: Ta
+    ):
+# type: (...) -> IO
+    return _coconut_tail_call(IO, lambda: _print(show(x)))
 
 
 ### Input functions:
-getChar = None  # type: _coconut.typing.Callable[[], Char]
-getChar = _coconut.functools.partial(sys.stdin.read, 1)  # type: ignore
+getChar = IO(_coconut.functools.partial(sys.stdin.read, 1))  # type: IO
 
-getLine = None  # type: _coconut.typing.Callable[[], str]
-getLine = input
+getLine = IO(input)  # type: IO
 
-getContents = None  # type: _coconut.typing.Callable[[], str]
-getContents = sys.stdin.read
+getContents = IO(sys.stdin.read)  # type: IO
 
+@_coconut_tco
 def interact(func  # type: _coconut.typing.Callable[[str], str]
     ):
-# type: (...) -> None
-    while True:
-        (print)((func)(input()))
+# type: (...) -> IO
+    def do_interact():
+        while True:
+            (_print)((func)(input()))
+    return _coconut_tail_call(IO, do_interact)
 
 
 ### Files:
-FilePath = T.NewType("FilePath", str)
+FilePath = str
 
+@_coconut_tco
 def readFile(fpath  # type: FilePath
     ):
+# type: (...) -> IO
+    def do_readFile():
 # type: (...) -> str
-    with open(fpath, "r+") as f:
-        return f.read()
+        with open(fpath, "r+") as f:
+            return f.read()
+    return _coconut_tail_call(IO, do_readFile)
 
+@_coconut_tco
 def writeFile(fpath,  # type: FilePath
      text  # type: str
     ):
+# type: (...) -> IO
+    def do_writeFile():
 # type: (...) -> None
-    with open(fpath, "w+") as f:
-        f.write(text)  # type: ignore
+        with open(fpath, "w+") as f:
+            f.write(text)
+    return _coconut_tail_call(IO, do_writeFile)
 
+@_coconut_tco
 def appendFile(fpath,  # type: FilePath
      text  # type: str
     ):
+# type: (...) -> IO
+    def do_appendFile():
 # type: (...) -> None
-    with open(fpath, "a+") as f:
-        f.write(text)  # type: ignore
+        with open(fpath, "a+") as f:
+            f.write(text)
+    return _coconut_tail_call(IO, do_appendFile)
 
-readIO = NotImplemented
+@_coconut_tco
+def readIO(s  # type: str
+    ):
+# type: (...) -> IO
+    return _coconut_tail_call(IO, _coconut.functools.partial(read, s))
 
-readLn = NotImplemented
+@_coconut_tco
+def readLn():
+# type: (...) -> IO
+    return _coconut_tail_call((bind), getLine(), readIO)
 
 
 
 ## Exception handling:
-IOError = None  # type: T.Type[Exception]
-IOError = _IOError
+@_coconut_tco
+def ioError(err  # type: IOError
+    ):
+# type: (...) -> IO
+    def _coconut_lambda_1():
+        raise err
+    return _coconut_tail_call(IO, _coconut_lambda_1)
 
-def ioError():
-# type: (...) -> None
-    raise IOError()
-
+@_coconut_tco
 def userError(msg  # type: str
     ):
-# type: (...) -> None
-    raise IOError(msg)
+# type: (...) -> IOError
+    return _coconut_tail_call(IOError, msg)

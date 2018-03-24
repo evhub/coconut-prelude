@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xe691e71d
+# __coconut_hash__ = 0xa58d769a
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -40,8 +40,12 @@ def derivingEqOrd(*valueConstructors  # type: TType
 
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
+
+# Eq
         def __eq__(x, y):
             return type(x) is type(y) and tuple.__eq__(x, y)
+
+# Ord
         valCon.__eq__ = __eq__
         def __lt__(x, y):
             return tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
@@ -56,22 +60,34 @@ def derivingEqOrd(*valueConstructors  # type: TType
             return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
         valCon.__gt__ = __gt__
-def derivingEnum(*valueConstructors  # type: TType
+def derivingBoundedEnum(*valueConstructors  # type: TType
     ):
 # type: (...) -> None
     """
     The expression
-        derivingEnum(valueConstructor1, valueConstructor2, ...)
+        derivingBoundedEnum(valueConstructor1, valueConstructor2, ...)
     is equivalent to stating that for some data type defined as
         data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
     we should add
-        deriving (Enum)
+        deriving (Bounded, Enum)
     """
     if TYPE_CHECKING:
         return
 
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
+
+# Bounded
+        @_coconut_tco
+        def __minBound__(self):
+            return _coconut_tail_call(valueConstructors[0])
+        valCon.__minBound__ = __minBound__
+        @_coconut_tco
+        def __maxBound__(self):
+            return _coconut_tail_call(valueConstructors[-1])
+
+# Enum
+        valCon.__maxBound__ = __maxBound__
         @_coconut_tco
         def __int__(x):
             return _coconut_tail_call(ind, x)
@@ -114,4 +130,15 @@ def definesBind(dataType  # type: TType
         return _coconut_tail_call(self.__bind__, lambda x: x)
 
     dataType.__join__ = __join__
+    return dataType
+
+def definesReturn(dataType  # type: TType
+    ):
+# type: (...) -> TType
+    """
+    A simple decorator to set __pure__ equal to __return__.
+    If used with definesBind, definesReturn must be applied
+    first (i.e. be a more inner decorator).
+    """
+    dataType.__pure__ = dataType.__return__
     return dataType

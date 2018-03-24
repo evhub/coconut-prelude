@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x8f883565
+# __coconut_hash__ = 0x6ace1980
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -185,7 +185,7 @@ def test_Applicative():
     assert (seqAr)(nothing, Just(1)) == nothing
     assert (seqAl)(Just(1), nothing) == nothing
     assert (seqAr)(Just(1), Just(2)) == Just(2) == (seqAl)(Just(2), Just(1))
-    assert liftA2(_coconut.operator.add, [1, 2, 3], [10, 20, 30]) == [11, 21, 31, 12, 22, 32, 13, 23, 33]
+    assert liftA2(_coconut.operator.add)([1, 2, 3], [10, 20, 30]) == [11, 21, 31, 12, 22, 32, 13, 23, 33]
     assert (ap)(pure(error), nothing) == nothing
     assert (ap)(pure(lambda _=None: _ + 1), Just(2)) == Just(3)
     assert (ap)(pure(lambda _=None: _ + 1), Left(10)) == Left(10)

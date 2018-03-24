@@ -23,10 +23,9 @@ _filter: -> T.Any = filter
 _int: -> T.Any = int
 _sum: -> T.Any = sum
 _reversed: -> T.Any = reversed
-_print: -> None = print
+_print: -> T.Any = print
 _ceil: -> T.Any = _math.ceil
 _floor: -> T.Any = _math.floor
-_IOError: T.Any = IOError
 
 
 
@@ -46,7 +45,7 @@ otherwise: bool = True
 #### Maybe:
 class Maybe:
     @staticmethod
-    def __pure__(obj: Ta) -> Maybe = Just(obj)
+    def __pure__(x: Ta) -> Maybe = Just(x)
 
     @staticmethod
     def __fail__(msg: str) -> Maybe = nothing
@@ -63,7 +62,7 @@ derivingEqOrd(Nothing, Just)
 
 if TYPE_CHECKING:
     def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb =
-        ...  # type: ignore
+        ...
 else:
     def maybe(default, _, Nothing()) = default
 
@@ -73,7 +72,7 @@ else:
 #### Either:
 class Either:
     @staticmethod
-    def __pure__(obj: Ta) -> Either = Right(obj)
+    def __pure__(x: Ta) -> Either = Right(x)
 
     @staticmethod
     def __fail__(msg: str) -> Either = Left(msg)
@@ -90,7 +89,7 @@ derivingEqOrd(Left, Right)
 
 if TYPE_CHECKING:
     def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc =
-        ...  # type: ignore
+        ...
 else:
     def either(left_func, _, Left(x)) = left_func(x)
 
@@ -113,7 +112,7 @@ data GT() from Ordering:
     def __bool__() -> bool = True
 
 derivingEqOrd(LT, EQ, GT)
-derivingEnum(LT, EQ, GT)
+derivingBoundedEnum(LT, EQ, GT)
 
 lt: Ordering = LT()
 eq: Ordering = EQ()
@@ -134,7 +133,7 @@ snd: T.Tuple[Ta, Tb] -> Tb
 snd = .[1]
 
 def curry(func: (Ta, Tb) -> Tc) -> Ta -> Tb -> Tc =
-    func$  # type: ignore
+    func$
 
 def uncurry(func: Ta -> Tb -> Tc) -> (Ta, Tb) -> Tc =
     (x, y) -> func(x)(y)
@@ -152,7 +151,7 @@ TOrd = T.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x: Ord, y: Ord) -> Ordering =
-        ...  # type: ignore
+        ...
 else:
     def compare(x, y if x == y) = eq
 
@@ -205,26 +204,40 @@ def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> TEnum$[] =
 
 
 #### Bounded:
-Bounded = T.Union[bool, Ordering]
+Bounded = T.Union[bool, T.Iterable]
 TBounded = T.TypeVar("TBounded", bound=Bounded)
 
-if TYPE_CHECKING:
-    def minBound(b: TBounded) -> TBounded =
-        ...  # type: ignore
-else:
-    def minBound(b is bool) = False
+def minBound(b: TBounded) -> TBounded =
+    """
+    -- minBound is overridden by the __minBound__ method
+    -- the default implementation recursively calls fmap (__fmap__) with minBound
+    """
+    # Check if bool
+    if b `isinstance` bool:
+        return False  # type: ignore
 
-    @addpattern(minBound)
-    def minBound(b is Ordering) = lt
+    # Check if overridden
+    if b `hasattr` "__minBound__":
+        return b.__minBound__()
 
-if TYPE_CHECKING:
-    def maxBound(b: TBounded) -> TBounded =
-        ...  # type: ignore
-else:
-    def maxBound(b is bool) = True
+    # Default implementation
+    fmap(minBound, b)
 
-    @addpattern(maxBound)
-    def maxBound(b is Ordering) = gt
+def maxBound(b: TBounded) -> TBounded =
+    """
+    -- maxBound is overridden by the __maxBound__ method
+    -- the default implementation recursively calls fmap (__fmap__) with maxBound
+    """
+    # Check if bool
+    if b `isinstance` bool:
+        return True  # type: ignore
+
+    # Check if overridden
+    if b `hasattr` "__maxBound__":
+        return b.__maxBound__()
+
+    # Default implementation
+    fmap(maxBound, b)
 
 
 
@@ -273,7 +286,7 @@ abs = _abs
 
 if TYPE_CHECKING:
     def signum(x: Num) -> int =
-        ...  # type: ignore
+        ...
 else:
     def signum(0) = 0
 
@@ -290,7 +303,7 @@ Real = Num
 
 if TYPE_CHECKING:
     def toRational(real: Real) -> Rational =
-        ...  # type: ignore
+        ...
 
 else:
     def toRational(real is float) =
@@ -428,7 +441,7 @@ gcd = abs.._fractions.gcd
 
 if TYPE_CHECKING:
     def lcm(x: int, y: int) -> int =
-        ...  # type: ignore
+        ...
 else:
     def lcm(_, 0) = 0
 
@@ -453,30 +466,28 @@ TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
 data MEmpty():
     """
-    -- mempty is overridden by the __mempty__ staticmethod
+    -- mempty is overridden by the __mempty__ method
     """
     @staticmethod
     def __mempty__() -> MEmpty = mempty
 
     @staticmethod
-    def mempty_as(M: T.Type[TMonoid]) -> TMonoid =
+    def mempty_as(M: TMonoid) -> TMonoid =
         if M `hasattr` "__mempty__":
             return M.__mempty__()  # type: ignore
-        makedata(M)
+        makedata(type(M))
 
-mempty = MEmpty()
+mempty: T.Any = MEmpty()
 
 def mappend(x: TMonoid, y: TMonoid) -> TMonoid =
     """
     -- mappend is overridden by the __mappend__ method
-    -- you may also want to define a __mempty__ staticmethod
+    -- you may also want to define a __mempty__ method
     -- the default implementation identifies identities using __bool__
     """
     # Resolve memptys
-    if x `isinstance` MEmpty:
-        x = x.mempty_as(type(y))
-    if y `isinstance` MEmpty:
-        y = y.mempty_as(type(x))
+    x = x `asTypeOf` y
+    y = y `asTypeOf` x
 
     # Check if overridden
     if x `hasattr` "__mappend__":
@@ -515,25 +526,39 @@ def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
 Applicative = Functor
 TApp = T.TypeVar("TApp", bound=Applicative)
 
-data pure(val):
-    """
-    return_ = return
-    -- pure/return is overridden by the __pure__ staticmethod
-    """
-    def __join__(self) -> T.Any = self.val
+if TYPE_CHECKING:
+    def pure(x: Ta) -> T.Any =
+        ...
+else:
+    data pure(val):
+        """
+        return_ = return
+        -- pure/return is overridden by the __pure__ method
+        """
+        def __join__(self) -> T.Any = self.val
 
-    def pure_as(self, M: T.Type[TApp]) -> TApp =
-        if M `hasattr` "__pure__":
-            return M.__pure__(self.val)  # type: ignore
-        makedata(M, self.val)
+        def pure_as(self, M: TApp) -> TApp =
+            if M `hasattr` "__pure__":
+                return M.__pure__(self.val)  # type: ignore
+            makedata(type(M), self.val)
 
 def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
     """
     ap :: Applicative f => f (a -> b) -> f a -> f b
     ap = (<*>)
-    -- ap is overridden by overriding join (__join__) and fmap (__fmap__)
-    -- you may also want to define a __pure__ staticmethod
+    -- ap is overridden by the __ap__ method
+    -- you may also want to define a __pure__ method
+    -- the default implementation uses join (__join__) and fmap (__fmap__)
     """
+    # Resolve pures
+    fs = fs `asTypeOf` xs  # type: ignore
+    xs = xs `asTypeOf` fs  # type: ignore
+
+    # Check if overridden
+    if fs `hasattr` "__ap__":
+        return fs.__ap__(xs)  # type: ignore
+
+    # Default implementation
     fs `bind` f -> _fmap(f, xs)
 
 def seqAr(f1: Applicative, f2: TApp) -> TApp =
@@ -550,12 +575,12 @@ def seqAl(f1: TApp, f2: Applicative) -> TApp =
     """
     _fmap(x1 -> x2 -> x1, f1) `ap` f2
 
-def liftA2(func: (Ta, Tb) -> Tc, f1: Applicative[Ta], f2: Applicative[Tb]) -> Applicative[Tc] =
+def liftA2(func: (Ta, Tb) -> Tc) -> (Applicative[Ta], Applicative[Tb]) -> Applicative[Tc] =
     """
     import Control.Applicative
     liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
     """
-    _fmap(func$, f1) `ap` f2
+    (f1, f2) -> _fmap(func$, f1) `ap` f2
 
 #### Monad:
 Monad = Applicative
@@ -578,19 +603,23 @@ def seqM(m1: Monad, m2: TMonad) -> TMonad =
 
 return_ = pure
 
-data fail(msg):
-    """
-    -- fail is overridden by the __fail__ method
-    """
-    @staticmethod
-    def __bool__() -> bool = False
+if TYPE_CHECKING:
+    def fail(msg: str) -> T.Any =
+        ...
+else:
+    data fail(msg: str):
+        """
+        -- fail is overridden by the __fail__ method
+        """
+        @staticmethod
+        def __bool__() -> bool = False
 
-    def __fmap__(self, func: Ta -> Tb) -> T.Any = self
+        def __fmap__(self, func: Ta -> Tb) -> T.Any = self
 
-    def fail_as(self, M: T.Type[TMonad]) -> TMonad =
-        if M `hasattr` "__fail__":
-            return M.__fail__(self.msg)  # type: ignore
-        makedata(M)
+        def fail_as(self, M: TMonad) -> TMonad =
+            if M `hasattr` "__fail__":
+                return M.__fail__(self.msg)  # type: ignore
+            makedata(type(M))
 
 # sequence_ and mapM_ defined in Foldable
 
@@ -606,16 +635,11 @@ def join(ms: Monad[TMonad]) -> TMonad =
     import Control.Monad
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
-    -- you may also want to define __pure__ and __fail__ staticmethods (pure = return)
+    -- you may also want to define __pure__ and __fail__ methods (pure = return)
     -- the default implementation identifies failures using __bool__
     """
     # Resolve pures and fails
-    valCons = type(ms)
-    ms = ms |> fmap$(m ->
-        m.fail_as(valCons) if m `isinstance` fail
-        else m.pure_as(valCons) if m `isinstance` pure
-        else m
-    )  # type: ignore
+    ms = ms |> fmap$(m -> m `asTypeOf` ms)  # type: ignore
 
     # Check if overridden
     if ms `hasattr` "__join__":
@@ -633,11 +657,11 @@ def join(ms: Monad[TMonad]) -> TMonad =
             fallback = m
     if not vals:
         return fallback  # type: ignore
-    makedata(valCons, *vals)
+    makedata(type(ms), *vals)
 
 if TYPE_CHECKING:
     def do(monads: TMonad[], func: -> TMonad) -> TMonad =
-        ...  # type: ignore
+        ...
 else:
     def do([], func) = func()
 
@@ -656,6 +680,11 @@ else:
             x2 <- m2
             ...
             func(x1, x2, ...)
+        or equivalently, do can also be used as a decorator such that
+            @do$([m1, m2, ...])
+            def func(x1, x2, ...) =
+                ...
+        is the same as the above.
         """
         m `bind` x -> do(ms, func$(x))
 
@@ -710,7 +739,15 @@ product = reduce$(*)
 Traversable = T.Iterable
 
 def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] =
-    fs `do` (*xs) -> xs |*> makedata$(type(fs)) |> pure
+    """
+    -- sequenceA is overridden by the __sequenceA__ method
+    """
+    # Check if overridden
+    if fs `hasattr` "__sequenceA__":
+        return fs.__sequenceA__()  # type: ignore
+
+    # Default implementation
+    reduce(liftA2((xs, x) -> xs + [x]), fs, pure([])) |> fmap$(xs -> makedata(type(fs), *xs))
 
 traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
 traverse = sequenceA..fmap
@@ -751,7 +788,20 @@ def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
         return x
     until(cond, func, func(x))  # tail recursive
 
-def asTypeOf(x: Ta, y: Ta) -> Ta = x
+def asTypeOf(x: Ta, y: Ta) -> Ta:
+    """
+    -- use asTypeOf to resolve pure, fail, and mempty to the correct type
+    """
+    if TYPE_CHECKING: return x
+
+    if x `isinstance` pure:
+        return x.pure_as(y)
+    elif x `isinstance` fail:
+        return x.fail_as(y)
+    elif x `isinstance` mempty:
+        return x.mempty_as(y)
+    else:
+        return x
 
 def error(msg: str) -> None: raise Exception(msg)
 
@@ -833,7 +883,7 @@ def concat(xs: Foldable[Ta$[]]) -> Ta$[] =
     _reduce((::), xs, ())
 
 concatMap: (Ta -> Tb$[], Foldable[Ta]) -> Tb$[]
-concatMap = concat..map  # type: ignore
+concatMap = concat..map
 
 
 
@@ -866,7 +916,7 @@ def replicate(n: int, x: Ta) -> Ta$[] =
 
 if TYPE_CHECKING:
     def cycle(xs: Ta$[]) -> Ta$[] =
-        ...  # type: ignore
+        ...
 else:
     @recursive_iterator
     def cycle(xs if len(xs) > 0) =
@@ -893,7 +943,7 @@ dropWhile = dropwhile
 
 if TYPE_CHECKING:
     def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]] =
-        ...  # type: ignore
+        ...
 else:
     def span(_, []) = ([], [])
 
@@ -946,7 +996,7 @@ def zipWith3(func: (Ta, Tb, Tc) -> Td, xs1: Ta$[], xs2: Tb$[], xs3: Tc$[]) -> Td
     starmap(func, _zip(xs1, xs2, xs3))
 
 def unzip(xs: T.Tuple[Ta, Tb]$[]) -> T.Tuple[Ta[], Tb[]] =
-    _zip(*xs) |> map$(list) |> tuple  # type: ignore
+    _zip(*xs) |> map$(list) |> tuple
 
 unzip3: T.Tuple[Ta, Tb, Tc]$[] -> T.Tuple[Ta[], Tb[], Tc[]]
 unzip3 = unzip  # type: ignore
@@ -955,10 +1005,10 @@ unzip3 = unzip  # type: ignore
 
 ## Functions on strings:
 lines: str -> str[]
-lines = .splitlines()  # type: ignore
+lines = .splitlines()
 
 words: str -> str[]
-words = .split()  # type: ignore
+words = .split()
 
 def unlines(strs: str[]) -> str =
     "".join(s + "\n" for s in strs)
@@ -1034,67 +1084,110 @@ lex = NotImplemented
 # Basic input and output:
 
 #### IO:
+data IO(io_func):
+    @staticmethod
+    def __pure__(x: Ta) -> IO =
+        IO(() -> x)
 
-IO = NotImplemented
+    @staticmethod
+    def __fail__(msg: str) -> IO =
+        IO(def () -> raise IOError(msg))
+
+    def __fmap__(self, func: Ta -> Tb) -> IO =
+        IO(func..self.io_func)
+
+    def __join__(self) -> IO =
+        fmap(unIO, self)
+
+    @staticmethod
+    def __mempty__() -> IO =
+        IO(() -> mempty)
+
+    def __mappend__(self, other: IO) -> IO =
+        IO(() -> mappend(self.io_func(), other.io_func()))
+
+def unIO(io: IO) -> Ta =
+    """
+    The unIO function is an impure function which performs the
+    I/O contained in the given IO object and returns the result.
+    In particular, the recommendation is to write
+        @unIO
+        @do$([m1, m2, ...])
+        def main(x1, x2, ...) =
+            ...
+    which is equivalent to the Haskell code
+        main = do
+            x1 <- m1
+            x2 <- m2
+            ...
+    """
+    io.io_func()
+
 
 
 
 ## Simple I/O operations:
 
 ### Output functions:
-putStr: str -> None
-putStr = print$(end="")
+def putStr(s: str) -> IO =
+    IO(_print$(s, end=""))
 
-putChar: Char -> None
+putChar: Char -> IO
 putChar = putStr
 
-putStrLn: str -> None
-putStrLn = print
+def putStrLn(s: str) -> IO =
+    IO(_print$(s))
 
-print: str -> None
-print = _print
+def print(x: Ta) -> IO =
+    IO(() -> _print(show(x)))
 
 
 ### Input functions:
-getChar: () -> Char
-getChar = sys.stdin.read$(1)  # type: ignore
+getChar: IO = IO(sys.stdin.read$(1))
 
-getLine: () -> str
-getLine = input
+getLine: IO = IO(input)
 
-getContents: () -> str
-getContents = sys.stdin.read
+getContents: IO = IO(sys.stdin.read)
 
-def interact(func: str -> str) -> None:
-    while True:
-        input() |> func |> print
+def interact(func: str -> str) -> IO =
+    def do_interact():
+        while True:
+            input() |> func |> _print
+    IO(do_interact)
 
 
 ### Files:
-FilePath = T.NewType("FilePath", str)
+FilePath = str
 
-def readFile(fpath: FilePath) -> str:
-    with open(fpath, "r+") as f:
-        return f.read()
+def readFile(fpath: FilePath) -> IO =
+    def do_readFile() -> str:
+        with open(fpath, "r+") as f:
+            return f.read()
+    IO(do_readFile)
 
-def writeFile(fpath: FilePath, text: str) -> None:
-    with open(fpath, "w+") as f:
-        f.write(text)  # type: ignore
+def writeFile(fpath: FilePath, text: str) -> IO =
+    def do_writeFile() -> None:
+        with open(fpath, "w+") as f:
+            f.write(text)
+    IO(do_writeFile)
 
-def appendFile(fpath: FilePath, text: str) -> None:
-    with open(fpath, "a+") as f:
-        f.write(text)  # type: ignore
+def appendFile(fpath: FilePath, text: str) -> IO =
+    def do_appendFile() -> None:
+        with open(fpath, "a+") as f:
+            f.write(text)
+    IO(do_appendFile)
 
-readIO = NotImplemented
+def readIO(s: str) -> IO =
+    IO(read$(s))
 
-readLn = NotImplemented
+def readLn() -> IO =
+    getLine() `bind` readIO
 
 
 
 ## Exception handling:
-IOError: T.Type[Exception]
-IOError = _IOError
+def ioError(err: IOError) -> IO =
+    IO(def () -> raise err)
 
-def ioError() -> None: raise IOError()
-
-def userError(msg: str) -> None: raise IOError(msg)
+def userError(msg: str) -> IOError =
+    IOError(msg)
