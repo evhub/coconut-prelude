@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa7ecaf72
+# __coconut_hash__ = 0x276e844a
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -824,7 +824,7 @@ def mappend(x,  # type: TMonoid
     """
     -- mappend is overridden by the __mappend__ method
     -- you may also want to define a __mempty__ method
-    -- the default implementation identifies identities using __bool__
+    -- the default implementation identifies non-identities using __bool__
     """
 # Resolve memptys
     x = (asTypeOf)(x, y)
@@ -1034,9 +1034,12 @@ def join(ms  # type: Monad[TMonad]
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
     -- you may also want to define __pure__ and __fail__ methods (pure = return)
-    -- the default implementation identifies failures using __bool__
+    -- the default implementation identifies non-failures using __bool__
     """
-# Resolve pures and fails
+# Resolve ms being pure or fail
+    ms = reduce(lambda ms, m: (asTypeOf)(ms, m), ms, ms)
+
+# Resolve pures and fails inside of ms
     ms = fmap(lambda m: (asTypeOf)(m, ms), ms)  # type: ignore
 
 # Check if overridden
@@ -1276,7 +1279,6 @@ def until(cond,  # type: _coconut.typing.Callable[[Ta], bool]
 
         return None
 _coconut_recursive_func_70 = until
-@_coconut_tco
 def asTypeOf(x,  # type: Ta
      y  # type: Ta
     ):
@@ -1287,21 +1289,31 @@ def asTypeOf(x,  # type: Ta
     if TYPE_CHECKING:
         return x
 
-    if (isinstance)(x, pure):
-        return _coconut_tail_call(x.pure_as, y)
-    elif (isinstance)(x, fail):
-        return _coconut_tail_call(x.fail_as, y)
-    elif (isinstance)(x, mempty):
-        return _coconut_tail_call(x.mempty_as, y)
-    else:
-        return x
+    done_pure = done_fail = done_mempty = False
+    while True:
+        if not done_pure and (isinstance)(x, pure):
+            x = x.pure_as(y)
+            done_pure = True
+        elif not done_fail and (isinstance)(x, fail):
+            x = x.fail_as(y)
+            done_fail = True
+        elif not done_mempty and (isinstance)(x, MEmpty):
+            x = x.mempty_as(y)
+            done_mempty = True
+        else:
+            return x
 
 def error(msg  # type: str
     ):
 # type: (...) -> None
     raise Exception(msg)
 
-errorWithoutStackTrace = NotImplemented
+def errorWithoutStackTrace(msg  # type: str
+    ):
+# type: (...) -> None
+    _coconut_raise_from = Exception(msg)
+    _coconut_raise_from.__cause__ = None
+    raise _coconut_raise_from
 
 undefined = None  # type: T.Any
 
@@ -1747,6 +1759,19 @@ class IO(_coconut.collections.namedtuple("IO", "io_func"), _coconut.object):
 # type: (...) -> IO
         return _coconut_tail_call(IO, lambda: mappend(self.io_func(), other.io_func()))
 
+_nullIO = IO(lambda: None)  # type: IO
+
+@_coconut_tco
+def asIO(io  # type: IO
+    ):
+# type: (...) -> IO
+    """
+    asIO :: IO a -> IO a
+    asIO = id
+    -- asIO(x) is equivalent to x `asTypeOf` IO(...)
+    """
+    return _coconut_tail_call((asTypeOf), io, _nullIO)
+
 @_coconut_tco
 def unIO(io  # type: IO
     ):
@@ -1756,16 +1781,16 @@ def unIO(io  # type: IO
     I/O contained in the given IO object and returns the result.
     In particular, the recommendation is to write
         @unIO
-        @do$([m1, m2, ...])
-        def main(x1, x2, ...) =
+        @do$([io1, io2, ...])
+        def main(r1, r2, ...) =
             ...
     which is equivalent to the Haskell code
         main = do
-            x1 <- m1
-            x2 <- m2
+            r1 <- io1
+            r2 <- io2
             ...
     """
-    return _coconut_tail_call(io.io_func)
+    return _coconut_tail_call(asIO(io).io_func)
 
 
 

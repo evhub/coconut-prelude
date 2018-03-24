@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x6ace1980
+# __coconut_hash__ = 0xe30a8f08
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -94,6 +94,11 @@ def test_Bounded():
     assert maxBound(False) is True
     assert minBound(eq) == lt
     assert maxBound(eq) == gt
+    assert minBound((False, gt)) == (False, lt)
+    assert maxBound((True, lt)) == (True, gt)
+
+def test_Rational():
+    assert Rational(1, 3) == (over)(1, 3)
 
 def test_Num():
     assert negate(2) == -2 == negate((over)(2, 1))
@@ -162,10 +167,13 @@ def test_Numeric_functions():
 def test_Monoids():
     assert mappend(Just([]), mempty) == Just([]) == mappend(mempty, Just([]))
     assert mappend(nothing, Just([])) == Just([]) == mappend(Just([]), nothing)
+    assert mappend(nothing, pure(1)) == Just(1)
+    assert mappend(fail("derp"), Just(2)) == Just(2)
     assert mappend([1, 2], [3, 4]) == [1, 2, 3, 4]
     assert mappend(Just([1, 2]), Just([3, 4])) == Just([1, 2, 3, 4])
     assert mappend(lt, gt) == lt == mappend(eq, lt)
     assert mappend(gt, lt) == gt == mappend(gt, eq)
+    assert mappend(eq, mempty) == eq == mappend(mempty, eq)
     assert mappend(([1], [2]), ([3], [4])) == ([1, 3], [2, 4])
     assert mconcat([[1], [2, 3]]) == [1, 2, 3]
 
@@ -178,19 +186,21 @@ def test_Functor():
     assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))
 
 def test_Applicative():
+    assert pure("12") == fmap(lambda s: s + "2", pure("1"))
     assert (ap)(nothing, Just(10)) == nothing
     assert (ap)(Just(_coconut.functools.partial(_coconut.operator.add, 1)), Just(2)) == Just(3)
     assert (ap)([_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)], [10, 20, 30]) == [11, 21, 31, 30, 60, 90]
     assert (ap)((_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)), (10, 20, 30)) == (11, 21, 31, 30, 60, 90)
-    assert (seqAr)(nothing, Just(1)) == nothing
-    assert (seqAl)(Just(1), nothing) == nothing
-    assert (seqAr)(Just(1), Just(2)) == Just(2) == (seqAl)(Just(2), Just(1))
-    assert liftA2(_coconut.operator.add)([1, 2, 3], [10, 20, 30]) == [11, 21, 31, 12, 22, 32, 13, 23, 33]
     assert (ap)(pure(error), nothing) == nothing
     assert (ap)(pure(lambda _=None: _ + 1), Just(2)) == Just(3)
     assert (ap)(pure(lambda _=None: _ + 1), Left(10)) == Left(10)
     assert (ap)(pure(lambda _=None: _ + 1), [1, 2, 3]) == [2, 3, 4]
     assert (ap)(pure(lambda _=None: _ + 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))
+    assert (ap)(fail("derp"), Right(1)) == Left("derp")
+    assert (seqAr)(nothing, Just(1)) == nothing
+    assert (seqAl)(Just(1), nothing) == nothing
+    assert (seqAr)(Just(1), Just(2)) == Just(2) == (seqAl)(Just(2), Just(1))
+    assert liftA2(_coconut.operator.add)([1, 2, 3], [10, 20, 30]) == [11, 21, 31, 12, 22, 32, 13, 23, 33]
 
 def test_Monad():
     assert nothing == (bind)(nothing, Just)
@@ -205,6 +215,7 @@ def test_Monad():
     assert Right(2) == (seqM)(Right(1), Right(2))
     assert Left(1) == (seqM)(Left(1), Right(2))
     assert [] == (seqM)([], [1])
+    assert fail("derp") == fmap(_coconut.functools.partial(_coconut.operator.add, 1), fail("derp"))
     assert nothing == (bind)(Just(1), _coconut_forward_compose(str, fail))
     assert Left(1) == (bind)(Left(1), _coconut_forward_compose(str, fail))
     assert Left("1") == (bind)(Right(1), _coconut_forward_compose(str, fail))
@@ -218,12 +229,19 @@ def test_Monad():
     assert Right(1) == (bind)(Right(1), return_)
     assert Left(1) == (bind)(Left(1), return_(2))
     assert Right(2) == (bind)(Right(1), lambda x: return_(x + 1))
+    assert join(return_(return_(5))) == return_(5)
     assert Just(1) == join(Just(Just(1)))
     assert nothing == join(Just(nothing))
     assert nothing == join(nothing)
     assert [1, 2, 3, 4, 5, 6] == join([[1, 2, 3], [], [4], [5, 6]])
-    assert [1] == join([fail("derp"), pure(1)])
+    assert [1] == join([fail("derp"), return_(1)])
     assert Left(3) == do([Right(1), Right(2), Left(3), Right(4),], lambda *xs: error(repr(xs)))
+    _coconut_decorator_0 = _coconut.functools.partial(do, [Right(1), Right(2)])
+    @_coconut_decorator_0
+    @_coconut_tco
+    def right3(x, y):
+        return _coconut_tail_call(Right, x + y)
+    assert right3 == Right(3)
     global glob
     glob = 1
     def _coconut_lambda_0(x):
@@ -277,6 +295,30 @@ def test_Miscellaneous_functions():
     assert (apply)(abs, -2) == 2
     assert until(lambda x: x < 0, _coconut.functools.partial(subtract, 1), 10) == -1
     assert asTypeOf(5, 10) == 5
+    assert asTypeOf(pure([]), nothing) == Just([])
+    assert asTypeOf(fail("herp"), Right(1)) == Left("herp")
+    assert asTypeOf(mempty, Just([])) == nothing
+    class Test(_coconut.collections.namedtuple("Test", "x"), _coconut.object):
+        __slots__ = ()
+        __ne__ = _coconut.object.__ne__
+        @staticmethod
+        @_coconut_tco
+        def __mempty__():
+            return _coconut_tail_call(pure, 0)
+
+        @staticmethod
+        @_coconut_tco
+        def __pure__(x):
+            return _coconut_tail_call(Test, x)
+    assert (asTypeOf)(mempty, Test(1)) == Test(0)
+    for _error in [error, errorWithoutStackTrace]:
+        try:
+            _error("derp")
+        except Exception as err:
+            assert str(err) == "derp"
+        else:
+            assert False, "expected error"
+    assert undefined == undefined
     assert seq(1, 2) == 2
     assert (cbv)(abs, -2) == 2
 
@@ -289,7 +331,7 @@ def test_List_operations():
     assert last([1, 2, 3]) == 3
     assert tail([1, 2, 3]) == [2, 3]
     assert init([1, 2, 3]) == [1, 2]
-    assert (at)([1, 2, 3], 1) == 2
+    assert (at)([1, 2, 3], 1) == 2 == (at)((_coconut_func() for _coconut_func in (lambda: 1, lambda: 2, lambda: 3)), 1)
     assert (list)(reverse([1, 2, 3])) == [3, 2, 1]
 
 def test_Special_folds():
@@ -360,6 +402,36 @@ def test_Converting_from_String():
     assert read("[]") == []
     assert read("10") == 10
     assert read('"abc"') == "abc"
+
+def test_IO():
+    assert unIO(pure(5)) == 5
+    assert (unIO)(mempty) == mempty
+    assert (unIO)(mappend(mempty, asIO(pure(gt)))) == gt
+    assert (unIO)(fmap(lambda _=None: _ * 2, pure(5))) == 10
+    try:
+        unIO(fail("herp"))
+    except IOError as err:
+        assert str(err) == "herp"
+    else:
+        assert False, "expected error"
+    assert 6 == (unIO)((bind)(pure(5), lambda x: pure(x + 1)))
+    _coconut_decorator_1 = _coconut.functools.partial(do, [asIO(pure(1)), pure(2)])
+    @unIO
+    @_coconut_decorator_1
+    @_coconut_tco
+    def three(x1, x2):
+        return _coconut_tail_call(pure, x1 + x2)
+    assert three == 3
+
+def test_Exception_handling():
+    try:
+        (unIO)(ioError(IOError("derp")))
+    except IOError as err:
+        assert str(err) == "derp"
+    else:
+        assert False, "expected error"
+    assert (isinstance)(userError("derp"), IOError)
+    assert (str)(userError("derp")) == "derp"
 
 if __name__ == "__main__":
     for var, val in globals().items():

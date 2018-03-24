@@ -483,7 +483,7 @@ def mappend(x: TMonoid, y: TMonoid) -> TMonoid =
     """
     -- mappend is overridden by the __mappend__ method
     -- you may also want to define a __mempty__ method
-    -- the default implementation identifies identities using __bool__
+    -- the default implementation identifies non-identities using __bool__
     """
     # Resolve memptys
     x = x `asTypeOf` y
@@ -636,9 +636,12 @@ def join(ms: Monad[TMonad]) -> TMonad =
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
     -- you may also want to define __pure__ and __fail__ methods (pure = return)
-    -- the default implementation identifies failures using __bool__
+    -- the default implementation identifies non-failures using __bool__
     """
-    # Resolve pures and fails
+    # Resolve ms being pure or fail
+    ms = reduce((ms, m) -> ms `asTypeOf` m, ms, ms)
+
+    # Resolve pures and fails inside of ms
     ms = ms |> fmap$(m -> m `asTypeOf` ms)  # type: ignore
 
     # Check if overridden
@@ -794,18 +797,25 @@ def asTypeOf(x: Ta, y: Ta) -> Ta:
     """
     if TYPE_CHECKING: return x
 
-    if x `isinstance` pure:
-        return x.pure_as(y)
-    elif x `isinstance` fail:
-        return x.fail_as(y)
-    elif x `isinstance` mempty:
-        return x.mempty_as(y)
-    else:
-        return x
+    done_pure = done_fail = done_mempty = False
+    while True:
+        if not done_pure and x `isinstance` pure:
+            x = x.pure_as(y)
+            done_pure = True
+        elif not done_fail and x `isinstance` fail:
+            x = x.fail_as(y)
+            done_fail = True
+        elif not done_mempty and x `isinstance` MEmpty:
+            x = x.mempty_as(y)
+            done_mempty = True
+        else:
+            return x
 
-def error(msg: str) -> None: raise Exception(msg)
+def error(msg: str) -> None:
+    raise Exception(msg)
 
-errorWithoutStackTrace = NotImplemented
+def errorWithoutStackTrace(msg: str) -> None:
+    raise Exception(msg) from None
 
 undefined: T.Any = None
 
@@ -1106,22 +1116,32 @@ data IO(io_func):
     def __mappend__(self, other: IO) -> IO =
         IO(() -> mappend(self.io_func(), other.io_func()))
 
+_nullIO: IO = IO(() -> None)
+
+def asIO(io: IO) -> IO =
+    """
+    asIO :: IO a -> IO a
+    asIO = id
+    -- asIO(x) is equivalent to x `asTypeOf` IO(...)
+    """
+    io `asTypeOf` _nullIO
+
 def unIO(io: IO) -> Ta =
     """
     The unIO function is an impure function which performs the
     I/O contained in the given IO object and returns the result.
     In particular, the recommendation is to write
         @unIO
-        @do$([m1, m2, ...])
-        def main(x1, x2, ...) =
+        @do$([io1, io2, ...])
+        def main(r1, r2, ...) =
             ...
     which is equivalent to the Haskell code
         main = do
-            x1 <- m1
-            x2 <- m2
+            r1 <- io1
+            r2 <- io2
             ...
     """
-    io.io_func()
+    asIO(io).io_func()
 
 
 
