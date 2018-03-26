@@ -683,11 +683,11 @@ else:
             x2 <- m2
             ...
             func(x1, x2, ...)
-        or equivalently, do can also be used as a decorator such that
+        or equivalently, do can also be used as a decorator where
             @do$([m1, m2, ...])
             def func(x1, x2, ...) =
                 ...
-        is the same as the above.
+        also does the same thing.
         """
         m `bind` x -> do(ms, func$(x))
 
@@ -742,15 +742,7 @@ product = reduce$(*)
 Traversable = T.Iterable
 
 def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] =
-    """
-    -- sequenceA is overridden by the __sequenceA__ method
-    """
-    # Check if overridden
-    if fs `hasattr` "__sequenceA__":
-        return fs.__sequenceA__()  # type: ignore
-
-    # Default implementation
-    reduce(liftA2((xs, x) -> xs + [x]), fs, pure([])) |> fmap$(xs -> makedata(type(fs), *xs))
+    reduce(liftA2((xs, x) -> xs :: (x,)), fs, pure(())) |> fmap$(xs -> makedata(type(fs), *xs))
 
 traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
 traverse = sequenceA..fmap
@@ -794,22 +786,22 @@ def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
 def asTypeOf(x: Ta, y: Ta) -> Ta:
     """
     -- use asTypeOf to resolve pure, fail, and mempty to the correct type
+    -- set asTypeOf.RECURSION_LIMIT to control recursive resolution
     """
     if TYPE_CHECKING: return x
 
-    done_pure = done_fail = done_mempty = False
-    while True:
-        if not done_pure and x `isinstance` pure:
+    for i in count() |> takewhile$(i -> i < asTypeOf.RECURSION_LIMIT):
+        if x `isinstance` pure:
             x = x.pure_as(y)
-            done_pure = True
-        elif not done_fail and x `isinstance` fail:
+        elif x `isinstance` fail:
             x = x.fail_as(y)
-            done_fail = True
-        elif not done_mempty and x `isinstance` MEmpty:
+        elif x `isinstance` MEmpty:
             x = x.mempty_as(y)
-            done_mempty = True
         else:
-            return x
+            break
+    return x
+
+asTypeOf.RECURSION_LIMIT = 3  # type: ignore
 
 def error(msg: str) -> None:
     raise Exception(msg)
@@ -925,7 +917,7 @@ def replicate(n: int, x: Ta) -> Ta$[] =
     repeat(x)$[:n]
 
 if TYPE_CHECKING:
-    def cycle(xs: Ta$[]) -> Ta$[] =
+    def cycle(xs: Ta[]) -> Ta$[] =
         ...
 else:
     @recursive_iterator
@@ -1159,7 +1151,7 @@ def putStrLn(s: str) -> IO =
     IO(_print$(s))
 
 def print(x: Ta) -> IO =
-    IO(() -> _print(show(x)))
+    IO(_print$(show(x)))
 
 
 ### Input functions:

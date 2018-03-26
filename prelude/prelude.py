@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x276e844a
+# __coconut_hash__ = 0x59c9a2bd
 
 # Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
 
@@ -1099,11 +1099,11 @@ else:
             x2 <- m2
             ...
             func(x1, x2, ...)
-        or equivalently, do can also be used as a decorator such that
+        or equivalently, do can also be used as a decorator where
             @do$([m1, m2, ...])
             def func(x1, x2, ...) =
                 ...
-        is the same as the above.
+        also does the same thing.
         """
         _coconut_match_check = False
         if (1 <= _coconut.len(_coconut_match_to_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_to_args) > 1, "func" in _coconut_match_to_kwargs)) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) >= 1):
@@ -1203,15 +1203,7 @@ Traversable = T.Iterable
 def sequenceA(fs  # type: Traversable[Applicative[Ta]]
     ):
 # type: (...) -> Applicative[Traversable[Ta]]
-    """
-    -- sequenceA is overridden by the __sequenceA__ method
-    """
-# Check if overridden
-    if (hasattr)(fs, "__sequenceA__"):
-        return _coconut_tail_call(fs.__sequenceA__)  # type: ignore
-
-# Default implementation
-    return _coconut_tail_call(fmap, lambda xs: makedata(type(fs), *xs), reduce(liftA2(lambda xs, x: xs + [x]), fs, pure([])))
+    return _coconut_tail_call(fmap, lambda xs: makedata(type(fs), *xs), reduce(liftA2(lambda xs, x: _coconut.itertools.chain.from_iterable((_coconut_func() for _coconut_func in (lambda: xs, lambda: (x,))))), fs, pure(())))
 
 traverse = None  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Applicative[Tb]], Traversable[Ta]], Applicative[Traversable[Tb]]]
 traverse = _coconut_forward_compose(fmap, sequenceA)
@@ -1285,23 +1277,23 @@ def asTypeOf(x,  # type: Ta
 # type: (...) -> Ta
     """
     -- use asTypeOf to resolve pure, fail, and mempty to the correct type
+    -- set asTypeOf.RECURSION_LIMIT to control recursive resolution
     """
     if TYPE_CHECKING:
         return x
 
-    done_pure = done_fail = done_mempty = False
-    while True:
-        if not done_pure and (isinstance)(x, pure):
+    for i in takewhile(lambda i: i < asTypeOf.RECURSION_LIMIT, count()):
+        if (isinstance)(x, pure):
             x = x.pure_as(y)
-            done_pure = True
-        elif not done_fail and (isinstance)(x, fail):
+        elif (isinstance)(x, fail):
             x = x.fail_as(y)
-            done_fail = True
-        elif not done_mempty and (isinstance)(x, MEmpty):
+        elif (isinstance)(x, MEmpty):
             x = x.mempty_as(y)
-            done_mempty = True
         else:
-            return x
+            break
+    return x
+
+asTypeOf.RECURSION_LIMIT = 3  # type: ignore
 
 def error(msg  # type: str
     ):
@@ -1471,7 +1463,7 @@ def replicate(n,  # type: int
     return _coconut_tail_call(_coconut_igetitem, repeat(x), _coconut.slice(None, n))
 
 if TYPE_CHECKING:
-    def cycle(xs  # type: _coconut.typing.Iterable[Ta]
+    def cycle(xs  # type: _coconut.typing.Sequence[Ta]
     ):
 # type: (...) -> _coconut.typing.Iterable[Ta]
         return _coconut.Ellipsis
@@ -1817,7 +1809,7 @@ def putStrLn(s  # type: str
 def print(x  # type: Ta
     ):
 # type: (...) -> IO
-    return _coconut_tail_call(IO, lambda: _print(show(x)))
+    return _coconut_tail_call(IO, _coconut.functools.partial(_print, show(x)))
 
 
 ### Input functions:
