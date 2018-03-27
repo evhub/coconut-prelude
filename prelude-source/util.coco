@@ -3,23 +3,19 @@ from .typevars import *  # type: ignore
 
 
 # Deriving:
-def derivingEqOrd(*valueConstructors: TType) -> None:
+def derivingOrd(*valueConstructors: TType) -> None:
     """
     The expression
-        derivingEqOrd(valueConstructor1, valueConstructor2, ...)
+        derivingOrd(valueConstructor1, valueConstructor2, ...)
     is equivalent to stating that for some data type defined as
         data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
     we should add
-        deriving (Eq, Ord)
+        deriving Ord
     """
     if TYPE_CHECKING: return
 
     ind = valueConstructors.index..type
     for valCon in valueConstructors:
-
-        # Eq
-        def valCon.__eq__(x, y) =
-            type(x) is type(y) and tuple.__eq__(x, y)
 
         # Ord
         def valCon.__lt__(x, y) =

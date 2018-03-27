@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa58d769a
+# __coconut_hash__ = 0x8ed3d76
 
-# Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev27 [Dead Parrot]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -24,16 +24,16 @@ from .typevars import *  # type: ignore
 
 
 # Deriving:
-def derivingEqOrd(*valueConstructors  # type: TType
+def derivingOrd(*valueConstructors  # type: TType
     ):
 # type: (...) -> None
     """
     The expression
-        derivingEqOrd(valueConstructor1, valueConstructor2, ...)
+        derivingOrd(valueConstructor1, valueConstructor2, ...)
     is equivalent to stating that for some data type defined as
         data dataType = valueConstructor1 ... | valueConstructor2 ... | ...
     we should add
-        deriving (Eq, Ord)
+        deriving Ord
     """
     if TYPE_CHECKING:
         return
@@ -41,12 +41,7 @@ def derivingEqOrd(*valueConstructors  # type: TType
     ind = _coconut_forward_compose(type, valueConstructors.index)
     for valCon in valueConstructors:
 
-# Eq
-        def __eq__(x, y):
-            return type(x) is type(y) and tuple.__eq__(x, y)
-
 # Ord
-        valCon.__eq__ = __eq__
         def __lt__(x, y):
             return tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
         valCon.__lt__ = __lt__

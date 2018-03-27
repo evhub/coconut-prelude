@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x59c9a2bd
+# __coconut_hash__ = 0xb38961e0
 
-# Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev27 [Dead Parrot]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -86,13 +86,19 @@ class Maybe(_coconut.object):
 class Nothing(_coconut.collections.namedtuple("Nothing", ""), Maybe):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
+
 nothing = Nothing()  # type: Maybe
 
 class Just(_coconut.collections.namedtuple("Just", "x"), Maybe):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
 
-derivingEqOrd(Nothing, Just)
+
+derivingOrd(Nothing, Just)
 
 if TYPE_CHECKING:
     def maybe(default,  # type: Tb
@@ -154,6 +160,8 @@ class Either(_coconut.object):
 class Left(_coconut.collections.namedtuple("Left", "x"), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     @staticmethod
     def __bool__():
 # type: (...) -> bool
@@ -167,8 +175,11 @@ class Left(_coconut.collections.namedtuple("Left", "x"), Either):
 class Right(_coconut.collections.namedtuple("Right", "x"), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
 
-derivingEqOrd(Left, Right)
+
+derivingOrd(Left, Right)
 
 if TYPE_CHECKING:
     def either(left_func,  # type: _coconut.typing.Callable[[Ta], Tc]
@@ -223,6 +234,8 @@ class Ordering(_coconut.object):
 class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     @staticmethod
     def __bool__():
 # type: (...) -> bool
@@ -231,16 +244,21 @@ class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
 class EQ(_coconut.collections.namedtuple("EQ", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
+
 
 class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     @staticmethod
     def __bool__():
 # type: (...) -> bool
         return True
 
-derivingEqOrd(LT, EQ, GT)
+derivingOrd(LT, EQ, GT)
 derivingBoundedEnum(LT, EQ, GT)
 
 lt = LT()  # type: Ordering
@@ -560,7 +578,6 @@ if TYPE_CHECKING:
     ):
 # type: (...) -> Rational
         return _coconut.Ellipsis
-
 else:
     @_coconut_tco
     def toRational(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -794,17 +811,14 @@ realToFrac = toRational
 Monoid = T.Iterable
 TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
-class MEmpty(_coconut.collections.namedtuple("MEmpty", ""), _coconut.object):
+class Mempty(_coconut.collections.namedtuple("Mempty", ""), _coconut.object):
     """
     -- mempty is overridden by the __mempty__ method
     """
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
-    @staticmethod
-    def __mempty__():
-# type: (...) -> MEmpty
-        return mempty
-
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     @staticmethod
     @_coconut_tco
     def mempty_as(M  # type: TMonoid
@@ -814,7 +828,7 @@ class MEmpty(_coconut.collections.namedtuple("MEmpty", ""), _coconut.object):
             return _coconut_tail_call(M.__mempty__)  # type: ignore
         return _coconut_tail_call(makedata, type(M))
 
-mempty = MEmpty()  # type: T.Any
+mempty = Mempty()  # type: T.Any
 
 @_coconut_tco
 def mappend(x,  # type: TMonoid
@@ -887,6 +901,8 @@ else:
         """
         __slots__ = ()
         __ne__ = _coconut.object.__ne__
+        def __eq__(self, other):
+            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
         def __join__(self):
 # type: (...) -> T.Any
             return self.val
@@ -994,6 +1010,8 @@ else:
         """
         __slots__ = ()
         __ne__ = _coconut.object.__ne__
+        def __eq__(self, other):
+            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
         @staticmethod
         def __bool__():
 # type: (...) -> bool
@@ -1099,7 +1117,7 @@ else:
             x2 <- m2
             ...
             func(x1, x2, ...)
-        or equivalently, do can also be used as a decorator where
+        or do can also be used as a decorator such that
             @do$([m1, m2, ...])
             def func(x1, x2, ...) =
                 ...
@@ -1282,15 +1300,16 @@ def asTypeOf(x,  # type: Ta
     if TYPE_CHECKING:
         return x
 
-    for i in takewhile(lambda i: i < asTypeOf.RECURSION_LIMIT, count()):
-        if (isinstance)(x, pure):
-            x = x.pure_as(y)
-        elif (isinstance)(x, fail):
-            x = x.fail_as(y)
-        elif (isinstance)(x, MEmpty):
-            x = x.mempty_as(y)
-        else:
-            break
+    if not (isinstance)(y, (pure, fail, Mempty)):
+        for i in takewhile(lambda i: i < asTypeOf.RECURSION_LIMIT, count()):
+            if (isinstance)(x, pure):
+                x = x.pure_as(y)
+            elif (isinstance)(x, fail):
+                x = x.fail_as(y)
+            elif (isinstance)(x, Mempty):
+                x = x.mempty_as(y)
+            else:
+                break
     return x
 
 asTypeOf.RECURSION_LIMIT = 3  # type: ignore
@@ -1712,6 +1731,8 @@ lex = NotImplemented
 class IO(_coconut.collections.namedtuple("IO", "io_func"), _coconut.object):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
+    def __eq__(self, other):
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     @staticmethod
     @_coconut_tco
     def __pure__(x  # type: Ta

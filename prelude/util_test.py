@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x417f2f6d
+# __coconut_hash__ = 0x7bdb30c8
 
-# Compiled with Coconut version 1.3.1-post_dev26 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev27 [Dead Parrot]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -30,6 +30,8 @@ def test_definesBind():
     class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", "func"), _coconut.object):
         __slots__ = ()
         __ne__ = _coconut.object.__ne__
+        def __eq__(self, other):
+            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
         @staticmethod
         @_coconut_tco
         def __pure__(x  # type: Ta

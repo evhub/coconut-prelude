@@ -58,7 +58,7 @@ nothing: Maybe = Nothing()
 
 data Just(x) from Maybe
 
-derivingEqOrd(Nothing, Just)
+derivingOrd(Nothing, Just)
 
 if TYPE_CHECKING:
     def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb =
@@ -85,7 +85,7 @@ data Left(x) from Either:
 
 data Right(x) from Either
 
-derivingEqOrd(Left, Right)
+derivingOrd(Left, Right)
 
 if TYPE_CHECKING:
     def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc =
@@ -111,7 +111,7 @@ data GT() from Ordering:
     @staticmethod
     def __bool__() -> bool = True
 
-derivingEqOrd(LT, EQ, GT)
+derivingOrd(LT, EQ, GT)
 derivingBoundedEnum(LT, EQ, GT)
 
 lt: Ordering = LT()
@@ -304,7 +304,6 @@ Real = Num
 if TYPE_CHECKING:
     def toRational(real: Real) -> Rational =
         ...
-
 else:
     def toRational(real is float) =
         Rational.from_float(real)
@@ -464,20 +463,17 @@ realToFrac = toRational
 Monoid = T.Iterable
 TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
-data MEmpty():
+data Mempty():
     """
     -- mempty is overridden by the __mempty__ method
     """
-    @staticmethod
-    def __mempty__() -> MEmpty = mempty
-
     @staticmethod
     def mempty_as(M: TMonoid) -> TMonoid =
         if M `hasattr` "__mempty__":
             return M.__mempty__()  # type: ignore
         makedata(type(M))
 
-mempty: T.Any = MEmpty()
+mempty: T.Any = Mempty()
 
 def mappend(x: TMonoid, y: TMonoid) -> TMonoid =
     """
@@ -683,7 +679,7 @@ else:
             x2 <- m2
             ...
             func(x1, x2, ...)
-        or equivalently, do can also be used as a decorator where
+        or do can also be used as a decorator such that
             @do$([m1, m2, ...])
             def func(x1, x2, ...) =
                 ...
@@ -719,12 +715,14 @@ foldl1 = reduce
 def foldr1(func: (Ta, Ta) -> Ta, xs: Foldable[Ta]) -> Ta =
     reduce((x, y) -> func(y, x), reversed(xs))
 
-def null(xs: Foldable[Ta]) -> bool = len(xs) == 0
+def null(xs: Foldable[Ta]) -> bool =
+    len(xs) == 0
 
 length: Foldable -> int
 length = len
 
-def elem(e: Ta, xs: Foldable[Ta]) -> bool = e in xs
+def elem(e: Ta, xs: Foldable[Ta]) -> bool =
+    e in xs
 
 maximum: Foldable[TOrd] -> TOrd
 maximum = _max
@@ -790,15 +788,16 @@ def asTypeOf(x: Ta, y: Ta) -> Ta:
     """
     if TYPE_CHECKING: return x
 
-    for i in count() |> takewhile$(i -> i < asTypeOf.RECURSION_LIMIT):
-        if x `isinstance` pure:
-            x = x.pure_as(y)
-        elif x `isinstance` fail:
-            x = x.fail_as(y)
-        elif x `isinstance` MEmpty:
-            x = x.mempty_as(y)
-        else:
-            break
+    if not y `isinstance` (pure, fail, Mempty):
+        for i in count() |> takewhile$(i -> i < asTypeOf.RECURSION_LIMIT):
+            if x `isinstance` pure:
+                x = x.pure_as(y)
+            elif x `isinstance` fail:
+                x = x.fail_as(y)
+            elif x `isinstance` Mempty:
+                x = x.mempty_as(y)
+            else:
+                break
     return x
 
 asTypeOf.RECURSION_LIMIT = 3  # type: ignore
