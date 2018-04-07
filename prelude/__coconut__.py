@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 1.3.1-post_dev27 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev28 [Dead Parrot]
 
 """Built-in Coconut utilities."""
 
@@ -141,7 +141,7 @@ class _coconut(object):
         abc = collections
     else:
         import collections.abc as abc
-    Ellipsis, Exception, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, classmethod, dict, enumerate, filter, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, map, min, max, next, object, property, range, reversed, set, slice, str, sum, super, tuple, zip, repr, bytearray = Ellipsis, Exception, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, classmethod, dict, enumerate, filter, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, map, min, max, next, object, property, range, reversed, set, slice, str, sum, super, tuple, zip, staticmethod(repr), bytearray
+    Ellipsis, Exception, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, classmethod, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, map, min, max, next, object, property, range, reversed, set, slice, str, sum, super, tuple, zip, repr, bytearray = Ellipsis, Exception, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, classmethod, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, map, min, max, next, object, property, range, reversed, set, slice, str, sum, super, tuple, zip, staticmethod(repr), bytearray
 def _coconut_NamedTuple(name, fields):
     return _coconut.collections.namedtuple(name, [x for x, t in fields])
 class MatchError(Exception):
@@ -439,7 +439,8 @@ class enumerate(_coconut.enumerate):
     def __fmap__(self, func):
         return _coconut_map(func, self)
 class count(object):
-    """count(start, step) returns an infinite iterator starting at start and increasing by step."""
+    """count(start, step) returns an infinite iterator starting at start and increasing by step.
+    If step is set to 0, count will infinitely repeat its first argument."""
     __slots__ = ("start", "step")
     def __init__(self, start=0, step=1):
         self.start = start
@@ -447,27 +448,38 @@ class count(object):
     def __iter__(self):
         while True:
             yield self.start
-            self.start += self.step
+            if self.step:
+                self.start += self.step
     def __contains__(self, elem):
-        return elem >= self.start and (elem - self.start) % self.step == 0
+        if not self.step:
+            return elem == self.start
+        if elem < self.start:
+            return False
+        return (elem - self.start) % self.step == 0
     def __getitem__(self, index):
         if _coconut.isinstance(index, _coconut.slice) and (index.start is None or index.start >= 0) and (index.stop is None or index.stop >= 0):
             if index.stop is None:
                 return self.__class__(self.start + (index.start if index.start is not None else 0), self.step * (index.step if index.step is not None else 1))
-            if _coconut.isinstance(self.start, _coconut.int) and _coconut.isinstance(self.step, _coconut.int):
+            if self.step and _coconut.isinstance(self.start, _coconut.int) and _coconut.isinstance(self.step, _coconut.int):
                 return _coconut.range(self.start + self.step * (index.start if index.start is not None else 0), self.start + self.step * index.stop, self.step * (index.step if index.step is not None else 1))
             return _coconut_map(self.__getitem__, _coconut.range(index.start if index.start is not None else 0, index.stop, index.step if index.step is not None else 1))
-        if index >= 0:
-            return self.start + self.step * index
-        raise _coconut.IndexError("count indices must be positive")
+        if index < 0:
+            raise _coconut.IndexError("count indices must be positive")
+        return self.start + self.step * index if self.step else self.start
     def count(self, elem):
         """Count the number of times elem appears in the count."""
+        if not self.step:
+            return _coconut.float("inf") if elem == self.start else 0
         return int(elem in self)
     def index(self, elem):
         """Find the index of elem in the count."""
         if elem not in self:
-            raise _coconut.ValueError(_coconut.repr(elem) + " is not in count")
-        return (elem - self.start) // self.step
+            raise _coconut.ValueError(_coconut.repr(elem) + " not in " + _coconut.repr(self))
+        return (elem - self.start) // self.step if self.step else 0
+    def __reversed__(self):
+        if not self.step:
+            return self
+        raise _coconut.TypeError(repr(self) + " object is not reversible")
     def __repr__(self):
         return "count(%r, %r)" % (self.start, self.step)
     def __hash__(self):

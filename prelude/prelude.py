@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb38961e0
+# __coconut_hash__ = 0xdc77dbd2
 
-# Compiled with Coconut version 1.3.1-post_dev27 [Dead Parrot]
+# Compiled with Coconut version 1.3.1-post_dev28 [Dead Parrot]
 
 # Coconut Header: -------------------------------------------------------------
 
