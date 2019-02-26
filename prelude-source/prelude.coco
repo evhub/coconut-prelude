@@ -62,7 +62,7 @@ derivingOrd(Nothing, Just)
 
 if TYPE_CHECKING:
     def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb =
-        ...
+        ...  # type: ignore
 else:
     def maybe(default, _, Nothing()) = default
 
@@ -89,7 +89,7 @@ derivingOrd(Left, Right)
 
 if TYPE_CHECKING:
     def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc =
-        ...
+        ...  # type: ignore
 else:
     def either(left_func, _, Left(x)) = left_func(x)
 
@@ -151,7 +151,7 @@ TOrd = T.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x: Ord, y: Ord) -> Ordering =
-        ...
+        ...  # type: ignore
 else:
     def compare(x, y if x == y) = eq
 
@@ -191,7 +191,7 @@ def enumFromThen(first: TEnum, second: TEnum) -> TEnum$[] =
 
 def enumFromTo(first: TEnum, last: TEnum) -> TEnum$[] =
     dist = fromEnum(last) - fromEnum(first)
-    iterate(succ, first)$[:dist+1] if dist >= 0 else ()
+    iterate(succ, first)$[:dist+1] if dist >= 0 else ()  # type: ignore
 
 def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> TEnum$[] =
     step = fromEnum(second) - fromEnum(first)
@@ -286,7 +286,7 @@ abs = _abs
 
 if TYPE_CHECKING:
     def signum(x: Num) -> int =
-        ...
+        ...  # type: ignore
 else:
     def signum(0) = 0
 
@@ -303,7 +303,7 @@ Real = Num
 
 if TYPE_CHECKING:
     def toRational(real: Real) -> Rational =
-        ...
+        ...  # type: ignore
 else:
     def toRational(real is float) =
         Rational.from_float(real)
@@ -440,7 +440,7 @@ gcd = abs.._fractions.gcd
 
 if TYPE_CHECKING:
     def lcm(x: int, y: int) -> int =
-        ...
+        ...  # type: ignore
 else:
     def lcm(_, 0) = 0
 
@@ -524,7 +524,7 @@ TApp = T.TypeVar("TApp", bound=Applicative)
 
 if TYPE_CHECKING:
     def pure(x: Ta) -> T.Any =
-        ...
+        ...  # type: ignore
 else:
     data pure(val):
         """
@@ -601,7 +601,7 @@ return_ = pure
 
 if TYPE_CHECKING:
     def fail(msg: str) -> T.Any =
-        ...
+        ...  # type: ignore
 else:
     data fail(msg: str):
         """
@@ -660,7 +660,7 @@ def join(ms: Monad[TMonad]) -> TMonad =
 
 if TYPE_CHECKING:
     def do(monads: TMonad[], func: -> TMonad) -> TMonad =
-        ...
+        ...  # type: ignore
 else:
     def do([], func) = func()
 
@@ -739,8 +739,11 @@ product = reduce$(*)
 #### Traversable:
 Traversable = T.Iterable
 
+def _snoc(xs: Ta$[], x: Ta) -> Ta$[] =
+    (::)(xs, (x,))
+
 def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] =
-    reduce(liftA2((xs, x) -> xs :: (x,)), fs, pure(())) |> fmap$(xs -> makedata(type(fs), *xs))
+    reduce(liftA2(_snoc), fs, pure(())) |> fmap$(xs -> makedata(type(fs), *xs))
 
 traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
 traverse = sequenceA..fmap
@@ -917,7 +920,7 @@ def replicate(n: int, x: Ta) -> Ta$[] =
 
 if TYPE_CHECKING:
     def cycle(xs: Ta[]) -> Ta$[] =
-        ...
+        ...  # type: ignore
 else:
     @recursive_iterator
     def cycle(xs if len(xs) > 0) =
@@ -944,7 +947,7 @@ dropWhile = dropwhile
 
 if TYPE_CHECKING:
     def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]] =
-        ...
+        ...  # type: ignore
 else:
     def span(_, []) = ([], [])
 
@@ -1192,7 +1195,7 @@ def readIO(s: str) -> IO =
     IO(read$(s))
 
 def readLn() -> IO =
-    getLine() `bind` readIO
+    getLine() `bind` readIO  # type: ignore
 
 
 

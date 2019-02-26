@@ -1,21 +1,21 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x17d169d
+# __coconut_hash__ = 0x5f1d578a
 
-# Compiled with Coconut version 1.3.1-post_dev28 [Dead Parrot]
+# Compiled with Coconut version 1.4.0-post_dev10 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import print_function, absolute_import, unicode_literals, division
+from __future__ import generator_stop
 import sys as _coconut_sys, os.path as _coconut_os_path
 _coconut_file_path = _coconut_os_path.dirname(_coconut_os_path.abspath(__file__))
-_coconut_cached_module = _coconut_sys.modules.get(str("__coconut__"))
+_coconut_cached_module = _coconut_sys.modules.get("__coconut__")
 if _coconut_cached_module is not None and _coconut_os_path.dirname(_coconut_cached_module.__file__) != _coconut_file_path:
-    del _coconut_sys.modules[str("__coconut__")]
+    del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_path)
-from __coconut__ import _coconut, _coconut_NamedTuple, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_pipe, _coconut_star_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial
+from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_pipe, _coconut_star_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_addpattern, _coconut_sentinel
 from __coconut__ import *
-_coconut_sys.path.remove(_coconut_file_path)
+_coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
 
@@ -24,9 +24,7 @@ from .typevars import *  # type: ignore
 
 
 # Deriving:
-def derivingOrd(*valueConstructors  # type: TType
-    ):
-# type: (...) -> None
+def derivingOrd(*valueConstructors: 'TType') -> 'None':
     """
     The expression
         derivingOrd(valueConstructor1, valueConstructor2, ...)
@@ -55,9 +53,7 @@ def derivingOrd(*valueConstructors  # type: TType
             return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
         valCon.__gt__ = __gt__
-def derivingBoundedEnum(*valueConstructors  # type: TType
-    ):
-# type: (...) -> None
+def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
     """
     The expression
         derivingBoundedEnum(valueConstructor1, valueConstructor2, ...)
@@ -99,9 +95,7 @@ def derivingBoundedEnum(*valueConstructors  # type: TType
 
 # Monads:
         valCon.__sub__ = __sub__
-def definesBind(dataType  # type: TType
-    ):
-# type: (...) -> TType
+def definesBind(dataType: 'TType') -> 'TType':
     """
     Decorator to declare that a data type defines __bind__
     instead of __join__. Will also create an __fmap__ method
@@ -127,9 +121,7 @@ def definesBind(dataType  # type: TType
     dataType.__join__ = __join__
     return dataType
 
-def definesReturn(dataType  # type: TType
-    ):
-# type: (...) -> TType
+def definesReturn(dataType: 'TType') -> 'TType':
     """
     A simple decorator to set __pure__ equal to __return__.
     If used with definesBind, definesReturn must be applied

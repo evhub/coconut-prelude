@@ -8,13 +8,13 @@ install: build
 
 .PHONY: build
 build:
-	coconut setup.coco --strict
-	coconut "prelude-source" prelude --strict --jobs sys --mypy --python-version 3.6
+	coconut setup.coco --strict --target 3.6
+	coconut "prelude-source" prelude --strict --target 3.6 --jobs sys --mypy
 
-.PHONY: build2
-build2:
+.PHONY: build-univ
+build-univ:
 	coconut setup.coco --strict
-	coconut "prelude-source" prelude --strict --jobs sys --mypy
+	coconut "prelude-source" prelude --strict --jobs sys
 
 .PHONY: setup
 setup:
@@ -22,7 +22,7 @@ setup:
 	pip install -U "coconut-develop[watch,cPyparsing,jobs,mypy]"
 
 .PHONY: upload
-upload: clean install
+upload: clean build-univ
 	python3 setup.py sdist bdist_wheel
 	pip3 install -U twine
 	twine upload ./dist/*
@@ -36,4 +36,4 @@ clean:
 
 .PHONY: watch
 watch: install
-	coconut "prelude-source" prelude --watch --strict --mypy
+	coconut "prelude-source" prelude --watch --strict --target 3.6 --mypy

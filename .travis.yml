@@ -9,8 +9,8 @@ python:
 install:
 - make setup
 script:
-- make build2
 - make test
+- make build-univ
 deploy:
   provider: pypi
   edge:
