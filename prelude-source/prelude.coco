@@ -1014,10 +1014,10 @@ lines = .splitlines()
 words: str -> str[]
 words = .split()
 
-def unlines(strs: str[]) -> str =
+def unlines(strs: str$[]) -> str =
     "".join(s + "\n" for s in strs)
 
-unwords: str[] -> str
+unwords: str$[] -> str
 unwords = " ".join
 
 
@@ -1038,8 +1038,8 @@ show = repr
 def shows(x: Show) -> ShowS =
     s -> repr(x) + s
 
-showList: Show[] -> ShowS
-showList = shows
+def showList(xs: Show$[]) -> ShowS =
+    s -> repr(list(xs)) + s
 
 def showString(x: str) -> ShowS =
     s -> x + s

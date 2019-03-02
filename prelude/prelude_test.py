@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa782ccef
+# __coconut_hash__ = 0x577c2370
 
-# Compiled with Coconut version 1.4.0-post_dev10 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.0-post_dev14 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -397,6 +397,7 @@ def test_Converting_to_String():
     assert show("abc") == "'abc'"
     assert ((shows)(3))("abc") == "3abc"
     assert ((showList)([1]))("abc") == "[1]abc"
+    assert ((showList)((_coconut_func() for _coconut_func in (lambda: 1, lambda: 2))))("") == "[1, 2]"
     assert ((showString)("abc"))("def") == "abcdef"
     assert ((showChar)("a"))("bcd") == "abcd"
     assert (showParen(True, showString("abc")))("def") == "(abc)def"

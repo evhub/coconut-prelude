@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xbcfb0841
+# __coconut_hash__ = 0x231ab8b6
 
-# Compiled with Coconut version 1.4.0-post_dev10 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.0-post_dev14 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -1449,10 +1449,10 @@ words: '_coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]'
 words = _coconut.operator.methodcaller("split")
 
 @_coconut_tco
-def unlines(strs: '_coconut.typing.Sequence[str]') -> 'str':
+def unlines(strs: '_coconut.typing.Iterable[str]') -> 'str':
     return _coconut_tail_call("".join, (s + "\n" for s in strs))
 
-unwords: '_coconut.typing.Callable[[_coconut.typing.Sequence[str]], str]'
+unwords: '_coconut.typing.Callable[[_coconut.typing.Iterable[str]], str]'
 unwords = " ".join
 
 
@@ -1473,8 +1473,8 @@ show = repr
 def shows(x: 'Show') -> 'ShowS':
     return lambda s: repr(x) + s
 
-showList: '_coconut.typing.Callable[[_coconut.typing.Sequence[Show]], ShowS]'
-showList = shows
+def showList(xs: '_coconut.typing.Iterable[Show]') -> 'ShowS':
+    return lambda s: repr(list(xs)) + s
 
 def showString(x: 'str') -> 'ShowS':
     return lambda s: x + s

@@ -367,6 +367,7 @@ def test_Converting_to_String():
     assert show("abc") == "'abc'"
     assert 3 |> shows <| "abc" == "3abc"
     assert [1] |> showList <| "abc" == "[1]abc"
+    assert (|1, 2|) |> showList <| "" == "[1, 2]"
     assert "abc" |> showString <| "def" == "abcdef"
     assert "a" |> showChar <| "bcd" == "abcd"
     assert showString("abc") |> showParen$(True) <| "def" == "(abc)def"
