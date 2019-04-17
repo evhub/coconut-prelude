@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x90348fb2
+# __coconut_hash__ = 0xca3a303e
 
-# Compiled with Coconut version 1.4.0-post_dev14 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.0-post_dev30 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 from builtins import chr, filter, hex, input, int, map, object, oct, open, print, range, str, zip, filter, reversed, enumerate
-py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_zip, py_filter, py_reversed, py_enumerate = chr, hex, input, int, map, object, oct, open, print, range, str, zip, filter, reversed, enumerate
+py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, hex, input, int, map, object, oct, open, print, range, str, zip, filter, reversed, enumerate, repr
 _coconut_str = str
 class _coconut:
     import collections, copy, functools, types, itertools, operator, weakref, threading
@@ -65,29 +65,41 @@ class _coconut_base_compose:
     def __init__(self, func, *funcstars):
         self.func = func
         self.funcstars = []
-        for f, star in funcstars:
+        for f, stars in funcstars:
             if isinstance(f, _coconut_base_compose):
-                self.funcstars.append((f.func, star))
+                self.funcstars.append((f.func, stars))
                 self.funcstars += f.funcstars
             else:
-                self.funcstars.append((f, star))
+                self.funcstars.append((f, stars))
     def __call__(self, *args, **kwargs):
         arg = self.func(*args, **kwargs)
-        for f, star in self.funcstars:
-            arg = f(*arg) if star else f(arg)
+        for f, stars in self.funcstars:
+            if stars == 0:
+                arg = f(arg)
+            elif stars == 1:
+                arg = f(*arg)
+            elif stars == 2:
+                arg = f(**arg)
+            else:
+                raise ValueError()
         return arg
     def __repr__(self):
-        return _coconut.repr(self.func) + " " + " ".join(("..*> " if star else "..> ") + _coconut.repr(f) for f, star in self.funcstars)
+        return _coconut.repr(self.func) + " " + " ".join(("..*> " if star == 1 else "..**>" if star == 2 else "..> ") + _coconut.repr(f) for f, star in self.funcstars)
     def __reduce__(self):
         return (self.__class__, (self.func,) + _coconut.tuple(self.funcstars))
-def _coconut_forward_compose(func, *funcs): return _coconut_base_compose(func, *((f, False) for f in funcs))
+def _coconut_forward_compose(func, *funcs): return _coconut_base_compose(func, *((f, 0) for f in funcs))
 def _coconut_back_compose(*funcs): return _coconut_forward_compose(*_coconut.reversed(funcs))
-def _coconut_forward_star_compose(func, *funcs): return _coconut_base_compose(func, *((f, True) for f in funcs))
+def _coconut_forward_star_compose(func, *funcs): return _coconut_base_compose(func, *((f, 1) for f in funcs))
 def _coconut_back_star_compose(*funcs): return _coconut_forward_star_compose(*_coconut.reversed(funcs))
+def _coconut_forward_dubstar_compose(func, *funcs): return _coconut_base_compose(func, *((f, 2) for f in funcs))
+def _coconut_back_dubstar_compose(*funcs): return _coconut_forward_dubstar_compose(*_coconut.reversed(funcs))
 def _coconut_pipe(x, f): return f(x)
 def _coconut_star_pipe(xs, f): return f(*xs)
+def _coconut_dubstar_pipe(kws, f): return f(**kws)
 def _coconut_back_pipe(f, x): return f(x)
 def _coconut_back_star_pipe(f, xs): return f(*xs)
+def _coconut_back_dubstar_pipe(f, kws): return f(**kws)
+def _coconut_assert(cond, msg=None): assert cond, msg if msg is not None else "(assert) got falsey value " + _coconut.repr(cond)
 def _coconut_bool_and(a, b): return a and b
 def _coconut_bool_or(a, b): return a or b
 def _coconut_none_coalesce(a, b): return a if a is not None else b
@@ -109,13 +121,15 @@ class reiterable:
     __slots__ = ("iter",)
     def __init__(self, iterable):
         self.iter = iterable
+    def _get_new_iter(self):
+        self.iter, new_iter = _coconut_tee(self.iter)
+        return new_iter
     def __iter__(self):
-        self.iter, out = _coconut_tee(self.iter)
-        return _coconut.iter(out)
+        return _coconut.iter(self._get_new_iter())
     def __getitem__(self, index):
-        return _coconut_igetitem(_coconut.iter(self), index)
+        return _coconut_igetitem(self._get_new_iter(), index)
     def __reversed__(self):
-        return _coconut_reversed(_coconut.iter(self))
+        return _coconut_reversed(self._get_new_iter())
     def __len__(self):
         return _coconut.len(self.iter)
     def __repr__(self):
@@ -123,8 +137,7 @@ class reiterable:
     def __reduce__(self):
         return (self.__class__, (self.iter,))
     def __copy__(self):
-        self.iter, new_iter = _coconut_tee(self.iter)
-        return self.__class__(new_iter)
+        return self.__class__(self._get_new_iter())
     def __fmap__(self, func):
         return _coconut_map(func, self)
 class scan:
@@ -335,10 +348,15 @@ class count:
         return (elem - self.start) % self.step == 0
     def __getitem__(self, index):
         if _coconut.isinstance(index, _coconut.slice) and (index.start is None or index.start >= 0) and (index.stop is None or index.stop >= 0):
+            new_start, new_step = self.start, self.step
+            if self.step and index.start is not None:
+                new_start += self.step * index.start
+            if self.step and index.step is not None:
+                new_step *= index.step
             if index.stop is None:
-                return self.__class__(self.start + (index.start if index.start is not None else 0), self.step * (index.step if index.step is not None else 1))
+                return self.__class__(new_start, new_step)
             if self.step and _coconut.isinstance(self.start, _coconut.int) and _coconut.isinstance(self.step, _coconut.int):
-                return _coconut.range(self.start + self.step * (index.start if index.start is not None else 0), self.start + self.step * index.stop, self.step * (index.step if index.step is not None else 1))
+                return _coconut.range(new_start, self.start + self.step * index.stop, new_step)
             return _coconut_map(self.__getitem__, _coconut.range(index.start if index.start is not None else 0, index.stop, index.step if index.step is not None else 1))
         if index < 0:
             raise _coconut.IndexError("count indices must be positive")
@@ -562,6 +580,9 @@ def fmap(func, obj):
     Override by defining obj.__fmap__(func)."""
     if _coconut.hasattr(obj, "__fmap__"):
         return obj.__fmap__(func)
+    if obj.__class__.__module__ == "numpy":
+        from numpy import vectorize
+        return vectorize(func)(obj)
     return _coconut_makedata(obj.__class__, *(_coconut_starmap(func, obj.items()) if _coconut.isinstance(obj, _coconut.abc.Mapping) else _coconut_map(func, obj)))
 def memoize(maxsize=None, *args, **kwargs):
     """Decorator that memoizes a function,

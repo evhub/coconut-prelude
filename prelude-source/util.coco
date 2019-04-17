@@ -1,5 +1,5 @@
 # Imports:
-from .typevars import *  # type: ignore
+from prelude.typevars import *  # type: ignore
 
 
 # Deriving:
