@@ -1,1 +1,1 @@
-from prelude.prelude import *  # type: ignore
+from prelude.main import *  # type: ignore
