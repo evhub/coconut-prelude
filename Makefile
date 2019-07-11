@@ -2,6 +2,9 @@
 test: install
 	pytest --strict -s ./prelude
 
+.PHONY: clean-install
+clean-install: clean install
+
 .PHONY: install
 install: build
 	pip install -e .
