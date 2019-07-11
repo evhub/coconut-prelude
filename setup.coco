@@ -1,4 +1,4 @@
-import setuptools
+import setuptools  # type: ignore
 
 VERSION = "0.1.7"
 

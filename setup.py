@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xaf805c42
+# __coconut_hash__ = 0xc0aa2fcb
 
 # Compiled with Coconut version 1.4.0-post_dev42 [Ernest Scribbler]
 
@@ -629,7 +629,7 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_makedata, _coc
 
 # Compiled Coconut: -----------------------------------------------------------
 
-import setuptools
+import setuptools  # type: ignore
 
 VERSION = "0.1.7"
 
