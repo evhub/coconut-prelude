@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xdcd7e79e
+# __coconut_hash__ = 0xa8fa329c
 
-# Compiled with Coconut version 1.4.0-post_dev42 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.1 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -817,7 +817,7 @@ def mconcat(ms: '_coconut.typing.Sequence[TMonoid]') -> 'TMonoid':
 #### Functor:
 Functor = T.Iterable
 
-fmap: '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], Functor[Ta]], Functor[Tb]]'
+fmap: '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], Functor[Ta]], Functor[Tb]]'  # type: ignore
 fmap = _fmap
 
 @_coconut_tco
@@ -1508,7 +1508,7 @@ def showParen(parens: 'bool', showFunc: 'ShowS') -> 'ShowS':
 ## Converting from String:
 ReadS = NotImplemented
 
-Read = T.Union[str, int, float, bool, None, tuple, list, dict]
+Read = T.Union[str, int, float, bool, None, tuple, list, dict,]
 
 readsPrec = NotImplemented
 

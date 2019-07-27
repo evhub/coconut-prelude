@@ -508,7 +508,7 @@ def mconcat(ms: TMonoid[]) -> TMonoid =
 #### Functor:
 Functor = T.Iterable
 
-fmap: (Ta -> Tb, Functor[Ta]) -> Functor[Tb]
+fmap: (Ta -> Tb, Functor[Ta]) -> Functor[Tb]  # type: ignore
 fmap = _fmap
 
 def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
