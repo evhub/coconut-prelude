@@ -24,7 +24,7 @@ build-univ:
 	coconut "prelude-source" prelude --strict --jobs sys
 
 .PHONY: docs
-docs: install-univ
+docs: install
 	pydoc -w prelude
 	pydoc -w prelude.main
 	pydoc -w prelude.util
@@ -35,7 +35,7 @@ setup:
 	pip install -U "coconut-develop[watch,cPyparsing,jobs,mypy]"
 
 .PHONY: upload
-upload: clean docs
+upload: clean install-univ
 	python3 setup.py sdist bdist_wheel
 	pip3 install -U twine
 	twine upload ./dist/*

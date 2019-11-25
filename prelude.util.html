@@ -10,7 +10,7 @@
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cutil.py">c:\users\evanj\documents\github\coconut-prelude\prelude\util.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x9a5db40c</tt></p>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x81f977c1</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -30,19 +30,19 @@
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-chr"><strong>chr</strong></a>(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
- <dl><dt><a name="-definesBind"><strong>definesBind</strong></a>(dataType)</dt><dd><tt>Decorator&nbsp;to&nbsp;declare&nbsp;that&nbsp;a&nbsp;data&nbsp;type&nbsp;defines&nbsp;__bind__<br>
+ <dl><dt><a name="-definesBind"><strong>definesBind</strong></a>(dataType:'TType') -&gt; 'TType'</dt><dd><tt>Decorator&nbsp;to&nbsp;declare&nbsp;that&nbsp;a&nbsp;data&nbsp;type&nbsp;defines&nbsp;__bind__<br>
 instead&nbsp;of&nbsp;__join__.&nbsp;Will&nbsp;also&nbsp;create&nbsp;an&nbsp;__fmap__&nbsp;method<br>
 if&nbsp;none&nbsp;exists,&nbsp;though&nbsp;then&nbsp;a&nbsp;__pure__&nbsp;method&nbsp;is&nbsp;required.</tt></dd></dl>
- <dl><dt><a name="-definesReturn"><strong>definesReturn</strong></a>(dataType)</dt><dd><tt>A&nbsp;simple&nbsp;decorator&nbsp;to&nbsp;set&nbsp;__pure__&nbsp;equal&nbsp;to&nbsp;__return__.<br>
+ <dl><dt><a name="-definesReturn"><strong>definesReturn</strong></a>(dataType:'TType') -&gt; 'TType'</dt><dd><tt>A&nbsp;simple&nbsp;decorator&nbsp;to&nbsp;set&nbsp;__pure__&nbsp;equal&nbsp;to&nbsp;__return__.<br>
 If&nbsp;used&nbsp;with&nbsp;definesBind,&nbsp;definesReturn&nbsp;must&nbsp;be&nbsp;applied<br>
 first&nbsp;(i.e.&nbsp;be&nbsp;a&nbsp;more&nbsp;inner&nbsp;decorator).</tt></dd></dl>
- <dl><dt><a name="-derivingBoundedEnum"><strong>derivingBoundedEnum</strong></a>(*valueConstructors)</dt><dd><tt>The&nbsp;expression<br>
+ <dl><dt><a name="-derivingBoundedEnum"><strong>derivingBoundedEnum</strong></a>(*valueConstructors:'TType') -&gt; 'None'</dt><dd><tt>The&nbsp;expression<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-derivingBoundedEnum">derivingBoundedEnum</a>(valueConstructor1,&nbsp;valueConstructor2,&nbsp;...)<br>
 is&nbsp;equivalent&nbsp;to&nbsp;stating&nbsp;that&nbsp;for&nbsp;some&nbsp;data&nbsp;type&nbsp;defined&nbsp;as<br>
 &nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;dataType&nbsp;=&nbsp;valueConstructor1&nbsp;...&nbsp;|&nbsp;valueConstructor2&nbsp;...&nbsp;|&nbsp;...<br>
 we&nbsp;should&nbsp;add<br>
 &nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;(Bounded,&nbsp;Enum)</tt></dd></dl>
- <dl><dt><a name="-derivingOrd"><strong>derivingOrd</strong></a>(*valueConstructors)</dt><dd><tt>The&nbsp;expression<br>
+ <dl><dt><a name="-derivingOrd"><strong>derivingOrd</strong></a>(*valueConstructors:'TType') -&gt; 'None'</dt><dd><tt>The&nbsp;expression<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-derivingOrd">derivingOrd</a>(valueConstructor1,&nbsp;valueConstructor2,&nbsp;...)<br>
 is&nbsp;equivalent&nbsp;to&nbsp;stating&nbsp;that&nbsp;for&nbsp;some&nbsp;data&nbsp;type&nbsp;defined&nbsp;as<br>
 &nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;dataType&nbsp;=&nbsp;valueConstructor1&nbsp;...&nbsp;|&nbsp;valueConstructor2&nbsp;...&nbsp;|&nbsp;...<br>
@@ -355,8 +355,5 @@ sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
 <strong>Tb</strong> = ~Tb<br>
 <strong>Tc</strong> = ~Tc<br>
 <strong>Td</strong> = ~Td<br>
-<strong>absolute_import</strong> = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0), 16384)<br>
-<strong>division</strong> = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 8192)<br>
-<strong>print_function</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 65536)<br>
-<strong>unicode_literals</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)</td></tr></table>
+<strong>generator_stop</strong> = _Feature((3, 5, 0, 'beta', 1), (3, 7, 0, 'alpha', 0), 524288)</td></tr></table>
 </body></html>
