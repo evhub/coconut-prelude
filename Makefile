@@ -7,7 +7,11 @@ clean-install: clean install
 
 .PHONY: install
 install: build
-	pip install -e .
+	pip install -Ue .[dev]
+
+.PHONY: install-univ
+install-univ: build-univ
+	pip install -Ue .[dev]
 
 .PHONY: build
 build:
@@ -19,13 +23,19 @@ build-univ:
 	coconut setup.coco --strict
 	coconut "prelude-source" prelude --strict --jobs sys
 
+.PHONY: docs
+docs: install-univ
+	pydoc -w prelude
+	pydoc -w prelude.main
+	pydoc -w prelude.util
+
 .PHONY: setup
 setup:
-	pip install -U setuptools pip pytest
+	pip install -U setuptools pip
 	pip install -U "coconut-develop[watch,cPyparsing,jobs,mypy]"
 
 .PHONY: upload
-upload: clean build-univ
+upload: clean docs
 	python3 setup.py sdist bdist_wheel
 	pip3 install -U twine
 	twine upload ./dist/*

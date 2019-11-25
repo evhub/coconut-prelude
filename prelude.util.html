@@ -1,0 +1,362 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module prelude.util</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="prelude.html"><font color="#ffffff">prelude</font></a>.util</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cutil.py">c:\users\evanj\documents\github\coconut-prelude\prelude\util.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x9a5db40c</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="typing.html">typing</a><br>
+</td><td width="25%" valign=top><a href="__coconut__.html">__coconut__</a><br>
+</td><td width="25%" valign=top><a href="ntpath.html">ntpath</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-chr"><strong>chr</strong></a>(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
+ <dl><dt><a name="-definesBind"><strong>definesBind</strong></a>(dataType)</dt><dd><tt>Decorator&nbsp;to&nbsp;declare&nbsp;that&nbsp;a&nbsp;data&nbsp;type&nbsp;defines&nbsp;__bind__<br>
+instead&nbsp;of&nbsp;__join__.&nbsp;Will&nbsp;also&nbsp;create&nbsp;an&nbsp;__fmap__&nbsp;method<br>
+if&nbsp;none&nbsp;exists,&nbsp;though&nbsp;then&nbsp;a&nbsp;__pure__&nbsp;method&nbsp;is&nbsp;required.</tt></dd></dl>
+ <dl><dt><a name="-definesReturn"><strong>definesReturn</strong></a>(dataType)</dt><dd><tt>A&nbsp;simple&nbsp;decorator&nbsp;to&nbsp;set&nbsp;__pure__&nbsp;equal&nbsp;to&nbsp;__return__.<br>
+If&nbsp;used&nbsp;with&nbsp;definesBind,&nbsp;definesReturn&nbsp;must&nbsp;be&nbsp;applied<br>
+first&nbsp;(i.e.&nbsp;be&nbsp;a&nbsp;more&nbsp;inner&nbsp;decorator).</tt></dd></dl>
+ <dl><dt><a name="-derivingBoundedEnum"><strong>derivingBoundedEnum</strong></a>(*valueConstructors)</dt><dd><tt>The&nbsp;expression<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-derivingBoundedEnum">derivingBoundedEnum</a>(valueConstructor1,&nbsp;valueConstructor2,&nbsp;...)<br>
+is&nbsp;equivalent&nbsp;to&nbsp;stating&nbsp;that&nbsp;for&nbsp;some&nbsp;data&nbsp;type&nbsp;defined&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;dataType&nbsp;=&nbsp;valueConstructor1&nbsp;...&nbsp;|&nbsp;valueConstructor2&nbsp;...&nbsp;|&nbsp;...<br>
+we&nbsp;should&nbsp;add<br>
+&nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;(Bounded,&nbsp;Enum)</tt></dd></dl>
+ <dl><dt><a name="-derivingOrd"><strong>derivingOrd</strong></a>(*valueConstructors)</dt><dd><tt>The&nbsp;expression<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#-derivingOrd">derivingOrd</a>(valueConstructor1,&nbsp;valueConstructor2,&nbsp;...)<br>
+is&nbsp;equivalent&nbsp;to&nbsp;stating&nbsp;that&nbsp;for&nbsp;some&nbsp;data&nbsp;type&nbsp;defined&nbsp;as<br>
+&nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;dataType&nbsp;=&nbsp;valueConstructor1&nbsp;...&nbsp;|&nbsp;valueConstructor2&nbsp;...&nbsp;|&nbsp;...<br>
+we&nbsp;should&nbsp;add<br>
+&nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;Ord</tt></dd></dl>
+ <dl><dt><a name="-hex"><strong>hex</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
+'0xc0ffee'</tt></dd></dl>
+ <dl><dt><a name="-input"><strong>input</strong></a>(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
+&nbsp;<br>
+The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
+trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
+On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-oct"><strong>oct</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
+'0o1234567'</tt></dd></dl>
+ <dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;IOError&nbsp;upon&nbsp;failure.<br>
+&nbsp;<br>
+file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
+if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
+be&nbsp;opened&nbsp;or&nbsp;an&nbsp;integer&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
+wrapped.&nbsp;(If&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;given,&nbsp;it&nbsp;is&nbsp;closed&nbsp;when&nbsp;the<br>
+returned&nbsp;I/O&nbsp;object&nbsp;is&nbsp;closed,&nbsp;unless&nbsp;closefd&nbsp;is&nbsp;set&nbsp;to&nbsp;False.)<br>
+&nbsp;<br>
+mode&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;the&nbsp;mode&nbsp;in&nbsp;which&nbsp;the&nbsp;file<br>
+is&nbsp;opened.&nbsp;It&nbsp;defaults&nbsp;to&nbsp;'r'&nbsp;which&nbsp;means&nbsp;open&nbsp;for&nbsp;reading&nbsp;in&nbsp;text<br>
+mode.&nbsp;&nbsp;Other&nbsp;common&nbsp;values&nbsp;are&nbsp;'w'&nbsp;for&nbsp;writing&nbsp;(truncating&nbsp;the&nbsp;file&nbsp;if<br>
+it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writing&nbsp;to&nbsp;a&nbsp;new&nbsp;file,&nbsp;and<br>
+'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
+append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
+In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
+dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
+current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
+mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+&nbsp;<br>
+=========&nbsp;===============================================================<br>
+Character&nbsp;Meaning<br>
+---------&nbsp;---------------------------------------------------------------<br>
+'r'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;reading&nbsp;(default)<br>
+'w'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;truncating&nbsp;the&nbsp;file&nbsp;first<br>
+'x'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;a&nbsp;new&nbsp;file&nbsp;and&nbsp;open&nbsp;it&nbsp;for&nbsp;writing<br>
+'a'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;appending&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;if&nbsp;it&nbsp;exists<br>
+'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
+'t'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
+'+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
+'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
+=========&nbsp;===============================================================<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
+access,&nbsp;the&nbsp;mode&nbsp;'w+b'&nbsp;opens&nbsp;and&nbsp;truncates&nbsp;the&nbsp;file&nbsp;to&nbsp;0&nbsp;bytes,&nbsp;while<br>
+'r+b'&nbsp;opens&nbsp;the&nbsp;file&nbsp;without&nbsp;truncation.&nbsp;The&nbsp;'x'&nbsp;mode&nbsp;implies&nbsp;'w'&nbsp;and<br>
+raises&nbsp;an&nbsp;`FileExistsError`&nbsp;if&nbsp;the&nbsp;file&nbsp;already&nbsp;exists.<br>
+&nbsp;<br>
+Python&nbsp;distinguishes&nbsp;between&nbsp;files&nbsp;opened&nbsp;in&nbsp;binary&nbsp;and&nbsp;text&nbsp;modes,<br>
+even&nbsp;when&nbsp;the&nbsp;underlying&nbsp;operating&nbsp;system&nbsp;doesn't.&nbsp;Files&nbsp;opened&nbsp;in<br>
+binary&nbsp;mode&nbsp;(appending&nbsp;'b'&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument)&nbsp;return&nbsp;contents&nbsp;as<br>
+bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;mode&nbsp;(the&nbsp;default,&nbsp;or&nbsp;when<br>
+'t'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
+returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
+platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
+&nbsp;<br>
+'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
+of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
+universal&nbsp;newlines&nbsp;mode.<br>
+&nbsp;<br>
+buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
+Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
+line&nbsp;buffering&nbsp;(only&nbsp;usable&nbsp;in&nbsp;text&nbsp;mode),&nbsp;and&nbsp;an&nbsp;integer&nbsp;&gt;&nbsp;1&nbsp;to&nbsp;indicate<br>
+the&nbsp;size&nbsp;of&nbsp;a&nbsp;fixed-size&nbsp;chunk&nbsp;buffer.&nbsp;&nbsp;When&nbsp;no&nbsp;buffering&nbsp;argument&nbsp;is<br>
+given,&nbsp;the&nbsp;default&nbsp;buffering&nbsp;policy&nbsp;works&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+*&nbsp;Binary&nbsp;files&nbsp;are&nbsp;buffered&nbsp;in&nbsp;fixed-size&nbsp;chunks;&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;buffer<br>
+&nbsp;&nbsp;is&nbsp;chosen&nbsp;using&nbsp;a&nbsp;heuristic&nbsp;trying&nbsp;to&nbsp;determine&nbsp;the&nbsp;underlying&nbsp;device's<br>
+&nbsp;&nbsp;"block&nbsp;size"&nbsp;and&nbsp;falling&nbsp;back&nbsp;on&nbsp;`io.DEFAULT_BUFFER_SIZE`.<br>
+&nbsp;&nbsp;On&nbsp;many&nbsp;systems,&nbsp;the&nbsp;buffer&nbsp;will&nbsp;typically&nbsp;be&nbsp;4096&nbsp;or&nbsp;8192&nbsp;bytes&nbsp;long.<br>
+&nbsp;<br>
+*&nbsp;"Interactive"&nbsp;text&nbsp;files&nbsp;(files&nbsp;for&nbsp;which&nbsp;isatty()&nbsp;returns&nbsp;True)<br>
+&nbsp;&nbsp;use&nbsp;line&nbsp;buffering.&nbsp;&nbsp;Other&nbsp;text&nbsp;files&nbsp;use&nbsp;the&nbsp;policy&nbsp;described&nbsp;above<br>
+&nbsp;&nbsp;for&nbsp;binary&nbsp;files.<br>
+&nbsp;<br>
+encoding&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;encoding&nbsp;used&nbsp;to&nbsp;decode&nbsp;or&nbsp;encode&nbsp;the<br>
+file.&nbsp;This&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;in&nbsp;text&nbsp;mode.&nbsp;The&nbsp;default&nbsp;encoding&nbsp;is<br>
+platform&nbsp;dependent,&nbsp;but&nbsp;any&nbsp;encoding&nbsp;supported&nbsp;by&nbsp;Python&nbsp;can&nbsp;be<br>
+passed.&nbsp;&nbsp;See&nbsp;the&nbsp;codecs&nbsp;module&nbsp;for&nbsp;the&nbsp;list&nbsp;of&nbsp;supported&nbsp;encodings.<br>
+&nbsp;<br>
+errors&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;how&nbsp;encoding&nbsp;errors&nbsp;are&nbsp;to<br>
+be&nbsp;handled---this&nbsp;argument&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;in&nbsp;binary&nbsp;mode.&nbsp;Pass<br>
+'strict'&nbsp;to&nbsp;raise&nbsp;a&nbsp;ValueError&nbsp;exception&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;encoding&nbsp;error<br>
+(the&nbsp;default&nbsp;of&nbsp;None&nbsp;has&nbsp;the&nbsp;same&nbsp;effect),&nbsp;or&nbsp;pass&nbsp;'ignore'&nbsp;to&nbsp;ignore<br>
+errors.&nbsp;(Note&nbsp;that&nbsp;ignoring&nbsp;encoding&nbsp;errors&nbsp;can&nbsp;lead&nbsp;to&nbsp;data&nbsp;loss.)<br>
+See&nbsp;the&nbsp;documentation&nbsp;for&nbsp;codecs.register&nbsp;or&nbsp;run&nbsp;'help(codecs.Codec)'<br>
+for&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;permitted&nbsp;encoding&nbsp;error&nbsp;strings.<br>
+&nbsp;<br>
+newline&nbsp;controls&nbsp;how&nbsp;universal&nbsp;newlines&nbsp;works&nbsp;(it&nbsp;only&nbsp;applies&nbsp;to&nbsp;text<br>
+mode).&nbsp;It&nbsp;can&nbsp;be&nbsp;None,&nbsp;'',&nbsp;'\n',&nbsp;'\r',&nbsp;and&nbsp;'\r\n'.&nbsp;&nbsp;It&nbsp;works&nbsp;as<br>
+follows:<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;input,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;universal&nbsp;newlines&nbsp;mode&nbsp;is<br>
+&nbsp;&nbsp;enabled.&nbsp;Lines&nbsp;in&nbsp;the&nbsp;input&nbsp;can&nbsp;end&nbsp;in&nbsp;'\n',&nbsp;'\r',&nbsp;or&nbsp;'\r\n',&nbsp;and<br>
+&nbsp;&nbsp;these&nbsp;are&nbsp;translated&nbsp;into&nbsp;'\n'&nbsp;before&nbsp;being&nbsp;returned&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;caller.&nbsp;If&nbsp;it&nbsp;is&nbsp;'',&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;is&nbsp;enabled,&nbsp;but&nbsp;line<br>
+&nbsp;&nbsp;endings&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.&nbsp;If&nbsp;it&nbsp;has&nbsp;any&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;input&nbsp;lines&nbsp;are&nbsp;only&nbsp;terminated&nbsp;by&nbsp;the&nbsp;given<br>
+&nbsp;&nbsp;string,&nbsp;and&nbsp;the&nbsp;line&nbsp;ending&nbsp;is&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;output,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are<br>
+&nbsp;&nbsp;translated&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;line&nbsp;separator,&nbsp;os.linesep.&nbsp;If<br>
+&nbsp;&nbsp;newline&nbsp;is&nbsp;''&nbsp;or&nbsp;'\n',&nbsp;no&nbsp;translation&nbsp;takes&nbsp;place.&nbsp;If&nbsp;newline&nbsp;is&nbsp;any<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are&nbsp;translated<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;given&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;closefd&nbsp;is&nbsp;False,&nbsp;the&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;will&nbsp;be&nbsp;kept&nbsp;open<br>
+when&nbsp;the&nbsp;file&nbsp;is&nbsp;closed.&nbsp;This&nbsp;does&nbsp;not&nbsp;work&nbsp;when&nbsp;a&nbsp;file&nbsp;name&nbsp;is&nbsp;given<br>
+and&nbsp;must&nbsp;be&nbsp;True&nbsp;in&nbsp;that&nbsp;case.<br>
+&nbsp;<br>
+A&nbsp;custom&nbsp;opener&nbsp;can&nbsp;be&nbsp;used&nbsp;by&nbsp;passing&nbsp;a&nbsp;callable&nbsp;as&nbsp;*opener*.&nbsp;The<br>
+underlying&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;the&nbsp;file&nbsp;object&nbsp;is&nbsp;then&nbsp;obtained&nbsp;by<br>
+calling&nbsp;*opener*&nbsp;with&nbsp;(*file*,&nbsp;*flags*).&nbsp;*opener*&nbsp;must&nbsp;return&nbsp;an&nbsp;open<br>
+file&nbsp;descriptor&nbsp;(passing&nbsp;os.open&nbsp;as&nbsp;*opener*&nbsp;results&nbsp;in&nbsp;functionality<br>
+similar&nbsp;to&nbsp;passing&nbsp;None).<br>
+&nbsp;<br>
+<a href="#-open">open</a>()&nbsp;returns&nbsp;a&nbsp;file&nbsp;object&nbsp;whose&nbsp;type&nbsp;depends&nbsp;on&nbsp;the&nbsp;mode,&nbsp;and<br>
+through&nbsp;which&nbsp;the&nbsp;standard&nbsp;file&nbsp;operations&nbsp;such&nbsp;as&nbsp;reading&nbsp;and&nbsp;writing<br>
+are&nbsp;performed.&nbsp;When&nbsp;<a href="#-open">open</a>()&nbsp;is&nbsp;used&nbsp;to&nbsp;open&nbsp;a&nbsp;file&nbsp;in&nbsp;a&nbsp;text&nbsp;mode&nbsp;('w',<br>
+'r',&nbsp;'wt',&nbsp;'rt',&nbsp;etc.),&nbsp;it&nbsp;returns&nbsp;a&nbsp;TextIOWrapper.&nbsp;When&nbsp;used&nbsp;to&nbsp;open<br>
+a&nbsp;file&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode,&nbsp;the&nbsp;returned&nbsp;class&nbsp;varies:&nbsp;in&nbsp;read&nbsp;binary<br>
+mode,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedReader;&nbsp;in&nbsp;write&nbsp;binary&nbsp;and&nbsp;append&nbsp;binary<br>
+modes,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedWriter,&nbsp;and&nbsp;in&nbsp;read/write&nbsp;mode,&nbsp;it&nbsp;returns<br>
+a&nbsp;BufferedRandom.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
+reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;StringIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;BytesIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-print"><strong>print</strong></a>(...)</dt><dd><tt><a href="#-print">print</a>(value,&nbsp;...,&nbsp;sep='&nbsp;',&nbsp;end='\n',&nbsp;file=sys.stdout,&nbsp;flush=False)<br>
+&nbsp;<br>
+Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
+Optional&nbsp;keyword&nbsp;arguments:<br>
+file:&nbsp;&nbsp;a&nbsp;file-like&nbsp;object&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
+sep:&nbsp;&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
+end:&nbsp;&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
+flush:&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</tt></dd></dl>
+ <dl><dt><a name="-py_chr"><strong>py_chr</strong></a> = chr(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
+ <dl><dt><a name="-py_hex"><strong>py_hex</strong></a> = hex(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
+'0xc0ffee'</tt></dd></dl>
+ <dl><dt><a name="-py_input"><strong>py_input</strong></a> = input(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
+&nbsp;<br>
+The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
+trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
+On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-py_oct"><strong>py_oct</strong></a> = oct(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
+'0o1234567'</tt></dd></dl>
+ <dl><dt><a name="-py_open"><strong>py_open</strong></a> = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;IOError&nbsp;upon&nbsp;failure.<br>
+&nbsp;<br>
+file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
+if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
+be&nbsp;opened&nbsp;or&nbsp;an&nbsp;integer&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
+wrapped.&nbsp;(If&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;given,&nbsp;it&nbsp;is&nbsp;closed&nbsp;when&nbsp;the<br>
+returned&nbsp;I/O&nbsp;object&nbsp;is&nbsp;closed,&nbsp;unless&nbsp;closefd&nbsp;is&nbsp;set&nbsp;to&nbsp;False.)<br>
+&nbsp;<br>
+mode&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;the&nbsp;mode&nbsp;in&nbsp;which&nbsp;the&nbsp;file<br>
+is&nbsp;opened.&nbsp;It&nbsp;defaults&nbsp;to&nbsp;'r'&nbsp;which&nbsp;means&nbsp;open&nbsp;for&nbsp;reading&nbsp;in&nbsp;text<br>
+mode.&nbsp;&nbsp;Other&nbsp;common&nbsp;values&nbsp;are&nbsp;'w'&nbsp;for&nbsp;writing&nbsp;(truncating&nbsp;the&nbsp;file&nbsp;if<br>
+it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writing&nbsp;to&nbsp;a&nbsp;new&nbsp;file,&nbsp;and<br>
+'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
+append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
+In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
+dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
+current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
+mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+&nbsp;<br>
+=========&nbsp;===============================================================<br>
+Character&nbsp;Meaning<br>
+---------&nbsp;---------------------------------------------------------------<br>
+'r'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;reading&nbsp;(default)<br>
+'w'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;truncating&nbsp;the&nbsp;file&nbsp;first<br>
+'x'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;a&nbsp;new&nbsp;file&nbsp;and&nbsp;open&nbsp;it&nbsp;for&nbsp;writing<br>
+'a'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;appending&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;if&nbsp;it&nbsp;exists<br>
+'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
+'t'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
+'+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
+'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
+=========&nbsp;===============================================================<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
+access,&nbsp;the&nbsp;mode&nbsp;'w+b'&nbsp;opens&nbsp;and&nbsp;truncates&nbsp;the&nbsp;file&nbsp;to&nbsp;0&nbsp;bytes,&nbsp;while<br>
+'r+b'&nbsp;opens&nbsp;the&nbsp;file&nbsp;without&nbsp;truncation.&nbsp;The&nbsp;'x'&nbsp;mode&nbsp;implies&nbsp;'w'&nbsp;and<br>
+raises&nbsp;an&nbsp;`FileExistsError`&nbsp;if&nbsp;the&nbsp;file&nbsp;already&nbsp;exists.<br>
+&nbsp;<br>
+Python&nbsp;distinguishes&nbsp;between&nbsp;files&nbsp;opened&nbsp;in&nbsp;binary&nbsp;and&nbsp;text&nbsp;modes,<br>
+even&nbsp;when&nbsp;the&nbsp;underlying&nbsp;operating&nbsp;system&nbsp;doesn't.&nbsp;Files&nbsp;opened&nbsp;in<br>
+binary&nbsp;mode&nbsp;(appending&nbsp;'b'&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument)&nbsp;return&nbsp;contents&nbsp;as<br>
+bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;mode&nbsp;(the&nbsp;default,&nbsp;or&nbsp;when<br>
+'t'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
+returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
+platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
+&nbsp;<br>
+'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
+of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
+universal&nbsp;newlines&nbsp;mode.<br>
+&nbsp;<br>
+buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
+Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
+line&nbsp;buffering&nbsp;(only&nbsp;usable&nbsp;in&nbsp;text&nbsp;mode),&nbsp;and&nbsp;an&nbsp;integer&nbsp;&gt;&nbsp;1&nbsp;to&nbsp;indicate<br>
+the&nbsp;size&nbsp;of&nbsp;a&nbsp;fixed-size&nbsp;chunk&nbsp;buffer.&nbsp;&nbsp;When&nbsp;no&nbsp;buffering&nbsp;argument&nbsp;is<br>
+given,&nbsp;the&nbsp;default&nbsp;buffering&nbsp;policy&nbsp;works&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+*&nbsp;Binary&nbsp;files&nbsp;are&nbsp;buffered&nbsp;in&nbsp;fixed-size&nbsp;chunks;&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;buffer<br>
+&nbsp;&nbsp;is&nbsp;chosen&nbsp;using&nbsp;a&nbsp;heuristic&nbsp;trying&nbsp;to&nbsp;determine&nbsp;the&nbsp;underlying&nbsp;device's<br>
+&nbsp;&nbsp;"block&nbsp;size"&nbsp;and&nbsp;falling&nbsp;back&nbsp;on&nbsp;`io.DEFAULT_BUFFER_SIZE`.<br>
+&nbsp;&nbsp;On&nbsp;many&nbsp;systems,&nbsp;the&nbsp;buffer&nbsp;will&nbsp;typically&nbsp;be&nbsp;4096&nbsp;or&nbsp;8192&nbsp;bytes&nbsp;long.<br>
+&nbsp;<br>
+*&nbsp;"Interactive"&nbsp;text&nbsp;files&nbsp;(files&nbsp;for&nbsp;which&nbsp;isatty()&nbsp;returns&nbsp;True)<br>
+&nbsp;&nbsp;use&nbsp;line&nbsp;buffering.&nbsp;&nbsp;Other&nbsp;text&nbsp;files&nbsp;use&nbsp;the&nbsp;policy&nbsp;described&nbsp;above<br>
+&nbsp;&nbsp;for&nbsp;binary&nbsp;files.<br>
+&nbsp;<br>
+encoding&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;encoding&nbsp;used&nbsp;to&nbsp;decode&nbsp;or&nbsp;encode&nbsp;the<br>
+file.&nbsp;This&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;in&nbsp;text&nbsp;mode.&nbsp;The&nbsp;default&nbsp;encoding&nbsp;is<br>
+platform&nbsp;dependent,&nbsp;but&nbsp;any&nbsp;encoding&nbsp;supported&nbsp;by&nbsp;Python&nbsp;can&nbsp;be<br>
+passed.&nbsp;&nbsp;See&nbsp;the&nbsp;codecs&nbsp;module&nbsp;for&nbsp;the&nbsp;list&nbsp;of&nbsp;supported&nbsp;encodings.<br>
+&nbsp;<br>
+errors&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;how&nbsp;encoding&nbsp;errors&nbsp;are&nbsp;to<br>
+be&nbsp;handled---this&nbsp;argument&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;in&nbsp;binary&nbsp;mode.&nbsp;Pass<br>
+'strict'&nbsp;to&nbsp;raise&nbsp;a&nbsp;ValueError&nbsp;exception&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;encoding&nbsp;error<br>
+(the&nbsp;default&nbsp;of&nbsp;None&nbsp;has&nbsp;the&nbsp;same&nbsp;effect),&nbsp;or&nbsp;pass&nbsp;'ignore'&nbsp;to&nbsp;ignore<br>
+errors.&nbsp;(Note&nbsp;that&nbsp;ignoring&nbsp;encoding&nbsp;errors&nbsp;can&nbsp;lead&nbsp;to&nbsp;data&nbsp;loss.)<br>
+See&nbsp;the&nbsp;documentation&nbsp;for&nbsp;codecs.register&nbsp;or&nbsp;run&nbsp;'help(codecs.Codec)'<br>
+for&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;permitted&nbsp;encoding&nbsp;error&nbsp;strings.<br>
+&nbsp;<br>
+newline&nbsp;controls&nbsp;how&nbsp;universal&nbsp;newlines&nbsp;works&nbsp;(it&nbsp;only&nbsp;applies&nbsp;to&nbsp;text<br>
+mode).&nbsp;It&nbsp;can&nbsp;be&nbsp;None,&nbsp;'',&nbsp;'\n',&nbsp;'\r',&nbsp;and&nbsp;'\r\n'.&nbsp;&nbsp;It&nbsp;works&nbsp;as<br>
+follows:<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;input,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;universal&nbsp;newlines&nbsp;mode&nbsp;is<br>
+&nbsp;&nbsp;enabled.&nbsp;Lines&nbsp;in&nbsp;the&nbsp;input&nbsp;can&nbsp;end&nbsp;in&nbsp;'\n',&nbsp;'\r',&nbsp;or&nbsp;'\r\n',&nbsp;and<br>
+&nbsp;&nbsp;these&nbsp;are&nbsp;translated&nbsp;into&nbsp;'\n'&nbsp;before&nbsp;being&nbsp;returned&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;caller.&nbsp;If&nbsp;it&nbsp;is&nbsp;'',&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;is&nbsp;enabled,&nbsp;but&nbsp;line<br>
+&nbsp;&nbsp;endings&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.&nbsp;If&nbsp;it&nbsp;has&nbsp;any&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;input&nbsp;lines&nbsp;are&nbsp;only&nbsp;terminated&nbsp;by&nbsp;the&nbsp;given<br>
+&nbsp;&nbsp;string,&nbsp;and&nbsp;the&nbsp;line&nbsp;ending&nbsp;is&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;output,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are<br>
+&nbsp;&nbsp;translated&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;line&nbsp;separator,&nbsp;os.linesep.&nbsp;If<br>
+&nbsp;&nbsp;newline&nbsp;is&nbsp;''&nbsp;or&nbsp;'\n',&nbsp;no&nbsp;translation&nbsp;takes&nbsp;place.&nbsp;If&nbsp;newline&nbsp;is&nbsp;any<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are&nbsp;translated<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;given&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;closefd&nbsp;is&nbsp;False,&nbsp;the&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;will&nbsp;be&nbsp;kept&nbsp;open<br>
+when&nbsp;the&nbsp;file&nbsp;is&nbsp;closed.&nbsp;This&nbsp;does&nbsp;not&nbsp;work&nbsp;when&nbsp;a&nbsp;file&nbsp;name&nbsp;is&nbsp;given<br>
+and&nbsp;must&nbsp;be&nbsp;True&nbsp;in&nbsp;that&nbsp;case.<br>
+&nbsp;<br>
+A&nbsp;custom&nbsp;opener&nbsp;can&nbsp;be&nbsp;used&nbsp;by&nbsp;passing&nbsp;a&nbsp;callable&nbsp;as&nbsp;*opener*.&nbsp;The<br>
+underlying&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;the&nbsp;file&nbsp;object&nbsp;is&nbsp;then&nbsp;obtained&nbsp;by<br>
+calling&nbsp;*opener*&nbsp;with&nbsp;(*file*,&nbsp;*flags*).&nbsp;*opener*&nbsp;must&nbsp;return&nbsp;an&nbsp;open<br>
+file&nbsp;descriptor&nbsp;(passing&nbsp;os.open&nbsp;as&nbsp;*opener*&nbsp;results&nbsp;in&nbsp;functionality<br>
+similar&nbsp;to&nbsp;passing&nbsp;None).<br>
+&nbsp;<br>
+<a href="#-open">open</a>()&nbsp;returns&nbsp;a&nbsp;file&nbsp;object&nbsp;whose&nbsp;type&nbsp;depends&nbsp;on&nbsp;the&nbsp;mode,&nbsp;and<br>
+through&nbsp;which&nbsp;the&nbsp;standard&nbsp;file&nbsp;operations&nbsp;such&nbsp;as&nbsp;reading&nbsp;and&nbsp;writing<br>
+are&nbsp;performed.&nbsp;When&nbsp;<a href="#-open">open</a>()&nbsp;is&nbsp;used&nbsp;to&nbsp;open&nbsp;a&nbsp;file&nbsp;in&nbsp;a&nbsp;text&nbsp;mode&nbsp;('w',<br>
+'r',&nbsp;'wt',&nbsp;'rt',&nbsp;etc.),&nbsp;it&nbsp;returns&nbsp;a&nbsp;TextIOWrapper.&nbsp;When&nbsp;used&nbsp;to&nbsp;open<br>
+a&nbsp;file&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode,&nbsp;the&nbsp;returned&nbsp;class&nbsp;varies:&nbsp;in&nbsp;read&nbsp;binary<br>
+mode,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedReader;&nbsp;in&nbsp;write&nbsp;binary&nbsp;and&nbsp;append&nbsp;binary<br>
+modes,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedWriter,&nbsp;and&nbsp;in&nbsp;read/write&nbsp;mode,&nbsp;it&nbsp;returns<br>
+a&nbsp;BufferedRandom.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
+reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;StringIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;BytesIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-py_print"><strong>py_print</strong></a> = print(...)</dt><dd><tt><a href="#-print">print</a>(value,&nbsp;...,&nbsp;sep='&nbsp;',&nbsp;end='\n',&nbsp;file=sys.stdout,&nbsp;flush=False)<br>
+&nbsp;<br>
+Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
+Optional&nbsp;keyword&nbsp;arguments:<br>
+file:&nbsp;&nbsp;a&nbsp;file-like&nbsp;object&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
+sep:&nbsp;&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
+end:&nbsp;&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
+flush:&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</tt></dd></dl>
+ <dl><dt><a name="-py_repr"><strong>py_repr</strong></a> = repr(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;object.<br>
+&nbsp;<br>
+For&nbsp;many&nbsp;object&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(repr(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
+ <dl><dt><a name="-reduce"><strong>reduce</strong></a>(...)</dt><dd><tt><a href="#-reduce">reduce</a>(function,&nbsp;sequence[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence,<br>
+from&nbsp;left&nbsp;to&nbsp;right,&nbsp;so&nbsp;as&nbsp;to&nbsp;reduce&nbsp;the&nbsp;sequence&nbsp;to&nbsp;a&nbsp;single&nbsp;value.<br>
+For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp;x+y,&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5])&nbsp;calculates<br>
+((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
+of&nbsp;the&nbsp;sequence&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
+sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>TType</strong> = ~TType<br>
+<strong>TYPE_CHECKING</strong> = False<br>
+<strong>Ta</strong> = ~Ta<br>
+<strong>Tb</strong> = ~Tb<br>
+<strong>Tc</strong> = ~Tc<br>
+<strong>Td</strong> = ~Td<br>
+<strong>absolute_import</strong> = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0), 16384)<br>
+<strong>division</strong> = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 8192)<br>
+<strong>print_function</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 65536)<br>
+<strong>unicode_literals</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)</td></tr></table>
+</body></html>

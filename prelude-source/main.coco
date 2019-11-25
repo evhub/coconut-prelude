@@ -772,7 +772,7 @@ def asTypeOf(x: Ta, y: Ta) -> Ta:
     if TYPE_CHECKING: return x
 
     if not y `isinstance` (pure, fail, Mempty):
-        for i in count() |> takewhile$(i -> i < asTypeOf.RECURSION_LIMIT):
+        for i in count() |> takewhile$(-> _ < asTypeOf.RECURSION_LIMIT):
             if x `isinstance` pure:
                 x = x.pure_as(y)
             elif x `isinstance` fail:

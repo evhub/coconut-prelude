@@ -1,0 +1,1995 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module prelude.main</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="prelude.html"><font color="#ffffff">prelude</font></a>.main</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cmain.py">c:\users\evanj\documents\github\coconut-prelude\prelude\main.py</a></font></td></tr></table>
+    <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0xed3763a5</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="typing.html">typing</a><br>
+<a href="ast.html">ast</a><br>
+</td><td width="25%" valign=top><a href="__coconut__.html">__coconut__</a><br>
+<a href="ntpath.html">ntpath</a><br>
+</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<a href="fractions.html">fractions</a><br>
+</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="sys.html">sys</a><br>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial">__coconut__.fail(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#fail">fail</a>(__coconut__.fail, <a href="builtins.html#object">builtins.object</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="builtins.html#object">builtins.object</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Either">Either</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Left">Left</a>(Left, <a href="prelude.main.html#Either">Either</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#Right">Right</a>(Right, <a href="prelude.main.html#Either">Either</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#IO">IO</a>(IO, <a href="builtins.html#object">builtins.object</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#Maybe">Maybe</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Just">Just</a>(Just, <a href="prelude.main.html#Maybe">Maybe</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#Nothing">Nothing</a>(Nothing, <a href="prelude.main.html#Maybe">Maybe</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Mempty">Mempty</a>(Mempty, <a href="builtins.html#object">builtins.object</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#Ordering">Ordering</a>
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#EQ">EQ</a>(EQ, <a href="prelude.main.html#Ordering">Ordering</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#GT">GT</a>(GT, <a href="prelude.main.html#Ordering">Ordering</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#LT">LT</a>(LT, <a href="prelude.main.html#Ordering">Ordering</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#fail">fail</a>(__coconut__.fail, <a href="builtins.html#object">builtins.object</a>)
+</font></dt><dt><font face="helvetica, arial"><a href="prelude.main.html#pure">pure</a>(pure, <a href="builtins.html#object">builtins.object</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">EQ(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#EQ">EQ</a>(EQ, <a href="prelude.main.html#Ordering">Ordering</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">GT(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#GT">GT</a>(GT, <a href="prelude.main.html#Ordering">Ordering</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">IO(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#IO">IO</a>(IO, <a href="builtins.html#object">builtins.object</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">Just(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Just">Just</a>(Just, <a href="prelude.main.html#Maybe">Maybe</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">LT(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#LT">LT</a>(LT, <a href="prelude.main.html#Ordering">Ordering</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">Left(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Left">Left</a>(Left, <a href="prelude.main.html#Either">Either</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">Mempty(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Mempty">Mempty</a>(Mempty, <a href="builtins.html#object">builtins.object</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">Nothing(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Nothing">Nothing</a>(Nothing, <a href="prelude.main.html#Maybe">Maybe</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">Right(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#Right">Right</a>(Right, <a href="prelude.main.html#Either">Either</a>)
+</font></dt></dl>
+</dd>
+<dt><font face="helvetica, arial">pure(<a href="builtins.html#tuple">builtins.tuple</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="prelude.main.html#pure">pure</a>(pure, <a href="builtins.html#object">builtins.object</a>)
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="EQ">class <strong>EQ</strong></a>(EQ, <a href="prelude.main.html#Ordering">Ordering</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#EQ">EQ</a>()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#EQ">EQ</a></dd>
+<dd>EQ</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Ordering">Ordering</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="EQ-__add__"><strong>__add__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="EQ-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="EQ-__int__"><strong>__int__</strong></a>(x)</dt></dl>
+
+<dl><dt><a name="EQ-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__maxBound__"><strong>__maxBound__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EQ-__minBound__"><strong>__minBound__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="EQ-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="EQ-__radd__"><strong>__radd__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__sub__"><strong>__sub__</strong></a>(x, y)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from EQ:<br>
+<dl><dt><a name="EQ-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="EQ-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="EQ-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="EQ-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#EQ">EQ</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from EQ:<br>
+<dl><dt><a name="EQ-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#EQ">EQ</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from EQ:<br>
+<dl><dt><a name="EQ-__new__"><strong>__new__</strong></a>(_cls)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#EQ">EQ</a>()</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from EQ:<br>
+<dl><dt><strong>_fields</strong> = ()</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="EQ-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="EQ-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="EQ-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="EQ-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="EQ-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="EQ-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="EQ-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="EQ-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#EQ-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="EQ-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#EQ-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Ordering">Ordering</a>:<br>
+<dl><dt><a name="EQ-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Either">class <strong>Either</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>####&nbsp;<a href="#Either">Either</a>:<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="Either-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="Either-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="GT">class <strong>GT</strong></a>(GT, <a href="prelude.main.html#Ordering">Ordering</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#GT">GT</a>()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#GT">GT</a></dd>
+<dd>GT</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Ordering">Ordering</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="GT-__add__"><strong>__add__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="GT-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="GT-__int__"><strong>__int__</strong></a>(x)</dt></dl>
+
+<dl><dt><a name="GT-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__maxBound__"><strong>__maxBound__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GT-__minBound__"><strong>__minBound__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="GT-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="GT-__radd__"><strong>__radd__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__sub__"><strong>__sub__</strong></a>(x, y)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="GT-__bool__"><strong>__bool__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from GT:<br>
+<dl><dt><a name="GT-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="GT-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="GT-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="GT-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#GT">GT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from GT:<br>
+<dl><dt><a name="GT-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#GT">GT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from GT:<br>
+<dl><dt><a name="GT-__new__"><strong>__new__</strong></a>(_cls)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#GT">GT</a>()</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from GT:<br>
+<dl><dt><strong>_fields</strong> = ()</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="GT-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="GT-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="GT-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="GT-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="GT-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="GT-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="GT-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="GT-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#GT-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="GT-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#GT-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Ordering">Ordering</a>:<br>
+<dl><dt><a name="GT-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="IO">class <strong>IO</strong></a>(IO, <a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#IO">IO</a>(io_func,)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#IO">IO</a></dd>
+<dd>IO</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="IO-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="IO-__fmap__"><strong>__fmap__</strong></a>(self, func)</dt></dl>
+
+<dl><dt><a name="IO-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="IO-__join__"><strong>__join__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="IO-__mappend__"><strong>__mappend__</strong></a>(self, other)</dt></dl>
+
+<dl><dt><a name="IO-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="IO-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="IO-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<dl><dt><a name="IO-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Methods inherited from IO:<br>
+<dl><dt><a name="IO-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="IO-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="IO-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="IO-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from IO:<br>
+<dl><dt><a name="IO-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from IO:<br>
+<dl><dt><a name="IO-__new__"><strong>__new__</strong></a>(_cls, io_func)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#IO">IO</a>(io_func,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from IO:<br>
+<dl><dt><strong>io_func</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from IO:<br>
+<dl><dt><strong>_fields</strong> = ('io_func',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="IO-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="IO-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="IO-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="IO-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="IO-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="IO-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="IO-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="IO-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="IO-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="IO-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="IO-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="IO-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="IO-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#IO-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="IO-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#IO-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Just">class <strong>Just</strong></a>(Just, <a href="prelude.main.html#Maybe">Maybe</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Just">Just</a>(x,)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#Just">Just</a></dd>
+<dd>Just</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Maybe">Maybe</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Just-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Just-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Just-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Just-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Just-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Just-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Just-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from Just:<br>
+<dl><dt><a name="Just-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Just-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Just-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Just-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Just">Just</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from Just:<br>
+<dl><dt><a name="Just-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Just">Just</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from Just:<br>
+<dl><dt><a name="Just-__new__"><strong>__new__</strong></a>(_cls, x)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Just">Just</a>(x,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from Just:<br>
+<dl><dt><strong>x</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from Just:<br>
+<dl><dt><strong>_fields</strong> = ('x',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Just-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Just-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Just-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Just-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Just-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Just-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Just-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Just-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Just-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Just-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Just-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Just-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
+<dl><dt><a name="Just-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="Just-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<dl><dt><a name="Just-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="LT">class <strong>LT</strong></a>(LT, <a href="prelude.main.html#Ordering">Ordering</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#LT">LT</a>()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#LT">LT</a></dd>
+<dd>LT</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Ordering">Ordering</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="LT-__add__"><strong>__add__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="LT-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="LT-__int__"><strong>__int__</strong></a>(x)</dt></dl>
+
+<dl><dt><a name="LT-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__maxBound__"><strong>__maxBound__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LT-__minBound__"><strong>__minBound__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="LT-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="LT-__radd__"><strong>__radd__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__sub__"><strong>__sub__</strong></a>(x, y)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="LT-__bool__"><strong>__bool__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from LT:<br>
+<dl><dt><a name="LT-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="LT-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="LT-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="LT-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#LT">LT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from LT:<br>
+<dl><dt><a name="LT-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#LT">LT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from LT:<br>
+<dl><dt><a name="LT-__new__"><strong>__new__</strong></a>(_cls)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#LT">LT</a>()</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from LT:<br>
+<dl><dt><strong>_fields</strong> = ()</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="LT-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="LT-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="LT-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="LT-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="LT-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="LT-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="LT-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="LT-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#LT-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="LT-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#LT-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Ordering">Ordering</a>:<br>
+<dl><dt><a name="LT-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Left">class <strong>Left</strong></a>(Left, <a href="prelude.main.html#Either">Either</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Left">Left</a>(x,)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#Left">Left</a></dd>
+<dd>Left</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Either">Either</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Left-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Left-__fmap__"><strong>__fmap__</strong></a>(self, func)</dt></dl>
+
+<dl><dt><a name="Left-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Left-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Left-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Left-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Left-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Left-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Left-__bool__"><strong>__bool__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from Left:<br>
+<dl><dt><a name="Left-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Left-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Left-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Left-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Left">Left</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from Left:<br>
+<dl><dt><a name="Left-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Left">Left</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from Left:<br>
+<dl><dt><a name="Left-__new__"><strong>__new__</strong></a>(_cls, x)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Left">Left</a>(x,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from Left:<br>
+<dl><dt><strong>x</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from Left:<br>
+<dl><dt><strong>_fields</strong> = ('x',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Left-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Left-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Left-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Left-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Left-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Left-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Left-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Left-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Left-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Left-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Left-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Left-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Either">Either</a>:<br>
+<dl><dt><a name="Left-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="Left-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Maybe">class <strong>Maybe</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>####&nbsp;<a href="#Maybe">Maybe</a>:<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="Maybe-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="Maybe-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<dl><dt><a name="Maybe-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Mempty">class <strong>Mempty</strong></a>(Mempty, <a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>--&nbsp;mempty&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__mempty__&nbsp;method<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#Mempty">Mempty</a></dd>
+<dd>Mempty</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Mempty-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="Mempty-mempty_as"><strong>mempty_as</strong></a>(M)</dt></dl>
+
+<hr>
+Methods inherited from Mempty:<br>
+<dl><dt><a name="Mempty-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Mempty-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Mempty">Mempty</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from Mempty:<br>
+<dl><dt><a name="Mempty-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Mempty">Mempty</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from Mempty:<br>
+<dl><dt><a name="Mempty-__new__"><strong>__new__</strong></a>(_cls)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Mempty">Mempty</a>()</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from Mempty:<br>
+<dl><dt><strong>_fields</strong> = ()</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Mempty-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Mempty-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Mempty-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Mempty-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Nothing">class <strong>Nothing</strong></a>(Nothing, <a href="prelude.main.html#Maybe">Maybe</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Nothing">Nothing</a>()<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#Nothing">Nothing</a></dd>
+<dd>Nothing</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Maybe">Maybe</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Nothing-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Nothing-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Nothing-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Nothing-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Nothing-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from Nothing:<br>
+<dl><dt><a name="Nothing-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Nothing-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Nothing">Nothing</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from Nothing:<br>
+<dl><dt><a name="Nothing-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Nothing">Nothing</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from Nothing:<br>
+<dl><dt><a name="Nothing-__new__"><strong>__new__</strong></a>(_cls)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Nothing">Nothing</a>()</tt></dd></dl>
+
+<hr>
+Data and other attributes inherited from Nothing:<br>
+<dl><dt><strong>_fields</strong> = ()</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Nothing-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Nothing-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Nothing-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Nothing-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
+<dl><dt><a name="Nothing-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="Nothing-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<dl><dt><a name="Nothing-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Ordering">class <strong>Ordering</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>####&nbsp;<a href="#Ordering">Ordering</a>:<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%">Static methods defined here:<br>
+<dl><dt><a name="Ordering-__mempty__"><strong>__mempty__</strong></a>()</dt></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="Right">class <strong>Right</strong></a>(Right, <a href="prelude.main.html#Either">Either</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#Right">Right</a>(x,)<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#Right">Right</a></dd>
+<dd>Right</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="prelude.main.html#Either">Either</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="Right-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="Right-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Right-__gt__"><strong>__gt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Right-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="Right-__le__"><strong>__le__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Right-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="Right-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<hr>
+Data descriptors defined here:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<hr>
+Methods inherited from Right:<br>
+<dl><dt><a name="Right-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="Right-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="Right-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="Right-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Right">Right</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from Right:<br>
+<dl><dt><a name="Right-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Right">Right</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from Right:<br>
+<dl><dt><a name="Right-__new__"><strong>__new__</strong></a>(_cls, x)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#Right">Right</a>(x,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from Right:<br>
+<dl><dt><strong>x</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from Right:<br>
+<dl><dt><strong>_fields</strong> = ('x',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="Right-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="Right-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="Right-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="Right-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="Right-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="Right-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="Right-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="Right-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="Right-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Right-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="Right-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Right-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+<hr>
+Static methods inherited from <a href="prelude.main.html#Either">Either</a>:<br>
+<dl><dt><a name="Right-__fail__"><strong>__fail__</strong></a>(msg)</dt></dl>
+
+<dl><dt><a name="Right-__pure__"><strong>__pure__</strong></a>(x)</dt></dl>
+
+<hr>
+Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<br>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="fail">class <strong>fail</strong></a>(__coconut__.fail, <a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt>--&nbsp;<a href="#fail">fail</a>&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fail__&nbsp;method<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#fail">fail</a></dd>
+<dd>__coconut__.fail</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="fail-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="fail-__fmap__"><strong>__fmap__</strong></a>(self, func)</dt></dl>
+
+<dl><dt><a name="fail-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="fail-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="fail-fail_as"><strong>fail_as</strong></a>(self, M)</dt></dl>
+
+<hr>
+Static methods defined here:<br>
+<dl><dt><a name="fail-__bool__"><strong>__bool__</strong></a>()</dt></dl>
+
+<hr>
+Methods inherited from __coconut__.fail:<br>
+<dl><dt><a name="fail-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="fail-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="fail-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="fail-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#fail">fail</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from __coconut__.fail:<br>
+<dl><dt><a name="fail-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#fail">fail</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from __coconut__.fail:<br>
+<dl><dt><a name="fail-__new__"><strong>__new__</strong></a>(_cls, msg)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#fail">fail</a>(msg,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from __coconut__.fail:<br>
+<dl><dt><strong>msg</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from __coconut__.fail:<br>
+<dl><dt><strong>_fields</strong> = ('msg',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="fail-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="fail-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="fail-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="fail-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="fail-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="fail-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="fail-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="fail-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="fail-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="fail-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="fail-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="fail-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="fail-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#fail-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="fail-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#fail-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="pure">class <strong>pure</strong></a>(pure, <a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#return_">return_</a>&nbsp;=&nbsp;return<br>
+--&nbsp;<a href="#pure">pure</a>/return&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__pure__&nbsp;method<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#pure">pure</a></dd>
+<dd>pure</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="pure-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="pure-__join__"><strong>__join__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="pure-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="pure-pure_as"><strong>pure_as</strong></a>(self, M)</dt></dl>
+
+<hr>
+Methods inherited from pure:<br>
+<dl><dt><a name="pure-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="pure-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="pure-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="pure-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from pure:<br>
+<dl><dt><a name="pure-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from pure:<br>
+<dl><dt><a name="pure-__new__"><strong>__new__</strong></a>(_cls, val)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#pure">pure</a>(val,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from pure:<br>
+<dl><dt><strong>val</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from pure:<br>
+<dl><dt><strong>_fields</strong> = ('val',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="pure-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="pure-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="pure-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="pure-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="pure-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="pure-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="pure-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="pure-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#pure-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="pure-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#pure-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+</td></tr></table> <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><strong>return_</strong> = <a name="return_">class pure</a>(pure, <a href="builtins.html#object">builtins.object</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#return_">return_</a>&nbsp;=&nbsp;return<br>
+--&nbsp;<a href="#pure">pure</a>/return&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__pure__&nbsp;method<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="prelude.main.html#pure">pure</a></dd>
+<dd>pure</dd>
+<dd><a href="builtins.html#tuple">builtins.tuple</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="pure-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
+
+<dl><dt><a name="pure-__join__"><strong>__join__</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="pure-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="pure-pure_as"><strong>pure_as</strong></a>(self, M)</dt></dl>
+
+<hr>
+Methods inherited from pure:<br>
+<dl><dt><a name="pure-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
+
+<dl><dt><a name="pure-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
+
+<dl><dt><a name="pure-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+
+<dl><dt><a name="pure-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+
+<hr>
+Class methods inherited from pure:<br>
+<dl><dt><a name="pure-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+
+<hr>
+Static methods inherited from pure:<br>
+<dl><dt><a name="pure-__new__"><strong>__new__</strong></a>(_cls, val)</dt><dd><tt>Create&nbsp;new&nbsp;instance&nbsp;of&nbsp;<a href="#pure">pure</a>(val,)</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from pure:<br>
+<dl><dt><strong>val</strong></dt>
+<dd><tt>Alias&nbsp;for&nbsp;field&nbsp;number&nbsp;0</tt></dd>
+</dl>
+<hr>
+Data and other attributes inherited from pure:<br>
+<dl><dt><strong>_fields</strong> = ('val',)</dl>
+
+<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+
+<hr>
+Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
+<dl><dt><a name="pure-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
+
+<dl><dt><a name="pure-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
+
+<dl><dt><a name="pure-__getitem__"><strong>__getitem__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;self[key].</tt></dd></dl>
+
+<dl><dt><a name="pure-__gt__"><strong>__gt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__iter__"><strong>__iter__</strong></a>(self, /)</dt><dd><tt>Implement&nbsp;iter(self).</tt></dd></dl>
+
+<dl><dt><a name="pure-__le__"><strong>__le__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;=value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
+
+<dl><dt><a name="pure-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+
+<dl><dt><a name="pure-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
+<dl><dt><a name="pure-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#return_-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
+
+<dl><dt><a name="pure-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#return_-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
+
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-abs"><strong>abs</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;absolute&nbsp;value&nbsp;of&nbsp;the&nbsp;argument.</tt></dd></dl>
+ <dl><dt><a name="-acos"><strong>acos</strong></a>(...)</dt><dd><tt><a href="#-acos">acos</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arc&nbsp;cosine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-acosh"><strong>acosh</strong></a>(...)</dt><dd><tt><a href="#-acosh">acosh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;cosine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-and_"><strong>and_</strong></a> = all(iterable, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;bool(x)&nbsp;is&nbsp;True&nbsp;for&nbsp;all&nbsp;values&nbsp;x&nbsp;in&nbsp;the&nbsp;iterable.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;True.</tt></dd></dl>
+ <dl><dt><a name="-ap"><strong>ap</strong></a>(fs, xs)</dt><dd><tt>ap&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b<br>
+ap&nbsp;=&nbsp;(&lt;*&gt;)<br>
+--&nbsp;ap&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__ap__&nbsp;method<br>
+--&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;a&nbsp;__pure__&nbsp;method<br>
+--&nbsp;the&nbsp;default&nbsp;implementation&nbsp;uses&nbsp;join&nbsp;(__join__)&nbsp;and&nbsp;fmap&nbsp;(__fmap__)</tt></dd></dl>
+ <dl><dt><a name="-appendFile"><strong>appendFile</strong></a>(fpath, text)</dt></dl>
+ <dl><dt><a name="-apply"><strong>apply</strong></a>(func, arg)</dt><dd><tt>apply&nbsp;::&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b<br>
+apply&nbsp;=&nbsp;($)</tt></dd></dl>
+ <dl><dt><a name="-asIO"><strong>asIO</strong></a>(io)</dt><dd><tt>asIO&nbsp;::&nbsp;<a href="#IO">IO</a>&nbsp;a&nbsp;-&gt;&nbsp;<a href="#IO">IO</a>&nbsp;a<br>
+asIO&nbsp;=&nbsp;id<br>
+--&nbsp;<a href="#-asIO">asIO</a>(x)&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;x&nbsp;`asTypeOf`&nbsp;<a href="#IO">IO</a>(...)</tt></dd></dl>
+ <dl><dt><a name="-asTypeOf"><strong>asTypeOf</strong></a>(x, y)</dt><dd><tt>--&nbsp;use&nbsp;asTypeOf&nbsp;to&nbsp;resolve&nbsp;<a href="#pure">pure</a>,&nbsp;<a href="#fail">fail</a>,&nbsp;and&nbsp;mempty&nbsp;to&nbsp;the&nbsp;correct&nbsp;type<br>
+--&nbsp;set&nbsp;asTypeOf.RECURSION_LIMIT&nbsp;to&nbsp;control&nbsp;recursive&nbsp;resolution</tt></dd></dl>
+ <dl><dt><a name="-asin"><strong>asin</strong></a>(...)</dt><dd><tt><a href="#-asin">asin</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arc&nbsp;sine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-asinh"><strong>asinh</strong></a>(...)</dt><dd><tt><a href="#-asinh">asinh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;sine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-at"><strong>at</strong></a>(xs, i)</dt><dd><tt>at&nbsp;::&nbsp;[a]&nbsp;-&gt;&nbsp;Int&nbsp;-&gt;&nbsp;a<br>
+at&nbsp;=&nbsp;(!!)</tt></dd></dl>
+ <dl><dt><a name="-atan"><strong>atan</strong></a>(...)</dt><dd><tt><a href="#-atan">atan</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-atan2"><strong>atan2</strong></a>(...)</dt><dd><tt><a href="#-atan2">atan2</a>(y,&nbsp;x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;y/x.<br>
+Unlike&nbsp;<a href="#-atan">atan</a>(y/x),&nbsp;the&nbsp;signs&nbsp;of&nbsp;both&nbsp;x&nbsp;and&nbsp;y&nbsp;are&nbsp;considered.</tt></dd></dl>
+ <dl><dt><a name="-atanh"><strong>atanh</strong></a>(...)</dt><dd><tt><a href="#-atanh">atanh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-bind"><strong>bind</strong></a>(m, func)</dt><dd><tt>bind&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;m&nbsp;b)&nbsp;-&gt;&nbsp;m&nbsp;b<br>
+bind&nbsp;=&nbsp;(&gt;&gt;=)<br>
+--&nbsp;bind&nbsp;is&nbsp;overridden&nbsp;by&nbsp;overriding&nbsp;fmap&nbsp;(__fmap__)&nbsp;and&nbsp;join&nbsp;(__join__)</tt></dd></dl>
+ <dl><dt><a name="-bindFrom"><strong>bindFrom</strong></a>(func, m)</dt><dd><tt>bindFrom&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;m&nbsp;b)&nbsp;-&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;m&nbsp;b<br>
+bindFrom&nbsp;=&nbsp;(=&lt;&lt;)</tt></dd></dl>
+ <dl><dt><a name="-break_"><strong>break_</strong></a>(cond, xs)</dt><dd><tt>break_&nbsp;=&nbsp;break</tt></dd></dl>
+ <dl><dt><a name="-cbv"><strong>cbv</strong></a>(func, arg)</dt><dd><tt>cbv&nbsp;::&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b<br>
+cbv&nbsp;=&nbsp;($!)</tt></dd></dl>
+ <dl><dt><a name="-ceiling"><strong>ceiling</strong></a> = ceil(...)</dt><dd><tt>ceil(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;ceiling&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
+This&nbsp;is&nbsp;the&nbsp;smallest&nbsp;integer&nbsp;&gt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-chain"><strong>chain</strong></a>(xs, ys)</dt><dd><tt>chain&nbsp;::&nbsp;[a]&nbsp;-&gt;&nbsp;[a]&nbsp;-&gt;&nbsp;[a]<br>
+chain&nbsp;=&nbsp;(++)</tt></dd></dl>
+ <dl><dt><a name="-chr"><strong>chr</strong></a>(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
+ <dl><dt><a name="-concat"><strong>concat</strong></a>(xs)</dt></dl>
+ <dl><dt><a name="-cons"><strong>cons</strong></a>(x, xs)</dt><dd><tt>cons&nbsp;::&nbsp;a&nbsp;-&gt;&nbsp;[a]&nbsp;-&gt;&nbsp;[a]<br>
+cons&nbsp;=&nbsp;(:)</tt></dd></dl>
+ <dl><dt><a name="-const"><strong>const</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-cos"><strong>cos</strong></a>(...)</dt><dd><tt><a href="#-cos">cos</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-cosh"><strong>cosh</strong></a>(...)</dt><dd><tt><a href="#-cosh">cosh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;hyperbolic&nbsp;cosine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-curry"><strong>curry</strong></a>(func)</dt></dl>
+ <dl><dt><a name="-div"><strong>div</strong></a> = floordiv(...)</dt><dd><tt>floordiv(a,&nbsp;b)&nbsp;--&nbsp;Same&nbsp;as&nbsp;a&nbsp;//&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-divMod"><strong>divMod</strong></a> = divmod(x, y, /)</dt><dd><tt>Return&nbsp;the&nbsp;tuple&nbsp;(x//y,&nbsp;x%y).&nbsp;&nbsp;Invariant:&nbsp;div*y&nbsp;+&nbsp;mod&nbsp;==&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-dot"><strong>dot</strong></a>(f, g)</dt><dd><tt>dot&nbsp;::&nbsp;(b&nbsp;-&gt;&nbsp;c)&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;c<br>
+dot&nbsp;=&nbsp;(.)</tt></dd></dl>
+ <dl><dt><a name="-drop"><strong>drop</strong></a>(n, xs)</dt></dl>
+ <dl><dt><a name="-elem"><strong>elem</strong></a>(e, xs)</dt></dl>
+ <dl><dt><a name="-enumFrom"><strong>enumFrom</strong></a>(first)</dt></dl>
+ <dl><dt><a name="-enumFromThen"><strong>enumFromThen</strong></a>(first, second)</dt></dl>
+ <dl><dt><a name="-enumFromThenTo"><strong>enumFromThenTo</strong></a>(first, second, last)</dt></dl>
+ <dl><dt><a name="-enumFromTo"><strong>enumFromTo</strong></a>(first, last)</dt></dl>
+ <dl><dt><a name="-error"><strong>error</strong></a>(msg)</dt></dl>
+ <dl><dt><a name="-errorWithoutStackTrace"><strong>errorWithoutStackTrace</strong></a>(msg)</dt></dl>
+ <dl><dt><a name="-even"><strong>even</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-exp"><strong>exp</strong></a>(...)</dt><dd><tt><a href="#-exp">exp</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;e&nbsp;raised&nbsp;to&nbsp;the&nbsp;power&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-flip"><strong>flip</strong></a>(func)</dt></dl>
+ <dl><dt><a name="-floatDigits"><strong>floatDigits</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-floatRadix"><strong>floatRadix</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-floatRange"><strong>floatRange</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-floor"><strong>floor</strong></a>(...)</dt><dd><tt><a href="#-floor">floor</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
+This&nbsp;is&nbsp;the&nbsp;largest&nbsp;integer&nbsp;&lt;=&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-fmapConst"><strong>fmapConst</strong></a>(x, xs)</dt><dd><tt>fmapConst&nbsp;::&nbsp;Functor&nbsp;f&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b<br>
+fmapConst&nbsp;=&nbsp;(&lt;$)</tt></dd></dl>
+ <dl><dt><a name="-foldMap"><strong>foldMap</strong></a>(func, xs)</dt></dl>
+ <dl><dt><a name="-foldl"><strong>foldl</strong></a>(func, init, xs)</dt></dl>
+ <dl><dt><a name="-foldl1"><strong>foldl1</strong></a> = reduce(...)</dt><dd><tt><a href="#-reduce">reduce</a>(function,&nbsp;sequence[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence,<br>
+from&nbsp;left&nbsp;to&nbsp;right,&nbsp;so&nbsp;as&nbsp;to&nbsp;reduce&nbsp;the&nbsp;sequence&nbsp;to&nbsp;a&nbsp;single&nbsp;value.<br>
+For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp;x+y,&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5])&nbsp;calculates<br>
+((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
+of&nbsp;the&nbsp;sequence&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
+sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
+ <dl><dt><a name="-foldr"><strong>foldr</strong></a>(func, init, xs)</dt></dl>
+ <dl><dt><a name="-foldr1"><strong>foldr1</strong></a>(func, xs)</dt></dl>
+ <dl><dt><a name="-fromInteger"><strong>fromInteger</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-fromIntegral"><strong>fromIntegral</strong></a> = fromInteger(x)</dt></dl>
+ <dl><dt><a name="-fromRational"><strong>fromRational</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-hex"><strong>hex</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
+'0xc0ffee'</tt></dd></dl>
+ <dl><dt><a name="-id"><strong>id</strong></a>(x)</dt><dd><tt>##&nbsp;Miscellaneous&nbsp;functions:</tt></dd></dl>
+ <dl><dt><a name="-input"><strong>input</strong></a>(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
+&nbsp;<br>
+The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
+trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
+On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-interact"><strong>interact</strong></a>(func)</dt></dl>
+ <dl><dt><a name="-ioError"><strong>ioError</strong></a>(err)</dt></dl>
+ <dl><dt><a name="-isIEEE"><strong>isIEEE</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-isInfinite"><strong>isInfinite</strong></a> = isinf(...)</dt><dd><tt>isinf(x)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;x&nbsp;is&nbsp;a&nbsp;positive&nbsp;or&nbsp;negative&nbsp;infinity,&nbsp;and&nbsp;False&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-isNaN"><strong>isNaN</strong></a> = isnan(...)</dt><dd><tt>isnan(x)&nbsp;-&gt;&nbsp;bool<br>
+&nbsp;<br>
+Return&nbsp;True&nbsp;if&nbsp;x&nbsp;is&nbsp;a&nbsp;NaN&nbsp;(not&nbsp;a&nbsp;number),&nbsp;and&nbsp;False&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-isNegativeZero"><strong>isNegativeZero</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-join"><strong>join</strong></a>(ms)</dt><dd><tt>import&nbsp;Control.Monad<br>
+join&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;(m&nbsp;a)&nbsp;-&gt;&nbsp;m&nbsp;a<br>
+--&nbsp;join&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__join__&nbsp;method<br>
+--&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;__pure__&nbsp;and&nbsp;__fail__&nbsp;methods&nbsp;(<a href="#pure">pure</a>&nbsp;=&nbsp;return)<br>
+--&nbsp;the&nbsp;default&nbsp;implementation&nbsp;identifies&nbsp;non-failures&nbsp;using&nbsp;__bool__</tt></dd></dl>
+ <dl><dt><a name="-length"><strong>length</strong></a> = len(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;items&nbsp;in&nbsp;a&nbsp;container.</tt></dd></dl>
+ <dl><dt><a name="-liftA2"><strong>liftA2</strong></a>(func)</dt><dd><tt>import&nbsp;Control.Applicative<br>
+liftA2&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b&nbsp;-&gt;&nbsp;c)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;c</tt></dd></dl>
+ <dl><dt><a name="-log"><strong>log</strong></a>(...)</dt><dd><tt><a href="#-log">log</a>(x[,&nbsp;base])<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;logarithm&nbsp;of&nbsp;x&nbsp;to&nbsp;the&nbsp;given&nbsp;base.<br>
+If&nbsp;the&nbsp;base&nbsp;not&nbsp;specified,&nbsp;returns&nbsp;the&nbsp;natural&nbsp;logarithm&nbsp;(base&nbsp;e)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-logBase"><strong>logBase</strong></a>(base, x)</dt></dl>
+ <dl><dt><a name="-lookup"><strong>lookup</strong></a>(key, assocs)</dt></dl>
+ <dl><dt><a name="-mappend"><strong>mappend</strong></a>(x, y)</dt><dd><tt>--&nbsp;mappend&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__mappend__&nbsp;method<br>
+--&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;a&nbsp;__mempty__&nbsp;method<br>
+--&nbsp;the&nbsp;default&nbsp;implementation&nbsp;identifies&nbsp;non-identities&nbsp;using&nbsp;__bool__</tt></dd></dl>
+ <dl><dt><a name="-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#-max">max</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+<a href="#-max">max</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;biggest&nbsp;item.&nbsp;The<br>
+default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
+the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
+With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;largest&nbsp;argument.</tt></dd></dl>
+ <dl><dt><a name="-maxBound"><strong>maxBound</strong></a>(b)</dt><dd><tt>--&nbsp;maxBound&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__maxBound__&nbsp;method<br>
+--&nbsp;the&nbsp;default&nbsp;implementation&nbsp;recursively&nbsp;calls&nbsp;fmap&nbsp;(__fmap__)&nbsp;with&nbsp;maxBound</tt></dd></dl>
+ <dl><dt><a name="-maximum"><strong>maximum</strong></a> = max(...)</dt><dd><tt><a href="#-max">max</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+<a href="#-max">max</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;biggest&nbsp;item.&nbsp;The<br>
+default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
+the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
+With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;largest&nbsp;argument.</tt></dd></dl>
+ <dl><dt><a name="-mconcat"><strong>mconcat</strong></a>(ms)</dt></dl>
+ <dl><dt><a name="-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#-min">min</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+<a href="#-min">min</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;smallest&nbsp;item.&nbsp;The<br>
+default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
+the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
+With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;smallest&nbsp;argument.</tt></dd></dl>
+ <dl><dt><a name="-minBound"><strong>minBound</strong></a>(b)</dt><dd><tt>--&nbsp;minBound&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__minBound__&nbsp;method<br>
+--&nbsp;the&nbsp;default&nbsp;implementation&nbsp;recursively&nbsp;calls&nbsp;fmap&nbsp;(__fmap__)&nbsp;with&nbsp;minBound</tt></dd></dl>
+ <dl><dt><a name="-minimum"><strong>minimum</strong></a> = min(...)</dt><dd><tt><a href="#-min">min</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+<a href="#-min">min</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;smallest&nbsp;item.&nbsp;The<br>
+default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
+the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
+With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;smallest&nbsp;argument.</tt></dd></dl>
+ <dl><dt><a name="-mod"><strong>mod</strong></a>(...)</dt><dd><tt><a href="#-mod">mod</a>(a,&nbsp;b)&nbsp;--&nbsp;Same&nbsp;as&nbsp;a&nbsp;%&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-notElem"><strong>notElem</strong></a>(e, xs)</dt><dd><tt>##&nbsp;Searching&nbsp;lists:</tt></dd></dl>
+ <dl><dt><a name="-not_"><strong>not_</strong></a>(...)</dt><dd><tt><a href="#-not_">not_</a>(a)&nbsp;--&nbsp;Same&nbsp;as&nbsp;not&nbsp;a.</tt></dd></dl>
+ <dl><dt><a name="-null"><strong>null</strong></a>(xs)</dt></dl>
+ <dl><dt><a name="-oct"><strong>oct</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
+'0o1234567'</tt></dd></dl>
+ <dl><dt><a name="-odd"><strong>odd</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;IOError&nbsp;upon&nbsp;failure.<br>
+&nbsp;<br>
+file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
+if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
+be&nbsp;opened&nbsp;or&nbsp;an&nbsp;integer&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
+wrapped.&nbsp;(If&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;given,&nbsp;it&nbsp;is&nbsp;closed&nbsp;when&nbsp;the<br>
+returned&nbsp;I/O&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;closed,&nbsp;unless&nbsp;closefd&nbsp;is&nbsp;set&nbsp;to&nbsp;False.)<br>
+&nbsp;<br>
+mode&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;the&nbsp;mode&nbsp;in&nbsp;which&nbsp;the&nbsp;file<br>
+is&nbsp;opened.&nbsp;It&nbsp;defaults&nbsp;to&nbsp;'r'&nbsp;which&nbsp;means&nbsp;open&nbsp;for&nbsp;reading&nbsp;in&nbsp;text<br>
+mode.&nbsp;&nbsp;Other&nbsp;common&nbsp;values&nbsp;are&nbsp;'w'&nbsp;for&nbsp;writing&nbsp;(truncating&nbsp;the&nbsp;file&nbsp;if<br>
+it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writing&nbsp;to&nbsp;a&nbsp;new&nbsp;file,&nbsp;and<br>
+'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
+append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
+In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
+dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
+current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
+mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+&nbsp;<br>
+=========&nbsp;===============================================================<br>
+Character&nbsp;Meaning<br>
+---------&nbsp;---------------------------------------------------------------<br>
+'r'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;reading&nbsp;(default)<br>
+'w'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;truncating&nbsp;the&nbsp;file&nbsp;first<br>
+'x'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;a&nbsp;new&nbsp;file&nbsp;and&nbsp;open&nbsp;it&nbsp;for&nbsp;writing<br>
+'a'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;appending&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;if&nbsp;it&nbsp;exists<br>
+'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
+'t'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
+'+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
+'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
+=========&nbsp;===============================================================<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
+access,&nbsp;the&nbsp;mode&nbsp;'w+b'&nbsp;opens&nbsp;and&nbsp;truncates&nbsp;the&nbsp;file&nbsp;to&nbsp;0&nbsp;bytes,&nbsp;while<br>
+'r+b'&nbsp;opens&nbsp;the&nbsp;file&nbsp;without&nbsp;truncation.&nbsp;The&nbsp;'x'&nbsp;mode&nbsp;implies&nbsp;'w'&nbsp;and<br>
+raises&nbsp;an&nbsp;`FileExistsError`&nbsp;if&nbsp;the&nbsp;file&nbsp;already&nbsp;exists.<br>
+&nbsp;<br>
+Python&nbsp;distinguishes&nbsp;between&nbsp;files&nbsp;opened&nbsp;in&nbsp;binary&nbsp;and&nbsp;text&nbsp;modes,<br>
+even&nbsp;when&nbsp;the&nbsp;underlying&nbsp;operating&nbsp;system&nbsp;doesn't.&nbsp;Files&nbsp;opened&nbsp;in<br>
+binary&nbsp;mode&nbsp;(appending&nbsp;'b'&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument)&nbsp;return&nbsp;contents&nbsp;as<br>
+bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;mode&nbsp;(the&nbsp;default,&nbsp;or&nbsp;when<br>
+'t'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
+returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
+platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
+&nbsp;<br>
+'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
+of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
+universal&nbsp;newlines&nbsp;mode.<br>
+&nbsp;<br>
+buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
+Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
+line&nbsp;buffering&nbsp;(only&nbsp;usable&nbsp;in&nbsp;text&nbsp;mode),&nbsp;and&nbsp;an&nbsp;integer&nbsp;&gt;&nbsp;1&nbsp;to&nbsp;indicate<br>
+the&nbsp;size&nbsp;of&nbsp;a&nbsp;fixed-size&nbsp;chunk&nbsp;buffer.&nbsp;&nbsp;When&nbsp;no&nbsp;buffering&nbsp;argument&nbsp;is<br>
+given,&nbsp;the&nbsp;default&nbsp;buffering&nbsp;policy&nbsp;works&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+*&nbsp;Binary&nbsp;files&nbsp;are&nbsp;buffered&nbsp;in&nbsp;fixed-size&nbsp;chunks;&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;buffer<br>
+&nbsp;&nbsp;is&nbsp;chosen&nbsp;using&nbsp;a&nbsp;heuristic&nbsp;trying&nbsp;to&nbsp;determine&nbsp;the&nbsp;underlying&nbsp;device's<br>
+&nbsp;&nbsp;"block&nbsp;size"&nbsp;and&nbsp;falling&nbsp;back&nbsp;on&nbsp;`io.DEFAULT_BUFFER_SIZE`.<br>
+&nbsp;&nbsp;On&nbsp;many&nbsp;systems,&nbsp;the&nbsp;buffer&nbsp;will&nbsp;typically&nbsp;be&nbsp;4096&nbsp;or&nbsp;8192&nbsp;bytes&nbsp;long.<br>
+&nbsp;<br>
+*&nbsp;"Interactive"&nbsp;text&nbsp;files&nbsp;(files&nbsp;for&nbsp;which&nbsp;isatty()&nbsp;returns&nbsp;True)<br>
+&nbsp;&nbsp;use&nbsp;line&nbsp;buffering.&nbsp;&nbsp;Other&nbsp;text&nbsp;files&nbsp;use&nbsp;the&nbsp;policy&nbsp;described&nbsp;above<br>
+&nbsp;&nbsp;for&nbsp;binary&nbsp;files.<br>
+&nbsp;<br>
+encoding&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;encoding&nbsp;used&nbsp;to&nbsp;decode&nbsp;or&nbsp;encode&nbsp;the<br>
+file.&nbsp;This&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;in&nbsp;text&nbsp;mode.&nbsp;The&nbsp;default&nbsp;encoding&nbsp;is<br>
+platform&nbsp;dependent,&nbsp;but&nbsp;any&nbsp;encoding&nbsp;supported&nbsp;by&nbsp;Python&nbsp;can&nbsp;be<br>
+passed.&nbsp;&nbsp;See&nbsp;the&nbsp;codecs&nbsp;module&nbsp;for&nbsp;the&nbsp;list&nbsp;of&nbsp;supported&nbsp;encodings.<br>
+&nbsp;<br>
+errors&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;how&nbsp;encoding&nbsp;errors&nbsp;are&nbsp;to<br>
+be&nbsp;handled---this&nbsp;argument&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;in&nbsp;binary&nbsp;mode.&nbsp;Pass<br>
+'strict'&nbsp;to&nbsp;raise&nbsp;a&nbsp;ValueError&nbsp;exception&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;encoding&nbsp;error<br>
+(the&nbsp;default&nbsp;of&nbsp;None&nbsp;has&nbsp;the&nbsp;same&nbsp;effect),&nbsp;or&nbsp;pass&nbsp;'ignore'&nbsp;to&nbsp;ignore<br>
+errors.&nbsp;(Note&nbsp;that&nbsp;ignoring&nbsp;encoding&nbsp;errors&nbsp;can&nbsp;lead&nbsp;to&nbsp;data&nbsp;loss.)<br>
+See&nbsp;the&nbsp;documentation&nbsp;for&nbsp;codecs.register&nbsp;or&nbsp;run&nbsp;'help(codecs.Codec)'<br>
+for&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;permitted&nbsp;encoding&nbsp;error&nbsp;strings.<br>
+&nbsp;<br>
+newline&nbsp;controls&nbsp;how&nbsp;universal&nbsp;newlines&nbsp;works&nbsp;(it&nbsp;only&nbsp;applies&nbsp;to&nbsp;text<br>
+mode).&nbsp;It&nbsp;can&nbsp;be&nbsp;None,&nbsp;'',&nbsp;'\n',&nbsp;'\r',&nbsp;and&nbsp;'\r\n'.&nbsp;&nbsp;It&nbsp;works&nbsp;as<br>
+follows:<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;input,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;universal&nbsp;newlines&nbsp;mode&nbsp;is<br>
+&nbsp;&nbsp;enabled.&nbsp;Lines&nbsp;in&nbsp;the&nbsp;input&nbsp;can&nbsp;end&nbsp;in&nbsp;'\n',&nbsp;'\r',&nbsp;or&nbsp;'\r\n',&nbsp;and<br>
+&nbsp;&nbsp;these&nbsp;are&nbsp;translated&nbsp;into&nbsp;'\n'&nbsp;before&nbsp;being&nbsp;returned&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;caller.&nbsp;If&nbsp;it&nbsp;is&nbsp;'',&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;is&nbsp;enabled,&nbsp;but&nbsp;line<br>
+&nbsp;&nbsp;endings&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.&nbsp;If&nbsp;it&nbsp;has&nbsp;any&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;input&nbsp;lines&nbsp;are&nbsp;only&nbsp;terminated&nbsp;by&nbsp;the&nbsp;given<br>
+&nbsp;&nbsp;string,&nbsp;and&nbsp;the&nbsp;line&nbsp;ending&nbsp;is&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;output,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are<br>
+&nbsp;&nbsp;translated&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;line&nbsp;separator,&nbsp;os.linesep.&nbsp;If<br>
+&nbsp;&nbsp;newline&nbsp;is&nbsp;''&nbsp;or&nbsp;'\n',&nbsp;no&nbsp;translation&nbsp;takes&nbsp;place.&nbsp;If&nbsp;newline&nbsp;is&nbsp;any<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are&nbsp;translated<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;given&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;closefd&nbsp;is&nbsp;False,&nbsp;the&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;will&nbsp;be&nbsp;kept&nbsp;open<br>
+when&nbsp;the&nbsp;file&nbsp;is&nbsp;closed.&nbsp;This&nbsp;does&nbsp;not&nbsp;work&nbsp;when&nbsp;a&nbsp;file&nbsp;name&nbsp;is&nbsp;given<br>
+and&nbsp;must&nbsp;be&nbsp;True&nbsp;in&nbsp;that&nbsp;case.<br>
+&nbsp;<br>
+A&nbsp;custom&nbsp;opener&nbsp;can&nbsp;be&nbsp;used&nbsp;by&nbsp;passing&nbsp;a&nbsp;callable&nbsp;as&nbsp;*opener*.&nbsp;The<br>
+underlying&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;the&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;then&nbsp;obtained&nbsp;by<br>
+calling&nbsp;*opener*&nbsp;with&nbsp;(*file*,&nbsp;*flags*).&nbsp;*opener*&nbsp;must&nbsp;return&nbsp;an&nbsp;open<br>
+file&nbsp;descriptor&nbsp;(passing&nbsp;os.open&nbsp;as&nbsp;*opener*&nbsp;results&nbsp;in&nbsp;functionality<br>
+similar&nbsp;to&nbsp;passing&nbsp;None).<br>
+&nbsp;<br>
+<a href="#-open">open</a>()&nbsp;returns&nbsp;a&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;whose&nbsp;type&nbsp;depends&nbsp;on&nbsp;the&nbsp;mode,&nbsp;and<br>
+through&nbsp;which&nbsp;the&nbsp;standard&nbsp;file&nbsp;operations&nbsp;such&nbsp;as&nbsp;reading&nbsp;and&nbsp;writing<br>
+are&nbsp;performed.&nbsp;When&nbsp;<a href="#-open">open</a>()&nbsp;is&nbsp;used&nbsp;to&nbsp;open&nbsp;a&nbsp;file&nbsp;in&nbsp;a&nbsp;text&nbsp;mode&nbsp;('w',<br>
+'r',&nbsp;'wt',&nbsp;'rt',&nbsp;etc.),&nbsp;it&nbsp;returns&nbsp;a&nbsp;TextIOWrapper.&nbsp;When&nbsp;used&nbsp;to&nbsp;open<br>
+a&nbsp;file&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode,&nbsp;the&nbsp;returned&nbsp;class&nbsp;varies:&nbsp;in&nbsp;read&nbsp;binary<br>
+mode,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedReader;&nbsp;in&nbsp;write&nbsp;binary&nbsp;and&nbsp;append&nbsp;binary<br>
+modes,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedWriter,&nbsp;and&nbsp;in&nbsp;read/write&nbsp;mode,&nbsp;it&nbsp;returns<br>
+a&nbsp;BufferedRandom.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
+reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;StringIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;BytesIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-or_"><strong>or_</strong></a> = any(iterable, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;bool(x)&nbsp;is&nbsp;True&nbsp;for&nbsp;any&nbsp;x&nbsp;in&nbsp;the&nbsp;iterable.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;False.</tt></dd></dl>
+ <dl><dt><a name="-over"><strong>over</strong></a>(x, y)</dt><dd><tt>import&nbsp;Data.Ratio<br>
+over&nbsp;::&nbsp;Integer&nbsp;-&gt;&nbsp;Integer&nbsp;-&gt;&nbsp;Rational<br>
+over&nbsp;=&nbsp;(%)</tt></dd></dl>
+ <dl><dt><a name="-print"><strong>print</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-properFraction"><strong>properFraction</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-putChar"><strong>putChar</strong></a> = putStr(s)</dt></dl>
+ <dl><dt><a name="-putStr"><strong>putStr</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-putStrLn"><strong>putStrLn</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-py_chr"><strong>py_chr</strong></a> = chr(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
+ <dl><dt><a name="-py_hex"><strong>py_hex</strong></a> = hex(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
+'0xc0ffee'</tt></dd></dl>
+ <dl><dt><a name="-py_input"><strong>py_input</strong></a> = input(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
+&nbsp;<br>
+The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
+trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
+&nbsp;<br>
+If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
+On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
+ <dl><dt><a name="-py_oct"><strong>py_oct</strong></a> = oct(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
+'0o1234567'</tt></dd></dl>
+ <dl><dt><a name="-py_open"><strong>py_open</strong></a> = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;IOError&nbsp;upon&nbsp;failure.<br>
+&nbsp;<br>
+file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
+if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
+be&nbsp;opened&nbsp;or&nbsp;an&nbsp;integer&nbsp;file&nbsp;descriptor&nbsp;of&nbsp;the&nbsp;file&nbsp;to&nbsp;be<br>
+wrapped.&nbsp;(If&nbsp;a&nbsp;file&nbsp;descriptor&nbsp;is&nbsp;given,&nbsp;it&nbsp;is&nbsp;closed&nbsp;when&nbsp;the<br>
+returned&nbsp;I/O&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;closed,&nbsp;unless&nbsp;closefd&nbsp;is&nbsp;set&nbsp;to&nbsp;False.)<br>
+&nbsp;<br>
+mode&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;the&nbsp;mode&nbsp;in&nbsp;which&nbsp;the&nbsp;file<br>
+is&nbsp;opened.&nbsp;It&nbsp;defaults&nbsp;to&nbsp;'r'&nbsp;which&nbsp;means&nbsp;open&nbsp;for&nbsp;reading&nbsp;in&nbsp;text<br>
+mode.&nbsp;&nbsp;Other&nbsp;common&nbsp;values&nbsp;are&nbsp;'w'&nbsp;for&nbsp;writing&nbsp;(truncating&nbsp;the&nbsp;file&nbsp;if<br>
+it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writing&nbsp;to&nbsp;a&nbsp;new&nbsp;file,&nbsp;and<br>
+'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
+append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
+In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
+dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
+current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
+mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+&nbsp;<br>
+=========&nbsp;===============================================================<br>
+Character&nbsp;Meaning<br>
+---------&nbsp;---------------------------------------------------------------<br>
+'r'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;reading&nbsp;(default)<br>
+'w'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;truncating&nbsp;the&nbsp;file&nbsp;first<br>
+'x'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;create&nbsp;a&nbsp;new&nbsp;file&nbsp;and&nbsp;open&nbsp;it&nbsp;for&nbsp;writing<br>
+'a'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;for&nbsp;writing,&nbsp;appending&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;if&nbsp;it&nbsp;exists<br>
+'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
+'t'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
+'+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
+'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
+=========&nbsp;===============================================================<br>
+&nbsp;<br>
+The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
+access,&nbsp;the&nbsp;mode&nbsp;'w+b'&nbsp;opens&nbsp;and&nbsp;truncates&nbsp;the&nbsp;file&nbsp;to&nbsp;0&nbsp;bytes,&nbsp;while<br>
+'r+b'&nbsp;opens&nbsp;the&nbsp;file&nbsp;without&nbsp;truncation.&nbsp;The&nbsp;'x'&nbsp;mode&nbsp;implies&nbsp;'w'&nbsp;and<br>
+raises&nbsp;an&nbsp;`FileExistsError`&nbsp;if&nbsp;the&nbsp;file&nbsp;already&nbsp;exists.<br>
+&nbsp;<br>
+Python&nbsp;distinguishes&nbsp;between&nbsp;files&nbsp;opened&nbsp;in&nbsp;binary&nbsp;and&nbsp;text&nbsp;modes,<br>
+even&nbsp;when&nbsp;the&nbsp;underlying&nbsp;operating&nbsp;system&nbsp;doesn't.&nbsp;Files&nbsp;opened&nbsp;in<br>
+binary&nbsp;mode&nbsp;(appending&nbsp;'b'&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument)&nbsp;return&nbsp;contents&nbsp;as<br>
+bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;mode&nbsp;(the&nbsp;default,&nbsp;or&nbsp;when<br>
+'t'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
+returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
+platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
+&nbsp;<br>
+'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
+of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
+universal&nbsp;newlines&nbsp;mode.<br>
+&nbsp;<br>
+buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
+Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
+line&nbsp;buffering&nbsp;(only&nbsp;usable&nbsp;in&nbsp;text&nbsp;mode),&nbsp;and&nbsp;an&nbsp;integer&nbsp;&gt;&nbsp;1&nbsp;to&nbsp;indicate<br>
+the&nbsp;size&nbsp;of&nbsp;a&nbsp;fixed-size&nbsp;chunk&nbsp;buffer.&nbsp;&nbsp;When&nbsp;no&nbsp;buffering&nbsp;argument&nbsp;is<br>
+given,&nbsp;the&nbsp;default&nbsp;buffering&nbsp;policy&nbsp;works&nbsp;as&nbsp;follows:<br>
+&nbsp;<br>
+*&nbsp;Binary&nbsp;files&nbsp;are&nbsp;buffered&nbsp;in&nbsp;fixed-size&nbsp;chunks;&nbsp;the&nbsp;size&nbsp;of&nbsp;the&nbsp;buffer<br>
+&nbsp;&nbsp;is&nbsp;chosen&nbsp;using&nbsp;a&nbsp;heuristic&nbsp;trying&nbsp;to&nbsp;determine&nbsp;the&nbsp;underlying&nbsp;device's<br>
+&nbsp;&nbsp;"block&nbsp;size"&nbsp;and&nbsp;falling&nbsp;back&nbsp;on&nbsp;`io.DEFAULT_BUFFER_SIZE`.<br>
+&nbsp;&nbsp;On&nbsp;many&nbsp;systems,&nbsp;the&nbsp;buffer&nbsp;will&nbsp;typically&nbsp;be&nbsp;4096&nbsp;or&nbsp;8192&nbsp;bytes&nbsp;long.<br>
+&nbsp;<br>
+*&nbsp;"Interactive"&nbsp;text&nbsp;files&nbsp;(files&nbsp;for&nbsp;which&nbsp;isatty()&nbsp;returns&nbsp;True)<br>
+&nbsp;&nbsp;use&nbsp;line&nbsp;buffering.&nbsp;&nbsp;Other&nbsp;text&nbsp;files&nbsp;use&nbsp;the&nbsp;policy&nbsp;described&nbsp;above<br>
+&nbsp;&nbsp;for&nbsp;binary&nbsp;files.<br>
+&nbsp;<br>
+encoding&nbsp;is&nbsp;the&nbsp;name&nbsp;of&nbsp;the&nbsp;encoding&nbsp;used&nbsp;to&nbsp;decode&nbsp;or&nbsp;encode&nbsp;the<br>
+file.&nbsp;This&nbsp;should&nbsp;only&nbsp;be&nbsp;used&nbsp;in&nbsp;text&nbsp;mode.&nbsp;The&nbsp;default&nbsp;encoding&nbsp;is<br>
+platform&nbsp;dependent,&nbsp;but&nbsp;any&nbsp;encoding&nbsp;supported&nbsp;by&nbsp;Python&nbsp;can&nbsp;be<br>
+passed.&nbsp;&nbsp;See&nbsp;the&nbsp;codecs&nbsp;module&nbsp;for&nbsp;the&nbsp;list&nbsp;of&nbsp;supported&nbsp;encodings.<br>
+&nbsp;<br>
+errors&nbsp;is&nbsp;an&nbsp;optional&nbsp;string&nbsp;that&nbsp;specifies&nbsp;how&nbsp;encoding&nbsp;errors&nbsp;are&nbsp;to<br>
+be&nbsp;handled---this&nbsp;argument&nbsp;should&nbsp;not&nbsp;be&nbsp;used&nbsp;in&nbsp;binary&nbsp;mode.&nbsp;Pass<br>
+'strict'&nbsp;to&nbsp;raise&nbsp;a&nbsp;ValueError&nbsp;exception&nbsp;if&nbsp;there&nbsp;is&nbsp;an&nbsp;encoding&nbsp;error<br>
+(the&nbsp;default&nbsp;of&nbsp;None&nbsp;has&nbsp;the&nbsp;same&nbsp;effect),&nbsp;or&nbsp;pass&nbsp;'ignore'&nbsp;to&nbsp;ignore<br>
+errors.&nbsp;(Note&nbsp;that&nbsp;ignoring&nbsp;encoding&nbsp;errors&nbsp;can&nbsp;lead&nbsp;to&nbsp;data&nbsp;loss.)<br>
+See&nbsp;the&nbsp;documentation&nbsp;for&nbsp;codecs.register&nbsp;or&nbsp;run&nbsp;'help(codecs.Codec)'<br>
+for&nbsp;a&nbsp;list&nbsp;of&nbsp;the&nbsp;permitted&nbsp;encoding&nbsp;error&nbsp;strings.<br>
+&nbsp;<br>
+newline&nbsp;controls&nbsp;how&nbsp;universal&nbsp;newlines&nbsp;works&nbsp;(it&nbsp;only&nbsp;applies&nbsp;to&nbsp;text<br>
+mode).&nbsp;It&nbsp;can&nbsp;be&nbsp;None,&nbsp;'',&nbsp;'\n',&nbsp;'\r',&nbsp;and&nbsp;'\r\n'.&nbsp;&nbsp;It&nbsp;works&nbsp;as<br>
+follows:<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;input,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;universal&nbsp;newlines&nbsp;mode&nbsp;is<br>
+&nbsp;&nbsp;enabled.&nbsp;Lines&nbsp;in&nbsp;the&nbsp;input&nbsp;can&nbsp;end&nbsp;in&nbsp;'\n',&nbsp;'\r',&nbsp;or&nbsp;'\r\n',&nbsp;and<br>
+&nbsp;&nbsp;these&nbsp;are&nbsp;translated&nbsp;into&nbsp;'\n'&nbsp;before&nbsp;being&nbsp;returned&nbsp;to&nbsp;the<br>
+&nbsp;&nbsp;caller.&nbsp;If&nbsp;it&nbsp;is&nbsp;'',&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;is&nbsp;enabled,&nbsp;but&nbsp;line<br>
+&nbsp;&nbsp;endings&nbsp;are&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.&nbsp;If&nbsp;it&nbsp;has&nbsp;any&nbsp;of<br>
+&nbsp;&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;input&nbsp;lines&nbsp;are&nbsp;only&nbsp;terminated&nbsp;by&nbsp;the&nbsp;given<br>
+&nbsp;&nbsp;string,&nbsp;and&nbsp;the&nbsp;line&nbsp;ending&nbsp;is&nbsp;returned&nbsp;to&nbsp;the&nbsp;caller&nbsp;untranslated.<br>
+&nbsp;<br>
+*&nbsp;On&nbsp;output,&nbsp;if&nbsp;newline&nbsp;is&nbsp;None,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are<br>
+&nbsp;&nbsp;translated&nbsp;to&nbsp;the&nbsp;system&nbsp;default&nbsp;line&nbsp;separator,&nbsp;os.linesep.&nbsp;If<br>
+&nbsp;&nbsp;newline&nbsp;is&nbsp;''&nbsp;or&nbsp;'\n',&nbsp;no&nbsp;translation&nbsp;takes&nbsp;place.&nbsp;If&nbsp;newline&nbsp;is&nbsp;any<br>
+&nbsp;&nbsp;of&nbsp;the&nbsp;other&nbsp;legal&nbsp;values,&nbsp;any&nbsp;'\n'&nbsp;characters&nbsp;written&nbsp;are&nbsp;translated<br>
+&nbsp;&nbsp;to&nbsp;the&nbsp;given&nbsp;string.<br>
+&nbsp;<br>
+If&nbsp;closefd&nbsp;is&nbsp;False,&nbsp;the&nbsp;underlying&nbsp;file&nbsp;descriptor&nbsp;will&nbsp;be&nbsp;kept&nbsp;open<br>
+when&nbsp;the&nbsp;file&nbsp;is&nbsp;closed.&nbsp;This&nbsp;does&nbsp;not&nbsp;work&nbsp;when&nbsp;a&nbsp;file&nbsp;name&nbsp;is&nbsp;given<br>
+and&nbsp;must&nbsp;be&nbsp;True&nbsp;in&nbsp;that&nbsp;case.<br>
+&nbsp;<br>
+A&nbsp;custom&nbsp;opener&nbsp;can&nbsp;be&nbsp;used&nbsp;by&nbsp;passing&nbsp;a&nbsp;callable&nbsp;as&nbsp;*opener*.&nbsp;The<br>
+underlying&nbsp;file&nbsp;descriptor&nbsp;for&nbsp;the&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;is&nbsp;then&nbsp;obtained&nbsp;by<br>
+calling&nbsp;*opener*&nbsp;with&nbsp;(*file*,&nbsp;*flags*).&nbsp;*opener*&nbsp;must&nbsp;return&nbsp;an&nbsp;open<br>
+file&nbsp;descriptor&nbsp;(passing&nbsp;os.open&nbsp;as&nbsp;*opener*&nbsp;results&nbsp;in&nbsp;functionality<br>
+similar&nbsp;to&nbsp;passing&nbsp;None).<br>
+&nbsp;<br>
+<a href="#-open">open</a>()&nbsp;returns&nbsp;a&nbsp;file&nbsp;<a href="builtins.html#object">object</a>&nbsp;whose&nbsp;type&nbsp;depends&nbsp;on&nbsp;the&nbsp;mode,&nbsp;and<br>
+through&nbsp;which&nbsp;the&nbsp;standard&nbsp;file&nbsp;operations&nbsp;such&nbsp;as&nbsp;reading&nbsp;and&nbsp;writing<br>
+are&nbsp;performed.&nbsp;When&nbsp;<a href="#-open">open</a>()&nbsp;is&nbsp;used&nbsp;to&nbsp;open&nbsp;a&nbsp;file&nbsp;in&nbsp;a&nbsp;text&nbsp;mode&nbsp;('w',<br>
+'r',&nbsp;'wt',&nbsp;'rt',&nbsp;etc.),&nbsp;it&nbsp;returns&nbsp;a&nbsp;TextIOWrapper.&nbsp;When&nbsp;used&nbsp;to&nbsp;open<br>
+a&nbsp;file&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode,&nbsp;the&nbsp;returned&nbsp;class&nbsp;varies:&nbsp;in&nbsp;read&nbsp;binary<br>
+mode,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedReader;&nbsp;in&nbsp;write&nbsp;binary&nbsp;and&nbsp;append&nbsp;binary<br>
+modes,&nbsp;it&nbsp;returns&nbsp;a&nbsp;BufferedWriter,&nbsp;and&nbsp;in&nbsp;read/write&nbsp;mode,&nbsp;it&nbsp;returns<br>
+a&nbsp;BufferedRandom.<br>
+&nbsp;<br>
+It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
+reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;StringIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;BytesIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
+ <dl><dt><a name="-py_print"><strong>py_print</strong></a> = print(...)</dt><dd><tt><a href="#-print">print</a>(value,&nbsp;...,&nbsp;sep='&nbsp;',&nbsp;end='\n',&nbsp;file=sys.stdout,&nbsp;flush=False)<br>
+&nbsp;<br>
+Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
+Optional&nbsp;keyword&nbsp;arguments:<br>
+file:&nbsp;&nbsp;a&nbsp;file-like&nbsp;<a href="builtins.html#object">object</a>&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
+sep:&nbsp;&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
+end:&nbsp;&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
+flush:&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</tt></dd></dl>
+ <dl><dt><a name="-py_repr"><strong>py_repr</strong></a> = repr(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(repr(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
+ <dl><dt><a name="-quot"><strong>quot</strong></a>(x, y)</dt></dl>
+ <dl><dt><a name="-quotRem"><strong>quotRem</strong></a>(x, y)</dt></dl>
+ <dl><dt><a name="-read"><strong>read</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-readFile"><strong>readFile</strong></a>(fpath)</dt></dl>
+ <dl><dt><a name="-readIO"><strong>readIO</strong></a>(s)</dt></dl>
+ <dl><dt><a name="-readLn"><strong>readLn</strong></a>()</dt></dl>
+ <dl><dt><a name="-reduce"><strong>reduce</strong></a>(...)</dt><dd><tt><a href="#-reduce">reduce</a>(function,&nbsp;sequence[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence,<br>
+from&nbsp;left&nbsp;to&nbsp;right,&nbsp;so&nbsp;as&nbsp;to&nbsp;reduce&nbsp;the&nbsp;sequence&nbsp;to&nbsp;a&nbsp;single&nbsp;value.<br>
+For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp;x+y,&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5])&nbsp;calculates<br>
+((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
+of&nbsp;the&nbsp;sequence&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
+sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
+ <dl><dt><a name="-rem"><strong>rem</strong></a>(x, y)</dt></dl>
+ <dl><dt><a name="-replicate"><strong>replicate</strong></a>(n, x)</dt></dl>
+ <dl><dt><a name="-round"><strong>round</strong></a>(...)</dt><dd><tt><a href="#-round">round</a>(number[,&nbsp;ndigits])&nbsp;-&gt;&nbsp;number<br>
+&nbsp;<br>
+Round&nbsp;a&nbsp;number&nbsp;to&nbsp;a&nbsp;given&nbsp;precision&nbsp;in&nbsp;decimal&nbsp;digits&nbsp;(default&nbsp;0&nbsp;digits).<br>
+This&nbsp;returns&nbsp;an&nbsp;int&nbsp;when&nbsp;called&nbsp;with&nbsp;one&nbsp;argument,&nbsp;otherwise&nbsp;the<br>
+same&nbsp;type&nbsp;as&nbsp;the&nbsp;number.&nbsp;ndigits&nbsp;may&nbsp;be&nbsp;negative.</tt></dd></dl>
+ <dl><dt><a name="-scaleFloat"><strong>scaleFloat</strong></a>(power, x)</dt></dl>
+ <dl><dt><a name="-scanl"><strong>scanl</strong></a>(func, init, xs)</dt></dl>
+ <dl><dt><a name="-scanr"><strong>scanr</strong></a>(func, init, xs)</dt></dl>
+ <dl><dt><a name="-scanr1"><strong>scanr1</strong></a>(func, xs)</dt></dl>
+ <dl><dt><a name="-seq"><strong>seq</strong></a>(x, y)</dt></dl>
+ <dl><dt><a name="-seqAl"><strong>seqAl</strong></a>(f1, f2)</dt><dd><tt>seqAl&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;a<br>
+seqAl&nbsp;=&nbsp;(&lt;*)</tt></dd></dl>
+ <dl><dt><a name="-seqAr"><strong>seqAr</strong></a>(f1, f2)</dt><dd><tt>seqAr&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;b<br>
+seqAr&nbsp;=&nbsp;(*&gt;)</tt></dd></dl>
+ <dl><dt><a name="-seqM"><strong>seqM</strong></a>(m1, m2)</dt><dd><tt>seqM&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;m&nbsp;b&nbsp;-&gt;&nbsp;m&nbsp;b<br>
+seqM&nbsp;=&nbsp;(&gt;&gt;)</tt></dd></dl>
+ <dl><dt><a name="-sequence"><strong>sequence</strong></a> = sequenceA(fs)</dt></dl>
+ <dl><dt><a name="-sequenceA"><strong>sequenceA</strong></a>(fs)</dt></dl>
+ <dl><dt><a name="-sequence_"><strong>sequence_</strong></a>(ms)</dt></dl>
+ <dl><dt><a name="-show"><strong>show</strong></a> = repr(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.<br>
+&nbsp;<br>
+For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(repr(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
+ <dl><dt><a name="-showChar"><strong>showChar</strong></a> = showString(x)</dt></dl>
+ <dl><dt><a name="-showList"><strong>showList</strong></a>(xs)</dt></dl>
+ <dl><dt><a name="-showParen"><strong>showParen</strong></a>(parens, showFunc)</dt></dl>
+ <dl><dt><a name="-showString"><strong>showString</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-shows"><strong>shows</strong></a>(x)</dt></dl>
+ <dl><dt><a name="-sin"><strong>sin</strong></a>(...)</dt><dd><tt><a href="#-sin">sin</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;sine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-sinh"><strong>sinh</strong></a>(...)</dt><dd><tt><a href="#-sinh">sinh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;hyperbolic&nbsp;sine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-splitAt"><strong>splitAt</strong></a>(n, xs)</dt></dl>
+ <dl><dt><a name="-sqrt"><strong>sqrt</strong></a>(...)</dt><dd><tt><a href="#-sqrt">sqrt</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-subtract"><strong>subtract</strong></a>(x, y)</dt><dd><tt>###&nbsp;Numeric&nbsp;functions:</tt></dd></dl>
+ <dl><dt><a name="-sum"><strong>sum</strong></a>(iterable, start=0, /)</dt><dd><tt>Return&nbsp;the&nbsp;sum&nbsp;of&nbsp;a&nbsp;'start'&nbsp;value&nbsp;(default:&nbsp;0)&nbsp;plus&nbsp;an&nbsp;iterable&nbsp;of&nbsp;numbers<br>
+&nbsp;<br>
+When&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;the&nbsp;start&nbsp;value.<br>
+This&nbsp;function&nbsp;is&nbsp;intended&nbsp;specifically&nbsp;for&nbsp;use&nbsp;with&nbsp;numeric&nbsp;values&nbsp;and&nbsp;may<br>
+reject&nbsp;non-numeric&nbsp;types.</tt></dd></dl>
+ <dl><dt><a name="-take"><strong>take</strong></a>(n, xs)</dt></dl>
+ <dl><dt><a name="-tan"><strong>tan</strong></a>(...)</dt><dd><tt><a href="#-tan">tan</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;tangent&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-tanh"><strong>tanh</strong></a>(...)</dt><dd><tt><a href="#-tanh">tanh</a>(x)<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-unIO"><strong>unIO</strong></a>(io)</dt><dd><tt>The&nbsp;unIO&nbsp;function&nbsp;is&nbsp;an&nbsp;impure&nbsp;function&nbsp;which&nbsp;performs&nbsp;the<br>
+I/O&nbsp;contained&nbsp;in&nbsp;the&nbsp;given&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;returns&nbsp;the&nbsp;result.<br>
+In&nbsp;particular,&nbsp;the&nbsp;recommendation&nbsp;is&nbsp;to&nbsp;write<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@unIO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;@do$([io1,&nbsp;io2,&nbsp;...])<br>
+&nbsp;&nbsp;&nbsp;&nbsp;def&nbsp;main(r1,&nbsp;r2,&nbsp;...)&nbsp;=<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+which&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;Haskell&nbsp;code<br>
+&nbsp;&nbsp;&nbsp;&nbsp;main&nbsp;=&nbsp;do<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r1&nbsp;&lt;-&nbsp;io1<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r2&nbsp;&lt;-&nbsp;io2<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</tt></dd></dl>
+ <dl><dt><a name="-uncurry"><strong>uncurry</strong></a>(func)</dt></dl>
+ <dl><dt><a name="-unlines"><strong>unlines</strong></a>(strs)</dt></dl>
+ <dl><dt><a name="-until"><strong>until</strong></a>(cond, func, x)</dt></dl>
+ <dl><dt><a name="-unwords"><strong>unwords</strong></a> = join(...)<font color="#909090"><font face="helvetica, arial"> method of <a href="builtins.html#str">builtins.str</a> instance</font></font></dt><dd><tt>S.<a href="#-join">join</a>(iterable)&nbsp;-&gt;&nbsp;str<br>
+&nbsp;<br>
+Return&nbsp;a&nbsp;string&nbsp;which&nbsp;is&nbsp;the&nbsp;concatenation&nbsp;of&nbsp;the&nbsp;strings&nbsp;in&nbsp;the<br>
+iterable.&nbsp;&nbsp;The&nbsp;separator&nbsp;between&nbsp;elements&nbsp;is&nbsp;S.</tt></dd></dl>
+ <dl><dt><a name="-unzip"><strong>unzip</strong></a>(xs)</dt></dl>
+ <dl><dt><a name="-unzip3"><strong>unzip3</strong></a> = unzip(xs)</dt></dl>
+ <dl><dt><a name="-userError"><strong>userError</strong></a>(msg)</dt></dl>
+ <dl><dt><a name="-writeFile"><strong>writeFile</strong></a>(fpath, text)</dt></dl>
+ <dl><dt><a name="-zipWith"><strong>zipWith</strong></a>(func, xs1, xs2)</dt></dl>
+ <dl><dt><a name="-zipWith3"><strong>zipWith3</strong></a>(func, xs1, xs2, xs3)</dt></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>Bounded</strong> = typing.Union[bool, typing.Iterable]<br>
+<strong>Num</strong> = typing.Union[int, float, fractions.Fraction]<br>
+<strong>Read</strong> = typing.Union[str, int, float, NoneType, tuple, list, dict]<br>
+<strong>ReadS</strong> = NotImplemented<br>
+<strong>Real</strong> = typing.Union[int, float, fractions.Fraction]<br>
+<strong>Show</strong> = typing.Any<br>
+<strong>TApp</strong> = ~TApp<br>
+<strong>TBounded</strong> = ~TBounded<br>
+<strong>TEnum</strong> = ~TEnum<br>
+<strong>TMonad</strong> = ~TMonad<br>
+<strong>TMonoid</strong> = ~TMonoid<br>
+<strong>TNum</strong> = ~TNum<br>
+<strong>TOrd</strong> = ~TOrd<br>
+<strong>TType</strong> = ~TType<br>
+<strong>TYPE_CHECKING</strong> = False<br>
+<strong>Ta</strong> = ~Ta<br>
+<strong>Tb</strong> = ~Tb<br>
+<strong>Tc</strong> = ~Tc<br>
+<strong>Td</strong> = ~Td<br>
+<strong>absolute_import</strong> = _Feature((2, 5, 0, 'alpha', 1), (3, 0, 0, 'alpha', 0), 16384)<br>
+<strong>decodeFloat</strong> = NotImplemented<br>
+<strong>division</strong> = _Feature((2, 2, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 8192)<br>
+<strong>encodeFloat</strong> = NotImplemented<br>
+<strong>eq</strong> = EQ()<br>
+<strong>exponent</strong> = NotImplemented<br>
+<strong>fst</strong> = operator.itemgetter(0)<br>
+<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x0000012B3C3A8558&gt;, 1))<br>
+<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x0000012B3C3A8558&gt;)<br>
+<strong>getLine</strong> = IO(io_func=&lt;built-in function input&gt;)<br>
+<strong>gt</strong> = GT()<br>
+<strong>head</strong> = functools.partial(&lt;function _coconut_igetitem at 0x0000012B3CCAD510&gt;, index=0)<br>
+<strong>init</strong> = functools.partial(&lt;function _coconut_igetitem at 0x0000012B3CCAD510&gt;, index=slice(None, -1, None))<br>
+<strong>isDenormalized</strong> = NotImplemented<br>
+<strong>last</strong> = functools.partial(&lt;function _coconut_igetitem at 0x0000012B3CCAD510&gt;, index=-1)<br>
+<strong>lex</strong> = NotImplemented<br>
+<strong>lines</strong> = operator.methodcaller('splitlines')<br>
+<strong>lt</strong> = LT()<br>
+<strong>mempty</strong> = Mempty()<br>
+<strong>nothing</strong> = Nothing()<br>
+<strong>otherwise</strong> = True<br>
+<strong>pi</strong> = 3.141592653589793<br>
+<strong>pred</strong> = &lt;function _coconut_minus at 0x0000012B3CCA4158&gt;$(?, 1)<br>
+<strong>print_function</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 65536)<br>
+<strong>product</strong> = functools.partial(&lt;built-in function reduce&gt;, &lt;built-in function mul&gt;)<br>
+<strong>readList</strong> = NotImplemented<br>
+<strong>readParen</strong> = NotImplemented<br>
+<strong>reads</strong> = NotImplemented<br>
+<strong>readsPrec</strong> = NotImplemented<br>
+<strong>recip</strong> = functools.partial(&lt;built-in function truediv&gt;, 1)<br>
+<strong>showsPrec</strong> = NotImplemented<br>
+<strong>significand</strong> = NotImplemented<br>
+<strong>snd</strong> = operator.itemgetter(1)<br>
+<strong>succ</strong> = functools.partial(&lt;built-in function add&gt;, 1)<br>
+<strong>tail</strong> = functools.partial(&lt;function _coconut_igetitem at 0x0000012B3CCAD510&gt;, index=slice(1, None, None))<br>
+<strong>toEnum</strong> = NotImplemented<br>
+<strong>undefined</strong> = None<br>
+<strong>unicode_literals</strong> = _Feature((2, 6, 0, 'alpha', 2), (3, 0, 0, 'alpha', 0), 131072)<br>
+<strong>words</strong> = operator.methodcaller('split')</td></tr></table>
+</body></html>

@@ -1,21 +1,22 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x81f977c1
+# __coconut_hash__ = 0x9a5db40c
 
 # Compiled with Coconut version 1.4.1-post_dev8 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import generator_stop
+from __future__ import print_function, absolute_import, unicode_literals, division
 import sys as _coconut_sys, os.path as _coconut_os_path
 _coconut_file_path = _coconut_os_path.dirname(_coconut_os_path.abspath(__file__))
-_coconut_cached_module = _coconut_sys.modules.get("__coconut__")
+_coconut_cached_module = _coconut_sys.modules.get(str("__coconut__"))
 if _coconut_cached_module is not None and _coconut_os_path.dirname(_coconut_cached_module.__file__) != _coconut_file_path:
-    del _coconut_sys.modules["__coconut__"]
+    del _coconut_sys.modules[str("__coconut__")]
 _coconut_sys.path.insert(0, _coconut_file_path)
 from __coconut__ import *
 from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_back_pipe, _coconut_star_pipe, _coconut_back_star_pipe, _coconut_dubstar_pipe, _coconut_back_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match
-_coconut_sys.path.pop(0)
+if _coconut_sys.version_info >= (3,):
+    _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
 
@@ -24,7 +25,9 @@ from prelude.typevars import *  # type: ignore
 
 
 # Deriving:
-def derivingOrd(*valueConstructors: 'TType') -> 'None':
+def derivingOrd(*valueConstructors  # type: TType
+    ):
+# type: (...) -> None
     """
     The expression
         derivingOrd(valueConstructor1, valueConstructor2, ...)
@@ -73,7 +76,9 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':
 
         valCon.__gt__ = __gt__
         __gt__ = _coconut_dotted_func_name_store_3
-def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
+def derivingBoundedEnum(*valueConstructors  # type: TType
+    ):
+# type: (...) -> None
     """
     The expression
         derivingBoundedEnum(valueConstructor1, valueConstructor2, ...)
@@ -145,7 +150,9 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
 # Monads:
         valCon.__sub__ = __sub__
         __sub__ = _coconut_dotted_func_name_store_9
-def definesBind(dataType: 'TType') -> 'TType':
+def definesBind(dataType  # type: TType
+    ):
+# type: (...) -> TType
     """
     Decorator to declare that a data type defines __bind__
     instead of __join__. Will also create an __fmap__ method
@@ -181,7 +188,9 @@ def definesBind(dataType: 'TType') -> 'TType':
     __join__ = _coconut_dotted_func_name_store_11
     return dataType
 
-def definesReturn(dataType: 'TType') -> 'TType':
+def definesReturn(dataType  # type: TType
+    ):
+# type: (...) -> TType
     """
     A simple decorator to set __pure__ equal to __return__.
     If used with definesBind, definesReturn must be applied
