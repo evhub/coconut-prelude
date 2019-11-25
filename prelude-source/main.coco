@@ -64,10 +64,8 @@ if TYPE_CHECKING:
     def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb =
         ...  # type: ignore
 else:
-    def maybe(default, _, Nothing()) = default
-
-    @addpattern(maybe)
-    def maybe(_, func, Just(x)) = func(x)
+    match def maybe(default, _, Nothing()) = default
+    addpattern def maybe(_, func, Just(x)) = func(x)
 
 #### Either:
 class Either:
@@ -91,10 +89,8 @@ if TYPE_CHECKING:
     def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc =
         ...  # type: ignore
 else:
-    def either(left_func, _, Left(x)) = left_func(x)
-
-    @addpattern(either)
-    def either(_, right_func, Right(x)) = right_func(x)
+    match def either(left_func, _, Left(x)) = left_func(x)
+    addpattern def either(_, right_func, Right(x)) = right_func(x)
 
 #### Ordering:
 class Ordering:
@@ -153,13 +149,9 @@ if TYPE_CHECKING:
     def compare(x: Ord, y: Ord) -> Ordering =
         ...  # type: ignore
 else:
-    def compare(x, y if x == y) = eq
-
-    @addpattern(compare)
-    def compare(x, y if x < y) = lt
-
-    @addpattern(compare)
-    def compare(x, y if x > y) = gt
+    match def compare(x, y if x == y) = eq
+    addpattern def compare(x, y if x < y) = lt
+    addpattern def compare(x, y if x > y) = gt
 
 max: (TOrd, TOrd) -> TOrd
 max = _max
@@ -288,13 +280,9 @@ if TYPE_CHECKING:
     def signum(x: Num) -> int =
         ...  # type: ignore
 else:
-    def signum(0) = 0
-
-    @addpattern(signum)
-    def signum(x if x > 0) = 1
-
-    @addpattern(signum)
-    def signum(x if x < 0) = -1
+    match def signum(0) = 0
+    addpattern def signum(x if x > 0) = 1
+    addpattern def signum(x if x < 0) = -1
 
 def fromInteger(x: Integer) -> Num = x
 
@@ -305,11 +293,9 @@ if TYPE_CHECKING:
     def toRational(real: Real) -> Rational =
         ...  # type: ignore
 else:
-    def toRational(real is float) =
+    match def toRational(real is float) =
         Rational.from_float(real)
-
-    @addpattern(toRational)
-    def toRational(real) =
+    addpattern def toRational(real) =
         Rational(real)
 
 #### Integral:
@@ -442,13 +428,9 @@ if TYPE_CHECKING:
     def lcm(x: int, y: int) -> int =
         ...  # type: ignore
 else:
-    def lcm(_, 0) = 0
-
-    @addpattern(lcm)
-    def lcm(0, _) = 0
-
-    @addpattern(lcm)
-    def lcm(x, y) =
+    match def lcm(_, 0) = 0
+    addpattern def lcm(0, _) = 0
+    addpattern def lcm(x, y) =
         abs(y) * (abs(x) // gcd(x, y))
 
 fromIntegral: Integral -> Num
@@ -662,10 +644,8 @@ if TYPE_CHECKING:
     def do(monads: TMonad[], func: -> TMonad) -> TMonad =
         ...  # type: ignore
 else:
-    def do([], func) = func()
-
-    @addpattern(do)
-    def do([m] + ms, func) =
+    match def do([], func) = func()
+    addpattern def do([m] + ms, func) =
         """
         The call
             do([m1, m2, ...], func)
@@ -949,15 +929,11 @@ if TYPE_CHECKING:
     def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]] =
         ...  # type: ignore
 else:
-    def span(_, []) = ([], [])
-
-    @addpattern(span)
-    def span(cond, [x] + xs if cond(x)) =
+    match def span(_, []) = ([], [])
+    addpattern def span(cond, [x] + xs if cond(x)) =
         ys, zs = span(cond, xs)
         ([x] + ys, zs)
-
-    @addpattern(span)
-    def span(cond, xs) =
+    addpattern def span(cond, xs) =
         ([], xs)
 
 def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =

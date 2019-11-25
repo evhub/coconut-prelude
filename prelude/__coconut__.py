@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 1.4.1 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.1-post_dev8 [Ernest Scribbler]
 
 """Built-in Coconut utilities."""
 
@@ -494,6 +494,7 @@ class _coconut_FunctionMatchErrorContext(object):
 _coconut_get_function_match_error = _coconut_FunctionMatchErrorContext.get
 class _coconut_base_pattern_func:
     __slots__ = ("FunctionMatchError", "__doc__", "patterns")
+    _coconut_is_match = True
     def __init__(self, *funcs):
         self.FunctionMatchError = _coconut.type(_coconut_str("MatchError"), (_coconut_MatchError,), {})
         self.__doc__ = None
@@ -528,9 +529,18 @@ class _coconut_base_pattern_func:
         return (self.__class__, _coconut.tuple(self.patterns))
     def __get__(self, obj, objtype=None):
         return _coconut.functools.partial(self, obj)
-def addpattern(base_func):
+def _coconut_mark_as_match(base_func):
+    base_func._coconut_is_match = True
+    return base_func
+def addpattern(base_func, **kwargs):
     """Decorator to add a new case to a pattern-matching function,
     where the new case is checked last."""
+    allow_any_func = kwargs.pop("allow_any_func", False)
+    if not allow_any_func and not _coconut.getattr(base_func, "_coconut_is_match", False):
+        import warnings
+        warnings.warn("Possible misuse of addpattern with non-pattern-matching function " + _coconut.repr(base_func) + " (pass allow_any_func=True to dismiss)", stacklevel=2)
+    if kwargs:
+        raise _coconut.TypeError("addpattern() got unexpected keyword arguments " + _coconut.repr(kwargs))
     return _coconut.functools.partial(_coconut_base_pattern_func, base_func)
 _coconut_addpattern = addpattern
 class _coconut_partial:

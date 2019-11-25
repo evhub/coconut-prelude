@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x1e3a314a
+# __coconut_hash__ = 0x81f977c1
 
-# Compiled with Coconut version 1.4.1 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.1-post_dev8 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -14,7 +14,7 @@ if _coconut_cached_module is not None and _coconut_os_path.dirname(_coconut_cach
     del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_path)
 from __coconut__ import *
-from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_back_pipe, _coconut_star_pipe, _coconut_back_star_pipe, _coconut_dubstar_pipe, _coconut_back_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert
+from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_back_pipe, _coconut_star_pipe, _coconut_back_star_pipe, _coconut_dubstar_pipe, _coconut_back_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -40,19 +40,39 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':
     for valCon in valueConstructors:
 
 # Ord
+        try:
+            _coconut_dotted_func_name_store_0 = __lt__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_0 = None
         def __lt__(x, y):
             return tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
         valCon.__lt__ = __lt__
+        __lt__ = _coconut_dotted_func_name_store_0
+        try:
+            _coconut_dotted_func_name_store_1 = __le__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_1 = None
         def __le__(x, y):
             return tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y)
         valCon.__le__ = __le__
+        __le__ = _coconut_dotted_func_name_store_1
+        try:
+            _coconut_dotted_func_name_store_2 = __ge__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_2 = None
         def __ge__(x, y):
             return tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y)
         valCon.__ge__ = __ge__
+        __ge__ = _coconut_dotted_func_name_store_2
+        try:
+            _coconut_dotted_func_name_store_3 = __gt__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_3 = None
         def __gt__(x, y):
             return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
         valCon.__gt__ = __gt__
+        __gt__ = _coconut_dotted_func_name_store_3
 def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
     """
     The expression
@@ -69,32 +89,62 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
     for valCon in valueConstructors:
 
 # Bounded
+        try:
+            _coconut_dotted_func_name_store_4 = __minBound__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_4 = None
         @_coconut_tco
         def __minBound__(self):
             return _coconut_tail_call(valueConstructors[0])
         valCon.__minBound__ = __minBound__
+        __minBound__ = _coconut_dotted_func_name_store_4
+        try:
+            _coconut_dotted_func_name_store_5 = __maxBound__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_5 = None
         @_coconut_tco
         def __maxBound__(self):
             return _coconut_tail_call(valueConstructors[-1])
 
 # Enum
         valCon.__maxBound__ = __maxBound__
+        __maxBound__ = _coconut_dotted_func_name_store_5
+        try:
+            _coconut_dotted_func_name_store_6 = __int__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_6 = None
         @_coconut_tco
         def __int__(x):
             return _coconut_tail_call(ind, x)
         valCon.__int__ = __int__
+        __int__ = _coconut_dotted_func_name_store_6
+        try:
+            _coconut_dotted_func_name_store_7 = __add__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_7 = None
         def __add__(x, y):
             return valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y)
         valCon.__add__ = __add__
+        __add__ = _coconut_dotted_func_name_store_7
+        try:
+            _coconut_dotted_func_name_store_8 = __radd__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_8 = None
         def __radd__(x, y):
             return x + y
         valCon.__radd__ = __radd__
+        __radd__ = _coconut_dotted_func_name_store_8
+        try:
+            _coconut_dotted_func_name_store_9 = __sub__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_9 = None
         def __sub__(x, y):
             return valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
 
 
 # Monads:
         valCon.__sub__ = __sub__
+        __sub__ = _coconut_dotted_func_name_store_9
 def definesBind(dataType: 'TType') -> 'TType':
     """
     Decorator to declare that a data type defines __bind__
@@ -107,18 +157,28 @@ def definesBind(dataType: 'TType') -> 'TType':
     if not (hasattr)(dataType, "__fmap__"):
         if not (hasattr)(dataType, "__pure__"):
             raise TypeError("data types which define __bind__ must define either __fmap__ or __pure__")
+        try:
+            _coconut_dotted_func_name_store_10 = __fmap__
+        except _coconut.NameError:
+            _coconut_dotted_func_name_store_10 = None
         @_coconut_tco
         def __fmap__(self, func):
             return _coconut_tail_call(self.__bind__, lambda x: dataType.__pure__(func(x)))
 
         dataType.__fmap__ = __fmap__
+        __fmap__ = _coconut_dotted_func_name_store_10
     if (hasattr)(dataType, "__join__"):
         raise TypeError("data types which define __bind__ cannot define __join__")
+    try:
+        _coconut_dotted_func_name_store_11 = __join__
+    except _coconut.NameError:
+        _coconut_dotted_func_name_store_11 = None
     @_coconut_tco
     def __join__(self):
         return _coconut_tail_call(self.__bind__, lambda x: x)
 
     dataType.__join__ = __join__
+    __join__ = _coconut_dotted_func_name_store_11
     return dataType
 
 def definesReturn(dataType: 'TType') -> 'TType':
