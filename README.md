@@ -13,3 +13,7 @@ pip install coconut-prelude
 ```python
 from prelude import *
 ```
+
+## Documentation
+
+For documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco).
