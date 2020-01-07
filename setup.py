@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x4610c4b7
+# __coconut_hash__ = 0x18a3befe
 
-# Compiled with Coconut version 1.4.1-post_dev8 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.2-post_dev5 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -12,7 +12,7 @@ from builtins import chr, filter, hex, input, int, map, object, oct, open, print
 py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, hex, input, int, map, object, oct, open, print, range, str, zip, filter, reversed, enumerate, repr
 _coconut_str = str
 class _coconut:
-    import collections, copy, functools, types, itertools, operator, threading, weakref, os
+    import collections, copy, functools, types, itertools, operator, threading, weakref, os, warnings
     import pickle
     OrderedDict = collections.OrderedDict
     if _coconut_sys.version_info < (3, 3):
@@ -526,6 +526,8 @@ class _coconut_base_pattern_func:
     def __reduce__(self):
         return (self.__class__, _coconut.tuple(self.patterns))
     def __get__(self, obj, objtype=None):
+        if obj is None:
+            return self
         return _coconut.functools.partial(self, obj)
 def _coconut_mark_as_match(base_func):
     base_func._coconut_is_match = True
@@ -535,8 +537,7 @@ def addpattern(base_func, **kwargs):
     where the new case is checked last."""
     allow_any_func = kwargs.pop("allow_any_func", False)
     if not allow_any_func and not _coconut.getattr(base_func, "_coconut_is_match", False):
-        import warnings
-        warnings.warn("Possible misuse of addpattern with non-pattern-matching function " + _coconut.repr(base_func) + " (pass allow_any_func=True to dismiss)", stacklevel=2)
+        _coconut.warnings.warn("Possible misuse of addpattern with non-pattern-matching function " + _coconut.repr(base_func) + " (pass allow_any_func=True to dismiss)", stacklevel=2)
     if kwargs:
         raise _coconut.TypeError("addpattern() got unexpected keyword arguments " + _coconut.repr(kwargs))
     return _coconut.functools.partial(_coconut_base_pattern_func, base_func)

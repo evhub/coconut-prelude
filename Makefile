@@ -1,6 +1,6 @@
 .PHONY: test
 test: install
-	pytest --strict -s ./prelude
+	python3 -m pytest --strict -s ./prelude
 
 .PHONY: clean-install
 clean-install: clean install
