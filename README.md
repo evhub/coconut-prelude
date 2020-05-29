@@ -16,4 +16,4 @@ from prelude import *
 
 ## Documentation
 
-For documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://cdn.statically.io/gh/evhub/coconut-prelude/master/prelude.html).
+For documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://ghcdn.rawgit.org/evhub/coconut-prelude/master/prelude.html).

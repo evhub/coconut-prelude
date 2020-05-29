@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x273ecdbe
+# __coconut_hash__ = 0xe3b0d289
 
-# Compiled with Coconut version 1.4.2-post_dev6 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.3-post_dev25 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -43,36 +43,40 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':
         try:
             _coconut_dotted_func_name_store_0 = __lt__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_0 = None
+            _coconut_dotted_func_name_store_0 = _coconut_sentinel
         def __lt__(x, y):
             return tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y)
         valCon.__lt__ = __lt__
-        __lt__ = _coconut_dotted_func_name_store_0
+        if _coconut_dotted_func_name_store_0 is not _coconut_sentinel:
+            __lt__ = _coconut_dotted_func_name_store_0
         try:
             _coconut_dotted_func_name_store_1 = __le__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_1 = None
+            _coconut_dotted_func_name_store_1 = _coconut_sentinel
         def __le__(x, y):
             return tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y)
         valCon.__le__ = __le__
-        __le__ = _coconut_dotted_func_name_store_1
+        if _coconut_dotted_func_name_store_1 is not _coconut_sentinel:
+            __le__ = _coconut_dotted_func_name_store_1
         try:
             _coconut_dotted_func_name_store_2 = __ge__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_2 = None
+            _coconut_dotted_func_name_store_2 = _coconut_sentinel
         def __ge__(x, y):
             return tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y)
         valCon.__ge__ = __ge__
-        __ge__ = _coconut_dotted_func_name_store_2
+        if _coconut_dotted_func_name_store_2 is not _coconut_sentinel:
+            __ge__ = _coconut_dotted_func_name_store_2
         try:
             _coconut_dotted_func_name_store_3 = __gt__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_3 = None
+            _coconut_dotted_func_name_store_3 = _coconut_sentinel
         def __gt__(x, y):
             return tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y)
 
         valCon.__gt__ = __gt__
-        __gt__ = _coconut_dotted_func_name_store_3
+        if _coconut_dotted_func_name_store_3 is not _coconut_sentinel:
+            __gt__ = _coconut_dotted_func_name_store_3
 def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
     """
     The expression
@@ -92,59 +96,65 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':
         try:
             _coconut_dotted_func_name_store_4 = __minBound__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_4 = None
+            _coconut_dotted_func_name_store_4 = _coconut_sentinel
         @_coconut_tco
         def __minBound__(self):
             return _coconut_tail_call(valueConstructors[0])
         valCon.__minBound__ = __minBound__
-        __minBound__ = _coconut_dotted_func_name_store_4
+        if _coconut_dotted_func_name_store_4 is not _coconut_sentinel:
+            __minBound__ = _coconut_dotted_func_name_store_4
         try:
             _coconut_dotted_func_name_store_5 = __maxBound__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_5 = None
+            _coconut_dotted_func_name_store_5 = _coconut_sentinel
         @_coconut_tco
         def __maxBound__(self):
             return _coconut_tail_call(valueConstructors[-1])
 
 # Enum
         valCon.__maxBound__ = __maxBound__
-        __maxBound__ = _coconut_dotted_func_name_store_5
+        if _coconut_dotted_func_name_store_5 is not _coconut_sentinel:
+            __maxBound__ = _coconut_dotted_func_name_store_5
         try:
             _coconut_dotted_func_name_store_6 = __int__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_6 = None
+            _coconut_dotted_func_name_store_6 = _coconut_sentinel
         @_coconut_tco
         def __int__(x):
             return _coconut_tail_call(ind, x)
         valCon.__int__ = __int__
-        __int__ = _coconut_dotted_func_name_store_6
+        if _coconut_dotted_func_name_store_6 is not _coconut_sentinel:
+            __int__ = _coconut_dotted_func_name_store_6
         try:
             _coconut_dotted_func_name_store_7 = __add__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_7 = None
+            _coconut_dotted_func_name_store_7 = _coconut_sentinel
         def __add__(x, y):
             return valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y)
         valCon.__add__ = __add__
-        __add__ = _coconut_dotted_func_name_store_7
+        if _coconut_dotted_func_name_store_7 is not _coconut_sentinel:
+            __add__ = _coconut_dotted_func_name_store_7
         try:
             _coconut_dotted_func_name_store_8 = __radd__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_8 = None
+            _coconut_dotted_func_name_store_8 = _coconut_sentinel
         def __radd__(x, y):
             return x + y
         valCon.__radd__ = __radd__
-        __radd__ = _coconut_dotted_func_name_store_8
+        if _coconut_dotted_func_name_store_8 is not _coconut_sentinel:
+            __radd__ = _coconut_dotted_func_name_store_8
         try:
             _coconut_dotted_func_name_store_9 = __sub__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_9 = None
+            _coconut_dotted_func_name_store_9 = _coconut_sentinel
         def __sub__(x, y):
             return valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y)
 
 
 # Monads:
         valCon.__sub__ = __sub__
-        __sub__ = _coconut_dotted_func_name_store_9
+        if _coconut_dotted_func_name_store_9 is not _coconut_sentinel:
+            __sub__ = _coconut_dotted_func_name_store_9
 def definesBind(dataType: 'TType') -> 'TType':
     """
     Decorator to declare that a data type defines __bind__
@@ -160,25 +170,27 @@ def definesBind(dataType: 'TType') -> 'TType':
         try:
             _coconut_dotted_func_name_store_10 = __fmap__
         except _coconut.NameError:
-            _coconut_dotted_func_name_store_10 = None
+            _coconut_dotted_func_name_store_10 = _coconut_sentinel
         @_coconut_tco
         def __fmap__(self, func):
             return _coconut_tail_call(self.__bind__, lambda x: dataType.__pure__(func(x)))
 
         dataType.__fmap__ = __fmap__
-        __fmap__ = _coconut_dotted_func_name_store_10
+        if _coconut_dotted_func_name_store_10 is not _coconut_sentinel:
+            __fmap__ = _coconut_dotted_func_name_store_10
     if (hasattr)(dataType, "__join__"):
         raise TypeError("data types which define __bind__ cannot define __join__")
     try:
         _coconut_dotted_func_name_store_11 = __join__
     except _coconut.NameError:
-        _coconut_dotted_func_name_store_11 = None
+        _coconut_dotted_func_name_store_11 = _coconut_sentinel
     @_coconut_tco
     def __join__(self):
         return _coconut_tail_call(self.__bind__, lambda x: x)
 
     dataType.__join__ = __join__
-    __join__ = _coconut_dotted_func_name_store_11
+    if _coconut_dotted_func_name_store_11 is not _coconut_sentinel:
+        __join__ = _coconut_dotted_func_name_store_11
     return dataType
 
 def definesReturn(dataType: 'TType') -> 'TType':
