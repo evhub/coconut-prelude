@@ -5,6 +5,7 @@ import sys
 import fractions as _fractions
 import math as _math
 import ast as _ast
+from math import gcd as _gcd
 
 from prelude.util import *  # type: ignore
 
@@ -422,7 +423,7 @@ def odd(x: int) -> bool =
     x % 2 == 1
 
 gcd: (int, int) -> int
-gcd = abs.._fractions.gcd
+gcd = abs.._gcd
 
 if TYPE_CHECKING:
     def lcm(x: int, y: int) -> int =

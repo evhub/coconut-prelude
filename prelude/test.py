@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x77e526de
+# __coconut_hash__ = 0x91c1dab
 
-# Compiled with Coconut version 1.4.3-post_dev25 [Ernest Scribbler]
+# Compiled with Coconut version 1.4.3-post_dev65 [Ernest Scribbler]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -14,7 +14,7 @@ if _coconut_cached_module is not None and _coconut_os_path.dirname(_coconut_cach
     del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_path)
 from __coconut__ import *
-from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_back_pipe, _coconut_star_pipe, _coconut_back_star_pipe, _coconut_dubstar_pipe, _coconut_back_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match
+from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -186,7 +186,7 @@ def test_Functor():
     assert (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))
 
 def test_Applicative():
-    assert pure("12") == fmap(lambda s: s + "2", pure("1"))
+    assert pure("12") == (fmap)(lambda s: s + "2", pure("1"))
     assert (ap)(nothing, Just(10)) == nothing
     assert (ap)(Just(_coconut.functools.partial(_coconut.operator.add, 1)), Just(2)) == Just(3)
     assert (ap)([_coconut.functools.partial(_coconut.operator.add, 1), _coconut.functools.partial(_coconut.operator.mul, 3)], [10, 20, 30]) == [11, 21, 31, 30, 60, 90]
@@ -215,7 +215,7 @@ def test_Monad():
     assert Right(2) == (seqM)(Right(1), Right(2))
     assert Left(1) == (seqM)(Left(1), Right(2))
     assert [] == (seqM)([], [1])
-    assert fail("derp") == fmap(_coconut.functools.partial(_coconut.operator.add, 1), fail("derp"))
+    assert fail("derp") == (fmap)(_coconut.functools.partial(_coconut.operator.add, 1), fail("derp"))
     assert nothing == (bind)(Just(1), _coconut_forward_compose(str, fail))
     assert Left(1) == (bind)(Left(1), _coconut_forward_compose(str, fail))
     assert Left("1") == (bind)(Right(1), _coconut_forward_compose(str, fail))
@@ -355,14 +355,14 @@ def test_Scans():
     assert (list)(scanr1(_coconut.operator.add, [1, 2, 3])) == [6, 5, 3]
 
 def test_Infinite_lists():
-    assert (list)(take(3, iterate(_coconut.functools.partial(subtract, 1), 3))) == [3, 2, 1]
+    assert (list)((take)(3, iterate(_coconut.functools.partial(subtract, 1), 3))) == [3, 2, 1]
     assert (list)(_coconut_igetitem(repeat(1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(replicate(3, 1))
     assert (list)(_coconut_igetitem(cycle([1, 2]), _coconut.slice(None, 4))) == [1, 2, 1, 2]
 
 def test_Sublists():
     assert take(2, [1, 2, 3]) == [1, 2]
     assert drop(2, [1, 2, 3]) == [3]
-    assert fmap(list, splitAt(2, [1, 2, 3, 4])) == ([1, 2], [3, 4])
+    assert (fmap)(list, splitAt(2, [1, 2, 3, 4])) == ([1, 2], [3, 4])
     assert (list)(takeWhile((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.gt))(2), [0, 1, 2, 3])) == [0, 1]
     assert (list)(dropWhile((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.gt))(2), [0, 1, 2, 3])) == [2, 3]
     assert span((_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.gt))(2), [0, 1, 2, 3]) == ([0, 1], [2, 3])
@@ -400,8 +400,8 @@ def test_Converting_to_String():
     assert ((showList)((_coconut_func() for _coconut_func in (lambda: 1, lambda: 2))))("") == "[1, 2]"
     assert ((showString)("abc"))("def") == "abcdef"
     assert ((showChar)("a"))("bcd") == "abcd"
-    assert (showParen(True, showString("abc")))("def") == "(abc)def"
-    assert (showParen(False, showString("abc")))("def") == "abcdef"
+    assert ((showParen)(True, showString("abc")))("def") == "(abc)def"
+    assert ((showParen)(False, showString("abc")))("def") == "abcdef"
 
 def test_Converting_from_String():
     assert read("[]") == []
@@ -412,7 +412,7 @@ def test_IO():
     assert unIO(pure(5)) == 5
     assert (unIO)(mempty) == mempty
     assert (unIO)(mappend(mempty, asIO(pure(gt)))) == gt
-    assert (unIO)(fmap(lambda _=None: _ * 2, pure(5))) == 10
+    assert (unIO)((fmap)(lambda _=None: _ * 2, pure(5))) == 10
     try:
         unIO(fail("herp"))
     except IOError as err:

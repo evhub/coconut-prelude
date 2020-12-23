@@ -1,6 +1,6 @@
 .PHONY: test
 test: install
-	python3 -m pytest --strict -s ./prelude
+	python -m pytest --strict -s ./prelude
 
 .PHONY: clean-install
 clean-install: clean install
@@ -36,7 +36,7 @@ setup:
 
 .PHONY: upload
 upload: clean install-univ
-	python3 setup.py sdist bdist_wheel
+	python setup.py sdist bdist_wheel
 	pip3 install -U twine
 	twine upload ./dist/*
 
