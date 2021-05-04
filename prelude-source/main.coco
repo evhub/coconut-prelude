@@ -814,7 +814,7 @@ def cons(x: Ta, xs: Ta$[]) -> Ta$[] =
     """
     (::)([x], xs)
 
-map: (Ta -> Tb, Ta$[]) -> Tb$[]
+map: (Ta -> Tb, Ta$[]) -> Tb$[]  # type: ignore
 map = _map
 
 def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
@@ -824,7 +824,7 @@ def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     """
     (::)(xs, ys)
 
-filter: (Ta -> bool, Ta$[]) -> Ta$[]
+filter: (Ta -> bool, Ta$[]) -> Ta$[]  # type: ignore
 filter = _filter
 
 head: Ta$[] -> Ta
@@ -964,7 +964,7 @@ def lookup(key: Ta, assocs: T.Tuple[Ta, Tb]$[]) -> Maybe:
 
 
 ## Zipping and unzipping lists:
-zip: (Ta$[], Tb$[]) -> T.Tuple[Ta, Tb]$[]
+zip: (Ta$[], Tb$[]) -> T.Tuple[Ta, Tb]$[]  # type: ignore
 zip = _zip
 
 zip3: (Ta$[], Tb$[], Tc$[]) -> T.Tuple[Ta, Tb, Tc]$[]
@@ -1129,7 +1129,7 @@ putChar = putStr
 def putStrLn(s: str) -> IO =
     IO(_print$(s))
 
-def print(x: Ta) -> IO =
+def print(x: Ta) -> IO =  # type: ignore
     IO(_print$(show(x)))
 
 

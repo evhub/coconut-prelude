@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xd2db63a2
+# __coconut_hash__ = 0x447f8b9f
 
-# Compiled with Coconut version 1.4.3-post_dev66 [Ernest Scribbler]
+# Compiled with Coconut version 1.5.0-post_dev36 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -14,7 +14,7 @@ if _coconut_cached_module is not None and _coconut_os_path.dirname(_coconut_cach
     del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_path)
 from __coconut__ import *
-from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -79,24 +79,24 @@ class Maybe:
     def __mempty__() -> 'Maybe':
         return nothing
 
-class Nothing(_coconut.collections.namedtuple("Nothing", ""), Maybe):
+class Nothing(_coconut.collections.namedtuple("Nothing", ()), Maybe):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
-
+    __match_args__ = ()
 nothing: 'Maybe' = Nothing()
 
-class Just(_coconut.collections.namedtuple("Just", "x"), Maybe):
+class Just(_coconut.collections.namedtuple("Just", ('x',)), Maybe):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
-
+    __match_args__ = ('x',)
 
 derivingOrd(Nothing, Just)
 
@@ -146,13 +146,14 @@ class Either:
     def __fail__(msg: 'str') -> 'Either':
         return _coconut_tail_call(Left, msg)
 
-class Left(_coconut.collections.namedtuple("Left", "x"), Either):
+class Left(_coconut.collections.namedtuple("Left", ('x',)), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+    __match_args__ = ('x',)
     @staticmethod
     def __bool__() -> 'bool':
         return False
@@ -160,14 +161,14 @@ class Left(_coconut.collections.namedtuple("Left", "x"), Either):
     def __fmap__(self, func: '_coconut.typing.Callable[[Ta], Tb]') -> 'Either':
         return self
 
-class Right(_coconut.collections.namedtuple("Right", "x"), Either):
+class Right(_coconut.collections.namedtuple("Right", ('x',)), Either):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
-
+    __match_args__ = ('x',)
 
 derivingOrd(Left, Right)
 
@@ -213,33 +214,35 @@ class Ordering:
     def __mempty__() -> 'Ordering':
         return eq
 
-class LT(_coconut.collections.namedtuple("LT", ""), Ordering):
+class LT(_coconut.collections.namedtuple("LT", ()), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+    __match_args__ = ()
     @staticmethod
     def __bool__() -> 'bool':
         return True
 
-class EQ(_coconut.collections.namedtuple("EQ", ""), Ordering):
+class EQ(_coconut.collections.namedtuple("EQ", ()), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+    __match_args__ = ()
 
-
-class GT(_coconut.collections.namedtuple("GT", ""), Ordering):
+class GT(_coconut.collections.namedtuple("GT", ()), Ordering):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+    __match_args__ = ()
     @staticmethod
     def __bool__() -> 'bool':
         return True
@@ -740,7 +743,7 @@ realToFrac = toRational
 Monoid = T.Iterable
 TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
-class Mempty(_coconut.collections.namedtuple("Mempty", "")):
+class Mempty(_coconut.collections.namedtuple("Mempty", ())):
     """
     -- mempty is overridden by the __mempty__ method
     """
@@ -750,6 +753,7 @@ class Mempty(_coconut.collections.namedtuple("Mempty", "")):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+    __match_args__ = ()
     @staticmethod
     @_coconut_tco
     def mempty_as(M: 'TMonoid') -> 'TMonoid':
@@ -813,7 +817,7 @@ if TYPE_CHECKING:
     def pure(x: 'Ta') -> 'T.Any':
         return ...  # type: ignore
 else:
-    class pure(_coconut.collections.namedtuple("pure", "val")):
+    class pure(_coconut.collections.namedtuple("pure", ('val',))):
         """
         return_ = return
         -- pure/return is overridden by the __pure__ method
@@ -824,6 +828,7 @@ else:
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
         def __hash__(self):
             return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+        __match_args__ = ('val',)
         def __join__(self) -> 'T.Any':
             return self.val
 
@@ -913,6 +918,7 @@ else:
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
         def __hash__(self):
             return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+        __match_args__ = ('msg',)
         @staticmethod
         def __bool__() -> 'bool':
             return False
@@ -1198,7 +1204,7 @@ def cons(x: 'Ta', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterab
     """
     return _coconut_tail_call(_coconut.itertools.chain, [x], xs)
 
-map: '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]'
+map: '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]'  # type: ignore
 map = _map
 
 @_coconut_tco
@@ -1209,7 +1215,7 @@ def chain(xs: '_coconut.typing.Iterable[Ta]', ys: '_coconut.typing.Iterable[Ta]'
     """
     return _coconut_tail_call(_coconut.itertools.chain, xs, ys)
 
-filter: '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'
+filter: '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  # type: ignore
 filter = _filter
 
 head: '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]'
@@ -1281,12 +1287,12 @@ def scanr1(func: '_coconut.typing.Callable[[Ta, Ta], Ta]', xs: '_coconut.typing.
 @recursive_iterator
 @_coconut_tco
 def iterate(func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':
-    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: [x], lambda: iterate(func, func(x)))))
+    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: [x], lambda: iterate(func, func(x)))))
 
 @recursive_iterator
 @_coconut_tco
 def repeat(x: 'Ta') -> '_coconut.typing.Iterable[Ta]':
-    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: [x], lambda: repeat(x))))
+    return _coconut_tail_call(_coconut.itertools.chain.from_iterable, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: [x], lambda: repeat(x))))
 
 @_coconut_tco
 def replicate(n: 'int', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':
@@ -1312,7 +1318,7 @@ else:
         if not _coconut_match_check:
             raise _coconut_FunctionMatchError('def cycle(xs if len(xs) > 0) =', _coconut_match_to_args)
 
-        return _coconut_tail_call(_coconut.itertools.chain.from_iterable, (_coconut_func() for _coconut_func in (lambda: xs, lambda: cycle(xs))))
+        return _coconut_tail_call(_coconut.itertools.chain.from_iterable, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: xs, lambda: cycle(xs))))
 
 
 
@@ -1408,7 +1414,7 @@ def lookup(key: 'Ta', assocs: '_coconut.typing.Iterable[T.Tuple[Ta, Tb]]') -> 'M
 
 
 ## Zipping and unzipping lists:
-zip: '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[T.Tuple[Ta, Tb]]]'
+zip: '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[T.Tuple[Ta, Tb]]]'  # type: ignore
 zip = _zip
 
 zip3: '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[T.Tuple[Ta, Tb, Tc]]]'
@@ -1502,13 +1508,14 @@ lex = NotImplemented
 # Basic input and output:
 
 #### IO:
-class IO(_coconut.collections.namedtuple("IO", "io_func")):
+class IO(_coconut.collections.namedtuple("IO", ('io_func',))):
     __slots__ = ()
     __ne__ = _coconut.object.__ne__
     def __eq__(self, other):
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
     def __hash__(self):
         return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+    __match_args__ = ('io_func',)
     @staticmethod
     @_coconut_tco
     def __pure__(x: 'Ta') -> 'IO':
@@ -1584,8 +1591,8 @@ putChar = putStr
 def putStrLn(s: 'str') -> 'IO':
     return _coconut_tail_call(IO, _coconut.functools.partial(_print, s))
 
-@_coconut_tco
-def print(x: 'Ta') -> 'IO':
+@_coconut_tco  # type: ignore
+def print(x: 'Ta') -> 'IO':  # type: ignore
     return _coconut_tail_call(IO, _coconut.functools.partial(_print, show(x)))
 
 

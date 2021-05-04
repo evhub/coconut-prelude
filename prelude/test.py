@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa9bf3ae9
+# __coconut_hash__ = 0xa10d1922
 
-# Compiled with Coconut version 1.4.3-post_dev66 [Ernest Scribbler]
+# Compiled with Coconut version 1.5.0-post_dev36 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -14,7 +14,7 @@ if _coconut_cached_module is not None and _coconut_os_path.dirname(_coconut_cach
     del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_path)
 from __coconut__ import *
-from __coconut__ import _coconut, _coconut_MatchError, _coconut_tail_call, _coconut_tco, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -298,13 +298,14 @@ def test_Miscellaneous_functions():
     assert asTypeOf(pure([]), nothing) == Just([])
     assert asTypeOf(fail("herp"), Right(1)) == Left("herp")
     assert asTypeOf(mempty, Just([])) == nothing
-    class Test(_coconut.collections.namedtuple("Test", "x")):
+    class Test(_coconut.collections.namedtuple("Test", ('x',))):
         __slots__ = ()
         __ne__ = _coconut.object.__ne__
         def __eq__(self, other):
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
         def __hash__(self):
             return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
+        __match_args__ = ('x',)
         @staticmethod
         @_coconut_tco
         def __mempty__():
@@ -335,7 +336,7 @@ def test_List_operations():
     assert last([1, 2, 3]) == 3
     assert tail([1, 2, 3]) == [2, 3]
     assert init([1, 2, 3]) == [1, 2]
-    assert (at)([1, 2, 3], 1) == 2 == (at)((_coconut_func() for _coconut_func in (lambda: 1, lambda: 2, lambda: 3)), 1)
+    assert (at)([1, 2, 3], 1) == 2 == (at)(_coconut_reiterable(_coconut_func() for _coconut_func in (lambda: 1, lambda: 2, lambda: 3)), 1)
     assert (list)(reverse([1, 2, 3])) == [3, 2, 1]
 
 def test_Special_folds():
@@ -397,7 +398,7 @@ def test_Converting_to_String():
     assert show("abc") == "'abc'"
     assert ((shows)(3))("abc") == "3abc"
     assert ((showList)([1]))("abc") == "[1]abc"
-    assert ((showList)((_coconut_func() for _coconut_func in (lambda: 1, lambda: 2))))("") == "[1, 2]"
+    assert ((showList)(_coconut_reiterable(_coconut_func() for _coconut_func in (lambda: 1, lambda: 2))))("") == "[1, 2]"
     assert ((showString)("abc"))("def") == "abcdef"
     assert ((showChar)("a"))("bcd") == "abcd"
     assert ((showParen)(True, showString("abc")))("def") == "(abc)def"
