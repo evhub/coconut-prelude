@@ -32,7 +32,7 @@ docs: install
 .PHONY: setup
 setup:
 	pip install -U setuptools pip
-	pip install -U "coconut-develop[watch,cPyparsing,jobs,mypy]"
+	pip install -U coconut-develop[watch,jobs,mypy]
 
 .PHONY: upload
 upload: clean install-univ

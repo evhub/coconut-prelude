@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x9ddc6a5b
+# __coconut_hash__ = 0xa6dd5d45
 
-# Compiled with Coconut version 1.5.0-post_dev37 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -199,5 +199,7 @@ def definesReturn(dataType: 'TType') -> 'TType':
     If used with definesBind, definesReturn must be applied
     first (i.e. be a more inner decorator).
     """
+    if (hasattr)(dataType, "__pure__"):
+        raise TypeError("data types which define __return__ cannot define __pure__")
     dataType.__pure__ = dataType.__return__
     return dataType

@@ -62,8 +62,8 @@ data Just(x) from Maybe
 derivingOrd(Nothing, Just)
 
 if TYPE_CHECKING:
-    def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb =
-        ...  # type: ignore
+    def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb:
+        ...
 else:
     match def maybe(default, _, Nothing()) = default
     addpattern def maybe(_, func, Just(x)) = func(x)
@@ -87,8 +87,8 @@ data Right(x) from Either
 derivingOrd(Left, Right)
 
 if TYPE_CHECKING:
-    def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc =
-        ...  # type: ignore
+    def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc:
+        ...
 else:
     match def either(left_func, _, Left(x)) = left_func(x)
     addpattern def either(_, right_func, Right(x)) = right_func(x)
@@ -147,8 +147,8 @@ Ord = Eq
 TOrd = T.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
-    def compare(x: Ord, y: Ord) -> Ordering =
-        ...  # type: ignore
+    def compare(x: Ord, y: Ord) -> Ordering:
+        ...
 else:
     match def compare(x, y if x == y) = eq
     addpattern def compare(x, y if x < y) = lt
@@ -278,8 +278,8 @@ abs: TNum -> TNum
 abs = _abs
 
 if TYPE_CHECKING:
-    def signum(x: Num) -> int =
-        ...  # type: ignore
+    def signum(x: Num) -> int:
+        ...
 else:
     match def signum(0) = 0
     addpattern def signum(x if x > 0) = 1
@@ -291,8 +291,8 @@ def fromInteger(x: Integer) -> Num = x
 Real = Num
 
 if TYPE_CHECKING:
-    def toRational(real: Real) -> Rational =
-        ...  # type: ignore
+    def toRational(real: Real) -> Rational:
+        ...
 else:
     match def toRational(real is float) =
         Rational.from_float(real)
@@ -426,8 +426,8 @@ gcd: (int, int) -> int
 gcd = abs.._gcd
 
 if TYPE_CHECKING:
-    def lcm(x: int, y: int) -> int =
-        ...  # type: ignore
+    def lcm(x: int, y: int) -> int:
+        ...
 else:
     match def lcm(_, 0) = 0
     addpattern def lcm(0, _) = 0
@@ -506,8 +506,8 @@ Applicative = Functor
 TApp = T.TypeVar("TApp", bound=Applicative)
 
 if TYPE_CHECKING:
-    def pure(x: Ta) -> T.Any =
-        ...  # type: ignore
+    def pure(x: Ta) -> T.Any:
+        ...
 else:
     data pure(val):
         """
@@ -583,8 +583,8 @@ def seqM(m1: Monad, m2: TMonad) -> TMonad =
 return_ = pure
 
 if TYPE_CHECKING:
-    def fail(msg: str) -> T.Any =
-        ...  # type: ignore
+    def fail(msg: str) -> T.Any:
+        ...
 else:
     data fail(msg: str):
         """
@@ -642,8 +642,8 @@ def join(ms: Monad[TMonad]) -> TMonad =
     makedata(type(ms), *vals)
 
 if TYPE_CHECKING:
-    def do(monads: TMonad[], func: -> TMonad) -> TMonad =
-        ...  # type: ignore
+    def do(monads: TMonad[], func: -> TMonad) -> TMonad:
+        ...
 else:
     match def do([], func) = func()
     addpattern def do([m] + ms, func) =
@@ -755,25 +755,26 @@ def flip(func: (Ta, Tb) -> Tc) -> (Tb, Ta) -> Tc =
 
 if TYPE_CHECKING:
     @T.overload
-    def apply(func: Ta -> Tb, arg: Ta) -> Tb =
-        ... # type: ignore
+    def apply(func: Ta -> Tb, arg: Ta) -> Tb:
+        ...
     @T.overload
-    def apply(func: (Ta, Tb) -> Tc, arg: Ta) -> Tb -> Tc =
-        ... # type: ignore
+    def apply(func: (Ta, Tb) -> Tc, arg: Ta) -> Tb -> Tc:
+        ...
     @T.overload
-    def apply(func: (Ta, Tb, Tc) -> Td, arg: Ta) -> (Tb, Tc) -> Td =
-        ... # type: ignore
+    def apply(func: (Ta, Tb, Tc) -> Td, arg: Ta) -> (Tb, Tc) -> Td:
+        ...
     @T.overload
-    def apply(func: -> Tb, arg: Ta) -> T.Any =
-        ... # type: ignore
-    def apply(func, arg) =
-        ... # type: ignore
+    def apply(func: -> Tb, arg: Ta) -> T.Any:
+        ...
+    def apply(func, arg):
+        ...
 else:
     def apply(func, arg):
         """
         apply :: (a -> b) -> a -> b
         apply = ($)
         -- apply will automatically curry functions
+        --  as in Haskell function application
         """
         f = func$(arg)
         try:
@@ -815,14 +816,19 @@ def errorWithoutStackTrace(msg: str) -> None:
 
 undefined: T.Any = None
 
-def seq(x: Ta, y: Tb) -> Tb = y
+def seq(x: Ta, y: Tb) -> Tb =
+    """
+    -- seq doesn't actually do anything here, since Python isn't lazy
+    """
+    y
 
 def cbv(func: Ta -> Tb, arg: Ta) -> Tb =
     """
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
+    -- cbv is just an apply that doesn't curry the provided function
     """
-    arg `seq` apply(func, arg)
+    arg `seq` func(arg)
 
 
 
@@ -921,8 +927,8 @@ def replicate(n: int, x: Ta) -> Ta$[] =
     repeat(x)$[:n]
 
 if TYPE_CHECKING:
-    def cycle(xs: Ta[]) -> Ta$[] =
-        ...  # type: ignore
+    def cycle(xs: Ta[]) -> Ta$[]:
+        ...
 else:
     @recursive_iterator
     def cycle(xs if len(xs) > 0) =
@@ -948,8 +954,8 @@ dropWhile: (Ta -> bool, Ta$[]) -> Ta$[]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]] =
-        ...  # type: ignore
+    def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]]:
+        ...
 else:
     match def span(_, []) = ([], [])
     addpattern def span(cond, [x] + xs if cond(x)) =

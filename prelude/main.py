@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x3ad4b38a
+# __coconut_hash__ = 0xb7dad914
 
-# Compiled with Coconut version 1.5.0-post_dev37 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -102,7 +102,7 @@ derivingOrd(Nothing, Just)
 
 if TYPE_CHECKING:
     def maybe(default: 'Tb', func: '_coconut.typing.Callable[[Ta], Tb]', x: 'Maybe') -> 'Tb':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_mark_as_match
     def maybe(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -174,7 +174,7 @@ derivingOrd(Left, Right)
 
 if TYPE_CHECKING:
     def either(left_func: '_coconut.typing.Callable[[Ta], Tc]', right_func: '_coconut.typing.Callable[[Tb], Tc]', x: 'Either') -> 'Tc':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_tco
     @_coconut_mark_as_match
@@ -288,7 +288,7 @@ TOrd = T.TypeVar("TOrd", bound=Ord)
 
 if TYPE_CHECKING:
     def compare(x: 'Ord', y: 'Ord') -> 'Ordering':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_mark_as_match
     def compare(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -473,7 +473,7 @@ abs = _abs
 
 if TYPE_CHECKING:
     def signum(x: 'Num') -> 'int':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_mark_as_match
     def signum(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -527,7 +527,7 @@ Real = Num
 
 if TYPE_CHECKING:
     def toRational(real: 'Real') -> 'Rational':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_tco
     @_coconut_mark_as_match
@@ -689,7 +689,7 @@ gcd = _coconut_forward_compose(_gcd, abs)
 
 if TYPE_CHECKING:
     def lcm(x: 'int', y: 'int') -> 'int':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_mark_as_match
     def lcm(*_coconut_match_to_args, **_coconut_match_to_kwargs):
@@ -815,7 +815,7 @@ TApp = T.TypeVar("TApp", bound=Applicative)
 
 if TYPE_CHECKING:
     def pure(x: 'Ta') -> 'T.Any':
-        return ...  # type: ignore
+        ...
 else:
     class pure(_coconut.collections.namedtuple("pure", ('val',))):
         """
@@ -906,7 +906,7 @@ return_ = pure
 
 if TYPE_CHECKING:
     def fail(msg: 'str') -> 'T.Any':
-        return ...  # type: ignore
+        ...
 else:
     class fail(_coconut.typing.NamedTuple("fail", [("msg", 'str')])):
         """
@@ -977,7 +977,7 @@ def join(ms: 'Monad[TMonad]') -> 'TMonad':
 
 if TYPE_CHECKING:
     def do(monads: '_coconut.typing.Sequence[TMonad]', func: '_coconut.typing.Callable[..., TMonad]') -> 'TMonad':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_tco
     @_coconut_mark_as_match
@@ -1127,24 +1127,25 @@ def flip(func: '_coconut.typing.Callable[[Ta, Tb], Tc]') -> '_coconut.typing.Cal
 if TYPE_CHECKING:
     @T.overload
     def apply(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':
-        return ...  # type: ignore
+        ...
     @T.overload
     def apply(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', arg: 'Ta') -> '_coconut.typing.Callable[[Tb], Tc]':
-        return ...  # type: ignore
+        ...
     @T.overload
     def apply(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', arg: 'Ta') -> '_coconut.typing.Callable[[Tb, Tc], Td]':
-        return ...  # type: ignore
+        ...
     @T.overload
     def apply(func: '_coconut.typing.Callable[..., Tb]', arg: 'Ta') -> 'T.Any':
-        return ...  # type: ignore
+        ...
     def apply(func, arg):
-        return ...  # type: ignore
+        ...
 else:
     def apply(func, arg):
         """
         apply :: (a -> b) -> a -> b
         apply = ($)
         -- apply will automatically curry functions
+        --  as in Haskell function application
         """
         f = _coconut.functools.partial(func, arg)
         try:
@@ -1202,6 +1203,9 @@ def errorWithoutStackTrace(msg: 'str') -> 'None':
 undefined: 'T.Any' = None
 
 def seq(x: 'Ta', y: 'Tb') -> 'Tb':
+    """
+    -- seq doesn't actually do anything here, since Python isn't lazy
+    """
     return y
 
 @_coconut_tco
@@ -1209,8 +1213,9 @@ def cbv(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':
     """
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
+    -- cbv is just an apply that doesn't curry the provided function
     """
-    return _coconut_tail_call((seq), arg, apply(func, arg))
+    return _coconut_tail_call((seq), arg, func(arg))
 
 
 
@@ -1320,7 +1325,7 @@ def replicate(n: 'int', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':
 
 if TYPE_CHECKING:
     def cycle(xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Iterable[Ta]':
-        return ...  # type: ignore
+        ...
 else:
     @recursive_iterator
     @_coconut_tco
@@ -1363,7 +1368,7 @@ dropWhile = dropwhile
 
 if TYPE_CHECKING:
     def span(cond: '_coconut.typing.Callable[[Ta], bool]', xs: '_coconut.typing.Sequence[Ta]') -> 'T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]]':
-        return ...  # type: ignore
+        ...
 else:
     @_coconut_mark_as_match
     def span(*_coconut_match_to_args, **_coconut_match_to_kwargs):

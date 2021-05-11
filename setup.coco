@@ -1,6 +1,6 @@
 import setuptools  # type: ignore
 
-VERSION = "0.1.10"
+VERSION = "0.1.11"
 
 setuptools.setup(
     name="coconut-prelude",
@@ -11,7 +11,7 @@ setuptools.setup(
     author_email="evanjhub@gmail.com",
     packages=setuptools.find_packages(),
     install_requires=[
-        "coconut-develop",
+        "coconut[mypy]",
     ],
     extras_require={
         ":python_version<'3.5'": [

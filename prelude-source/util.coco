@@ -84,5 +84,7 @@ def definesReturn(dataType: TType) -> TType:
     If used with definesBind, definesReturn must be applied
     first (i.e. be a more inner decorator).
     """
+    if dataType `hasattr` "__pure__":
+        raise TypeError("data types which define __return__ cannot define __pure__")
     dataType.__pure__ = dataType.__return__
     return dataType
