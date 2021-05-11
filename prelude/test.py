@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa10d1922
+# __coconut_hash__ = 0x87982dcf
 
-# Compiled with Coconut version 1.5.0-post_dev36 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev37 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -293,6 +293,8 @@ def test_Miscellaneous_functions():
     assert ((dot)(abs, _coconut.operator.add))(-2, -3) == 5
     assert flip(_coconut_minus)(10, 5) == -5
     assert (apply)(abs, -2) == 2
+    assert ((apply)(_coconut.operator.truediv, 6))(2) == 3
+    assert (apply)((apply)((apply)((lambda x, y, z: (x, y, z)), 1), 2), 3) == (1, 2, 3)
     assert until(lambda x: x < 0, _coconut.functools.partial(subtract, 1), 10) == -1
     assert asTypeOf(5, 10) == 5
     assert asTypeOf(pure([]), nothing) == Just([])
@@ -439,6 +441,8 @@ def test_Exception_handling():
     assert (isinstance)(userError("derp"), IOError)
     assert (str)(userError("derp")) == "derp"
 
+
+# Run tests:
 if __name__ == "__main__":
     for var, val in globals().items():
         if var.startswith("test_"):

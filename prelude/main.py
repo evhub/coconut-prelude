@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x447f8b9f
+# __coconut_hash__ = 0x3ad4b38a
 
-# Compiled with Coconut version 1.5.0-post_dev36 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev37 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -1124,13 +1124,33 @@ def dot(f: '_coconut.typing.Callable[[Tb], Tc]', g: '_coconut.typing.Callable[[T
 def flip(func: '_coconut.typing.Callable[[Ta, Tb], Tc]') -> '_coconut.typing.Callable[[Tb, Ta], Tc]':
     return lambda x, y: func(y, x)
 
-@_coconut_tco
-def apply(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':
-    """
-    apply :: (a -> b) -> a -> b
-    apply = ($)
-    """
-    return _coconut_tail_call(func, arg)
+if TYPE_CHECKING:
+    @T.overload
+    def apply(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':
+        return ...  # type: ignore
+    @T.overload
+    def apply(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', arg: 'Ta') -> '_coconut.typing.Callable[[Tb], Tc]':
+        return ...  # type: ignore
+    @T.overload
+    def apply(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', arg: 'Ta') -> '_coconut.typing.Callable[[Tb, Tc], Td]':
+        return ...  # type: ignore
+    @T.overload
+    def apply(func: '_coconut.typing.Callable[..., Tb]', arg: 'Ta') -> 'T.Any':
+        return ...  # type: ignore
+    def apply(func, arg):
+        return ...  # type: ignore
+else:
+    def apply(func, arg):
+        """
+        apply :: (a -> b) -> a -> b
+        apply = ($)
+        -- apply will automatically curry functions
+        """
+        f = _coconut.functools.partial(func, arg)
+        try:
+            return f()
+        except TypeError:
+            return f
 
 @_coconut_tco
 def until(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> 'Ta':
@@ -1139,7 +1159,7 @@ def until(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.C
         if cond(x):
             return x
         try:  # tail recursive
-            _coconut_is_recursive = until is _coconut_recursive_func_71  # tail recursive
+            _coconut_is_recursive = until is _coconut_recursive_func_72  # tail recursive
         except _coconut.NameError:  # tail recursive
             _coconut_is_recursive = False  # tail recursive
         if _coconut_is_recursive:  # tail recursive
@@ -1150,7 +1170,7 @@ def until(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.C
 # tail recursive
 
         return None
-_coconut_recursive_func_71 = until
+_coconut_recursive_func_72 = until
 def asTypeOf(x: 'Ta', y: 'Ta') -> 'Ta':
     """
     -- use asTypeOf to resolve pure, fail, and mempty to the correct type
@@ -1190,7 +1210,7 @@ def cbv(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
     """
-    return _coconut_tail_call(func, arg)
+    return _coconut_tail_call((seq), arg, apply(func, arg))
 
 
 

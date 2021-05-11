@@ -753,12 +753,33 @@ def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
 def flip(func: (Ta, Tb) -> Tc) -> (Tb, Ta) -> Tc =
     (x, y) -> func(y, x)
 
-def apply(func: Ta -> Tb, arg: Ta) -> Tb =
-    """
-    apply :: (a -> b) -> a -> b
-    apply = ($)
-    """
-    func(arg)
+if TYPE_CHECKING:
+    @T.overload
+    def apply(func: Ta -> Tb, arg: Ta) -> Tb =
+        ... # type: ignore
+    @T.overload
+    def apply(func: (Ta, Tb) -> Tc, arg: Ta) -> Tb -> Tc =
+        ... # type: ignore
+    @T.overload
+    def apply(func: (Ta, Tb, Tc) -> Td, arg: Ta) -> (Tb, Tc) -> Td =
+        ... # type: ignore
+    @T.overload
+    def apply(func: -> Tb, arg: Ta) -> T.Any =
+        ... # type: ignore
+    def apply(func, arg) =
+        ... # type: ignore
+else:
+    def apply(func, arg):
+        """
+        apply :: (a -> b) -> a -> b
+        apply = ($)
+        -- apply will automatically curry functions
+        """
+        f = func$(arg)
+        try:
+            return f()
+        except TypeError:
+            return f
 
 def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
     if cond(x):
@@ -801,7 +822,7 @@ def cbv(func: Ta -> Tb, arg: Ta) -> Tb =
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
     """
-    func(arg)
+    arg `seq` apply(func, arg)
 
 
 

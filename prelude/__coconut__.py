@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 1.5.0-post_dev36 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev37 [Fish License]
 
 """Built-in Coconut utilities."""
 
@@ -259,7 +259,7 @@ class reversed:
     def __reduce__(self):
         return (self.__class__, (self.iter,))
     def __eq__(self, other):
-        return _coconut.isinstance(other, self.__class__) and self.iter == other.iter
+        return self.__class__ is other.__class__ and self.iter == other.iter
     def __contains__(self, elem):
         return elem in self.iter
     def count(self, elem):
@@ -346,7 +346,7 @@ class _coconut_base_parallel_concurrent_map(map):
 class parallel_map(_coconut_base_parallel_concurrent_map):
     """Multi-process implementation of map using concurrent.futures.
     Requires arguments to be pickleable. For multiple sequential calls,
-    use `with parallel_map.multiple_sequential_calls()`."""
+    use `with parallel_map.multiple_sequential_calls():`."""
     __slots__ = ()
     threadlocal_ns = _coconut.threading.local()
     @classmethod
@@ -358,7 +358,7 @@ class parallel_map(_coconut_base_parallel_concurrent_map):
 class concurrent_map(_coconut_base_parallel_concurrent_map):
     """Multi-thread implementation of map using concurrent.futures.
     For multiple sequential calls, use
-    `with concurrent_map.multiple_sequential_calls()`."""
+    `with concurrent_map.multiple_sequential_calls():`."""
     __slots__ = ()
     threadlocal_ns = _coconut.threading.local()
     @classmethod
@@ -541,7 +541,7 @@ class count:
     def __copy__(self):
         return self.__class__(self.start, self.step)
     def __eq__(self, other):
-        return _coconut.isinstance(other, self.__class__) and self.start == other.start and self.step == other.step
+        return self.__class__ is other.__class__ and self.start == other.start and self.step == other.step
     def __fmap__(self, func):
         return _coconut_map(func, self)
 class groupsof:
@@ -786,7 +786,7 @@ def datamaker(*args, **kwargs):
     raise _coconut.NameError("deprecated feature 'datamaker' disabled by --strict compilation; use 'makedata' instead")
 def fmap(func, obj):
     """fmap(func, obj) creates a copy of obj with func applied to its contents.
-    Override by defining obj.__fmap__(func)."""
+    Override by defining obj.__fmap__(func). For numpy arrays, uses np.vectorize."""
     obj_fmap = _coconut.getattr(obj, "__fmap__", None)
     if obj_fmap is not None:
         try:
@@ -796,7 +796,7 @@ def fmap(func, obj):
         else:
             if result is not _coconut.NotImplemented:
                 return result
-    if obj.__class__.__module__ == "numpy":
+    if obj.__class__.__module__ in ("numpy", "pandas"):
         from numpy import vectorize
         return vectorize(func)(obj)
     return _coconut_makedata(obj.__class__, *(_coconut_starmap(func, obj.items()) if _coconut.isinstance(obj, _coconut.abc.Mapping) else _coconut_map(func, obj)))
