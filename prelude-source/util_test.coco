@@ -3,6 +3,13 @@ from prelude import *  # type: ignore
 
 
 # Tests:
+def test_FunctionApplication():
+    assert (+) `of` 1 `of` 2 == 3
+    assert of((x, y, z) -> (x, y, z), 1, 2) `of` 3 == (1, 2, 3)
+    assert of((x, y) -> (x, y), y=2) `of` 1 == (1, 2)
+    assert curry(+)(1)(2) == 3 == uncurry((+)$)(1, 2)
+    assert uncurry(curry(/))(6, 2) == 3
+
 def test_definesBind():
     @definesBind
     data FunctionMonad(func):

@@ -2,6 +2,65 @@
 from prelude.typevars import *  # type: ignore
 
 
+# Function application:
+if TYPE_CHECKING:
+    @T.overload
+    def of(func: Ta -> Tb, _x: Ta) -> Tb:
+        ...
+    @T.overload
+    def of(func: (Ta, Tb) -> Tc, _x: Ta) -> Tb -> Tc:
+        ...
+    @T.overload
+    def of(func: (Ta, Tb, Tc) -> Td, _x: Ta) -> (Tb, Tc) -> Td:
+        ...
+    @T.overload
+    def of(func: -> Tb, _x: Ta) -> T.Any:
+        ...
+    @T.overload
+    def of(func: (Ta, Tb) -> Tc, _x: Ta, _y: Tb) -> Tc:
+        ...
+    @T.overload
+    def of(func: (Ta, Tb, Tc) -> Td, _x: Ta, _y: Tb) -> Tc -> Td:
+        ...
+    @T.overload
+    def of(func: (Ta, Tb, Tc) -> Td, _x: Ta, _y: Tb, _z: Tc) -> Td:
+        ...
+    @T.overload
+    def of(func: -> T.Any, *args: T.Any, **kwargs: T.Any) -> T.Any:
+        ...
+    def of(func, *args, **kwargs):
+        ...
+else:
+    def of(func, *args, **kwargs):
+        """
+        of = ($)
+        -- of(func, *args, **kwargs) attempts to call func(*args, **kwargs),
+        --  but in case of TypeError curries func$(*args, **kwargs) instead,
+        --  as in Haskell function application (see also curry, uncurry)
+        """
+        f = func$(*args, **kwargs)
+        try:
+            return f()
+        except TypeError:
+            return f
+
+def curry(func) =
+    """
+    -- curry a Python-style multi-place function into
+    --  a Haskell-style function that returns a function
+    --  (see also curry_tuple for functions of tuples)
+    """
+    of$(func)
+
+def uncurry(func) =
+    """
+    -- uncurry a Haskell-style function that returns a function
+    --  into a Python-style multi-place function
+    --  (see also uncurry_tuple for functions of tuples)
+    """
+    (*args) -> reduce(of, args, func)
+
+
 # Deriving:
 def derivingOrd(*valueConstructors: TType) -> None:
     """

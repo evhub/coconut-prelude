@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb7dad914
+# __coconut_hash__ = 0xf01d9d1e
 
-# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -130,7 +130,7 @@ else:
                 func = _coconut_match_temp_0
                 _coconut_match_check = True
         if not _coconut_match_check:
-            raise _coconut_FunctionMatchError('addpattern def maybe(_, func, Just(x)) = func(x)', _coconut_match_to_args)
+            raise _coconut_FunctionMatchError('addpattern def maybe(_, func, Just(x)) = func x', _coconut_match_to_args)
 
         return _coconut_tail_call(func, x)
 
@@ -188,7 +188,7 @@ else:
                 left_func = _coconut_match_temp_0
                 _coconut_match_check = True
         if not _coconut_match_check:
-            raise _coconut_FunctionMatchError('match def either(left_func, _, Left(x)) = left_func(x)', _coconut_match_to_args)
+            raise _coconut_FunctionMatchError('match def either(left_func, _, Left(x)) = left_func x', _coconut_match_to_args)
 
         return _coconut_tail_call(left_func, x)
     @_coconut_addpattern(either)
@@ -204,7 +204,7 @@ else:
                 right_func = _coconut_match_temp_0
                 _coconut_match_check = True
         if not _coconut_match_check:
-            raise _coconut_FunctionMatchError('addpattern def either(_, right_func, Right(x)) = right_func(x)', _coconut_match_to_args)
+            raise _coconut_FunctionMatchError('addpattern def either(_, right_func, Right(x)) = right_func x', _coconut_match_to_args)
 
         return _coconut_tail_call(right_func, x)
 
@@ -268,12 +268,17 @@ fst = _coconut.operator.itemgetter((0))
 snd: '_coconut.typing.Callable[[T.Tuple[Ta, Tb]], Tb]'
 snd = _coconut.operator.itemgetter((1))
 
-@_coconut_tco
-def curry(func: '_coconut.typing.Callable[[Ta, Tb], Tc]') -> '_coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]':
-    return _coconut_tail_call(_coconut.functools.partial, _coconut.functools.partial, func)
+def curry_tuple(func: '_coconut.typing.Callable[[T.Tuple[Ta, Tb]], Tc]') -> '_coconut.typing.Callable[[Ta, Tb], Tc]':
+    """
+    -- curry a function of a tuple into a Python-style multi-place function
+    """
+    return lambda *args: func(args)  # type: ignore
 
-def uncurry(func: '_coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]') -> '_coconut.typing.Callable[[Ta, Tb], Tc]':
-    return lambda x, y: func(x)(y)
+def uncurry_tuple(func: '_coconut.typing.Callable[[Ta, Tb], Tc]') -> '_coconut.typing.Callable[[T.Tuple[Ta, Tb]], Tc]':
+    """
+    -- uncurry a Python-style multi-place function into a function of a tuple
+    """
+    return lambda args: func(*args)
 
 
 
@@ -1140,18 +1145,15 @@ if TYPE_CHECKING:
     def apply(func, arg):
         ...
 else:
+    @_coconut_tco
     def apply(func, arg):
         """
         apply :: (a -> b) -> a -> b
         apply = ($)
-        -- apply will automatically curry functions
-        --  as in Haskell function application
+        -- apply will automatically curry functions as in Haskell function
+        --  application (see also `of` for the more general version)
         """
-        f = _coconut.functools.partial(func, arg)
-        try:
-            return f()
-        except TypeError:
-            return f
+        return _coconut_tail_call((of), func, arg)
 
 @_coconut_tco
 def until(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> 'Ta':

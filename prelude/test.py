@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x433bd76d
+# __coconut_hash__ = 0xaac76bd9
 
-# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -64,8 +64,20 @@ def test_Ordering():
 
 def test_Tuples():
     assert (fst)((1, 2)) == 1 == (snd)((2, 1))
-    assert curry(_coconut.operator.add)(1)(2) == 3 == uncurry(_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.add))(1, 2)
-    assert uncurry(curry(_coconut_minus))(3, 2) == 1
+    @_coconut_mark_as_match
+    def _coconut_lambda_0(*_coconut_match_to_args, **_coconut_match_to_kwargs):
+        _coconut_match_check = False
+        _coconut_FunctionMatchError = _coconut_get_function_match_error()
+        if (_coconut.len(_coconut_match_to_args) == 1) and (_coconut.isinstance(_coconut_match_to_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_to_args[0]) == 2):
+            x = _coconut_match_to_args[0][0]
+            y = _coconut_match_to_args[0][1]
+            if not _coconut_match_to_kwargs:
+                _coconut_match_check = True
+        if not _coconut_match_check:
+            raise _coconut_FunctionMatchError('assert curry_tuple(+)((1, 2),) == 3 == uncurry_tuple(def ((x, y),) -> x + y)(1, 2)', _coconut_match_to_args)
+        return x + y
+    assert curry_tuple(_coconut.operator.add)((1, 2)) == 3 == uncurry_tuple(_coconut_lambda_0)(1, 2)
+    assert uncurry_tuple(curry_tuple(_coconut_minus))(3, 2) == 1
 
 def test_Ord():
     assert and_(((isinstance)(x, Ord) and (isinstance)(x, Eq) for x in (True, nothing, Left(3), lt, 5, (1, 2),)))
@@ -244,11 +256,11 @@ def test_Monad():
     assert right3 == Right(3)
     global glob
     glob = 1
-    def _coconut_lambda_0(x):
+    def _coconut_lambda_1(x):
         global glob
         glob = 2
         return Just(glob)
-    assert nothing == (bind)(nothing, (_coconut_lambda_0))
+    assert nothing == (bind)(nothing, (_coconut_lambda_1))
     assert glob == 1
 
 def test_Foldable():

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x2694dd79
+# __coconut_hash__ = 0x6d279b4d
 
-# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -24,6 +24,13 @@ from prelude import *  # type: ignore
 
 
 # Tests:
+def test_FunctionApplication():
+    assert (of)((of)(_coconut.operator.add, 1), 2) == 3
+    assert (of)(of(lambda x, y, z: (x, y, z), 1, 2), 3) == (1, 2, 3)
+    assert (of)(of(lambda x, y: (x, y), y=2), 1) == (1, 2)
+    assert curry(_coconut.operator.add)(1)(2) == 3 == uncurry(_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.add))(1, 2)
+    assert uncurry(curry(_coconut.operator.truediv))(6, 2) == 3
+
 def test_definesBind():
     @definesBind
     class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", ('func',))):

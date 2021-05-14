@@ -46,7 +46,7 @@ otherwise: bool = True
 #### Maybe:
 class Maybe:
     @staticmethod
-    def __pure__(x: Ta) -> Maybe = Just(x)
+    def __pure__(x: Ta) -> Maybe = Just x
 
     @staticmethod
     def __fail__(msg: str) -> Maybe = nothing
@@ -66,15 +66,15 @@ if TYPE_CHECKING:
         ...
 else:
     match def maybe(default, _, Nothing()) = default
-    addpattern def maybe(_, func, Just(x)) = func(x)
+    addpattern def maybe(_, func, Just(x)) = func x
 
 #### Either:
 class Either:
     @staticmethod
-    def __pure__(x: Ta) -> Either = Right(x)
+    def __pure__(x: Ta) -> Either = Right x
 
     @staticmethod
-    def __fail__(msg: str) -> Either = Left(msg)
+    def __fail__(msg: str) -> Either = Left msg
 
 data Left(x) from Either:
     @staticmethod
@@ -90,8 +90,8 @@ if TYPE_CHECKING:
     def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc:
         ...
 else:
-    match def either(left_func, _, Left(x)) = left_func(x)
-    addpattern def either(_, right_func, Right(x)) = right_func(x)
+    match def either(left_func, _, Left(x)) = left_func x
+    addpattern def either(_, right_func, Right(x)) = right_func x
 
 #### Ordering:
 class Ordering:
@@ -129,11 +129,17 @@ fst = .[0]
 snd: T.Tuple[Ta, Tb] -> Tb
 snd = .[1]
 
-def curry(func: (Ta, Tb) -> Tc) -> Ta -> Tb -> Tc =
-    func$
+def curry_tuple(func: T.Tuple[Ta, Tb] -> Tc) -> (Ta, Tb) -> Tc =
+    """
+    -- curry a function of a tuple into a Python-style multi-place function
+    """
+    (*args) -> func(args)  # type: ignore
 
-def uncurry(func: Ta -> Tb -> Tc) -> (Ta, Tb) -> Tc =
-    (x, y) -> func(x)(y)
+def uncurry_tuple(func: (Ta, Tb) -> Tc) -> T.Tuple[Ta, Tb] -> Tc =
+    """
+    -- uncurry a Python-style multi-place function into a function of a tuple
+    """
+    args -> func(*args)
 
 
 
@@ -259,7 +265,7 @@ def over(x, y) =
     over :: Integer -> Integer -> Rational
     over = (%)
     """
-    Rational(x, y)
+    Rational x y
 
 #### Word:
 Word = Int
@@ -357,7 +363,7 @@ from math import (
 )
 
 def logBase(base: float, x: float) -> float =
-    log(x, base)
+    log x base
 
 #### RealFrac:
 RealFrac = Rational
@@ -751,7 +757,7 @@ def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     f..g
 
 def flip(func: (Ta, Tb) -> Tc) -> (Tb, Ta) -> Tc =
-    (x, y) -> func(y, x)
+    (x, y) -> func y x
 
 if TYPE_CHECKING:
     @T.overload
@@ -769,18 +775,14 @@ if TYPE_CHECKING:
     def apply(func, arg):
         ...
 else:
-    def apply(func, arg):
+    def apply(func, arg) =
         """
         apply :: (a -> b) -> a -> b
         apply = ($)
-        -- apply will automatically curry functions
-        --  as in Haskell function application
+        -- apply will automatically curry functions as in Haskell function
+        --  application (see also `of` for the more general version)
         """
-        f = func$(arg)
-        try:
-            return f()
-        except TypeError:
-            return f
+        func `of` arg
 
 def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
     if cond(x):
@@ -1208,4 +1210,4 @@ def ioError(err: IOError) -> IO =
     IO(def () -> raise err)
 
 def userError(msg: str) -> IOError =
-    IOError(msg)
+    IOError msg

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x2ec23bc7
+# __coconut_hash__ = 0xd6d56246
 
-# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -176,15 +176,17 @@ def tee(iterable, n=2):
     return _coconut.itertools.tee(iterable, n)
 class reiterable:
     """Allows an iterator to be iterated over multiple times."""
-    __slots__ = ("iter",)
+    __slots__ = ("lock", "iter")
     def __new__(cls, iterable):
         if _coconut.isinstance(iterable, _coconut_reiterable):
             return iterable
         self = _coconut.object.__new__(cls)
+        self.lock = _coconut.threading.Lock()
         self.iter = iterable
         return self
     def get_new_iter(self):
-        self.iter, new_iter = _coconut_tee(self.iter)
+        with self.lock:
+            self.iter, new_iter = _coconut_tee(self.iter)
         return new_iter
     def __iter__(self):
         return _coconut.iter(self.get_new_iter())
@@ -819,6 +821,6 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_filter, _cocon
 
 import setuptools  # type: ignore
 
-VERSION = "0.1.11"
+VERSION = "0.2.0"
 
 setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages(), install_requires=["coconut[mypy]",], extras_require={":python_version<'3.5'": ["typing",], "dev": ["pytest",]})

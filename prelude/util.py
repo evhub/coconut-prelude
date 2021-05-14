@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa6dd5d45
+# __coconut_hash__ = 0xa8c8192c
 
-# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -21,6 +21,66 @@ _coconut_sys.path.pop(0)
 
 # Imports:
 from prelude.typevars import *  # type: ignore
+
+
+# Function application:
+if TYPE_CHECKING:
+    @T.overload
+    def of(func: '_coconut.typing.Callable[[Ta], Tb]', _x: 'Ta') -> 'Tb':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb], Tc]':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb, Tc], Td]':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[..., Tb]', _x: 'Ta') -> 'T.Any':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta', _y: 'Tb') -> 'Tc':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb') -> '_coconut.typing.Callable[[Tc], Td]':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb', _z: 'Tc') -> 'Td':
+        ...
+    @T.overload
+    def of(func: '_coconut.typing.Callable[..., T.Any]', *args: 'T.Any', **kwargs: 'T.Any') -> 'T.Any':
+        ...
+    def of(func, *args, **kwargs):
+        ...
+else:
+    def of(func, *args, **kwargs):
+        """
+        of = ($)
+        -- of(func, *args, **kwargs) attempts to call func(*args, **kwargs),
+        --  but in case of TypeError curries func$(*args, **kwargs) instead,
+        --  as in Haskell function application (see also curry, uncurry)
+        """
+        f = _coconut.functools.partial(func, *args, **kwargs)
+        try:
+            return f()
+        except TypeError:
+            return f
+
+@_coconut_tco
+def curry(func):
+    """
+    -- curry a Python-style multi-place function into
+    --  a Haskell-style function that returns a function
+    --  (see also curry_tuple for functions of tuples)
+    """
+    return _coconut_tail_call(_coconut.functools.partial, of, func)
+
+def uncurry(func):
+    """
+    -- uncurry a Haskell-style function that returns a function
+    --  into a Python-style multi-place function
+    --  (see also uncurry_tuple for functions of tuples)
+    """
+    return lambda *args: reduce(of, args, func)
 
 
 # Deriving:

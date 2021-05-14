@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 1.5.0-post_dev38 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
 
 """Built-in Coconut utilities."""
 
@@ -178,15 +178,17 @@ def tee(iterable, n=2):
     return _coconut.itertools.tee(iterable, n)
 class reiterable:
     """Allows an iterator to be iterated over multiple times."""
-    __slots__ = ("iter",)
+    __slots__ = ("lock", "iter")
     def __new__(cls, iterable):
         if _coconut.isinstance(iterable, _coconut_reiterable):
             return iterable
         self = _coconut.object.__new__(cls)
+        self.lock = _coconut.threading.Lock()
         self.iter = iterable
         return self
     def get_new_iter(self):
-        self.iter, new_iter = _coconut_tee(self.iter)
+        with self.lock:
+            self.iter, new_iter = _coconut_tee(self.iter)
         return new_iter
     def __iter__(self):
         return _coconut.iter(self.get_new_iter())

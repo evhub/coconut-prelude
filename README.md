@@ -41,6 +41,7 @@ over = (%)
 
 Furthermore, the following special functions are made available to mimic certain Haskell syntaxes, with information on each accessible via `help(func)`:
 ```python
+of
 do
 asIO
 unIO

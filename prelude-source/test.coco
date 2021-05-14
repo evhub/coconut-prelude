@@ -43,8 +43,8 @@ def test_Ordering():
 
 def test_Tuples():
     assert `fst` (1, 2) == 1 == `snd` (2, 1)
-    assert curry(+)(1)(2) == 3 == uncurry((+)$)(1, 2)
-    assert uncurry(curry(-))(3, 2) == 1
+    assert curry_tuple(+)((1, 2),) == 3 == uncurry_tuple(def ((x, y),) -> x + y)(1, 2)
+    assert uncurry_tuple(curry_tuple(-))(3, 2) == 1
 
 def test_Ord():
     assert and_(x `isinstance` Ord and x `isinstance` Eq for x in (
