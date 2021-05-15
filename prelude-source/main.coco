@@ -220,7 +220,7 @@ def minBound(b: TBounded) -> TBounded =
         return b.__minBound__()
 
     # Default implementation
-    fmap(minBound, b)
+    _fmap(minBound, b)
 
 def maxBound(b: TBounded) -> TBounded =
     """
@@ -236,7 +236,7 @@ def maxBound(b: TBounded) -> TBounded =
         return b.__maxBound__()
 
     # Default implementation
-    fmap(maxBound, b)
+    _fmap(maxBound, b)
 
 
 
@@ -488,7 +488,7 @@ def mappend(x: TMonoid, y: TMonoid) -> TMonoid =
     (::)(x, y) |*> makedata$(type(x))
 
 def mconcat(ms: TMonoid[]) -> TMonoid =
-    foldr(mappend, mempty, ms)
+    foldr(mappend, mempty, ms)  # type: ignore
 
 
 
@@ -551,14 +551,14 @@ def seqAr(f1: Applicative, f2: TApp) -> TApp =
     seqAr :: Applicative f => f a -> f b -> f b
     seqAr = (*>)
     """
-    _fmap(x1 -> x2 -> x2, f1) `ap` f2
+    _fmap(x1 -> x2 -> x2, f1) `ap` f2  # type: ignore
 
 def seqAl(f1: TApp, f2: Applicative) -> TApp =
     """
     seqAl :: Applicative f => f a -> f b -> f a
     seqAl = (<*)
     """
-    _fmap(x1 -> x2 -> x1, f1) `ap` f2
+    _fmap(x1 -> x2 -> x1, f1) `ap` f2  # type: ignore
 
 def liftA2(func: (Ta, Tb) -> Tc) -> (Applicative[Ta], Applicative[Tb]) -> Applicative[Tc] =
     """
@@ -577,14 +577,14 @@ def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     bind = (>>=)
     -- bind is overridden by overriding fmap (__fmap__) and join (__join__)
     """
-    join(_fmap(func, m))
+    join(_fmap(func, m))  # type: ignore
 
 def seqM(m1: Monad, m2: TMonad) -> TMonad =
     """
     seqM :: Monad m => m a -> m b -> m b
     seqM = (>>)
     """
-    m1 `bind` x -> m2
+    m1 `bind` x -> m2  # type: ignore
 
 return_ = pure
 
@@ -688,7 +688,7 @@ mapM_: (Ta -> Monad, Foldable[Ta]) -> Monad
 mapM_ = sequence_..fmap
 
 def foldMap(func: Ta -> TMonoid, xs: Foldable[Ta]) -> TMonoid =
-    mconcat(map(func, xs))
+    mconcat(_map(func, xs))  # type: ignore
 
 def foldl(func: (Tb, Ta) -> Tb, init: Tb, xs: Foldable[Ta]) -> Tb =
     _reduce(func, xs, init)
@@ -754,7 +754,7 @@ def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     dot :: (b -> c) -> (a -> b) -> a -> c
     dot = (.)
     """
-    f..g
+    f..g  # type: ignore
 
 def flip(func: (Ta, Tb) -> Tc) -> (Tb, Ta) -> Tc =
     (x, y) -> func y x
@@ -970,7 +970,7 @@ def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
     """
     break_ = break
     """
-    span((not)..cond, xs)
+    span((not)..cond, xs)  # type: ignore
 
 
 
@@ -1006,7 +1006,7 @@ def zipWith3(func: (Ta, Tb, Tc) -> Td, xs1: Ta$[], xs2: Tb$[], xs3: Tc$[]) -> Td
     starmap(func, _zip(xs1, xs2, xs3))
 
 def unzip(xs: T.Tuple[Ta, Tb]$[]) -> T.Tuple[Ta[], Tb[]] =
-    _zip(*xs) |> map$(list) |> tuple
+    _zip(*xs) |> _map$(list) |> tuple  # type: ignore
 
 unzip3: T.Tuple[Ta, Tb, Tc]$[] -> T.Tuple[Ta[], Tb[], Tc[]]
 unzip3 = unzip  # type: ignore
@@ -1107,7 +1107,7 @@ data IO(io_func):
         IO(func..self.io_func)
 
     def __join__(self) -> IO =
-        fmap(unIO, self)
+        _fmap(unIO, self)
 
     @staticmethod
     def __mempty__() -> IO =
@@ -1124,7 +1124,7 @@ def asIO(io: IO) -> IO =
     asIO = id
     -- asIO(x) is equivalent to x `asTypeOf` IO(...)
     """
-    io `asTypeOf` _nullIO
+    io `asTypeOf` _nullIO  # type: ignore
 
 def unIO(io: IO) -> Ta =
     """

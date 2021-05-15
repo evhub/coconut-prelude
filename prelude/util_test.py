@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x6d279b4d
+# __coconut_hash__ = 0x3197d1e2
 
-# Compiled with Coconut version 1.5.0-post_dev39 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev42 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -20,50 +20,50 @@ _coconut_sys.path.pop(0)
 # Compiled Coconut: -----------------------------------------------------------
 
 # Imports:
-from prelude import *  # type: ignore
+from prelude import *  # type: ignore  #2 (line in coconut source)
 
 
 # Tests:
-def test_FunctionApplication():
-    assert (of)((of)(_coconut.operator.add, 1), 2) == 3
-    assert (of)(of(lambda x, y, z: (x, y, z), 1, 2), 3) == (1, 2, 3)
-    assert (of)(of(lambda x, y: (x, y), y=2), 1) == (1, 2)
-    assert curry(_coconut.operator.add)(1)(2) == 3 == uncurry(_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.add))(1, 2)
-    assert uncurry(curry(_coconut.operator.truediv))(6, 2) == 3
+def test_FunctionApplication():  #6 (line in coconut source)
+    assert (of)((of)(_coconut.operator.add, 1), 2) == 3  #7 (line in coconut source)
+    assert (of)(of(lambda x, y, z: (x, y, z), 1, 2), 3) == (1, 2, 3)  #8 (line in coconut source)
+    assert (of)(of(lambda x, y: (x, y), y=2), 1) == (1, 2)  #9 (line in coconut source)
+    assert curry(_coconut.operator.add)(1)(2) == 3 == uncurry(_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.add))(1, 2)  #10 (line in coconut source)
+    assert uncurry(curry(_coconut.operator.truediv))(6, 2) == 3  #11 (line in coconut source)
 
-def test_definesBind():
-    @definesBind
-    class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", ('func',))):
-        __slots__ = ()
-        __ne__ = _coconut.object.__ne__
-        def __eq__(self, other):
-            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)
-        def __hash__(self):
-            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)
-        __match_args__ = ('func',)
-        @staticmethod
-        @_coconut_tco
-        def __pure__(x: 'Ta') -> 'FunctionMonad':
-            return _coconut_tail_call(FunctionMonad, lambda e: x)
+def test_definesBind():  #13 (line in coconut source)
+    @definesBind  #14 (line in coconut source)
+    class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", ('func',))):  #14 (line in coconut source)
+        __slots__ = ()  #14 (line in coconut source)
+        __ne__ = _coconut.object.__ne__  #14 (line in coconut source)
+        def __eq__(self, other):  #14 (line in coconut source)
+            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #14 (line in coconut source)
+        def __hash__(self):  #14 (line in coconut source)
+            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #14 (line in coconut source)
+        __match_args__ = ('func',)  #14 (line in coconut source)
+        @staticmethod  #14 (line in coconut source)
+        @_coconut_tco  #14 (line in coconut source)
+        def __pure__(x: 'Ta') -> 'FunctionMonad':  #17 (line in coconut source)
+            return _coconut_tail_call(FunctionMonad, lambda e: x)  #18 (line in coconut source)
 
-        @_coconut_tco
-        def __bind__(x: 'FunctionMonad', f: '_coconut.typing.Callable[[Ta], FunctionMonad]') -> 'FunctionMonad':
-            return _coconut_tail_call(FunctionMonad, lambda r: ((f)((x)(r)))(r))
+        @_coconut_tco  #20 (line in coconut source)
+        def __bind__(x: 'FunctionMonad', f: '_coconut.typing.Callable[[Ta], FunctionMonad]') -> 'FunctionMonad':  #20 (line in coconut source)
+            return _coconut_tail_call(FunctionMonad, lambda r: ((f)((x)(r)))(r))  #21 (line in coconut source)
 
-        @_coconut_tco
-        @_coconut_mark_as_match
-        def __call__(*_coconut_match_to_args, **_coconut_match_to_kwargs):
-            _coconut_match_check = False
-            _coconut_FunctionMatchError = _coconut_get_function_match_error()
-            if (_coconut.len(_coconut_match_to_args) >= 1) and (_coconut.isinstance(_coconut_match_to_args[0], FunctionMonad)) and (_coconut.len(_coconut_match_to_args[0]) == 1):
-                func = _coconut_match_to_args[0][0]
-                args = _coconut_match_to_args[1:]
-                kwargs = _coconut_match_to_kwargs
-                _coconut_match_check = True
-            if not _coconut_match_check:
-                raise _coconut_FunctionMatchError('def __call__(FunctionMonad(func), *args, **kwargs) =', _coconut_match_to_args)
+        @_coconut_tco  #23 (line in coconut source)
+        @_coconut_mark_as_match  #23 (line in coconut source)
+        def __call__(*_coconut_match_to_args, **_coconut_match_to_kwargs):  #23 (line in coconut source)
+            _coconut_match_check = False  #23 (line in coconut source)
+            _coconut_FunctionMatchError = _coconut_get_function_match_error()  #23 (line in coconut source)
+            if (_coconut.len(_coconut_match_to_args) >= 1) and (_coconut.isinstance(_coconut_match_to_args[0], FunctionMonad)) and (_coconut.len(_coconut_match_to_args[0]) == 1):  #23 (line in coconut source)
+                func = _coconut_match_to_args[0][0]  #23 (line in coconut source)
+                args = _coconut_match_to_args[1:]  #23 (line in coconut source)
+                kwargs = _coconut_match_to_kwargs  #23 (line in coconut source)
+                _coconut_match_check = True  #23 (line in coconut source)
+            if not _coconut_match_check:  #23 (line in coconut source)
+                raise _coconut_FunctionMatchError('def __call__(FunctionMonad(func), *args, **kwargs) =', _coconut_match_to_args)  #23 (line in coconut source)
 
-            return _coconut_tail_call(func, *args, **kwargs)
+            return _coconut_tail_call(func, *args, **kwargs)  #24 (line in coconut source)
 
-    assert 8 == ((fmap)(_coconut.functools.partial(_coconut.operator.mul, 2), FunctionMonad(_coconut.functools.partial(_coconut.operator.add, 1))))(3)
-    assert 6 == ((join)(FunctionMonad(curry(_coconut.operator.add))))(3)
+    assert 8 == ((fmap)(_coconut.functools.partial(_coconut.operator.mul, 2), FunctionMonad(_coconut.functools.partial(_coconut.operator.add, 1))))(3)  #26 (line in coconut source)
+    assert 6 == ((join)(FunctionMonad(curry(_coconut.operator.add))))(3)  #27 (line in coconut source)
