@@ -640,9 +640,9 @@ def join(ms: Monad[TMonad]) -> TMonad =
     fallback = ms
     for m in ms:
         if m:
-            vals.extend(m)
+            vals.extend(m)  # type: ignore
         else:
-            fallback = m
+            fallback = m  # type: ignore
     if not vals:
         return fallback  # type: ignore
     makedata(type(ms), *vals)
@@ -844,7 +844,7 @@ def cons(x: Ta, xs: Ta$[]) -> Ta$[] =
     (::)([x], xs)
 
 map: (Ta -> Tb, Ta$[]) -> Tb$[]  # type: ignore
-map = _map
+map = _map  # type: ignore
 
 def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     """
@@ -854,7 +854,7 @@ def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     (::)(xs, ys)
 
 filter: (Ta -> bool, Ta$[]) -> Ta$[]  # type: ignore
-filter = _filter
+filter = _filter  # type: ignore
 
 head: Ta$[] -> Ta
 head = .$[0]
@@ -994,7 +994,7 @@ def lookup(key: Ta, assocs: T.Tuple[Ta, Tb]$[]) -> Maybe:
 
 ## Zipping and unzipping lists:
 zip: (Ta$[], Tb$[]) -> T.Tuple[Ta, Tb]$[]  # type: ignore
-zip = _zip
+zip = _zip  # type: ignore
 
 zip3: (Ta$[], Tb$[], Tc$[]) -> T.Tuple[Ta, Tb, Tc]$[]
 zip3 = _zip

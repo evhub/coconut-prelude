@@ -7,11 +7,13 @@ clean-install: clean install
 
 .PHONY: install
 install: build
-	pip install -Ue .[dev]
+	pip install --upgrade pytest
+	pip install --upgrade --no-deps -e .
 
 .PHONY: install-univ
 install-univ: build-univ
-	pip install -Ue .[dev]
+	pip install --upgrade pytest
+	pip install --upgrade --no-deps -e .
 
 .PHONY: build
 build:
