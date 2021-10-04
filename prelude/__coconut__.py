@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 1.5.0-post_dev60 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev88 [Fish License]
 
 """Built-in Coconut utilities."""
 
@@ -37,7 +37,8 @@ if _coconut_sys.version_info < (3, 7):
 else:
     py_breakpoint = breakpoint
 class _coconut:
-    import collections, copy, functools, types, itertools, operator, threading, os, warnings, contextlib, traceback, weakref
+    import collections, copy, functools, types, itertools, operator, threading, os, warnings, contextlib, traceback, weakref, multiprocessing
+    from multiprocessing import dummy as multiprocessing_dummy
     import asyncio
     import pickle
     OrderedDict = collections.OrderedDict
@@ -113,8 +114,8 @@ def _coconut_tco(func):
             call_func, args, kwargs = result.func, result.args, result.kwargs
     tail_call_optimized_func._coconut_tco_func = func
     tail_call_optimized_func.__module__ = _coconut.getattr(func, "__module__", None)
-    tail_call_optimized_func.__name__ = _coconut.getattr(func, "__name__", "<coconut tco function (pass --no-tco to remove)>")
-    tail_call_optimized_func.__qualname__ = _coconut.getattr(func, "__qualname__", tail_call_optimized_func.__name__)
+    tail_call_optimized_func.__name__ = _coconut.getattr(func, "__name__", None)
+    tail_call_optimized_func.__qualname__ = _coconut.getattr(func, "__qualname__", None)
     _coconut_tco_func_dict[_coconut.id(tail_call_optimized_func)] = _coconut.weakref.ref(tail_call_optimized_func)
     return tail_call_optimized_func
 def _coconut_igetitem(iterable, index):
@@ -367,75 +368,89 @@ class map(_coconut_base_hashable, _coconut.map):
     def __fmap__(self, func):
         return self.__class__(_coconut_forward_compose(self.func, func), *self.iters)
 class _coconut_parallel_concurrent_map_func_wrapper(_coconut_base_hashable):
-    __slots__ = ("map_cls", "func",)
-    def __init__(self, map_cls, func):
+    __slots__ = ("map_cls", "func", "star")
+    def __init__(self, map_cls, func, star):
         self.map_cls = map_cls
         self.func = func
+        self.star = star
     def __reduce__(self):
-        return (self.__class__, (self.map_cls, self.func))
+        return (self.__class__, (self.map_cls, self.func, self.star))
     def __call__(self, *args, **kwargs):
-        self.map_cls.get_executor_stack().append(None)
+        self.map_cls.get_pool_stack().append(None)
         try:
-            return self.func(*args, **kwargs)
+            if self.star:
+                assert _coconut.len(args) == 1, "internal parallel/concurrent map error"
+                return self.func(*args[0], **kwargs)
+            else:
+                return self.func(*args, **kwargs)
         except:
             _coconut.print(self.map_cls.__name__ + " error:")
             _coconut.traceback.print_exc()
             raise
         finally:
-            self.map_cls.get_executor_stack().pop()
+            assert self.map_cls.get_pool_stack().pop() is None, "internal parallel/concurrent map error"
 class _coconut_base_parallel_concurrent_map(map):
-    __slots__ = ("result")
+    __slots__ = ("result", "chunksize")
     @classmethod
-    def get_executor_stack(cls):
-        return cls.threadlocal_ns.__dict__.setdefault("executor_stack", [None])
-    def __new__(cls, function, *iterables):
+    def get_pool_stack(cls):
+        return cls.threadlocal_ns.__dict__.setdefault("pool_stack", [None])
+    def __new__(cls, function, *iterables, **kwargs):
         self = _coconut_map.__new__(cls, function, *iterables)
         self.result = None
-        if cls.get_executor_stack()[-1] is not None:
+        self.chunksize = kwargs.pop("chunksize", 1)
+        if kwargs:
+            raise _coconut.TypeError(cls.__name__ + "() got unexpected keyword arguments " + _coconut.repr(kwargs))
+        if cls.get_pool_stack()[-1] is not None:
             return self.get_list()
         return self
     @classmethod
     @_coconut.contextlib.contextmanager
     def multiple_sequential_calls(cls, max_workers=None):
         """Context manager that causes nested calls to use the same pool."""
-        if cls.get_executor_stack()[-1] is None:
-            with cls.make_executor(max_workers) as executor:
-                cls.get_executor_stack()[-1] = executor
-                try:
-                    yield
-                finally:
-                    cls.get_executor_stack()[-1] = None
+        if cls.get_pool_stack()[-1] is None:
+            cls.get_pool_stack()[-1] = cls.make_pool(max_workers)
+            try:
+                yield
+            finally:
+                cls.get_pool_stack()[-1].terminate()
+                cls.get_pool_stack()[-1] = None
         else:
             yield
     def get_list(self):
         if self.result is None:
             with self.multiple_sequential_calls():
-                self.result = _coconut.list(self.get_executor_stack()[-1].map(_coconut_parallel_concurrent_map_func_wrapper(self.__class__, self.func), *self.iters))
+                if _coconut.len(self.iters) == 1:
+                    self.result = _coconut.list(self.get_pool_stack()[-1].imap(_coconut_parallel_concurrent_map_func_wrapper(self.__class__, self.func, False), self.iters[0], self.chunksize))
+                else:
+                    self.result = _coconut.list(self.get_pool_stack()[-1].imap(_coconut_parallel_concurrent_map_func_wrapper(self.__class__, self.func, True), _coconut.zip(*self.iters), self.chunksize))
         return self.result
     def __iter__(self):
         return _coconut.iter(self.get_list())
 class parallel_map(_coconut_base_parallel_concurrent_map):
-    """Multi-process implementation of map using concurrent.futures.
-    Requires arguments to be pickleable. For multiple sequential calls,
-    use `with parallel_map.multiple_sequential_calls():`."""
+    """
+    Multi-process implementation of map. Requires arguments to be pickleable.
+    For multiple sequential calls, use:
+        with parallel_map.multiple_sequential_calls():
+            ...
+    """
     __slots__ = ()
     threadlocal_ns = _coconut.threading.local()
     @staticmethod
-    def make_executor(max_workers=None):
-        from concurrent.futures import ProcessPoolExecutor
-        return ProcessPoolExecutor(max_workers)
+    def make_pool(max_workers=None):
+        return _coconut.multiprocessing.Pool(max_workers)
     def __repr__(self):
         return "parallel_" + _coconut_map.__repr__(self)
 class concurrent_map(_coconut_base_parallel_concurrent_map):
-    """Multi-thread implementation of map using concurrent.futures.
-    For multiple sequential calls, use
-    `with concurrent_map.multiple_sequential_calls():`."""
+    """
+    Multi-thread implementation of map. For multiple sequential calls, use:
+        with concurrent_map.multiple_sequential_calls():
+            ...
+    """
     __slots__ = ()
     threadlocal_ns = _coconut.threading.local()
     @staticmethod
-    def make_executor(max_workers=None):
-        from concurrent.futures import ThreadPoolExecutor
-        return ThreadPoolExecutor(max_workers)
+    def make_pool(max_workers=None):
+        return _coconut.multiprocessing_dummy.Pool(_coconut.multiprocessing.cpu_count() * 5 if max_workers is None else max_workers)
     def __repr__(self):
         return "concurrent_" + _coconut_map.__repr__(self)
 class filter(_coconut_base_hashable, _coconut.filter):
@@ -646,7 +661,7 @@ class recursive_iterator(_coconut_base_hashable):
         self.tee_store = {}
         self.backup_tee_store = []
     def __call__(self, *args, **kwargs):
-        key = (args, _coconut.frozenset(kwargs))
+        key = (args, _coconut.frozenset(kwargs.items()))
         use_backup = False
         try:
             _coconut.hash(key)
@@ -683,7 +698,7 @@ class recursive_iterator(_coconut_base_hashable):
             return self
         return _coconut.types.MethodType(self, obj)
 class _coconut_FunctionMatchErrorContext:
-    __slots__ = ('exc_class', 'taken')
+    __slots__ = ("exc_class", "taken")
     threadlocal_ns = _coconut.threading.local()
     def __init__(self, exc_class):
         self.exc_class = exc_class
@@ -709,20 +724,29 @@ def _coconut_get_function_match_error():
     ctx.taken = True
     return ctx.exc_class
 class _coconut_base_pattern_func(_coconut_base_hashable):
-    __slots__ = ("FunctionMatchError", "__doc__", "patterns")
+    if _coconut_sys.version_info < (3, 7):
+        __slots__ = ("FunctionMatchError", "patterns", "__doc__", "__name__")
+    else:
+        __slots__ = ("FunctionMatchError", "patterns", "__doc__", "__name__", "__qualname__")
     _coconut_is_match = True
     def __init__(self, *funcs):
         self.FunctionMatchError = _coconut.type(_coconut_py_str("MatchError"), (_coconut_MatchError,), {})
-        self.__doc__ = None
         self.patterns = []
+        self.__doc__ = None
+        self.__name__ = None
+        if _coconut_sys.version_info >= (3, 7):
+            self.__qualname__ = None
         for func in funcs:
             self.add_pattern(func)
     def add_pattern(self, func):
-        self.__doc__ = _coconut.getattr(func, "__doc__", None) or self.__doc__
         if _coconut.isinstance(func, _coconut_base_pattern_func):
             self.patterns += func.patterns
         else:
             self.patterns.append(func)
+        self.__doc__ = _coconut.getattr(func, "__doc__", self.__doc__)
+        self.__name__ = _coconut.getattr(func, "__name__", self.__name__)
+        if _coconut_sys.version_info >= (3, 7):
+            self.__qualname__ = _coconut.getattr(func, "__qualname__", self.__qualname__)
     def __call__(self, *args, **kwargs):
         for func in self.patterns[:-1]:
             try:

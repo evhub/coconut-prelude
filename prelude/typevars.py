@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xf267d079
+# __coconut_hash__ = 0x8738c99f
 
-# Compiled with Coconut version 1.5.0-post_dev60 [Fish License]
+# Compiled with Coconut version 1.5.0-post_dev88 [Fish License]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -23,21 +23,24 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
             try:
                 _coconut_v.__module__ = _coconut_full_module_name
             except AttributeError:
-                type(_coconut_v).__module__ = _coconut_full_module_name
+                _coconut_v_type = type(_coconut_v)
+                if getattr(_coconut_v_type, "__module__", None) == "__coconut__":
+                    _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
 from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable
 _coconut_sys.path.pop(0)
+
 # Compiled Coconut: -----------------------------------------------------------
 
 # Imports:
-import typing as T  #2 (line in coconut source)
+import typing as T  #2 (line num in coconut source)
 
 
 # TypeVars:
-Ta = T.TypeVar("Ta")  #6 (line in coconut source)
-Tb = T.TypeVar("Tb")  #7 (line in coconut source)
-Tc = T.TypeVar("Tc")  #8 (line in coconut source)
-Td = T.TypeVar("Td")  #9 (line in coconut source)
+Ta = T.TypeVar("Ta")  #6 (line num in coconut source)
+Tb = T.TypeVar("Tb")  #7 (line num in coconut source)
+Tc = T.TypeVar("Tc")  #8 (line num in coconut source)
+Td = T.TypeVar("Td")  #9 (line num in coconut source)
 
-TType = T.TypeVar("TType", bound=T.Type)  #11 (line in coconut source)
+TType = T.TypeVar("TType", bound=T.Type)  #11 (line num in coconut source)

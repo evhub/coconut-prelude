@@ -5,15 +5,16 @@ test: install
 .PHONY: clean-install
 clean-install: clean install
 
-.PHONY: install
-install: build
+.PHONY: base-install
+base-install:
 	pip install --upgrade pytest
 	pip install --upgrade --no-deps -e .
 
+.PHONY: install
+install: build base-install
+
 .PHONY: install-univ
-install-univ: build-univ
-	pip install --upgrade pytest
-	pip install --upgrade --no-deps -e .
+install-univ: build-univ base-install
 
 .PHONY: build
 build:
