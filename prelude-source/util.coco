@@ -4,7 +4,7 @@ from prelude.typevars import *  # type: ignore
 
 # Function application:
 if TYPE_CHECKING:
-    @T.overload
+    @T.overload  # type: ignore
     def of(func: Ta -> Tb, _x: Ta) -> Tb:
         ...
     @T.overload

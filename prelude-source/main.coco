@@ -746,18 +746,12 @@ mapM = traverse
 ## Miscellaneous functions:
 def id(x: Ta) -> Ta = x
 
-def const(x: Ta) -> Tb -> Ta =
-    y -> x
-
 def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     """
     dot :: (b -> c) -> (a -> b) -> a -> c
     dot = (.)
     """
     f..g  # type: ignore
-
-def flip(func: (Ta, Tb) -> Tc) -> (Tb, Ta) -> Tc =
-    (x, y) -> func y x
 
 if TYPE_CHECKING:
     @T.overload
