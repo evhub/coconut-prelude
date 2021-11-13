@@ -300,7 +300,7 @@ if TYPE_CHECKING:
     def toRational(real: Real) -> Rational:
         ...
 else:
-    match def toRational(real is float) =
+    match def toRational(real `isinstance` float) =
         Rational.from_float(real)
     addpattern def toRational(real) =
         Rational(real)

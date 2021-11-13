@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x192c1c40
+# __coconut_hash__ = 0x97c4c803
 
-# Compiled with Coconut version 2.0.0-a_dev1 [Vocational Guidance Counsellor]
+# Compiled with Coconut version 2.0.0-a_dev9 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -112,14 +112,14 @@ def test_Enum():  #59 (line num in coconut source)
     assert and_(((isinstance)(x, Enum) for x in (True, lt, 5)))  #60 (line num in coconut source)
     assert (succ)(5) == 6 == (pred)(7)  #63 (line num in coconut source)
     assert fromEnum(10) == 10  #64 (line num in coconut source)
-    assert (list)(_coconut_igetitem(enumFrom(2), _coconut.slice(None, 2))) == [2, 3]  #65 (line num in coconut source)
-    assert (list)(_coconut_igetitem(enumFromThen(2, 4), _coconut.slice(None, 3))) == [2, 4, 6]  #66 (line num in coconut source)
+    assert (list)(_coconut_iter_getitem(enumFrom(2), _coconut.slice(None, 2))) == [2, 3]  #65 (line num in coconut source)
+    assert (list)(_coconut_iter_getitem(enumFromThen(2, 4), _coconut.slice(None, 3))) == [2, 4, 6]  #66 (line num in coconut source)
     assert (list)(enumFromTo(2, 4)) == [2, 3, 4]  #67 (line num in coconut source)
     assert (list)(enumFromThenTo(2, 4, 8)) == [2, 4, 6, 8] == (list)(enumFromThenTo(2, 4, 9))  #68 (line num in coconut source)
     assert (list)(enumFromThenTo(2, 4, 1)) == []  #69 (line num in coconut source)
     assert (list)(enumFromThen(10, 1)) == []  #70 (line num in coconut source)
     assert (list)(enumFromThenTo(4, 3, 1)) == [4, 3, 2, 1]  #71 (line num in coconut source)
-    assert (list)(_coconut_igetitem(enumFromThen(1, 1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(_coconut_igetitem(enumFromThenTo(1, 1, 1), _coconut.slice(None, 3)))  #72 (line num in coconut source)
+    assert (list)(_coconut_iter_getitem(enumFromThen(1, 1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(_coconut_iter_getitem(enumFromThenTo(1, 1, 1), _coconut.slice(None, 3)))  #72 (line num in coconut source)
     assert (list)(enumFromTo(1, 1)) == [1, ]  #73 (line num in coconut source)
 
 def test_Bounded():  #75 (line num in coconut source)
@@ -334,6 +334,7 @@ def test_Miscellaneous_functions():  #270 (line num in coconut source)
     assert asTypeOf(fail("herp"), Right(1)) == Left("herp")  #281 (line num in coconut source)
     assert asTypeOf(mempty, Just([])) == nothing  #282 (line num in coconut source)
     class Test(_coconut.collections.namedtuple("Test", ('x',))):  #283 (line num in coconut source)
+        _coconut_is_data = True  #283 (line num in coconut source)
         __slots__ = ()  #283 (line num in coconut source)
         __ne__ = _coconut.object.__ne__  #283 (line num in coconut source)
         def __eq__(self, other):  #283 (line num in coconut source)
@@ -392,8 +393,8 @@ def test_Scans():  #323 (line num in coconut source)
 
 def test_Infinite_lists():  #329 (line num in coconut source)
     assert (list)((take)(3, iterate(_coconut.functools.partial(subtract, 1), 3))) == [3, 2, 1]  #330 (line num in coconut source)
-    assert (list)(_coconut_igetitem(repeat(1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(replicate(3, 1))  #331 (line num in coconut source)
-    assert (list)(_coconut_igetitem(cycle([1, 2]), _coconut.slice(None, 4))) == [1, 2, 1, 2]  #332 (line num in coconut source)
+    assert (list)(_coconut_iter_getitem(repeat(1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(replicate(3, 1))  #331 (line num in coconut source)
+    assert (list)(_coconut_iter_getitem(cycle([1, 2]), _coconut.slice(None, 4))) == [1, 2, 1, 2]  #332 (line num in coconut source)
 
 def test_Sublists():  #334 (line num in coconut source)
     assert take(2, [1, 2, 3]) == [1, 2]  #335 (line num in coconut source)

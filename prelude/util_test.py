@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x699201a2
+# __coconut_hash__ = 0x2a7e8320
 
-# Compiled with Coconut version 2.0.0-a_dev1 [Vocational Guidance Counsellor]
+# Compiled with Coconut version 2.0.0-a_dev9 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_igetitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -48,6 +48,7 @@ def test_FunctionApplication():  #6 (line num in coconut source)
 def test_definesBind():  #13 (line num in coconut source)
     @definesBind  #14 (line num in coconut source)
     class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", ('func',))):  #14 (line num in coconut source)
+        _coconut_is_data = True  #14 (line num in coconut source)
         __slots__ = ()  #14 (line num in coconut source)
         __ne__ = _coconut.object.__ne__  #14 (line num in coconut source)
         def __eq__(self, other):  #14 (line num in coconut source)
@@ -68,18 +69,57 @@ def test_definesBind():  #13 (line num in coconut source)
         @_coconut_mark_as_match  #23 (line num in coconut source)
         def __call__(*_coconut_match_args, **_coconut_match_kwargs):  #23 (line num in coconut source)
             _coconut_match_check_0 = False  #23 (line num in coconut source)
-            _coconut_match_set_name_func = _coconut_sentinel  #23 (line num in coconut source)
             _coconut_match_set_name_args = _coconut_sentinel  #23 (line num in coconut source)
             _coconut_match_set_name_kwargs = _coconut_sentinel  #23 (line num in coconut source)
             _coconut_FunctionMatchError = _coconut_get_function_match_error()  #23 (line num in coconut source)
-            if (_coconut.len(_coconut_match_args) >= 1) and (_coconut.isinstance(_coconut_match_args[0], FunctionMonad)) and (_coconut.len(_coconut_match_args[0]) == 1):  #23 (line num in coconut source)
-                _coconut_match_set_name_func = _coconut_match_args[0][0]  #23 (line num in coconut source)
+            if _coconut.len(_coconut_match_args) >= 1:  #23 (line num in coconut source)
+                _coconut_match_temp_0 = _coconut.getattr(FunctionMonad, "_coconut_is_data", False) or _coconut.isinstance(FunctionMonad, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in FunctionMonad)   #type: ignore  #23 (line num in coconut source)
                 _coconut_match_set_name_args = _coconut_match_args[1:]  #23 (line num in coconut source)
                 _coconut_match_set_name_kwargs = _coconut_match_kwargs  #23 (line num in coconut source)
                 _coconut_match_check_0 = True  #23 (line num in coconut source)
             if _coconut_match_check_0:  #23 (line num in coconut source)
-                if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
-                    func = _coconut_match_args[0][0]  #23 (line num in coconut source)
+                _coconut_match_check_0 = False  #23 (line num in coconut source)
+                if not _coconut_match_check_0:  #23 (line num in coconut source)
+                    _coconut_match_set_name_func = _coconut_sentinel  #23 (line num in coconut source)
+                    if (_coconut_match_temp_0) and (_coconut.isinstance(_coconut_match_args[0], FunctionMonad)) and (_coconut.len(_coconut_match_args[0]) == 1):  #23 (line num in coconut source)
+                        _coconut_match_set_name_func = _coconut_match_args[0][0]  #23 (line num in coconut source)
+                        _coconut_match_check_0 = True  #23 (line num in coconut source)
+                    if _coconut_match_check_0:  #23 (line num in coconut source)
+                        if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
+                            func = _coconut_match_args[0][0]  #23 (line num in coconut source)
+
+                if not _coconut_match_check_0:  #23 (line num in coconut source)
+                    if (not _coconut_match_temp_0) and (_coconut.isinstance(_coconut_match_args[0], FunctionMonad)):  #23 (line num in coconut source)
+                        _coconut_match_check_0 = True  #23 (line num in coconut source)
+                    if _coconut_match_check_0:  #23 (line num in coconut source)
+                        _coconut_match_check_0 = False  #23 (line num in coconut source)
+                        if not _coconut_match_check_0:  #23 (line num in coconut source)
+                            _coconut_match_set_name_func = _coconut_sentinel  #23 (line num in coconut source)
+                            if _coconut.isinstance(_coconut_match_args[0], _coconut_self_match_types):  #23 (line num in coconut source)
+                                _coconut_match_set_name_func = _coconut_match_args[0]  #23 (line num in coconut source)
+                                _coconut_match_check_0 = True  #23 (line num in coconut source)
+                            if _coconut_match_check_0:  #23 (line num in coconut source)
+                                if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
+                                    func = _coconut_match_args[0]  #23 (line num in coconut source)
+
+                        if not _coconut_match_check_0:  #23 (line num in coconut source)
+                            _coconut_match_set_name_func = _coconut_sentinel  #23 (line num in coconut source)
+                            if not _coconut.isinstance(_coconut_match_args[0], _coconut_self_match_types):  #23 (line num in coconut source)
+                                _coconut_match_temp_1 = _coconut.getattr(FunctionMonad, '__match_args__', ())  #23 (line num in coconut source)
+                                if not _coconut.isinstance(_coconut_match_temp_1, _coconut.tuple):  #23 (line num in coconut source)
+                                    raise _coconut.TypeError("FunctionMonad.__match_args__ must be a tuple")  #23 (line num in coconut source)
+                                if _coconut.len(_coconut_match_temp_1) < 1:  #23 (line num in coconut source)
+                                    raise _coconut.TypeError("too many positional args in class match (pattern requires 1; 'FunctionMonad' only supports %s)" % (_coconut.len(_coconut_match_temp_1),))  #23 (line num in coconut source)
+                                _coconut_match_temp_2 = _coconut.getattr(_coconut_match_args[0], _coconut_match_temp_1[0], _coconut_sentinel)  #23 (line num in coconut source)
+                                if _coconut_match_temp_2 is not _coconut_sentinel:  #23 (line num in coconut source)
+                                    _coconut_match_set_name_func = _coconut_match_temp_2  #23 (line num in coconut source)
+                                    _coconut_match_check_0 = True  #23 (line num in coconut source)
+                            if _coconut_match_check_0:  #23 (line num in coconut source)
+                                if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
+                                    func = _coconut_match_temp_2  #23 (line num in coconut source)
+
+
+            if _coconut_match_check_0:  #23 (line num in coconut source)
                 if _coconut_match_set_name_args is not _coconut_sentinel:  #23 (line num in coconut source)
                     args = _coconut_match_args[1:]  #23 (line num in coconut source)
                 if _coconut_match_set_name_kwargs is not _coconut_sentinel:  #23 (line num in coconut source)
