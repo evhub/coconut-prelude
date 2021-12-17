@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xadac4719
+# __coconut_hash__ = 0x8ca42b92
 
-# Compiled with Coconut version 2.0.0-a_dev9 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev28 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op
+from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -42,29 +42,38 @@ if TYPE_CHECKING:  #6 (line num in coconut source)
     @T.overload  # type: ignore  #7 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[[Ta], Tb]', _x: 'Ta') -> 'Tb':  #8 (line num in coconut source)
         ...  #9 (line num in coconut source)
+
     @T.overload  #10 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb], Tc]':  #11 (line num in coconut source)
         ...  #12 (line num in coconut source)
+
     @T.overload  #13 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb, Tc], Td]':  #14 (line num in coconut source)
         ...  #15 (line num in coconut source)
+
     @T.overload  #16 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[..., Tb]', _x: 'Ta') -> 'T.Any':  #17 (line num in coconut source)
         ...  #18 (line num in coconut source)
+
     @T.overload  #19 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta', _y: 'Tb') -> 'Tc':  #20 (line num in coconut source)
         ...  #21 (line num in coconut source)
+
     @T.overload  #22 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb') -> '_coconut.typing.Callable[[Tc], Td]':  #23 (line num in coconut source)
         ...  #24 (line num in coconut source)
+
     @T.overload  #25 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb', _z: 'Tc') -> 'Td':  #26 (line num in coconut source)
         ...  #27 (line num in coconut source)
+
     @T.overload  #28 (line num in coconut source)
     def of(func: '_coconut.typing.Callable[..., T.Any]', *args: 'T.Any', **kwargs: 'T.Any') -> 'T.Any':  #29 (line num in coconut source)
         ...  #30 (line num in coconut source)
+
     def of(func, *args, **kwargs):  #31 (line num in coconut source)
         ...  #32 (line num in coconut source)
+
 else:  #33 (line num in coconut source)
     def of(func, *args, **kwargs):  #34 (line num in coconut source)
         """
@@ -79,6 +88,7 @@ else:  #33 (line num in coconut source)
         except TypeError:  #44 (line num in coconut source)
             return (f)  #45 (line num in coconut source)
 
+
 @_coconut_tco  #47 (line num in coconut source)
 def curry(func):  #47 (line num in coconut source)
     """
@@ -87,6 +97,7 @@ def curry(func):  #47 (line num in coconut source)
     --  (see also curry_tuple for functions of tuples)
     """  #52 (line num in coconut source)
     return _coconut_tail_call(_coconut.functools.partial, of, func)  #53 (line num in coconut source)
+
 
 def uncurry(func):  #55 (line num in coconut source)
     """
@@ -98,6 +109,7 @@ def uncurry(func):  #55 (line num in coconut source)
 
 
 # Deriving:
+
 def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line num in coconut source)
     """
     The expression
@@ -123,6 +135,7 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line num in coconu
         valCon.__lt__ = __lt__  #82 (line num in coconut source)
         if _coconut_name_store_0 is not _coconut_sentinel:  #82 (line num in coconut source)
             __lt__ = _coconut_name_store_0  #82 (line num in coconut source)
+
         try:  #82 (line num in coconut source)
             _coconut_name_store_1 = __le__  #82 (line num in coconut source)
         except _coconut.NameError:  #82 (line num in coconut source)
@@ -132,6 +145,7 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line num in coconu
         valCon.__le__ = __le__  #84 (line num in coconut source)
         if _coconut_name_store_1 is not _coconut_sentinel:  #84 (line num in coconut source)
             __le__ = _coconut_name_store_1  #84 (line num in coconut source)
+
         try:  #84 (line num in coconut source)
             _coconut_name_store_2 = __ge__  #84 (line num in coconut source)
         except _coconut.NameError:  #84 (line num in coconut source)
@@ -141,6 +155,7 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line num in coconu
         valCon.__ge__ = __ge__  #86 (line num in coconut source)
         if _coconut_name_store_2 is not _coconut_sentinel:  #86 (line num in coconut source)
             __ge__ = _coconut_name_store_2  #86 (line num in coconut source)
+
         try:  #86 (line num in coconut source)
             _coconut_name_store_3 = __gt__  #86 (line num in coconut source)
         except _coconut.NameError:  #86 (line num in coconut source)
@@ -151,6 +166,8 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line num in coconu
         valCon.__gt__ = __gt__  #89 (line num in coconut source)
         if _coconut_name_store_3 is not _coconut_sentinel:  #89 (line num in coconut source)
             __gt__ = _coconut_name_store_3  #89 (line num in coconut source)
+
+
 def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num in coconut source)
     """
     The expression
@@ -177,6 +194,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num i
         valCon.__minBound__ = __minBound__  #106 (line num in coconut source)
         if _coconut_name_store_4 is not _coconut_sentinel:  #106 (line num in coconut source)
             __minBound__ = _coconut_name_store_4  #106 (line num in coconut source)
+
         try:  #106 (line num in coconut source)
             _coconut_name_store_5 = __maxBound__  #106 (line num in coconut source)
         except _coconut.NameError:  #106 (line num in coconut source)
@@ -189,6 +207,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num i
         valCon.__maxBound__ = __maxBound__  #110 (line num in coconut source)
         if _coconut_name_store_5 is not _coconut_sentinel:  #110 (line num in coconut source)
             __maxBound__ = _coconut_name_store_5  #110 (line num in coconut source)
+
         try:  #110 (line num in coconut source)
             _coconut_name_store_6 = __int__  #110 (line num in coconut source)
         except _coconut.NameError:  #110 (line num in coconut source)
@@ -199,6 +218,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num i
         valCon.__int__ = __int__  #111 (line num in coconut source)
         if _coconut_name_store_6 is not _coconut_sentinel:  #111 (line num in coconut source)
             __int__ = _coconut_name_store_6  #111 (line num in coconut source)
+
         try:  #111 (line num in coconut source)
             _coconut_name_store_7 = __add__  #111 (line num in coconut source)
         except _coconut.NameError:  #111 (line num in coconut source)
@@ -208,6 +228,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num i
         valCon.__add__ = __add__  #113 (line num in coconut source)
         if _coconut_name_store_7 is not _coconut_sentinel:  #113 (line num in coconut source)
             __add__ = _coconut_name_store_7  #113 (line num in coconut source)
+
         try:  #113 (line num in coconut source)
             _coconut_name_store_8 = __radd__  #113 (line num in coconut source)
         except _coconut.NameError:  #113 (line num in coconut source)
@@ -217,6 +238,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num i
         valCon.__radd__ = __radd__  #114 (line num in coconut source)
         if _coconut_name_store_8 is not _coconut_sentinel:  #114 (line num in coconut source)
             __radd__ = _coconut_name_store_8  #114 (line num in coconut source)
+
         try:  #114 (line num in coconut source)
             _coconut_name_store_9 = __sub__  #114 (line num in coconut source)
         except _coconut.NameError:  #114 (line num in coconut source)
@@ -229,6 +251,8 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line num i
         valCon.__sub__ = __sub__  #119 (line num in coconut source)
         if _coconut_name_store_9 is not _coconut_sentinel:  #119 (line num in coconut source)
             __sub__ = _coconut_name_store_9  #119 (line num in coconut source)
+
+
 def definesBind(dataType: 'TType') -> 'TType':  #119 (line num in coconut source)
     """
     Decorator to declare that a data type defines __bind__
@@ -252,6 +276,7 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line num in coconut source
         dataType.__fmap__ = __fmap__  #133 (line num in coconut source)
         if _coconut_name_store_10 is not _coconut_sentinel:  #133 (line num in coconut source)
             __fmap__ = _coconut_name_store_10  #133 (line num in coconut source)
+
     if (hasattr)(dataType, "__join__"):  #133 (line num in coconut source)
         raise TypeError("data types which define __bind__ cannot define __join__")  #134 (line num in coconut source)
     try:  #135 (line num in coconut source)
@@ -265,7 +290,9 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line num in coconut source
     dataType.__join__ = __join__  #138 (line num in coconut source)
     if _coconut_name_store_11 is not _coconut_sentinel:  #138 (line num in coconut source)
         __join__ = _coconut_name_store_11  #138 (line num in coconut source)
+
     return (dataType)  #138 (line num in coconut source)
+
 
 def definesReturn(dataType: 'TType') -> 'TType':  #140 (line num in coconut source)
     """

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x2a7e8320
+# __coconut_hash__ = 0x2c3e4db7
 
-# Compiled with Coconut version 2.0.0-a_dev9 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev28 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op
+from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -39,11 +39,12 @@ from prelude import *  # type: ignore  #2 (line num in coconut source)
 
 # Tests:
 def test_FunctionApplication():  #6 (line num in coconut source)
-    assert (of)((of)(_coconut.operator.add, 1), 2) == 3  #7 (line num in coconut source)
+    assert (of)((of)((_coconut.operator.add), 1), 2) == 3  #7 (line num in coconut source)
     assert (of)(of(lambda x, y, z: (x, y, z), 1, 2), 3) == (1, 2, 3)  #8 (line num in coconut source)
     assert (of)(of(lambda x, y: (x, y), y=2), 1) == (1, 2)  #9 (line num in coconut source)
-    assert curry(_coconut.operator.add)(1)(2) == 3 == uncurry(_coconut.functools.partial(_coconut.functools.partial, _coconut.operator.add))(1, 2)  #10 (line num in coconut source)
+    assert curry(_coconut.operator.add)(1)(2) == 3 == uncurry(_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.add)))(1, 2)  #10 (line num in coconut source)
     assert uncurry(curry(_coconut.operator.truediv))(6, 2) == 3  #11 (line num in coconut source)
+
 
 def test_definesBind():  #13 (line num in coconut source)
     @definesBind  #14 (line num in coconut source)
@@ -61,9 +62,11 @@ def test_definesBind():  #13 (line num in coconut source)
         def __pure__(x: 'Ta') -> 'FunctionMonad':  #17 (line num in coconut source)
             return _coconut_tail_call(FunctionMonad, lambda e: x)  #18 (line num in coconut source)
 
+
         @_coconut_tco  #20 (line num in coconut source)
         def __bind__(x: 'FunctionMonad', f: '_coconut.typing.Callable[[Ta], FunctionMonad]') -> 'FunctionMonad':  #20 (line num in coconut source)
             return _coconut_tail_call(FunctionMonad, lambda r: ((f)((x)(r)))(r))  #21 (line num in coconut source)
+
 
         @_coconut_tco  #23 (line num in coconut source)
         @_coconut_mark_as_match  #23 (line num in coconut source)
@@ -129,5 +132,6 @@ def test_definesBind():  #13 (line num in coconut source)
 
             return _coconut_tail_call(func, *args, **kwargs)  #24 (line num in coconut source)
 
-    assert 8 == ((fmap)(_coconut.functools.partial(_coconut.operator.mul, 2), FunctionMonad(_coconut.functools.partial(_coconut.operator.add, 1))))(3)  #26 (line num in coconut source)
+
+    assert 8 == ((fmap)(_coconut.functools.partial((_coconut.operator.mul), 2), FunctionMonad(_coconut.functools.partial((_coconut.operator.add), 1))))(3)  #26 (line num in coconut source)
     assert 6 == ((join)(FunctionMonad(curry(_coconut.operator.add))))(3)  #27 (line num in coconut source)

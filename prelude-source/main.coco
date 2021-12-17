@@ -217,7 +217,7 @@ def minBound(b: TBounded) -> TBounded =
 
     # Check if overridden
     if b `hasattr` "__minBound__":
-        return b.__minBound__()
+        return b.__minBound__()  # type: ignore
 
     # Default implementation
     _fmap(minBound, b)
@@ -233,7 +233,7 @@ def maxBound(b: TBounded) -> TBounded =
 
     # Check if overridden
     if b `hasattr` "__maxBound__":
-        return b.__maxBound__()
+        return b.__maxBound__()  # type: ignore
 
     # Default implementation
     _fmap(maxBound, b)
