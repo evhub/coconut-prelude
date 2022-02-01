@@ -54,7 +54,11 @@ class Maybe:
     @staticmethod
     def __mempty__() -> Maybe = nothing
 
-data Nothing() from Maybe
+data Nothing() from Maybe:
+    """
+    -- Nothing is the data type; use nothing for the canonical instance
+    """
+
 nothing: Maybe = Nothing()
 
 data Just(x) from Maybe

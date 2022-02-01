@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x45c04ab2
+# __coconut_hash__ = 0xc34ff71d
 
-# Compiled with Coconut version 2.0.0-a_dev28 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev38 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -10,7 +10,7 @@ from __future__ import generator_stop
 import sys as _coconut_sys, os as _coconut_os
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_cached_module = _coconut_sys.modules.get("__coconut__")
-if _coconut_cached_module is not None and _coconut_os.path.dirname(_coconut_cached_module.__file__) != _coconut_file_dir:
+if _coconut_cached_module is not None and _coconut_os.path.dirname(_coconut_cached_module.__file__) != _coconut_file_dir:  # type: ignore
     del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_dir)
 _coconut_module_name = _coconut_os.path.splitext(_coconut_os.path.basename(_coconut_file_dir))[0]
@@ -88,16 +88,17 @@ def test_Tuples():  #44 (line num in coconut source)
         _coconut_match_set_name_x = _coconut_sentinel  #46 (line num in coconut source)
         _coconut_match_set_name_y = _coconut_sentinel  #46 (line num in coconut source)
         _coconut_FunctionMatchError = _coconut_get_function_match_error()  #46 (line num in coconut source)
-        if (_coconut.len(_coconut_match_args) == 1) and (_coconut.isinstance(_coconut_match_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_args[0]) == 2):  #46 (line num in coconut source)
-            _coconut_match_set_name_x = _coconut_match_args[0][0]  #46 (line num in coconut source)
-            _coconut_match_set_name_y = _coconut_match_args[0][1]  #46 (line num in coconut source)
-            if not _coconut_match_kwargs:  #46 (line num in coconut source)
-                _coconut_match_check_0 = True  #46 (line num in coconut source)
+        if _coconut.len(_coconut_match_args) == 1:  #46 (line num in coconut source)
+            if (_coconut.isinstance(_coconut_match_args[0], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_args[0]) == 2):  #46 (line num in coconut source)
+                _coconut_match_set_name_x = _coconut_match_args[0][0]  #46 (line num in coconut source)
+                _coconut_match_set_name_y = _coconut_match_args[0][1]  #46 (line num in coconut source)
+                if not _coconut_match_kwargs:  #46 (line num in coconut source)
+                    _coconut_match_check_0 = True  #46 (line num in coconut source)
         if _coconut_match_check_0:  #46 (line num in coconut source)
             if _coconut_match_set_name_x is not _coconut_sentinel:  #46 (line num in coconut source)
-                x = _coconut_match_args[0][0]  #46 (line num in coconut source)
+                x = _coconut_match_set_name_x  #46 (line num in coconut source)
             if _coconut_match_set_name_y is not _coconut_sentinel:  #46 (line num in coconut source)
-                y = _coconut_match_args[0][1]  #46 (line num in coconut source)
+                y = _coconut_match_set_name_y  #46 (line num in coconut source)
         if not _coconut_match_check_0:  #46 (line num in coconut source)
             raise _coconut_FunctionMatchError('assert curry_tuple(+)((1, 2),) == 3 == uncurry_tuple(def ((x, y),) -> x + y)(1, 2)', _coconut_match_args)  #46 (line num in coconut source)
         return x + y  #46 (line num in coconut source)
@@ -288,10 +289,10 @@ def test_Monad():  #188 (line num in coconut source)
     assert [1, 2, 3, 4, 5, 6] == join([[1, 2, 3], [], [4,], [5, 6]])  #219 (line num in coconut source)
     assert [1,] == join([fail("derp"), return_(1)])  #220 (line num in coconut source)
     assert Left(3) == do([Right(1), Right(2), Left(3), Right(4)], lambda *xs: error(repr(xs)))  #221 (line num in coconut source)
-    _coconut_decorator_0 = _coconut.functools.partial(do, [Right(1), Right(2)])  #222 (line num in coconut source)
-    @_coconut_decorator_0  #222 (line num in coconut source)
-    @_coconut_tco  #222 (line num in coconut source)
-    def right3(x, y):  #222 (line num in coconut source)
+    _coconut_decorator_0 = _coconut.functools.partial(do, [Right(1), Right(2)])  #227 (line num in coconut source)
+    @_coconut_decorator_0  #228 (line num in coconut source)
+    @_coconut_tco  #228 (line num in coconut source)
+    def right3(x, y):  #228 (line num in coconut source)
         return _coconut_tail_call(Right, x + y)  #228 (line num in coconut source)
 
     assert right3 == Right(3)  #229 (line num in coconut source)
@@ -359,21 +360,24 @@ def test_Miscellaneous_functions():  #270 (line num in coconut source)
     class Test(_coconut.collections.namedtuple("Test", ('x',))):  #283 (line num in coconut source)
         _coconut_is_data = True  #283 (line num in coconut source)
         __slots__ = ()  #283 (line num in coconut source)
+        def __add__(self, other): return _coconut.NotImplemented  #283 (line num in coconut source)
+        def __mul__(self, other): return _coconut.NotImplemented  #283 (line num in coconut source)
+        def __rmul__(self, other): return _coconut.NotImplemented  #283 (line num in coconut source)
         __ne__ = _coconut.object.__ne__  #283 (line num in coconut source)
         def __eq__(self, other):  #283 (line num in coconut source)
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #283 (line num in coconut source)
         def __hash__(self):  #283 (line num in coconut source)
             return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #283 (line num in coconut source)
         __match_args__ = ('x',)  #283 (line num in coconut source)
-        @staticmethod  #283 (line num in coconut source)
-        @_coconut_tco  #283 (line num in coconut source)
-        def __mempty__():  #283 (line num in coconut source)
+        @staticmethod  #284 (line num in coconut source)
+        @_coconut_tco  #285 (line num in coconut source)
+        def __mempty__():  #285 (line num in coconut source)
             return _coconut_tail_call(pure, 0)  #285 (line num in coconut source)
 
 
         @staticmethod  #287 (line num in coconut source)
-        @_coconut_tco  #287 (line num in coconut source)
-        def __pure__(x):  #287 (line num in coconut source)
+        @_coconut_tco  #288 (line num in coconut source)
+        def __pure__(x):  #288 (line num in coconut source)
             return _coconut_tail_call(Test, x)  #288 (line num in coconut source)
 
     assert (asTypeOf)(mempty, Test(1)) == Test(0)  #289 (line num in coconut source)
@@ -493,11 +497,11 @@ def test_IO():  #383 (line num in coconut source)
     else:  #392 (line num in coconut source)
         assert False, "expected error"  #393 (line num in coconut source)
     assert 6 == (unIO)((bind)(pure(5), lambda x: pure(x + 1)))  #394 (line num in coconut source)
-    _coconut_decorator_1 = _coconut.functools.partial(do, [asIO(pure(1)), pure(2)])  #395 (line num in coconut source)
+    _coconut_decorator_1 = _coconut.functools.partial(do, [asIO(pure(1)), pure(2)])  #396 (line num in coconut source)
     @unIO  #395 (line num in coconut source)
-    @_coconut_decorator_1  #395 (line num in coconut source)
-    @_coconut_tco  #395 (line num in coconut source)
-    def three(x1, x2):  #395 (line num in coconut source)
+    @_coconut_decorator_1  #396 (line num in coconut source)
+    @_coconut_tco  #396 (line num in coconut source)
+    def three(x1, x2):  #396 (line num in coconut source)
         return _coconut_tail_call(pure, x1 + x2)  #397 (line num in coconut source)
 
     assert three == 3  #398 (line num in coconut source)

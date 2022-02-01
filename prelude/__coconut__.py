@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 2.0.0-a_dev28 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev38 [How Not to Be Seen]
 
 """Built-in Coconut utilities."""
 
@@ -149,13 +149,16 @@ def _coconut_iter_getitem(iterable, index):
             if result is not _coconut.NotImplemented:
                 return result
     if not _coconut.isinstance(index, _coconut.slice):
+        index = _coconut.operator.index(index)
         if index < 0:
             return _coconut.collections.deque(iterable, maxlen=-index)[0]
         result = _coconut.next(_coconut.itertools.islice(iterable, index, index + 1), _coconut_sentinel)
         if result is _coconut_sentinel:
             raise _coconut.IndexError("$[] index out of range")
         return result
-    start, stop, step = index.start, index.stop, 1 if index.step is None else index.step
+    start = _coconut.operator.index(index.start) if index.start is not None else None
+    stop = _coconut.operator.index(index.stop) if index.stop is not None else None
+    step = _coconut.operator.index(index.step) if index.step is not None else 1
     if step == 0:
         raise _coconut.ValueError("slice step cannot be zero")
     if start is None and stop is None and step == -1:
@@ -670,7 +673,7 @@ class count(_coconut_base_hashable):
         """Count the number of times elem appears in the count."""
         if not self.step:
             return _coconut.float("inf") if elem == self.start else 0
-        return int(elem in self)
+        return _coconut.int(elem in self)
     def index(self, elem):
         """Find the index of elem in the count."""
         if elem not in self:
@@ -695,13 +698,10 @@ class groupsof(_coconut_base_hashable):
     """
     __slots__ = ("group_size", "iter")
     def __init__(self, n, iterable):
-        self.iter = iterable
-        try:
-            self.group_size = _coconut.int(n)
-        except _coconut.ValueError:
-            raise _coconut.TypeError("group size must be an int; not %r" % (n,))
+        self.group_size = _coconut.operator.index(n)
         if self.group_size <= 0:
             raise _coconut.ValueError("group size must be > 0; not %r" % (self.group_size,))
+        self.iter = iterable
     def __iter__(self):
         iterator = _coconut.iter(self.iter)
         loop = True
@@ -1038,16 +1038,18 @@ def of(_coconut_f, *args, **kwargs):
     """
     return _coconut_f(*args, **kwargs)
 class flip(_coconut_base_hashable):
-    """Given a function, return a new function with inverse argument order."""
-    __slots__ = ("func",)
-    def __init__(self, func):
+    """Given a function, return a new function with inverse argument order.
+    If nargs is passed, only the first nargs arguments are reversed."""
+    __slots__ = ("func", "nargs")
+    def __init__(self, func, nargs=None):
         self.func = func
+        self.nargs = nargs
     def __reduce__(self):
-        return (self.__class__, (self.func,))
+        return (self.__class__, (self.func, self.nargs))
     def __call__(self, *args, **kwargs):
-        return self.func(*args[::-1], **kwargs)
+        return self.func(*args[::-1], **kwargs) if self.nargs is None else self.func(*(args[self.nargs-1::-1] + args[self.nargs:]), **kwargs)
     def __repr__(self):
-        return "flip(%r)" % (self.func,)
+        return "flip(%r%s)" % (self.func, "" if self.nargs is None else ", " + _coconut.repr(self.nargs))
 class const(_coconut_base_hashable):
     """Create a function that, whatever its arguments, just returns the given value."""
     __slots__ = ("value",)

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x2c3e4db7
+# __coconut_hash__ = 0xb7242ed6
 
-# Compiled with Coconut version 2.0.0-a_dev28 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev38 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -10,7 +10,7 @@ from __future__ import generator_stop
 import sys as _coconut_sys, os as _coconut_os
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_cached_module = _coconut_sys.modules.get("__coconut__")
-if _coconut_cached_module is not None and _coconut_os.path.dirname(_coconut_cached_module.__file__) != _coconut_file_dir:
+if _coconut_cached_module is not None and _coconut_os.path.dirname(_coconut_cached_module.__file__) != _coconut_file_dir:  # type: ignore
     del _coconut_sys.modules["__coconut__"]
 _coconut_sys.path.insert(0, _coconut_file_dir)
 _coconut_module_name = _coconut_os.path.splitext(_coconut_os.path.basename(_coconut_file_dir))[0]
@@ -48,17 +48,20 @@ def test_FunctionApplication():  #6 (line num in coconut source)
 
 def test_definesBind():  #13 (line num in coconut source)
     @definesBind  #14 (line num in coconut source)
-    class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", ('func',))):  #14 (line num in coconut source)
-        _coconut_is_data = True  #14 (line num in coconut source)
-        __slots__ = ()  #14 (line num in coconut source)
-        __ne__ = _coconut.object.__ne__  #14 (line num in coconut source)
-        def __eq__(self, other):  #14 (line num in coconut source)
-            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #14 (line num in coconut source)
-        def __hash__(self):  #14 (line num in coconut source)
-            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #14 (line num in coconut source)
-        __match_args__ = ('func',)  #14 (line num in coconut source)
-        @staticmethod  #14 (line num in coconut source)
-        @_coconut_tco  #14 (line num in coconut source)
+    class FunctionMonad(_coconut.collections.namedtuple("FunctionMonad", ('func',))):  #15 (line num in coconut source)
+        _coconut_is_data = True  #15 (line num in coconut source)
+        __slots__ = ()  #15 (line num in coconut source)
+        def __add__(self, other): return _coconut.NotImplemented  #15 (line num in coconut source)
+        def __mul__(self, other): return _coconut.NotImplemented  #15 (line num in coconut source)
+        def __rmul__(self, other): return _coconut.NotImplemented  #15 (line num in coconut source)
+        __ne__ = _coconut.object.__ne__  #15 (line num in coconut source)
+        def __eq__(self, other):  #15 (line num in coconut source)
+            return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #15 (line num in coconut source)
+        def __hash__(self):  #15 (line num in coconut source)
+            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #15 (line num in coconut source)
+        __match_args__ = ('func',)  #15 (line num in coconut source)
+        @staticmethod  #16 (line num in coconut source)
+        @_coconut_tco  #17 (line num in coconut source)
         def __pure__(x: 'Ta') -> 'FunctionMonad':  #17 (line num in coconut source)
             return _coconut_tail_call(FunctionMonad, lambda e: x)  #18 (line num in coconut source)
 
@@ -76,8 +79,8 @@ def test_definesBind():  #13 (line num in coconut source)
             _coconut_match_set_name_kwargs = _coconut_sentinel  #23 (line num in coconut source)
             _coconut_FunctionMatchError = _coconut_get_function_match_error()  #23 (line num in coconut source)
             if _coconut.len(_coconut_match_args) >= 1:  #23 (line num in coconut source)
-                _coconut_match_temp_0 = _coconut.getattr(FunctionMonad, "_coconut_is_data", False) or _coconut.isinstance(FunctionMonad, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in FunctionMonad)   #type: ignore  #23 (line num in coconut source)
                 _coconut_match_set_name_args = _coconut_match_args[1:]  #23 (line num in coconut source)
+                _coconut_match_temp_0 = _coconut.getattr(FunctionMonad, "_coconut_is_data", False) or _coconut.isinstance(FunctionMonad, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in FunctionMonad)   # type: ignore  #23 (line num in coconut source)
                 _coconut_match_set_name_kwargs = _coconut_match_kwargs  #23 (line num in coconut source)
                 _coconut_match_check_0 = True  #23 (line num in coconut source)
             if _coconut_match_check_0:  #23 (line num in coconut source)
@@ -89,7 +92,7 @@ def test_definesBind():  #13 (line num in coconut source)
                         _coconut_match_check_0 = True  #23 (line num in coconut source)
                     if _coconut_match_check_0:  #23 (line num in coconut source)
                         if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
-                            func = _coconut_match_args[0][0]  #23 (line num in coconut source)
+                            func = _coconut_match_set_name_func  #23 (line num in coconut source)
 
                 if not _coconut_match_check_0:  #23 (line num in coconut source)
                     if (not _coconut_match_temp_0) and (_coconut.isinstance(_coconut_match_args[0], FunctionMonad)):  #23 (line num in coconut source)
@@ -103,7 +106,7 @@ def test_definesBind():  #13 (line num in coconut source)
                                 _coconut_match_check_0 = True  #23 (line num in coconut source)
                             if _coconut_match_check_0:  #23 (line num in coconut source)
                                 if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
-                                    func = _coconut_match_args[0]  #23 (line num in coconut source)
+                                    func = _coconut_match_set_name_func  #23 (line num in coconut source)
 
                         if not _coconut_match_check_0:  #23 (line num in coconut source)
                             _coconut_match_set_name_func = _coconut_sentinel  #23 (line num in coconut source)
@@ -119,14 +122,16 @@ def test_definesBind():  #13 (line num in coconut source)
                                     _coconut_match_check_0 = True  #23 (line num in coconut source)
                             if _coconut_match_check_0:  #23 (line num in coconut source)
                                 if _coconut_match_set_name_func is not _coconut_sentinel:  #23 (line num in coconut source)
-                                    func = _coconut_match_temp_2  #23 (line num in coconut source)
+                                    func = _coconut_match_set_name_func  #23 (line num in coconut source)
+
+
 
 
             if _coconut_match_check_0:  #23 (line num in coconut source)
                 if _coconut_match_set_name_args is not _coconut_sentinel:  #23 (line num in coconut source)
-                    args = _coconut_match_args[1:]  #23 (line num in coconut source)
+                    args = _coconut_match_set_name_args  #23 (line num in coconut source)
                 if _coconut_match_set_name_kwargs is not _coconut_sentinel:  #23 (line num in coconut source)
-                    kwargs = _coconut_match_kwargs  #23 (line num in coconut source)
+                    kwargs = _coconut_match_set_name_kwargs  #23 (line num in coconut source)
             if not _coconut_match_check_0:  #23 (line num in coconut source)
                 raise _coconut_FunctionMatchError('def __call__(FunctionMonad(func), *args, **kwargs) =', _coconut_match_args)  #23 (line num in coconut source)
 
