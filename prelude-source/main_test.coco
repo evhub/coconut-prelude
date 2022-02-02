@@ -43,8 +43,8 @@ def test_Ordering():
 
 def test_Tuples():
     assert `fst` (1, 2) == 1 == `snd` (2, 1)
-    assert curry_tuple(+)((1, 2),) == 3 == uncurry_tuple(def ((x, y),) -> x + y)(1, 2)
-    assert uncurry_tuple(curry_tuple(-))(3, 2) == 1
+    assert uncurry_tuple(+)((1, 2),) == 3 == curry_tuple(def ((x, y),) -> x + y)(1, 2)
+    assert curry_tuple(uncurry_tuple(-))(3, 2) == 1
 
 def test_Ord():
     assert and_(x `isinstance` Ord and x `isinstance` Eq for x in (
@@ -406,6 +406,12 @@ def test_Exception_handling():
         assert False, "expected error"
     assert userError("derp") `isinstance` IOError
     assert userError("derp") |> str == "derp"
+
+def test_function_monad():
+    assert liftA2(,)(id, id)(1) == (1, 1) == lift(,)(ident, ident)(1)
+    assert (.+1) `fmap` (.*2) <| 3 == 7
+    assert pure(5)(10) == 5
+    assert (*)$ `ap` (.+1) <| 3 == 12 == (.+1) `bind` (*)$ <| 3
 
 
 # Run tests:

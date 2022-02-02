@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xc34ff71d
+# __coconut_hash__ = 0x8c8b178b
 
-# Compiled with Coconut version 2.0.0-a_dev38 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev39 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr
+from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -100,10 +100,10 @@ def test_Tuples():  #44 (line num in coconut source)
             if _coconut_match_set_name_y is not _coconut_sentinel:  #46 (line num in coconut source)
                 y = _coconut_match_set_name_y  #46 (line num in coconut source)
         if not _coconut_match_check_0:  #46 (line num in coconut source)
-            raise _coconut_FunctionMatchError('assert curry_tuple(+)((1, 2),) == 3 == uncurry_tuple(def ((x, y),) -> x + y)(1, 2)', _coconut_match_args)  #46 (line num in coconut source)
+            raise _coconut_FunctionMatchError('assert uncurry_tuple(+)((1, 2),) == 3 == curry_tuple(def ((x, y),) -> x + y)(1, 2)', _coconut_match_args)  #46 (line num in coconut source)
         return x + y  #46 (line num in coconut source)
-    assert curry_tuple(_coconut.operator.add)((1, 2)) == 3 == uncurry_tuple(_coconut_lambda_0)(1, 2)  #46 (line num in coconut source)
-    assert uncurry_tuple(curry_tuple(_coconut_minus))(3, 2) == 1  #47 (line num in coconut source)
+    assert uncurry_tuple(_coconut.operator.add)((1, 2)) == 3 == curry_tuple(_coconut_lambda_0)(1, 2)  #46 (line num in coconut source)
+    assert curry_tuple(uncurry_tuple(_coconut_minus))(3, 2) == 1  #47 (line num in coconut source)
 
 
 def test_Ord():  #49 (line num in coconut source)
@@ -518,10 +518,17 @@ def test_Exception_handling():  #400 (line num in coconut source)
     assert (str)(userError("derp")) == "derp"  #408 (line num in coconut source)
 
 
+def test_function_monad():  #410 (line num in coconut source)
+    assert liftA2(_coconut_comma_op)(id, id)(1) == (1, 1) == lift(_coconut_comma_op)(ident, ident)(1)  #411 (line num in coconut source)
+    assert ((fmap)((_coconut_partial(_coconut.operator.add, {1: 1}, 2)), (_coconut_partial(_coconut.operator.mul, {1: 2}, 2))))(3) == 7  #412 (line num in coconut source)
+    assert pure(5)(10) == 5  #413 (line num in coconut source)
+    assert ((ap)(_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.mul)), (_coconut_partial(_coconut.operator.add, {1: 1}, 2))))(3) == 12 == ((bind)((_coconut_partial(_coconut.operator.add, {1: 1}, 2)), _coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.mul))))(3)  #414 (line num in coconut source)
+
+
 # Run tests:
 
-if __name__ == "__main__":  #412 (line num in coconut source)
-    for var, val in globals().items():  #413 (line num in coconut source)
-        if var.startswith("test_"):  #414 (line num in coconut source)
-            val()  #415 (line num in coconut source)
-    print("<success>")  #416 (line num in coconut source)
+if __name__ == "__main__":  #418 (line num in coconut source)
+    for var, val in globals().items():  #419 (line num in coconut source)
+        if var.startswith("test_"):  #420 (line num in coconut source)
+            val()  #421 (line num in coconut source)
+    print("<success>")  #422 (line num in coconut source)

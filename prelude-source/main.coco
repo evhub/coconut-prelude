@@ -224,7 +224,7 @@ def minBound(b: TBounded) -> TBounded =
         return b.__minBound__()  # type: ignore
 
     # Default implementation
-    _fmap(minBound, b)
+    fmap(minBound, b)  # type: ignore
 
 def maxBound(b: TBounded) -> TBounded =
     """
@@ -240,7 +240,7 @@ def maxBound(b: TBounded) -> TBounded =
         return b.__maxBound__()  # type: ignore
 
     # Default implementation
-    _fmap(maxBound, b)
+    fmap(maxBound, b)  # type: ignore
 
 
 
@@ -501,15 +501,27 @@ def mconcat(ms: TMonoid[]) -> TMonoid =
 #### Functor:
 Functor = T.Iterable
 
-fmap: (Ta -> Tb, Functor[Ta]) -> Functor[Tb]  # type: ignore
-fmap = _fmap
+def fmap(f: Ta -> Tb, xs: Functor[Ta]) -> Functor[Tb]:  # type: ignore
+    """
+    -- fmap is overridden by the __fmap__ method
+    """
+    try:
+        # Default implementation
+        return _fmap(f, xs)
+
+    except TypeError:
+        # Function instance
+        if callable(xs):
+            return f .. xs  # type: ignore
+
+        raise
 
 def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
     """
     fmapConst :: Functor f => (a -> b) -> f a -> f b
     fmapConst = (<$)
     """
-    _fmap(_ -> x, xs)
+    fmap(_ -> x, xs)
 
 #### Applicative:
 Applicative = Functor
@@ -524,12 +536,29 @@ else:
         return_ = return
         -- pure/return is overridden by the __pure__ method
         """
+
         def __join__(self) -> T.Any = self.val
 
-        def pure_as(self, M: TApp) -> TApp =
+        def __call__(self, arg: T.Any) -> T.Any =
+            """Implicitly casts pure to the Applicative function instance."""
+            self.val
+
+        def pure_as(self, M: TApp) -> TApp:
+            # Check if overridden
             if M `hasattr` "__pure__":
                 return M.__pure__(self.val)  # type: ignore
-            makedata(type(M), self.val)
+
+            try:
+                # Default implementation
+                return makedata(type(M), self.val)
+
+            except TypeError:
+                # Check for functions
+                if callable(M):
+                    return const(self.val)
+
+                # Fallback
+                raise
 
 def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
     """
@@ -548,28 +577,28 @@ def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
         return fs.__ap__(xs)  # type: ignore
 
     # Default implementation
-    fs `bind` f -> _fmap(f, xs)
+    fs `bind` f -> fmap(f, xs)
 
 def seqAr(f1: Applicative, f2: TApp) -> TApp =
     """
     seqAr :: Applicative f => f a -> f b -> f b
     seqAr = (*>)
     """
-    _fmap(x1 -> x2 -> x2, f1) `ap` f2  # type: ignore
+    fmap(x1 -> x2 -> x2, f1) `ap` f2  # type: ignore
 
 def seqAl(f1: TApp, f2: Applicative) -> TApp =
     """
     seqAl :: Applicative f => f a -> f b -> f a
     seqAl = (<*)
     """
-    _fmap(x1 -> x2 -> x1, f1) `ap` f2  # type: ignore
+    fmap(x1 -> x2 -> x1, f1) `ap` f2  # type: ignore
 
 def liftA2(func: (Ta, Tb) -> Tc) -> (Applicative[Ta], Applicative[Tb]) -> Applicative[Tc] =
     """
     import Control.Applicative
     liftA2 :: Applicative f => (a -> b -> c) -> f a -> f b -> f c
     """
-    (f1, f2) -> _fmap(func$, f1) `ap` f2
+    (f1, f2) -> fmap(func$, f1) `ap` f2  # type: ignore
 
 #### Monad:
 Monad = Applicative
@@ -581,7 +610,7 @@ def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     bind = (>>=)
     -- bind is overridden by overriding fmap (__fmap__) and join (__join__)
     """
-    join(_fmap(func, m))  # type: ignore
+    join(fmap(func, m))  # type: ignore
 
 def seqM(m1: Monad, m2: TMonad) -> TMonad =
     """
@@ -600,6 +629,7 @@ else:
         """
         -- fail is overridden by the __fail__ method
         """
+
         @staticmethod
         def __bool__() -> bool = False
 
@@ -619,16 +649,17 @@ def bindFrom(func: Ta -> TMonad, m: Monad[Ta]) -> TMonad =
     """
     m `bind` func
 
-def join(ms: Monad[TMonad]) -> TMonad =
+def join(ms: Monad[TMonad]) -> TMonad:
     """
     import Control.Monad
     join :: Monad m => m (m a) -> m a
     -- join is overridden by the __join__ method
     -- you may also want to define __pure__ and __fail__ methods (pure = return)
-    -- the default implementation identifies non-failures using __bool__
+    -- the default implementation uses __bool__ and __iter__
     """
     # Resolve ms being pure or fail
-    ms = reduce((ms, m) -> ms `asTypeOf` m, ms, ms)
+    match () :: _ in ms:
+        ms = reduce((ms, m) -> ms `asTypeOf` m, ms, ms)
 
     # Resolve pures and fails inside of ms
     ms = ms |> fmap$(m -> m `asTypeOf` ms)  # type: ignore
@@ -638,18 +669,29 @@ def join(ms: Monad[TMonad]) -> TMonad =
         return ms.__join__()  # type: ignore
 
     # Default implementation
-    if not ms:
-        return ms  # type: ignore
-    vals = []  # type: ignore
-    fallback = ms
-    for m in ms:
-        if m:
-            vals.extend(m)  # type: ignore
-        else:
-            fallback = m  # type: ignore
-    if not vals:
-        return fallback  # type: ignore
-    makedata(type(ms), *vals)
+    cases ms:
+
+        # Iterable instance
+        match () :: _:
+            if not ms:
+                return ms  # type: ignore
+            vals = []  # type: ignore
+            fallback = ms
+            for m in ms:
+                if m:
+                    vals.extend(m)  # type: ignore
+                else:
+                    fallback = m  # type: ignore
+            if not vals:
+                return fallback  # type: ignore
+            return makedata(type(ms), *vals)
+
+        # Function instance
+        match _ if callable(ms):
+            return r -> ms(r)(r)  # type: ignore
+
+    else:
+        raise TypeError("cannot join non-monad type " + str(type(ms)))
 
 if TYPE_CHECKING:
     def do(monads: TMonad[], func: -> TMonad) -> TMonad:
@@ -748,7 +790,7 @@ mapM = traverse
 
 
 ## Miscellaneous functions:
-def id(x: Ta) -> Ta = x
+id: Ta -> Ta = ident
 
 def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     """
@@ -985,7 +1027,7 @@ def lookup(key: Ta, assocs: T.Tuple[Ta, Tb]$[]) -> Maybe:
             |> .[1]
             |> Just
         )
-    except StopIteration:
+    except IndexError:
         return nothing
 
 
@@ -1105,7 +1147,7 @@ data IO(io_func):
         IO(func..self.io_func)
 
     def __join__(self) -> IO =
-        _fmap(unIO, self)
+        fmap(unIO, self)  # type: ignore
 
     @staticmethod
     def __mempty__() -> IO =

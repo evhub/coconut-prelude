@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x9087e4dd
+# __coconut_hash__ = 0x24140d31
 
-# Compiled with Coconut version 2.0.0-a_dev38 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev39 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -270,6 +270,12 @@ def _coconut_none_dubstar_pipe(kws, f): return None if kws is None else f(**kws)
 def _coconut_assert(cond, msg=None):
     if not cond:
         assert False, msg if msg is not None else "(assert) got falsey value " + _coconut.repr(cond)
+def _coconut_raise(exc=None, from_exc=None):
+    if exc is None:
+        raise
+    if from_exc is not None:
+        exc.__cause__ = from_exc
+    raise exc
 def _coconut_bool_and(a, b): return a and b
 def _coconut_bool_or(a, b): return a or b
 def _coconut_none_coalesce(a, b): return b if a is None else a
@@ -1184,6 +1190,6 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_filter, _cocon
 
 import setuptools  # type: ignore
 
-VERSION = "0.2.0"
+VERSION = "0.2.1"
 
 setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages(), install_requires=["coconut[mypy]",], extras_require={":python_version<'3.5'": ["typing",], "dev": ["pytest",]})
