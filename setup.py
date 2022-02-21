@@ -1,16 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x24140d31
+# __coconut_hash__ = 0x5eef3496
 
-# Compiled with Coconut version 2.0.0-a_dev39 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev45 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
-from builtins import chr, filter, hex, input, int, map, object, oct, open, print, range, str, zip, filter, reversed, enumerate
-py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, hex, input, int, map, object, oct, open, print, range, str, zip, filter, reversed, enumerate, repr
-_coconut_py_str = str
+from builtins import chr, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
+py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_super, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
+_coconut_py_str, _coconut_py_super = str, super
+from functools import wraps as _coconut_wraps
 exec("_coconut_exec = exec")
 if _coconut_sys.version_info < (3, 7):
     def _coconut_default_breakpointhook(*args, **kwargs):
@@ -35,6 +36,20 @@ if _coconut_sys.version_info < (3, 7):
         return _coconut.getattr(_coconut_sys, "breakpointhook", _coconut_default_breakpointhook)(*args, **kwargs)
 else:
     py_breakpoint = breakpoint
+@_coconut_wraps(_coconut_py_super)
+def _coconut_super(type=None, object_or_type=None):
+    if type is None:
+        if object_or_type is not None:
+            raise _coconut.TypeError("invalid use of super()")
+        frame = _coconut_sys._getframe(1)
+        try:
+            cls = frame.f_locals["__class__"]
+        except _coconut.AttributeError:
+            raise _coconut.RuntimeError("super(): __class__ cell not found")
+        self = frame.f_locals[frame.f_code.co_varnames[0]]
+        return _coconut_py_super(cls, self)
+    return _coconut_py_super(type, object_or_type)
+super = _coconut_super
 class _coconut:
     import collections, copy, functools, types, itertools, operator, threading, os, warnings, contextlib, traceback, weakref, multiprocessing, math
     from multiprocessing import dummy as multiprocessing_dummy
@@ -1116,16 +1131,6 @@ def all_equal(iterable):
         elif first_item != item:
             return False
     return True
-def match_if(obj, predicate):
-    """Meant to be used in infix pattern-matching expressions to match the left-hand side only if the predicate on the right-hand side holds.
-
-    For example:
-        a `match_if` predicate or b = obj
-
-    The actual definition of match_if is extremely simple:
-        def match_if(obj, predicate) = predicate(obj)
-    """
-    return predicate(obj)
 def collectby(key_func, iterable, value_func=None, reduce_func=None):
     """Collect the items in iterable into a dictionary of lists keyed by key_func(item).
 

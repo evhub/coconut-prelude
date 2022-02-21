@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xc985ff16
+# __coconut_hash__ = 0xdc3a1870
 
-# Compiled with Coconut version 2.0.0-a_dev39 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev45 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr
+from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_super, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -80,7 +80,7 @@ def test_definesBind():  #13 (line num in coconut source)
             _coconut_FunctionMatchError = _coconut_get_function_match_error()  #23 (line num in coconut source)
             if _coconut.len(_coconut_match_args) >= 1:  #23 (line num in coconut source)
                 _coconut_match_set_name_args = _coconut_match_args[1:]  #23 (line num in coconut source)
-                _coconut_match_temp_0 = _coconut.getattr(FunctionMonad, "_coconut_is_data", False) or _coconut.isinstance(FunctionMonad, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in FunctionMonad)   # type: ignore  #23 (line num in coconut source)
+                _coconut_match_temp_0 = _coconut.getattr(FunctionMonad, "_coconut_is_data", False) or _coconut.isinstance(FunctionMonad, _coconut.tuple) and _coconut.all(_coconut.getattr(_coconut_x, "_coconut_is_data", False) for _coconut_x in FunctionMonad)  # type: ignore  #23 (line num in coconut source)
                 _coconut_match_set_name_kwargs = _coconut_match_kwargs  #23 (line num in coconut source)
                 _coconut_match_check_0 = True  #23 (line num in coconut source)
             if _coconut_match_check_0:  #23 (line num in coconut source)
