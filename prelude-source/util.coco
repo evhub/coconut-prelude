@@ -41,7 +41,7 @@ else:
         f = func$(*args, **kwargs)
         try:
             return f()
-        except TypeError:
+        except TypeError, MatchError:
             return f
 
 def curry(func) =

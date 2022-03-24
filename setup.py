@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x5eef3496
+# __coconut_hash__ = 0x73eba9c4
 
-# Compiled with Coconut version 2.0.0-a_dev45 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev48 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -53,6 +53,7 @@ super = _coconut_super
 class _coconut:
     import collections, copy, functools, types, itertools, operator, threading, os, warnings, contextlib, traceback, weakref, multiprocessing, math
     from multiprocessing import dummy as multiprocessing_dummy
+    import copyreg
     import asyncio
     import pickle
     OrderedDict = collections.OrderedDict
@@ -863,13 +864,19 @@ class _coconut_base_pattern_func(_coconut_base_hashable):
 def _coconut_mark_as_match(base_func):
     base_func._coconut_is_match = True
     return base_func
-def addpattern(base_func, **kwargs):
-    """Decorator to add a new case to a pattern-matching function (where the new case is checked last)."""
+def addpattern(base_func, new_pattern=None, **kwargs):
+    """Decorator to add a new case to a pattern-matching function (where the new case is checked last).
+
+    Pass allow_any_func=True to allow any object as the base_func rather than just pattern-matching functions.
+    If new_pattern is passed, addpattern(base_func, new_pattern) is equivalent to addpattern(base_func)(new_pattern).
+    """
     allow_any_func = kwargs.pop("allow_any_func", False)
     if not allow_any_func and not _coconut.getattr(base_func, "_coconut_is_match", False):
         _coconut.warnings.warn("Possible misuse of addpattern with non-pattern-matching function " + _coconut.repr(base_func) + " (pass allow_any_func=True to dismiss)", stacklevel=2)
     if kwargs:
         raise _coconut.TypeError("addpattern() got unexpected keyword arguments " + _coconut.repr(kwargs))
+    if new_pattern is not None:
+        return _coconut_base_pattern_func(base_func, new_pattern)
     return _coconut.functools.partial(_coconut_base_pattern_func, base_func)
 _coconut_addpattern = addpattern
 def prepattern(*args, **kwargs):
@@ -1154,7 +1161,16 @@ def collectby(key_func, iterable, value_func=None, reduce_func=None):
     return collection
 def _namedtuple_of(**kwargs):
     """Construct an anonymous namedtuple of the given keyword arguments."""
-    return _coconut.collections.namedtuple("_namedtuple_of", kwargs.keys())(*kwargs.values())
+    return _coconut_mk_anon_namedtuple(kwargs.keys(), of_kwargs=kwargs)
+def _coconut_mk_anon_namedtuple(fields, types=None, of_kwargs=None):
+    if types is None:
+        NT = _coconut.collections.namedtuple("_namedtuple_of", fields)
+    else:
+        NT = _coconut.typing.NamedTuple("_namedtuple_of", [(f, t) for f, t in _coconut.zip(fields, types)])
+    _coconut.copyreg.pickle(NT, lambda nt: (_coconut_mk_anon_namedtuple, (nt._fields, types, nt._asdict())))
+    if of_kwargs is None:
+        return NT
+    return NT(**of_kwargs)
 def _coconut_ndim(arr):
     if arr.__class__.__module__ in ('numpy', 'pandas') and _coconut.isinstance(arr, _coconut.numpy.ndarray):
         return arr.ndim
