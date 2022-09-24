@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x41ba6780
+# __coconut_hash__ = 0x42693fb5
 
-# Compiled with Coconut version 2.0.0-a_dev48 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-a_dev64 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_super, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple
+from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_super, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -157,11 +157,11 @@ else:  #71 (line num in coconut source)
                 if _coconut_match_check_0:  #72 (line num in coconut source)
                     _coconut_match_check_0 = False  #72 (line num in coconut source)
                     if not _coconut_match_check_0:  #72 (line num in coconut source)
-                        if _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #72 (line num in coconut source)
+                        if _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #72 (line num in coconut source)
                             _coconut_match_check_0 = True  #72 (line num in coconut source)
 
                     if not _coconut_match_check_0:  #72 (line num in coconut source)
-                        if not _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #72 (line num in coconut source)
+                        if not _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #72 (line num in coconut source)
                             _coconut_match_temp_2 = _coconut.getattr(Nothing, '__match_args__', ())  #72 (line num in coconut source)
                             if not _coconut.isinstance(_coconut_match_temp_2, _coconut.tuple):  #72 (line num in coconut source)
                                 raise _coconut.TypeError("Nothing.__match_args__ must be a tuple")  #72 (line num in coconut source)
@@ -211,7 +211,7 @@ else:  #71 (line num in coconut source)
                     _coconut_match_check_1 = False  #73 (line num in coconut source)
                     if not _coconut_match_check_1:  #73 (line num in coconut source)
                         _coconut_match_set_name_x = _coconut_sentinel  #73 (line num in coconut source)
-                        if _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #73 (line num in coconut source)
+                        if _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #73 (line num in coconut source)
                             _coconut_match_set_name_x = _coconut_match_args[2]  #73 (line num in coconut source)
                             _coconut_match_check_1 = True  #73 (line num in coconut source)
                         if _coconut_match_check_1:  #73 (line num in coconut source)
@@ -220,7 +220,7 @@ else:  #71 (line num in coconut source)
 
                     if not _coconut_match_check_1:  #73 (line num in coconut source)
                         _coconut_match_set_name_x = _coconut_sentinel  #73 (line num in coconut source)
-                        if not _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #73 (line num in coconut source)
+                        if not _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #73 (line num in coconut source)
                             _coconut_match_temp_5 = _coconut.getattr(Just, '__match_args__', ())  #73 (line num in coconut source)
                             if not _coconut.isinstance(_coconut_match_temp_5, _coconut.tuple):  #73 (line num in coconut source)
                                 raise _coconut.TypeError("Just.__match_args__ must be a tuple")  #73 (line num in coconut source)
@@ -331,7 +331,7 @@ else:  #96 (line num in coconut source)
                     _coconut_match_check_2 = False  #97 (line num in coconut source)
                     if not _coconut_match_check_2:  #97 (line num in coconut source)
                         _coconut_match_set_name_x = _coconut_sentinel  #97 (line num in coconut source)
-                        if _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #97 (line num in coconut source)
+                        if _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #97 (line num in coconut source)
                             _coconut_match_set_name_x = _coconut_match_args[2]  #97 (line num in coconut source)
                             _coconut_match_check_2 = True  #97 (line num in coconut source)
                         if _coconut_match_check_2:  #97 (line num in coconut source)
@@ -340,7 +340,7 @@ else:  #96 (line num in coconut source)
 
                     if not _coconut_match_check_2:  #97 (line num in coconut source)
                         _coconut_match_set_name_x = _coconut_sentinel  #97 (line num in coconut source)
-                        if not _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #97 (line num in coconut source)
+                        if not _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #97 (line num in coconut source)
                             _coconut_match_temp_9 = _coconut.getattr(Left, '__match_args__', ())  #97 (line num in coconut source)
                             if not _coconut.isinstance(_coconut_match_temp_9, _coconut.tuple):  #97 (line num in coconut source)
                                 raise _coconut.TypeError("Left.__match_args__ must be a tuple")  #97 (line num in coconut source)
@@ -396,7 +396,7 @@ else:  #96 (line num in coconut source)
                     _coconut_match_check_3 = False  #98 (line num in coconut source)
                     if not _coconut_match_check_3:  #98 (line num in coconut source)
                         _coconut_match_set_name_x = _coconut_sentinel  #98 (line num in coconut source)
-                        if _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #98 (line num in coconut source)
+                        if _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #98 (line num in coconut source)
                             _coconut_match_set_name_x = _coconut_match_args[2]  #98 (line num in coconut source)
                             _coconut_match_check_3 = True  #98 (line num in coconut source)
                         if _coconut_match_check_3:  #98 (line num in coconut source)
@@ -405,7 +405,7 @@ else:  #96 (line num in coconut source)
 
                     if not _coconut_match_check_3:  #98 (line num in coconut source)
                         _coconut_match_set_name_x = _coconut_sentinel  #98 (line num in coconut source)
-                        if not _coconut.isinstance(_coconut_match_args[2], _coconut_self_match_types):  #98 (line num in coconut source)
+                        if not _coconut.type(_coconut_match_args[2]) in _coconut_self_match_types:  #98 (line num in coconut source)
                             _coconut_match_temp_13 = _coconut.getattr(Right, '__match_args__', ())  #98 (line num in coconut source)
                             if not _coconut.isinstance(_coconut_match_temp_13, _coconut.tuple):  #98 (line num in coconut source)
                                 raise _coconut.TypeError("Right.__match_args__ must be a tuple")  #98 (line num in coconut source)
@@ -628,7 +628,7 @@ succ: '_coconut.typing.Callable[[TEnum], TEnum]'  #177 (line num in coconut sour
 succ = _coconut.functools.partial((_coconut.operator.add), 1)  #178 (line num in coconut source)
 
 pred: '_coconut.typing.Callable[[TEnum], TEnum]'  #180 (line num in coconut source)
-pred = _coconut_partial((_coconut_minus), {1: 1}, 2)  #181 (line num in coconut source)
+pred = _coconut_partial((_coconut_minus), {1: 1}, 2, ())  #181 (line num in coconut source)
 
 toEnum = NotImplemented  #183 (line num in coconut source)
 
@@ -1377,7 +1377,7 @@ def join(ms: 'Monad[TMonad]') -> 'TMonad':  #652 (line num in coconut source)
                 fallback = m  # type: ignore  #684 (line num in coconut source)
         if not vals:  #685 (line num in coconut source)
             return (fallback)  # type: ignore  #686 (line num in coconut source)
-        return _coconut_tail_call(makedata, type(ms), *vals)  #687 (line num in coconut source)
+        return _coconut_tail_call(makedata, type(ms), *vals)  # type: ignore  #687 (line num in coconut source)
 
 # Function instance
     if not _coconut_case_match_check_0:  #690 (line num in coconut source)

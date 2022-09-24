@@ -684,7 +684,7 @@ def join(ms: Monad[TMonad]) -> TMonad:
                     fallback = m  # type: ignore
             if not vals:
                 return fallback  # type: ignore
-            return makedata(type(ms), *vals)
+            return makedata(type(ms), *vals)  # type: ignore
 
         # Function instance
         match _ if callable(ms):
