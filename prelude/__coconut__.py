@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 2.0.0-a_dev64 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev1 [How Not to Be Seen]
 
 """Built-in Coconut utilities."""
 
@@ -69,6 +69,7 @@ class _coconut:
         numpy = you_need_to_install_numpy()
     else:
         abc.Sequence.register(numpy.ndarray)
+    numpy_modules = ('numpy', 'pandas', 'jaxlib.xla_extension')
     abc.Sequence.register(collections.deque)
     Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bytes, classmethod, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, map, min, max, next, object, property, range, reversed, set, slice, str, sum, super, tuple, type, vars, zip, repr, print = Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bytes, classmethod, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, map, min, max, next, object, property, range, reversed, set, slice, str, sum, super, tuple, type, vars, zip, repr, print
 class _coconut_sentinel: pass
@@ -528,7 +529,7 @@ class _coconut_parallel_concurrent_map_func_wrapper(_coconut_base_hashable):
         self.map_cls.get_pool_stack().append(None)
         try:
             if self.star:
-                assert _coconut.len(args) == 1, "internal parallel/concurrent map error"
+                assert _coconut.len(args) == 1, "internal parallel/concurrent map error (you should report this at https://github.com/evhub/coconut/issues/new)"
                 return self.func(*args[0], **kwargs)
             else:
                 return self.func(*args, **kwargs)
@@ -537,7 +538,7 @@ class _coconut_parallel_concurrent_map_func_wrapper(_coconut_base_hashable):
             _coconut.traceback.print_exc()
             raise
         finally:
-            assert self.map_cls.get_pool_stack().pop() is None, "internal parallel/concurrent map error"
+            assert self.map_cls.get_pool_stack().pop() is None, "internal parallel/concurrent map error (you should report this at https://github.com/evhub/coconut/issues/new)"
 class _coconut_base_parallel_concurrent_map(map):
     __slots__ = ("result", "chunksize")
     @classmethod
@@ -732,7 +733,7 @@ class count(_coconut_base_hashable):
     def __contains__(self, elem):
         if not self.step:
             return elem == self.start
-        if elem < self.start:
+        if self.step > 0 and elem < self.start or self.step < 0 and elem > self.start:
             return False
         return (elem - self.start) % self.step == 0
     def __getitem__(self, index):
@@ -775,7 +776,7 @@ class count(_coconut_base_hashable):
 class groupsof(_coconut_base_hashable):
     """groupsof(n, iterable) splits iterable into groups of size n.
 
-    If the length of the iterable is not divisible by n, the last group may be of size < n.
+    If the length of the iterable is not divisible by n, the last group will be of size < n.
     """
     __slots__ = ("group_size", "iter")
     def __init__(self, n, iterable):
@@ -841,7 +842,7 @@ class recursive_iterator(_coconut_base_hashable):
             self.tee_store[key], to_return = _coconut_tee(it)
         return to_return
     def __repr__(self):
-        return "@recursive_iterator(%r)" % (self.func,)
+        return "recursive_iterator(%r)" % (self.func,)
     def __reduce__(self):
         return (self.__class__, (self.func,))
     def __get__(self, obj, objtype=None):
@@ -1030,8 +1031,7 @@ class starmap(_coconut_base_hashable, _coconut.itertools.starmap):
         return _coconut.iter(_coconut.itertools.starmap(self.func, self.iter))
     def __fmap__(self, func):
         return self.__class__(_coconut_forward_compose(self.func, func), self.iter)
-def makedata(data_type, *args):
-    """Construct an object of the given data_type containing the given arguments."""
+def _coconut_base_makedata(data_type, args):
     if _coconut.hasattr(data_type, "_make") and _coconut.issubclass(data_type, _coconut.tuple):
         return data_type._make(args)
     if _coconut.issubclass(data_type, (_coconut.range, _coconut.abc.Iterator)):
@@ -1039,6 +1039,9 @@ def makedata(data_type, *args):
     if _coconut.issubclass(data_type, _coconut.str):
         return "".join(args)
     return data_type(args)
+def makedata(data_type, *args):
+    """Construct an object of the given data_type containing the given arguments."""
+    return _coconut_base_makedata(data_type, args)
 def datamaker(*args, **kwargs):
     """Deprecated feature 'datamaker' disabled by --strict compilation; use 'makedata' instead."""
     raise _coconut.NameError("deprecated feature 'datamaker' disabled by --strict compilation; use 'makedata' instead")
@@ -1046,7 +1049,7 @@ class _coconut_amap(_coconut_base_hashable):
     __slots__ = ("func", "aiter")
     def __init__(self, func, aiter):
         self.func = func
-        self.aiter = aiter.__aiter__()
+        self.aiter = aiter
     def __reduce__(self):
         return (self.__class__, (self.func, self.aiter))
     def __aiter__(self):
@@ -1055,7 +1058,7 @@ class _coconut_amap(_coconut_base_hashable):
         return self.func(await self.aiter.__anext__())
 def fmap(func, obj, **kwargs):
     """fmap(func, obj) creates a copy of obj with func applied to its contents.
-    Supports asynchronous iterables. For numpy arrays, uses np.vectorize.
+    Supports asynchronous iterables, mappings (maps over .items()), and numpy arrays (uses np.vectorize).
 
     Override by defining obj.__fmap__(func).
     """
@@ -1071,14 +1074,21 @@ def fmap(func, obj, **kwargs):
         else:
             if result is not _coconut.NotImplemented:
                 return result
-    if obj.__class__.__module__ in ('numpy', 'pandas'):
+    if obj.__class__.__module__ in _coconut.numpy_modules:
         return _coconut.numpy.vectorize(func)(obj)
-    if _coconut.hasattr(obj, "__aiter__") and _coconut_amap is not None:
-        return _coconut_amap(func, obj)
+    obj_aiter = _coconut.getattr(obj, "__aiter__", None)
+    if obj_aiter is not None and _coconut_amap is not None:
+        try:
+            aiter = obj_aiter()
+        except _coconut.NotImplementedError:
+            pass
+        else:
+            if aiter is not _coconut.NotImplemented:
+                return _coconut_amap(func, aiter)
     if starmap_over_mappings:
-        return _coconut_makedata(obj.__class__, *(_coconut_starmap(func, obj.items()) if _coconut.isinstance(obj, _coconut.abc.Mapping) else _coconut_map(func, obj)))
+        return _coconut_base_makedata(obj.__class__, _coconut_starmap(func, obj.items()) if _coconut.isinstance(obj, _coconut.abc.Mapping) else _coconut_map(func, obj))
     else:
-        return _coconut_makedata(obj.__class__, *_coconut_map(func, obj.items() if _coconut.isinstance(obj, _coconut.abc.Mapping) else obj))
+        return _coconut_base_makedata(obj.__class__, _coconut_map(func, obj.items() if _coconut.isinstance(obj, _coconut.abc.Mapping) else obj))
 def memoize(maxsize=None, *args, **kwargs):
     """Decorator that memoizes a function, preventing it from being recomputed
     if it is called multiple times with the same arguments."""
@@ -1268,7 +1278,7 @@ def _coconut_mk_anon_namedtuple(fields, types=None, of_kwargs=None):
         return NT
     return NT(**of_kwargs)
 def _coconut_ndim(arr):
-    if arr.__class__.__module__ in ('numpy', 'pandas') and _coconut.isinstance(arr, _coconut.numpy.ndarray):
+    if (arr.__class__.__module__ in _coconut.numpy_modules or _coconut.hasattr(arr.__class__, "__matconcat__")) and _coconut.hasattr(arr, "ndim"):
         return arr.ndim
     if not _coconut.isinstance(arr, _coconut.abc.Sequence):
         return 0
@@ -1283,14 +1293,22 @@ def _coconut_ndim(arr):
         inner_arr = inner_arr[0]
     return arr_dim
 def _coconut_expand_arr(arr, new_dims):
-    if arr.__class__.__module__ in ('numpy', 'pandas') and _coconut.isinstance(arr, _coconut.numpy.ndarray):
+    if (arr.__class__.__module__ in _coconut.numpy_modules or _coconut.hasattr(arr.__class__, "__matconcat__")) and _coconut.hasattr(arr, "reshape"):
         return arr.reshape((1,) * new_dims + arr.shape)
     for _ in _coconut.range(new_dims):
         arr = [arr]
     return arr
 def _coconut_concatenate(arrs, axis):
-    if _coconut.any(a.__class__.__module__ in ('numpy', 'pandas') for a in arrs):
-        return _coconut.numpy.concatenate(arrs, axis)
+    matconcat = None
+    for a in arrs:
+        if a.__class__.__module__ in _coconut.numpy_modules:
+            matconcat = _coconut.numpy.concatenate
+            break
+        if _coconut.hasattr(a.__class__, "__matconcat__"):
+            matconcat = a.__class__.__matconcat__
+            break
+    if matconcat is not None:
+        return matconcat(arrs, axis)
     if not axis:
         return _coconut.list(_coconut.itertools.chain.from_iterable(arrs))
     return [_coconut_concatenate(rows, axis - 1) for rows in _coconut.zip(*arrs)]
@@ -1301,4 +1319,4 @@ def _coconut_multi_dim_arr(arrs, dim):
     max_arr_dim = _coconut.max(arr_dims)
     return _coconut_concatenate(arrs, max_arr_dim - dim)
 _coconut_self_match_types = (bool, bytearray, bytes, dict, float, frozenset, int, py_int, list, set, str, py_str, tuple)
-_coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_filter, _coconut_makedata, _coconut_map, _coconut_reiterable, _coconut_reversed, _coconut_starmap, _coconut_tee, _coconut_zip, TYPE_CHECKING, reduce, takewhile, dropwhile = MatchError, count, enumerate, filter, makedata, map, reiterable, reversed, starmap, tee, zip, False, _coconut.functools.reduce, _coconut.itertools.takewhile, _coconut.itertools.dropwhile
+_coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_filter, _coconut_map, _coconut_reiterable, _coconut_reversed, _coconut_starmap, _coconut_tee, _coconut_zip, TYPE_CHECKING, reduce, takewhile, dropwhile = MatchError, count, enumerate, filter, map, reiterable, reversed, starmap, tee, zip, False, _coconut.functools.reduce, _coconut.itertools.takewhile, _coconut.itertools.dropwhile

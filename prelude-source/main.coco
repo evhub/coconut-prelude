@@ -1166,7 +1166,7 @@ def asIO(io: IO) -> IO =
     """
     io `asTypeOf` _nullIO  # type: ignore
 
-def unIO(io: IO) -> Ta =
+def unIO(io: IO) -> T.Any =
     """
     The unIO function is an impure function which performs the
     I/O contained in the given IO object and returns the result.

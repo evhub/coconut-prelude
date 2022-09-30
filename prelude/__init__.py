@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xd546c692
+# __coconut_hash__ = 0x8ddb4829
 
-# Compiled with Coconut version 2.0.0-a_dev64 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev1 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -33,4 +33,4 @@ _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
 
-from prelude.main import *  # type: ignore  #1 (line num in coconut source)
+from prelude.main import *  # type: ignore  #1 (line in Coconut source)

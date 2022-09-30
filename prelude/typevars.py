@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x7a35f8c5
+# __coconut_hash__ = 0x14491c21
 
-# Compiled with Coconut version 2.0.0-a_dev64 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev1 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -34,13 +34,13 @@ _coconut_sys.path.pop(0)
 # Compiled Coconut: -----------------------------------------------------------
 
 # Imports:
-import typing as T  #2 (line num in coconut source)
+import typing as T  #2 (line in Coconut source)
 
 
 # TypeVars:
-Ta = T.TypeVar("Ta")  #6 (line num in coconut source)
-Tb = T.TypeVar("Tb")  #7 (line num in coconut source)
-Tc = T.TypeVar("Tc")  #8 (line num in coconut source)
-Td = T.TypeVar("Td")  #9 (line num in coconut source)
+Ta = T.TypeVar("Ta")  #6 (line in Coconut source)
+Tb = T.TypeVar("Tb")  #7 (line in Coconut source)
+Tc = T.TypeVar("Tc")  #8 (line in Coconut source)
+Td = T.TypeVar("Td")  #9 (line in Coconut source)
 
-TType = T.TypeVar("TType", bound=T.Type)  #11 (line num in coconut source)
+TType = T.TypeVar("TType", bound=T.Type)  #11 (line in Coconut source)
