@@ -57,31 +57,17 @@ Even if not using Coconut, however, to get MyPy working with `coconut-prelude` w
 
 If you are using Coconut, you can also get access to actual custom Haskell operators with the code:
 ```python
-operator $$  # apply ($)
-operator %%  # over (%)
-operator <$  # fmapConst
-operator <*>  # ap
-operator *>  # seqAr
-operator <*  # seqAl
-operator >>>=  # bind (>>=)
-operator >>>  # seqM (>>)
-operator =<<  # bindFrom
-operator ++  # chain
-operator !!  # at
-
-from prelude import (
-    ($$),
-    (%%),
-    (<$),
-    (<*>),
-    (*>),
-    (<*),
-    (>>>=),
-    (>>>),
-    (=<<),
-    (++),
-    (!!),
-)
+from prelude import operator $$  # apply ($)
+from prelude import operator %%  # over (%)
+from prelude import operator <$  # fmapConst
+from prelude import operator <*>  # ap
+from prelude import operator *>  # seqAr
+from prelude import operator <*  # seqAl
+from prelude import operator >>>=  # bind (>>=)
+from prelude import operator >>>  # seqM (>>)
+from prelude import operator =<<  # bindFrom
+from prelude import operator ++  # chain
+from prelude import operator !!  # at
 ```
 
 For additional documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://ghcdn.rawgit.org/evhub/coconut-prelude/master/prelude.html).
