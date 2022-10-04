@@ -55,4 +55,33 @@ Additionally, it is highly recommended, though fully optional, that `coconut-pre
 
 Even if not using Coconut, however, to get MyPy working with `coconut-prelude` will require you to follow the instructions [here](https://coconut.readthedocs.io/en/master/DOCS.html#mypy-integration) to generate the necessary stub files and add them to your `MYPYPATH`.
 
+If you are using Coconut, you can also get access to actual custom Haskell operators with the code:
+```python
+operator $$  # apply ($)
+operator %%  # over (%)
+operator <$  # fmapConst
+operator <*>  # ap
+operator *>  # seqAr
+operator <*  # seqAl
+operator >>=  # bind
+operator >>  # seqM
+operator =<<  # bindFrom
+operator ++  # chain
+operator !!  # at
+
+from prelude import (
+    ($$),
+    (%%),
+    (<$),
+    (<*>),
+    (*>),
+    (<*),
+    (>>=),
+    (>>),
+    (=<<),
+    (++),
+    (!!),
+)
+```
+
 For additional documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://ghcdn.rawgit.org/evhub/coconut-prelude/master/prelude.html).

@@ -1,5 +1,19 @@
 # Helpers:
 
+#### Operators:
+operator $$  # apply ($)
+operator %%  # over (%)
+operator <$  # fmapConst
+operator <*>  # ap
+operator *>  # seqAr
+operator <*  # seqAl
+operator >>=  # bind
+operator >>  # seqM
+operator =<<  # bindFrom
+operator ++  # chain
+operator !!  # at
+
+
 #### Imports:
 import sys
 import fractions as _fractions
@@ -270,6 +284,7 @@ def over(x, y) =
     over = (%)
     """
     Rational x y
+(%%) = over
 
 #### Word:
 Word = Int
@@ -522,6 +537,7 @@ def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
     fmapConst = (<$)
     """
     fmap(_ -> x, xs)
+(<$) = fmapConst
 
 #### Applicative:
 Applicative = Functor
@@ -578,6 +594,7 @@ def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
 
     # Default implementation
     fs `bind` f -> fmap(f, xs)
+(<*>) = ap
 
 def seqAr(f1: Applicative, f2: TApp) -> TApp =
     """
@@ -585,6 +602,7 @@ def seqAr(f1: Applicative, f2: TApp) -> TApp =
     seqAr = (*>)
     """
     fmap(x1 -> x2 -> x2, f1) `ap` f2  # type: ignore
+(*>) = seqAr
 
 def seqAl(f1: TApp, f2: Applicative) -> TApp =
     """
@@ -592,6 +610,7 @@ def seqAl(f1: TApp, f2: Applicative) -> TApp =
     seqAl = (<*)
     """
     fmap(x1 -> x2 -> x1, f1) `ap` f2  # type: ignore
+(<*) = seqAl
 
 def liftA2(func: (Ta, Tb) -> Tc) -> (Applicative[Ta], Applicative[Tb]) -> Applicative[Tc] =
     """
@@ -611,6 +630,7 @@ def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     -- bind is overridden by overriding fmap (__fmap__) and join (__join__)
     """
     join(fmap(func, m))  # type: ignore
+(>>=) = bind
 
 def seqM(m1: Monad, m2: TMonad) -> TMonad =
     """
@@ -618,6 +638,7 @@ def seqM(m1: Monad, m2: TMonad) -> TMonad =
     seqM = (>>)
     """
     m1 `bind` x -> m2  # type: ignore
+(>>) = seqM
 
 return_ = pure
 
@@ -648,6 +669,7 @@ def bindFrom(func: Ta -> TMonad, m: Monad[Ta]) -> TMonad =
     bindFrom = (=<<)
     """
     m `bind` func
+(=<<) = bindFrom
 
 def join(ms: Monad[TMonad]) -> TMonad:
     """
@@ -823,6 +845,7 @@ else:
         --  application (see also `of` for the more general version)
         """
         func `of` arg
+($$) = apply
 
 def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
     if cond(x):
@@ -892,6 +915,7 @@ def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     chain = (++)
     """
     (::)(xs, ys)
+(++) = chain
 
 filter: (Ta -> bool, Ta$[]) -> Ta$[]  # type: ignore
 filter = _filter  # type: ignore
@@ -914,6 +938,7 @@ def at(xs: Ta$[], i: int) -> Ta =
     at = (!!)
     """
     xs$[i]
+(!!) = at
 
 reverse: Ta[] -> Ta[]
 reverse = _reversed

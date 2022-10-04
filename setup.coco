@@ -1,6 +1,6 @@
 import setuptools  # type: ignore
 
-VERSION = "0.2.1"
+VERSION = "0.2.2"
 
 setuptools.setup(
     name="coconut-prelude",
