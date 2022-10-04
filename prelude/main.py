@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x4cfa78a8
+# __coconut_hash__ = 0x9fb7098a
 
-# Compiled with Coconut version 2.0.0-post_dev5 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev6 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -1284,7 +1284,7 @@ def bind(m: 'Monad[Ta]', func: '_coconut.typing.Callable[[Ta], TMonad]') -> 'TMo
     """  #631 (line in Coconut source)
     return _coconut_tail_call(join, fmap(func, m))  # type: ignore  #632 (line in Coconut source)
 
-_coconut_op_U62_U62_U61 = bind  #633 (line in Coconut source)
+_coconut_op_U62_U62_U62_U61 = bind  #633 (line in Coconut source)
 
 @_coconut_tco  #635 (line in Coconut source)
 def seqM(m1: 'Monad', m2: 'TMonad') -> 'TMonad':  #635 (line in Coconut source)
@@ -1294,7 +1294,7 @@ def seqM(m1: 'Monad', m2: 'TMonad') -> 'TMonad':  #635 (line in Coconut source)
     """  #639 (line in Coconut source)
     return _coconut_tail_call((bind), m1, lambda x: m2)  # type: ignore  #640 (line in Coconut source)
 
-_coconut_op_U62_U62 = seqM  #641 (line in Coconut source)
+_coconut_op_U62_U62_U62 = seqM  #641 (line in Coconut source)
 
 return_ = pure  #643 (line in Coconut source)
 

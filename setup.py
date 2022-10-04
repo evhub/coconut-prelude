@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb39ed429
+# __coconut_hash__ = 0x8ffc0038
 
-# Compiled with Coconut version 2.0.0-post_dev5 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev6 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -1323,6 +1323,6 @@ _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_filter, _cocon
 
 import setuptools  # type: ignore
 
-VERSION = "0.2.2"
+VERSION = "0.2.3"
 
 setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages(), install_requires=["coconut[mypy]",], extras_require={":python_version<'3.5'": ["typing",], "dev": ["pytest",]})

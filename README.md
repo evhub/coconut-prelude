@@ -63,8 +63,8 @@ operator <$  # fmapConst
 operator <*>  # ap
 operator *>  # seqAr
 operator <*  # seqAl
-operator >>=  # bind
-operator >>  # seqM
+operator >>>=  # bind (>>=)
+operator >>>  # seqM (>>)
 operator =<<  # bindFrom
 operator ++  # chain
 operator !!  # at
@@ -76,8 +76,8 @@ from prelude import (
     (<*>),
     (*>),
     (<*),
-    (>>=),
-    (>>),
+    (>>>=),
+    (>>>),
     (=<<),
     (++),
     (!!),

@@ -7,8 +7,8 @@ operator <$  # fmapConst
 operator <*>  # ap
 operator *>  # seqAr
 operator <*  # seqAl
-operator >>=  # bind
-operator >>  # seqM
+operator >>>=  # bind (>>=)
+operator >>>  # seqM (>>)
 operator =<<  # bindFrom
 operator ++  # chain
 operator !!  # at
@@ -630,7 +630,7 @@ def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
     -- bind is overridden by overriding fmap (__fmap__) and join (__join__)
     """
     join(fmap(func, m))  # type: ignore
-(>>=) = bind
+(>>>=) = bind
 
 def seqM(m1: Monad, m2: TMonad) -> TMonad =
     """
@@ -638,7 +638,7 @@ def seqM(m1: Monad, m2: TMonad) -> TMonad =
     seqM = (>>)
     """
     m1 `bind` x -> m2  # type: ignore
-(>>) = seqM
+(>>>) = seqM
 
 return_ = pure
 

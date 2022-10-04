@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 2.0.0-post_dev5 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev6 [How Not to Be Seen]
 
 """Built-in Coconut utilities."""
 
