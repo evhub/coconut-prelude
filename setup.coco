@@ -6,6 +6,7 @@ setuptools.setup(
     name="coconut-prelude",
     version=VERSION,
     description="An implementation of Haskell's Prelude in Python using Coconut.",
+    long_description="An implementation of Haskell's Prelude in Python using Coconut.",
     url="https://github.com/evhub/coconut-prelude",
     author="Evan Hubinger",
     author_email="evanjhub@gmail.com",
