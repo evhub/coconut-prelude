@@ -379,7 +379,7 @@ from math import (
     asinh,
     acosh,
     atanh,
-)
+)  # NOQA
 
 def logBase(base: float, x: float) -> float =
     log x base
@@ -427,7 +427,7 @@ from math import (
     isnan as isNaN,
     isinf as isInfinite,
     atan2,
-)
+)  # NOQA
 
 isDenormalized = NotImplemented
 

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x373da2d9
+# __coconut_hash__ = 0xe9ce04e8
 
-# Compiled with Coconut version 2.0.0-post_dev8 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import generator_stop
+from __future__ import generator_stop, annotations
 import sys as _coconut_sys, os as _coconut_os
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_cached_module = _coconut_sys.modules.get("__coconut__")
@@ -62,12 +62,12 @@ def test_definesBind():  #13 (line in Coconut source)
         __match_args__ = ('func',)  #15 (line in Coconut source)
         @staticmethod  #16 (line in Coconut source)
         @_coconut_tco  #17 (line in Coconut source)
-        def __pure__(x: 'Ta') -> 'FunctionMonad':  #17 (line in Coconut source)
+        def __pure__(x: Ta) -> FunctionMonad:  #17 (line in Coconut source)
             return _coconut_tail_call(FunctionMonad, lambda e: x)  #18 (line in Coconut source)
 
 
         @_coconut_tco  #20 (line in Coconut source)
-        def __bind__(x: 'FunctionMonad', f: '_coconut.typing.Callable[[Ta], FunctionMonad]') -> 'FunctionMonad':  #20 (line in Coconut source)
+        def __bind__(x: FunctionMonad, f: _coconut.typing.Callable[[Ta], FunctionMonad]) -> FunctionMonad:  #20 (line in Coconut source)
             return _coconut_tail_call(FunctionMonad, lambda r: ((f)((x)(r)))(r))  #21 (line in Coconut source)
 
 

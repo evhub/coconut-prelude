@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x381bbb11
+# __coconut_hash__ = 0x46b485bc
 
-# Compiled with Coconut version 2.0.0-post_dev8 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import generator_stop
+from __future__ import generator_stop, annotations
 import sys as _coconut_sys, os as _coconut_os
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_cached_module = _coconut_sys.modules.get("__coconut__")
@@ -101,7 +101,7 @@ def test_Tuples():  #44 (line in Coconut source)
                 y = _coconut_match_set_name_y  #46 (line in Coconut source)
         if not _coconut_match_check_0:  #46 (line in Coconut source)
             raise _coconut_FunctionMatchError('assert uncurry_tuple(+)((1, 2),) == 3 == curry_tuple(def ((x, y),) -> x + y)(1, 2)', _coconut_match_args)  #46 (line in Coconut source)
-        return x + y  #46 (line in Coconut source)
+        return (x + y)  #46 (line in Coconut source)
     assert uncurry_tuple(_coconut.operator.add)((1, 2)) == 3 == curry_tuple(_coconut_lambda_0)(1, 2)  #46 (line in Coconut source)
     assert curry_tuple(uncurry_tuple(_coconut_minus))(3, 2) == 1  #47 (line in Coconut source)
 
@@ -301,7 +301,7 @@ def test_Monad():  #188 (line in Coconut source)
     def _coconut_lambda_1(x):  #231 (line in Coconut source)
         global glob  #231 (line in Coconut source)
         glob = 2  #231 (line in Coconut source)
-        return Just(glob)  #231 (line in Coconut source)
+        return (Just(glob))  #231 (line in Coconut source)
     assert nothing == (bind)(nothing, (_coconut_lambda_1))  #231 (line in Coconut source)
     assert glob == 1  #232 (line in Coconut source)
 
@@ -332,14 +332,14 @@ def test_Foldable():  #234 (line in Coconut source)
 
 
 def test_Traversable():  #258 (line in Coconut source)
-    for _sequence in [sequenceA, sequence]:  #259 (line in Coconut source)
+    for _sequence in ([sequenceA, sequence]):  #259 (line in Coconut source)
         assert _sequence([Just(1), nothing, Just(3)]) == nothing  #260 (line in Coconut source)
         assert _sequence([Right(1), Right(2), Left(3), Right(4)]) == Left(3)  #261 (line in Coconut source)
         assert _sequence([[1, 2, 3], [], [4,], [5, 6]]) == []  #262 (line in Coconut source)
         assert _sequence([Just(1), Just(2), Just(3)]) == Just([1, 2, 3])  #263 (line in Coconut source)
         assert _sequence([Right(1), Right(2), Right(3)]) == Right([1, 2, 3])  #264 (line in Coconut source)
         assert _sequence([[1, 2], [3,]]) == [[1, 3], [2, 3]]  #265 (line in Coconut source)
-    for _traverse in [traverse, mapM]:  #266 (line in Coconut source)
+    for _traverse in ([traverse, mapM]):  #266 (line in Coconut source)
         assert _traverse(lambda x: [x,], [1, 2, 3]) == [[1, 2, 3],]  #267 (line in Coconut source)
         assert _traverse(Just, [Just(1), nothing, Just(2)]) == Just([Just(1), nothing, Just(2)])  #268 (line in Coconut source)
 
@@ -381,7 +381,7 @@ def test_Miscellaneous_functions():  #270 (line in Coconut source)
             return _coconut_tail_call(Test, x)  #288 (line in Coconut source)
 
     assert (asTypeOf)(mempty, Test(1)) == Test(0)  #289 (line in Coconut source)
-    for _error in [error, errorWithoutStackTrace]:  #290 (line in Coconut source)
+    for _error in ([error, errorWithoutStackTrace]):  #290 (line in Coconut source)
         try:  #291 (line in Coconut source)
             _error("derp")  #292 (line in Coconut source)
         except Exception as err:  #293 (line in Coconut source)
@@ -528,7 +528,7 @@ def test_function_monad():  #410 (line in Coconut source)
 # Run tests:
 
 if __name__ == "__main__":  #418 (line in Coconut source)
-    for var, val in globals().items():  #419 (line in Coconut source)
+    for var, val in (globals().items()):  #419 (line in Coconut source)
         if var.startswith("test_"):  #420 (line in Coconut source)
             val()  #421 (line in Coconut source)
     print("<success>")  #422 (line in Coconut source)

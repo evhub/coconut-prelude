@@ -18,8 +18,8 @@ install-univ: build-univ base-install
 
 .PHONY: build
 build:
-	coconut setup.coco --strict --target 3.6
-	coconut "prelude-source" prelude --strict --target 3.6 --jobs sys --mypy
+	coconut setup.coco --strict --target 3.7
+	coconut "prelude-source" prelude --strict --target 3.7 --jobs sys --mypy
 
 .PHONY: build-univ
 build-univ:
@@ -37,9 +37,12 @@ setup:
 	pip install -U setuptools wheel pip
 	pip install -U coconut-develop[watch,jobs,mypy]
 
-.PHONY: upload
-upload: clean install-univ
+.PHONY: package
+package:
 	python setup.py sdist bdist_wheel
+
+.PHONY: upload
+upload: clean install-univ package
 	pip3 install -U twine
 	twine upload ./dist/*
 
@@ -52,4 +55,4 @@ clean:
 
 .PHONY: watch
 watch: install
-	coconut "prelude-source" prelude --watch --strict --target 3.6 --mypy
+	coconut "prelude-source" prelude --watch --strict --target 3.7 --mypy

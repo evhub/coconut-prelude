@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x9919a766
+# __coconut_hash__ = 0x2bdb4e20
 
-# Compiled with Coconut version 2.0.0-post_dev8 [How Not to Be Seen]
+# Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import generator_stop
+from __future__ import generator_stop, annotations
 import sys as _coconut_sys, os as _coconut_os
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_cached_module = _coconut_sys.modules.get("__coconut__")
@@ -40,35 +40,35 @@ from prelude.typevars import *  # type: ignore  #2 (line in Coconut source)
 # Function application:
 if TYPE_CHECKING:  #6 (line in Coconut source)
     @T.overload  # type: ignore  #7 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[[Ta], Tb]', _x: 'Ta') -> 'Tb':  #8 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[[Ta], Tb], _x: Ta) -> Tb:  #8 (line in Coconut source)
         ...  #9 (line in Coconut source)
 
     @T.overload  #10 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb], Tc]':  #11 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[[Ta, Tb], Tc], _x: Ta) -> _coconut.typing.Callable[[Tb], Tc]:  #11 (line in Coconut source)
         ...  #12 (line in Coconut source)
 
     @T.overload  #13 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb, Tc], Td]':  #14 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], _x: Ta) -> _coconut.typing.Callable[[Tb, Tc], Td]:  #14 (line in Coconut source)
         ...  #15 (line in Coconut source)
 
     @T.overload  #16 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[..., Tb]', _x: 'Ta') -> 'T.Any':  #17 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[..., Tb], _x: Ta) -> T.Any:  #17 (line in Coconut source)
         ...  #18 (line in Coconut source)
 
     @T.overload  #19 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta', _y: 'Tb') -> 'Tc':  #20 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[[Ta, Tb], Tc], _x: Ta, _y: Tb) -> Tc:  #20 (line in Coconut source)
         ...  #21 (line in Coconut source)
 
     @T.overload  #22 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb') -> '_coconut.typing.Callable[[Tc], Td]':  #23 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], _x: Ta, _y: Tb) -> _coconut.typing.Callable[[Tc], Td]:  #23 (line in Coconut source)
         ...  #24 (line in Coconut source)
 
     @T.overload  #25 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb', _z: 'Tc') -> 'Td':  #26 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], _x: Ta, _y: Tb, _z: Tc) -> Td:  #26 (line in Coconut source)
         ...  #27 (line in Coconut source)
 
     @T.overload  #28 (line in Coconut source)
-    def of(func: '_coconut.typing.Callable[..., T.Any]', *args: 'T.Any', **kwargs: 'T.Any') -> 'T.Any':  #29 (line in Coconut source)
+    def of(func: _coconut.typing.Callable[..., T.Any], *args: T.Any, **kwargs: T.Any) -> T.Any:  #29 (line in Coconut source)
         ...  #30 (line in Coconut source)
 
     def of(func, *args, **kwargs):  #31 (line in Coconut source)
@@ -110,7 +110,7 @@ def uncurry(func):  #55 (line in Coconut source)
 
 # Deriving:
 
-def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line in Coconut source)
+def derivingOrd(*valueConstructors: TType) -> None:  #65 (line in Coconut source)
     """
     The expression
         derivingOrd(valueConstructor1, valueConstructor2, ...)
@@ -123,7 +123,7 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line in Coconut so
         return  #74 (line in Coconut source)
 
     ind = _coconut_forward_compose(type, valueConstructors.index)  #76 (line in Coconut source)
-    for valCon in valueConstructors:  #77 (line in Coconut source)
+    for valCon in (valueConstructors):  #77 (line in Coconut source)
 
 # Ord
         try:  #80 (line in Coconut source)
@@ -168,7 +168,7 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line in Coconut so
             __gt__ = _coconut_name_store_3  #89 (line in Coconut source)
 
 
-def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Coconut source)
+def derivingBoundedEnum(*valueConstructors: TType) -> None:  #89 (line in Coconut source)
     """
     The expression
         derivingBoundedEnum(valueConstructor1, valueConstructor2, ...)
@@ -181,7 +181,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
         return  #98 (line in Coconut source)
 
     ind = _coconut_forward_compose(type, valueConstructors.index)  #100 (line in Coconut source)
-    for valCon in valueConstructors:  #101 (line in Coconut source)
+    for valCon in (valueConstructors):  #101 (line in Coconut source)
 
 # Bounded
         try:  #104 (line in Coconut source)
@@ -253,7 +253,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
             __sub__ = _coconut_name_store_9  #119 (line in Coconut source)
 
 
-def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
+def definesBind(dataType: TType) -> TType:  #119 (line in Coconut source)
     """
     Decorator to declare that a data type defines __bind__
     instead of __join__. Will also create an __fmap__ method
@@ -294,7 +294,7 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
     return (dataType)  #138 (line in Coconut source)
 
 
-def definesReturn(dataType: 'TType') -> 'TType':  #140 (line in Coconut source)
+def definesReturn(dataType: TType) -> TType:  #140 (line in Coconut source)
     """
     A simple decorator to set __pure__ equal to __return__.
     If used with definesBind, definesReturn must be applied
