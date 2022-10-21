@@ -9,7 +9,7 @@ operator *>  # seqAr
 operator <*  # seqAl
 operator >>>=  # bind (>>=)
 operator >>>  # seqM (>>)
-operator =<<  # bindFrom
+operator =<<<  # bindFrom (=<<)
 operator ++  # chain
 operator !!  # at
 
@@ -669,7 +669,7 @@ def bindFrom(func: Ta -> TMonad, m: Monad[Ta]) -> TMonad =
     bindFrom = (=<<)
     """
     m `bind` func
-(=<<) = bindFrom
+(=<<<) = bindFrom
 
 def join(ms: Monad[TMonad]) -> TMonad:
     """

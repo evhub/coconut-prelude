@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x84fd12ec
+# __coconut_hash__ = 0x6f74bf28
 
 # Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
 
@@ -1345,7 +1345,7 @@ def bindFrom(func: _coconut.typing.Callable[[Ta], TMonad], m: Monad[Ta]) -> TMon
     """  #670 (line in Coconut source)
     return _coconut_tail_call((bind), m, func)  #671 (line in Coconut source)
 
-_coconut_op_U3d_U3c_U3c = bindFrom  #672 (line in Coconut source)
+_coconut_op_U3d_U3c_U3c_U3c = bindFrom  #672 (line in Coconut source)
 
 @_coconut_tco  #674 (line in Coconut source)
 def join(ms: Monad[TMonad]) -> TMonad:  #674 (line in Coconut source)

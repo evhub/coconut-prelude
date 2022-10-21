@@ -65,7 +65,7 @@ from prelude import operator *>  # seqAr
 from prelude import operator <*  # seqAl
 from prelude import operator >>>=  # bind (>>=)
 from prelude import operator >>>  # seqM (>>)
-from prelude import operator =<<  # bindFrom
+from prelude import operator =<<<  # bindFrom (=<<)
 from prelude import operator ++  # chain
 from prelude import operator !!  # at
 ```
