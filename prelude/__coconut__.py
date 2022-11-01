@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
+# Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
 
 """Built-in Coconut utilities."""
 
@@ -39,6 +39,24 @@ class _coconut:
     OrderedDict = collections.OrderedDict
     import collections.abc as abc
     import typing
+    if _coconut_sys.version_info < (3, 10):
+        try:
+            from typing_extensions import TypeAlias, ParamSpec
+        except ImportError:
+            class you_need_to_install_typing_extensions:
+                __slots__ = ()
+            TypeAlias = ParamSpec = you_need_to_install_typing_extensions()
+        typing.TypeAlias = TypeAlias
+        typing.ParamSpec = ParamSpec
+    if _coconut_sys.version_info < (3, 11):
+        try:
+            from typing_extensions import TypeVarTuple, Unpack
+        except ImportError:
+            class you_need_to_install_typing_extensions:
+                __slots__ = ()
+            TypeVarTuple = Unpack = you_need_to_install_typing_extensions()
+        typing.TypeVarTuple = TypeVarTuple
+        typing.Unpack = Unpack
     zip_longest = itertools.zip_longest
     try:
         import numpy

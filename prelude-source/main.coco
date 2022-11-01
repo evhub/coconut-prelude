@@ -141,19 +141,19 @@ String = str
 
 
 ### Tuples:
-fst: T.Tuple[Ta, Tb] -> Ta
+fst: (Ta; Tb) -> Ta
 fst = .[0]
 
-snd: T.Tuple[Ta, Tb] -> Tb
+snd: (Ta; Tb) -> Tb
 snd = .[1]
 
-def curry_tuple(func: T.Tuple[Ta, Tb] -> Tc) -> (Ta, Tb) -> Tc =
+def curry_tuple(func: (Ta; Tb) -> Tc) -> (Ta, Tb) -> Tc =
     """
     -- curry a function of a tuple into a Python-style multi-place function
     """
     (*args) -> func(args)  # type: ignore
 
-def uncurry_tuple(func: (Ta, Tb) -> Tc) -> T.Tuple[Ta, Tb] -> Tc =
+def uncurry_tuple(func: (Ta, Tb) -> Tc) -> (Ta; Tb) -> Tc =
     """
     -- uncurry a Python-style multi-place function into a function of a tuple
     """
@@ -341,7 +341,7 @@ div = (//)
 mod: (int, int) -> int
 mod = (%)
 
-def quotRem(x: int, y: int) -> T.Tuple[int, int] =
+def quotRem(x: int, y: int) -> (int; int) =
     divxy, modxy = divmod(x, y)
     adj = 1 if divxy < 0 and modxy != 0 else 0
     divxy + adj, modxy - y*adj
@@ -387,7 +387,7 @@ def logBase(base: float, x: float) -> float =
 #### RealFrac:
 RealFrac = Rational
 
-def properFraction(x: RealFrac) -> T.Tuple[int, RealFrac] =
+def properFraction(x: RealFrac) -> (int; RealFrac) =
     floor_x = floor(x)
     floor_x, x - floor_x
 
@@ -410,7 +410,7 @@ def floatRadix(x: float) -> int = 2
 
 def floatDigits(x: float) -> int = 53
 
-def floatRange(x: float) -> T.Tuple[int, int] = (-1021, 1024)
+def floatRange(x: float) -> (int; int) = (-1021, 1024)
 
 decodeFloat = NotImplemented
 
@@ -1010,7 +1010,7 @@ def take(n: int, xs: Ta$[]) -> Ta$[] =
 def drop(n: int, xs: Ta$[]) -> Ta$[] =
     xs$[n:]
 
-def splitAt(n: int, xs: Ta$[]) -> T.Tuple[Ta$[], Ta$[]] =
+def splitAt(n: int, xs: Ta$[]) -> (Ta$[]; Ta$[]) =
     reit = reiterable(xs)
     reit$[:n], reit$[n:]
 
@@ -1021,7 +1021,7 @@ dropWhile: (Ta -> bool, Ta$[]) -> Ta$[]
 dropWhile = dropwhile
 
 if TYPE_CHECKING:
-    def span(cond: Ta -> bool, xs: Ta[]) -> T.Tuple[Ta[], Ta[]]:
+    def span(cond: Ta -> bool, xs: Ta[]) -> (Ta[]; Ta[]):
         ...
 else:
     match def span(_, []) = ([], [])
@@ -1043,7 +1043,7 @@ def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
 def notElem(e: Ta, xs: Ta[]) -> bool =
     e not in xs
 
-def lookup(key: Ta, assocs: T.Tuple[Ta, Tb]$[]) -> Maybe:
+def lookup(key: Ta, assocs: (Ta; Tb)$[]) -> Maybe:
     try:
         return (
             assocs
@@ -1058,10 +1058,10 @@ def lookup(key: Ta, assocs: T.Tuple[Ta, Tb]$[]) -> Maybe:
 
 
 ## Zipping and unzipping lists:
-zip: (Ta$[], Tb$[]) -> T.Tuple[Ta, Tb]$[]  # type: ignore
+zip: (Ta$[], Tb$[]) -> (Ta; Tb)$[]  # type: ignore
 zip = _zip  # type: ignore
 
-zip3: (Ta$[], Tb$[], Tc$[]) -> T.Tuple[Ta, Tb, Tc]$[]
+zip3: (Ta$[], Tb$[], Tc$[]) -> (Ta; Tb; Tc)$[]
 zip3 = _zip
 
 def zipWith(func: (Ta, Tb) -> Tc, xs1: Ta$[], xs2: Tb$[]) -> Tc$[] =
@@ -1070,10 +1070,10 @@ def zipWith(func: (Ta, Tb) -> Tc, xs1: Ta$[], xs2: Tb$[]) -> Tc$[] =
 def zipWith3(func: (Ta, Tb, Tc) -> Td, xs1: Ta$[], xs2: Tb$[], xs3: Tc$[]) -> Td$[] =
     starmap(func, _zip(xs1, xs2, xs3))
 
-def unzip(xs: T.Tuple[Ta, Tb]$[]) -> T.Tuple[Ta[], Tb[]] =
+def unzip(xs: (Ta; Tb)$[]) -> (Ta[]; Tb[]) =
     _zip(*xs) |> _map$(list) |> tuple  # type: ignore
 
-unzip3: T.Tuple[Ta, Tb, Tc]$[] -> T.Tuple[Ta[], Tb[], Tc[]]
+unzip3: (Ta; Tb; Tc)$[] -> (Ta[]; Tb[]; Tc[])
 unzip3 = unzip  # type: ignore
 
 

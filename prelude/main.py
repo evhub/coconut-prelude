@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x6f74bf28
+# __coconut_hash__ = 0x5288590e
 
-# Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
+# Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -82,7 +82,7 @@ not_ = (_coconut.operator.not_)  #56 (line in Coconut source)
 otherwise: bool = True  #58 (line in Coconut source)
 
 #### Maybe:
-class Maybe:  #61 (line in Coconut source)
+class Maybe():  #61 (line in Coconut source)
     @staticmethod  #62 (line in Coconut source)
     @_coconut_tco  #63 (line in Coconut source)
     def __pure__(x: Ta) -> Maybe:  #63 (line in Coconut source)
@@ -250,7 +250,7 @@ else:  #85 (line in Coconut source)
 
 #### Either:
 
-class Either:  #90 (line in Coconut source)
+class Either():  #90 (line in Coconut source)
     @staticmethod  #91 (line in Coconut source)
     @_coconut_tco  #92 (line in Coconut source)
     def __pure__(x: Ta) -> Either:  #92 (line in Coconut source)
@@ -435,7 +435,7 @@ else:  #110 (line in Coconut source)
 
 #### Ordering:
 
-class Ordering:  #115 (line in Coconut source)
+class Ordering():  #115 (line in Coconut source)
     @staticmethod  #116 (line in Coconut source)
     def __mempty__() -> Ordering:  #117 (line in Coconut source)
         return (eq)  #117 (line in Coconut source)
@@ -503,20 +503,20 @@ String = str  #140 (line in Coconut source)
 
 
 ### Tuples:
-fst: _coconut.typing.Callable[[T.Tuple[Ta, Tb]], Ta]  #144 (line in Coconut source)
+fst: _coconut.typing.Callable[[_coconut.typing.Tuple[Ta, Tb]], Ta]  #144 (line in Coconut source)
 fst = _coconut.operator.itemgetter((0))  #145 (line in Coconut source)
 
-snd: _coconut.typing.Callable[[T.Tuple[Ta, Tb]], Tb]  #147 (line in Coconut source)
+snd: _coconut.typing.Callable[[_coconut.typing.Tuple[Ta, Tb]], Tb]  #147 (line in Coconut source)
 snd = _coconut.operator.itemgetter((1))  #148 (line in Coconut source)
 
-def curry_tuple(func: _coconut.typing.Callable[[T.Tuple[Ta, Tb]], Tc]) -> _coconut.typing.Callable[[Ta, Tb], Tc]:  #150 (line in Coconut source)
+def curry_tuple(func: _coconut.typing.Callable[[_coconut.typing.Tuple[Ta, Tb]], Tc]) -> _coconut.typing.Callable[[Ta, Tb], Tc]:  #150 (line in Coconut source)
     """
     -- curry a function of a tuple into a Python-style multi-place function
     """  #153 (line in Coconut source)
     return (lambda *args: func(args))  # type: ignore  #154 (line in Coconut source)
 
 
-def uncurry_tuple(func: _coconut.typing.Callable[[Ta, Tb], Tc]) -> _coconut.typing.Callable[[T.Tuple[Ta, Tb]], Tc]:  #156 (line in Coconut source)
+def uncurry_tuple(func: _coconut.typing.Callable[[Ta, Tb], Tc]) -> _coconut.typing.Callable[[_coconut.typing.Tuple[Ta, Tb]], Tc]:  #156 (line in Coconut source)
     """
     -- uncurry a Python-style multi-place function into a function of a tuple
     """  #159 (line in Coconut source)
@@ -885,7 +885,7 @@ div = (_coconut.operator.floordiv)  #339 (line in Coconut source)
 mod: _coconut.typing.Callable[[int, int], int]  #341 (line in Coconut source)
 mod = (_coconut.operator.mod)  #342 (line in Coconut source)
 
-def quotRem(x: int, y: int) -> T.Tuple[int, int]:  #344 (line in Coconut source)
+def quotRem(x: int, y: int) -> _coconut.typing.Tuple[int, int]:  #344 (line in Coconut source)
     divxy, modxy = divmod(x, y)  #345 (line in Coconut source)
     adj = 1 if divxy < 0 and modxy != 0 else 0  #346 (line in Coconut source)
     return (divxy + adj, modxy - y * adj)  #347 (line in Coconut source)
@@ -934,7 +934,7 @@ def logBase(base: float, x: float) -> float:  #384 (line in Coconut source)
 
 RealFrac = Rational  #388 (line in Coconut source)
 
-def properFraction(x: RealFrac) -> T.Tuple[int, RealFrac]:  #390 (line in Coconut source)
+def properFraction(x: RealFrac) -> _coconut.typing.Tuple[int, RealFrac]:  #390 (line in Coconut source)
     floor_x = floor(x)  #391 (line in Coconut source)
     return (floor_x, x - floor_x)  #392 (line in Coconut source)
 
@@ -962,7 +962,7 @@ def floatDigits(x: float) -> int:  #411 (line in Coconut source)
     return (53)  #411 (line in Coconut source)
 
 
-def floatRange(x: float) -> T.Tuple[int, int]:  #413 (line in Coconut source)
+def floatRange(x: float) -> _coconut.typing.Tuple[int, int]:  #413 (line in Coconut source)
     return ((-1021, 1024))  #413 (line in Coconut source)
 
 
@@ -1613,17 +1613,17 @@ def until(cond: _coconut.typing.Callable[[Ta], bool], func: _coconut.typing.Call
         if cond(x):  #851 (line in Coconut source)
             return (x)  #852 (line in Coconut source)
         try:  # tail recursive  #853 (line in Coconut source)
-            _coconut_tre_check_0 = until is _coconut_recursive_func_71  # tail recursive  #853 (line in Coconut source)
+            _coconut_tre_check_0 = until is _coconut_recursive_func_65  # tail recursive  #853 (line in Coconut source)
         except _coconut.NameError:  # tail recursive  #853 (line in Coconut source)
             _coconut_tre_check_0 = False  # tail recursive  #853 (line in Coconut source)
         if _coconut_tre_check_0:  # tail recursive  #853 (line in Coconut source)
-            cond, func, x = cond, func, func(x)  # tail recursive  #853 (line in Coconut source)
+            (cond, func, x,) = (cond, func, func(x),)  # tail recursive  #853 (line in Coconut source)
             continue  # tail recursive  #853 (line in Coconut source)
         else:  # tail recursive  #853 (line in Coconut source)
             return _coconut_tail_call(until, cond, func, func(x))  #854 (line in Coconut source)
         return None  #855 (line in Coconut source)
 
-_coconut_recursive_func_71 = until  #855 (line in Coconut source)
+_coconut_recursive_func_65 = until  #855 (line in Coconut source)
 
 def asTypeOf(x: Ta, y: Ta) -> Ta:  #855 (line in Coconut source)
     """
@@ -1834,7 +1834,7 @@ def drop(n: int, xs: _coconut.typing.Iterable[Ta]) -> _coconut.typing.Iterable[T
     return _coconut_tail_call(_coconut_iter_getitem, xs, _coconut.slice(n, None))  #1011 (line in Coconut source)
 
 
-def splitAt(n: int, xs: _coconut.typing.Iterable[Ta]) -> T.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]]:  #1013 (line in Coconut source)
+def splitAt(n: int, xs: _coconut.typing.Iterable[Ta]) -> _coconut.typing.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]]:  #1013 (line in Coconut source)
     reit = reiterable(xs)  #1014 (line in Coconut source)
     return (_coconut_iter_getitem(reit, _coconut.slice(None, n)), _coconut_iter_getitem(reit, _coconut.slice(n, None)))  #1015 (line in Coconut source)
 
@@ -1846,7 +1846,7 @@ dropWhile: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coco
 dropWhile = dropwhile  #1021 (line in Coconut source)
 
 if TYPE_CHECKING:  #1023 (line in Coconut source)
-    def span(cond: _coconut.typing.Callable[[Ta], bool], xs: _coconut.typing.Sequence[Ta]) -> T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]]:  #1024 (line in Coconut source)
+    def span(cond: _coconut.typing.Callable[[Ta], bool], xs: _coconut.typing.Sequence[Ta]) -> _coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]]:  #1024 (line in Coconut source)
         ...  #1025 (line in Coconut source)
 
 else:  #1026 (line in Coconut source)
@@ -1935,7 +1935,7 @@ def notElem(e: Ta, xs: _coconut.typing.Sequence[Ta]) -> bool:  #1043 (line in Co
     return (e not in xs)  #1044 (line in Coconut source)
 
 
-def lookup(key: Ta, assocs: _coconut.typing.Iterable[T.Tuple[Ta, Tb]]) -> Maybe:  #1046 (line in Coconut source)
+def lookup(key: Ta, assocs: _coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]) -> Maybe:  #1046 (line in Coconut source)
     try:  #1047 (line in Coconut source)
         return (((Just)((_coconut_iter_getitem((dropwhile)(lambda pair: pair[0] != key, assocs), (0)))[1])))  #1048 (line in Coconut source)
     except IndexError:  #1055 (line in Coconut source)
@@ -1945,10 +1945,10 @@ def lookup(key: Ta, assocs: _coconut.typing.Iterable[T.Tuple[Ta, Tb]]) -> Maybe:
 
 ## Zipping and unzipping lists:
 # type: ignore
-zip: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[T.Tuple[Ta, Tb]]]  # type: ignore  #1061 (line in Coconut source)
+zip: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]]  # type: ignore  #1061 (line in Coconut source)
 zip = _zip  # type: ignore  #1062 (line in Coconut source)
 
-zip3: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[T.Tuple[Ta, Tb, Tc]]]  #1064 (line in Coconut source)
+zip3: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb, Tc]]]  #1064 (line in Coconut source)
 zip3 = _zip  #1065 (line in Coconut source)
 
 @_coconut_tco  #1067 (line in Coconut source)
@@ -1962,11 +1962,11 @@ def zipWith3(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], xs1: _coconut.typ
 
 
 @_coconut_tco  #1073 (line in Coconut source)
-def unzip(xs: _coconut.typing.Iterable[T.Tuple[Ta, Tb]]) -> T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]:  #1073 (line in Coconut source)
+def unzip(xs: _coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]) -> _coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]:  #1073 (line in Coconut source)
     return _coconut_tail_call((tuple), (_map)(list, _zip(*xs)))  # type: ignore  #1074 (line in Coconut source)
 
 
-unzip3: _coconut.typing.Callable[[_coconut.typing.Iterable[T.Tuple[Ta, Tb, Tc]]], T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]]]  #1076 (line in Coconut source)
+unzip3: _coconut.typing.Callable[[_coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb, Tc]]], _coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]]]  #1076 (line in Coconut source)
 unzip3 = unzip  # type: ignore  #1077 (line in Coconut source)
 
 

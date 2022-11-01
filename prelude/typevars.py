@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xc2922255
+# __coconut_hash__ = 0x378cc1ef
 
-# Compiled with Coconut version 2.0.0-post_dev23 [How Not to Be Seen]
+# Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
