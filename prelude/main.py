@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x5288590e
+# __coconut_hash__ = 0x699bd50b
 
 # Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
 
@@ -628,10 +628,10 @@ Enum = Ord  #188 (line in Coconut source)
 TEnum = T.TypeVar("TEnum", bound=Enum)  #189 (line in Coconut source)
 
 succ: _coconut.typing.Callable[[TEnum], TEnum]  #191 (line in Coconut source)
-succ = _coconut.functools.partial((_coconut.operator.add), 1)  #192 (line in Coconut source)
+succ = (_coconut.functools.partial(_coconut.operator.add, 1))  #192 (line in Coconut source)
 
 pred: _coconut.typing.Callable[[TEnum], TEnum]  #194 (line in Coconut source)
-pred = _coconut_partial((_coconut_minus), {1: 1}, 2, ())  #195 (line in Coconut source)
+pred = (_coconut_partial(_coconut_minus, {1: 1}, 2, ()))  #195 (line in Coconut source)
 
 toEnum = NotImplemented  #197 (line in Coconut source)
 
@@ -645,7 +645,7 @@ def enumFrom(first: TEnum) -> _coconut.typing.Iterable[TEnum]:  #202 (line in Co
 
 def enumFromThen(first: TEnum, second: TEnum) -> _coconut.typing.Iterable[TEnum]:  #205 (line in Coconut source)
     step = fromEnum(second) - fromEnum(first)  #206 (line in Coconut source)
-    return (iterate(_coconut.functools.partial((_coconut.operator.add), step), first) if step >= 0 else ())  # type: ignore  #207 (line in Coconut source)
+    return (iterate((_coconut_partial(_coconut.operator.add, {1: step}, 2, ())), first) if step >= 0 else ())  # type: ignore  #207 (line in Coconut source)
 
 
 def enumFromTo(first: TEnum, last: TEnum) -> _coconut.typing.Iterable[TEnum]:  #209 (line in Coconut source)
@@ -659,7 +659,7 @@ def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> _coconut.typing.
     steps = dist / step if step != 0 else 0  #216 (line in Coconut source)
     if steps < 0:  #217 (line in Coconut source)
         return (())  #218 (line in Coconut source)
-    counter = iterate(_coconut.functools.partial((_coconut.operator.add), step), first)  #219 (line in Coconut source)
+    counter = iterate((_coconut_partial(_coconut.operator.add, {1: step}, 2, ())), first)  #219 (line in Coconut source)
     return (_coconut_iter_getitem(counter, _coconut.slice(None, int(steps) + 1)) if steps != 0 else counter)  #220 (line in Coconut source)
 
 
@@ -900,7 +900,7 @@ toInteger = _int  #352 (line in Coconut source)
 Fractional = Rational  #355 (line in Coconut source)
 
 recip: _coconut.typing.Callable[[Fractional], Fractional]  #357 (line in Coconut source)
-recip = _coconut.functools.partial((_coconut.operator.truediv), 1)  #358 (line in Coconut source)
+recip = (_coconut.functools.partial(_coconut.operator.truediv, 1))  #358 (line in Coconut source)
 
 def fromRational(x: Rational) -> Fractional:  #360 (line in Coconut source)
     return (x)  #360 (line in Coconut source)
@@ -1953,12 +1953,12 @@ zip3 = _zip  #1065 (line in Coconut source)
 
 @_coconut_tco  #1067 (line in Coconut source)
 def zipWith(func: _coconut.typing.Callable[[Ta, Tb], Tc], xs1: _coconut.typing.Iterable[Ta], xs2: _coconut.typing.Iterable[Tb]) -> _coconut.typing.Iterable[Tc]:  #1067 (line in Coconut source)
-    return _coconut_tail_call(starmap, func, zip(xs1, xs2))  #1068 (line in Coconut source)
+    return _coconut_tail_call(_map, func, xs1, xs2)  #1068 (line in Coconut source)
 
 
 @_coconut_tco  #1070 (line in Coconut source)
 def zipWith3(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], xs1: _coconut.typing.Iterable[Ta], xs2: _coconut.typing.Iterable[Tb], xs3: _coconut.typing.Iterable[Tc]) -> _coconut.typing.Iterable[Td]:  #1070 (line in Coconut source)
-    return _coconut_tail_call(starmap, func, _zip(xs1, xs2, xs3))  #1071 (line in Coconut source)
+    return _coconut_tail_call(_map, func, xs1, xs2, xs3)  #1071 (line in Coconut source)
 
 
 @_coconut_tco  #1073 (line in Coconut source)

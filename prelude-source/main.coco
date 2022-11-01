@@ -189,10 +189,10 @@ Enum = Ord
 TEnum = T.TypeVar("TEnum", bound=Enum)
 
 succ: TEnum -> TEnum
-succ = (+)$(1)
+succ = (1+.)
 
 pred: TEnum -> TEnum
-pred = (-)$(?, 1)
+pred = (.-1)
 
 toEnum = NotImplemented
 
@@ -204,7 +204,7 @@ def enumFrom(first: TEnum) -> TEnum$[] =
 
 def enumFromThen(first: TEnum, second: TEnum) -> TEnum$[] =
     step = fromEnum(second) - fromEnum(first)
-    iterate((+)$(step), first) if step >= 0 else ()  # type: ignore
+    iterate((.+step), first) if step >= 0 else ()  # type: ignore
 
 def enumFromTo(first: TEnum, last: TEnum) -> TEnum$[] =
     dist = fromEnum(last) - fromEnum(first)
@@ -216,7 +216,7 @@ def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> TEnum$[] =
     steps = dist/step if step != 0 else 0
     if steps < 0:
         return ()
-    counter = iterate((+)$(step), first)
+    counter = iterate((.+step), first)
     counter$[:int(steps)+1] if steps != 0 else counter
 
 
@@ -355,7 +355,7 @@ toInteger = _int
 Fractional = Rational
 
 recip: Fractional -> Fractional
-recip = (/)$(1)
+recip = (1/.)
 
 def fromRational(x: Rational) -> Fractional = x
 
@@ -1065,10 +1065,10 @@ zip3: (Ta$[], Tb$[], Tc$[]) -> (Ta; Tb; Tc)$[]
 zip3 = _zip
 
 def zipWith(func: (Ta, Tb) -> Tc, xs1: Ta$[], xs2: Tb$[]) -> Tc$[] =
-    starmap(func, zip(xs1, xs2))
+    _map(func, xs1, xs2)
 
 def zipWith3(func: (Ta, Tb, Tc) -> Td, xs1: Ta$[], xs2: Tb$[], xs3: Tc$[]) -> Td$[] =
-    starmap(func, _zip(xs1, xs2, xs3))
+    _map(func, xs1, xs2, xs3)
 
 def unzip(xs: (Ta; Tb)$[]) -> (Ta[]; Tb[]) =
     _zip(*xs) |> _map$(list) |> tuple  # type: ignore
