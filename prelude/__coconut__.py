@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
+# Compiled with Coconut version 2.1.1-post_dev6 [The Spanish Inquisition]
 
 """Built-in Coconut utilities."""
 
@@ -41,13 +41,14 @@ class _coconut:
     import typing
     if _coconut_sys.version_info < (3, 10):
         try:
-            from typing_extensions import TypeAlias, ParamSpec
+            from typing_extensions import TypeAlias, ParamSpec, Concatenate
         except ImportError:
             class you_need_to_install_typing_extensions:
                 __slots__ = ()
-            TypeAlias = ParamSpec = you_need_to_install_typing_extensions()
+            TypeAlias = ParamSpec = Concatenate = you_need_to_install_typing_extensions()
         typing.TypeAlias = TypeAlias
         typing.ParamSpec = ParamSpec
+        typing.Concatenate = Concatenate
     if _coconut_sys.version_info < (3, 11):
         try:
             from typing_extensions import TypeVarTuple, Unpack
@@ -133,7 +134,7 @@ def _coconut_tco(func):
                 wkref_func = None if wkref is None else wkref()
                 if wkref_func is call_func:
                     call_func = call_func._coconut_tco_func
-            result = call_func(*args, **kwargs)  # pass --no-tco to clean up your traceback
+            result = call_func(*args, **kwargs)  # use coconut --no-tco to clean up your traceback
             if not isinstance(result, _coconut_tail_call):
                 return result
             call_func, args, kwargs = result.func, result.args, result.kwargs

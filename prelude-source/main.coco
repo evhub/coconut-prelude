@@ -178,11 +178,11 @@ else:
     addpattern def compare(x, y if x < y) = lt
     addpattern def compare(x, y if x > y) = gt
 
-max: (TOrd, TOrd) -> TOrd
-max = _max
+\max: (TOrd, TOrd) -> TOrd
+\max = _max
 
-min: (TOrd, TOrd) -> TOrd
-min = _min
+\min: (TOrd, TOrd) -> TOrd
+\min = _min
 
 #### Enum:
 Enum = Ord
@@ -299,8 +299,8 @@ TNum = T.TypeVar("TNum", bound=Num)
 negate: TNum -> TNum
 negate = (-)
 
-abs: TNum -> TNum
-abs = _abs
+\abs: TNum -> TNum
+\abs = _abs
 
 if TYPE_CHECKING:
     def signum(x: Num) -> int:
@@ -394,8 +394,8 @@ def properFraction(x: RealFrac) -> (int; RealFrac) =
 truncate: RealFrac -> int
 truncate = _int
 
-round: RealFrac -> int
-round = _round
+\round: RealFrac -> int
+\round = _round
 
 ceiling: RealFrac -> int
 ceiling = _ceil
@@ -516,7 +516,7 @@ def mconcat(ms: TMonoid[]) -> TMonoid =
 #### Functor:
 Functor = T.Iterable
 
-def fmap(f: Ta -> Tb, xs: Functor[Ta]) -> Functor[Tb]:  # type: ignore
+def \fmap(f: Ta -> Tb, xs: Functor[Ta]) -> Functor[Tb]:  # type: ignore
     """
     -- fmap is overridden by the __fmap__ method
     """
@@ -785,8 +785,8 @@ maximum = _max
 minimum: Foldable[TOrd] -> TOrd
 minimum = _min
 
-sum: Foldable[TNum] -> TNum
-sum = _sum
+\sum: Foldable[TNum] -> TNum
+\sum = _sum
 
 product: Foldable[TNum] -> TNum
 product = reduce$(*)
@@ -812,7 +812,7 @@ mapM = traverse
 
 
 ## Miscellaneous functions:
-id: Ta -> Ta = ident
+\id: Ta -> Ta = ident
 
 def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     """
@@ -906,8 +906,8 @@ def cons(x: Ta, xs: Ta$[]) -> Ta$[] =
     """
     (::)([x], xs)
 
-map: (Ta -> Tb, Ta$[]) -> Tb$[]  # type: ignore
-map = _map  # type: ignore
+\map: (Ta -> Tb, Ta$[]) -> Tb$[]  # type: ignore
+\map = _map  # type: ignore
 
 def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     """
@@ -917,8 +917,8 @@ def chain(xs: Ta$[], ys: Ta$[]) -> Ta$[] =
     (::)(xs, ys)
 (++) = chain
 
-filter: (Ta -> bool, Ta$[]) -> Ta$[]  # type: ignore
-filter = _filter  # type: ignore
+\filter: (Ta -> bool, Ta$[]) -> Ta$[]  # type: ignore
+\filter = _filter  # type: ignore
 
 head: Ta$[] -> Ta
 head = .$[0]
@@ -952,11 +952,11 @@ and_ = _all
 or_: Foldable[bool] -> bool
 or_ = _any
 
-any: ((Ta -> bool), Foldable[Ta]) -> bool
-any = or_..map
+\any: ((Ta -> bool), Foldable[Ta]) -> bool
+\any = or_..map
 
-all: ((Ta -> bool), Foldable[Ta]) -> bool
-all = and_..map
+\all: ((Ta -> bool), Foldable[Ta]) -> bool
+\all = and_..map
 
 def concat(xs: Foldable[Ta$[]]) -> Ta$[] =
     _reduce((::), xs, ())
@@ -1058,8 +1058,8 @@ def lookup(key: Ta, assocs: (Ta; Tb)$[]) -> Maybe:
 
 
 ## Zipping and unzipping lists:
-zip: (Ta$[], Tb$[]) -> (Ta; Tb)$[]  # type: ignore
-zip = _zip  # type: ignore
+\zip: (Ta$[], Tb$[]) -> (Ta; Tb)$[]  # type: ignore
+\zip = _zip  # type: ignore
 
 zip3: (Ta$[], Tb$[], Tc$[]) -> (Ta; Tb; Tc)$[]
 zip3 = _zip
@@ -1223,7 +1223,7 @@ putChar = putStr
 def putStrLn(s: str) -> IO =
     IO(_print$(s))
 
-def print(x: Ta) -> IO =  # type: ignore
+def \print(x: Ta) -> IO =  # type: ignore
     IO(_print$(show(x)))
 
 

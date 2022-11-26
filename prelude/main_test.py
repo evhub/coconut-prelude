@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb49b7ab4
+# __coconut_hash__ = 0x75169e06
 
-# Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
+# Compiled with Coconut version 2.1.1-post_dev6 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -83,6 +83,7 @@ def test_Ordering():  #33 (line in Coconut source)
 def test_Tuples():  #44 (line in Coconut source)
     assert (fst)((1, 2)) == 1 == (snd)((2, 1))  #45 (line in Coconut source)
     @_coconut_mark_as_match  #46 (line in Coconut source)
+    @_coconut_mark_as_match  #46 (line in Coconut source)
     def _coconut_lambda_0(*_coconut_match_args, **_coconut_match_kwargs):  #46 (line in Coconut source)
         _coconut_match_check_0 = False  #46 (line in Coconut source)
         _coconut_match_set_name_x = _coconut_sentinel  #46 (line in Coconut source)
@@ -102,6 +103,7 @@ def test_Tuples():  #44 (line in Coconut source)
         if not _coconut_match_check_0:  #46 (line in Coconut source)
             raise _coconut_FunctionMatchError('assert uncurry_tuple(+)((1, 2),) == 3 == curry_tuple(def ((x, y),) -> x + y)(1, 2)', _coconut_match_args)  #46 (line in Coconut source)
         return (x + y)  #46 (line in Coconut source)
+
     assert uncurry_tuple(_coconut.operator.add)((1, 2)) == 3 == curry_tuple(_coconut_lambda_0)(1, 2)  #46 (line in Coconut source)
     assert curry_tuple(uncurry_tuple(_coconut_minus))(3, 2) == 1  #47 (line in Coconut source)
 
@@ -298,10 +300,12 @@ def test_Monad():  #188 (line in Coconut source)
     assert right3 == Right(3)  #229 (line in Coconut source)
     global glob  #230 (line in Coconut source)
     glob = 1  #230 (line in Coconut source)
+    @_coconut_tco  #231 (line in Coconut source)
     def _coconut_lambda_1(x):  #231 (line in Coconut source)
         global glob  #231 (line in Coconut source)
         glob = 2  #231 (line in Coconut source)
-        return (Just(glob))  #231 (line in Coconut source)
+        return _coconut_tail_call(Just, glob)  #231 (line in Coconut source)
+
     assert nothing == (bind)(nothing, (_coconut_lambda_1))  #231 (line in Coconut source)
     assert glob == 1  #232 (line in Coconut source)
 

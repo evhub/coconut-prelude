@@ -1,5 +1,5 @@
 .PHONY: test
-test: install
+test: docs
 	python -m pytest --strict-markers -s ./prelude
 
 .PHONY: clean-install

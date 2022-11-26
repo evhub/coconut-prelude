@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x699bd50b
+# __coconut_hash__ = 0x7f18befe
 
-# Compiled with Coconut version 2.1.0-post_dev13 [The Spanish Inquisition]
+# Compiled with Coconut version 2.1.1-post_dev6 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -1303,7 +1303,7 @@ if TYPE_CHECKING:  #645 (line in Coconut source)
         ...  #647 (line in Coconut source)
 
 else:  #648 (line in Coconut source)
-    class fail(_coconut.typing.NamedTuple("fail", [("msg", str)])):  #649 (line in Coconut source)
+    class fail(_coconut.typing.NamedTuple("fail", [("msg", 'str')])):  #649 (line in Coconut source)
         """
         -- fail is overridden by the __fail__ method
         """  #652 (line in Coconut source)
@@ -2071,6 +2071,7 @@ class IO(_coconut.collections.namedtuple("IO", ('io_func',))):  #1162 (line in C
     def __fail__(msg: str) -> IO:  #1168 (line in Coconut source)
         def _coconut_lambda_0():  #1169 (line in Coconut source)
             raise IOError(msg)  #1169 (line in Coconut source)
+
         return _coconut_tail_call(IO, _coconut_lambda_0)  #1169 (line in Coconut source)
 
 
@@ -2215,6 +2216,7 @@ def readLn() -> IO:  #1268 (line in Coconut source)
 def ioError(err: IOError) -> IO:  #1274 (line in Coconut source)
     def _coconut_lambda_1():  #1275 (line in Coconut source)
         raise err  #1275 (line in Coconut source)
+
     return _coconut_tail_call(IO, _coconut_lambda_1)  #1275 (line in Coconut source)
 
 

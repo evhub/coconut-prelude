@@ -70,4 +70,4 @@ from prelude import operator ++  # chain
 from prelude import operator !!  # at
 ```
 
-For additional documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://ghcdn.rawgit.org/evhub/coconut-prelude/master/prelude.html).
+For additional documentation, either [read the source code](https://github.com/evhub/coconut-prelude/blob/master/prelude-source/main.coco) or view the [auto-generated documentation](https://refined-github-html-preview.kidonng.workers.dev/evhub/coconut-prelude/raw/master/prelude.html).

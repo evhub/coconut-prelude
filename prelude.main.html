@@ -8,9 +8,9 @@
 <td valign=bottom>&nbsp;<br>
 <font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="prelude.html"><font color="#ffffff">prelude</font></a>.main</strong></big></big></font></td
 ><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cmain.py">c:\users\evanj\documents\github\coconut-prelude\prelude\main.py</a></font></td></tr></table>
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cmain.py">c:\users\evanj\github\coconut-prelude\prelude\main.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;__coconut_hash__&nbsp;=&nbsp;0xed086435</tt></p>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x7f18befe</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -20,13 +20,14 @@
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="typing.html">typing</a><br>
 <a href="ast.html">ast</a><br>
-</td><td width="25%" valign=top><a href="__coconut__.html">__coconut__</a><br>
-<a href="ntpath.html">ntpath</a><br>
-</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
-<a href="fractions.html">fractions</a><br>
-</td><td width="25%" valign=top><a href="math.html">math</a><br>
+<a href="prelude.__coconut__.html">prelude.__coconut__</a><br>
+</td><td width="25%" valign=top><a href="prelude.__coconut__.html">prelude.__coconut__</a><br>
+<a href="os.html">os</a><br>
 <a href="sys.html">sys</a><br>
-</td></tr></table></td></tr></table><p>
+</td><td width="25%" valign=top><a href="fractions.html">fractions</a><br>
+<a href="math.html">math</a><br>
+<a href="sys.html">sys</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -166,9 +167,13 @@ Methods defined here:<br>
 
 <dl><dt><a name="EQ-__minBound__"><strong>__minBound__</strong></a>(self)</dt></dl>
 
+<dl><dt><a name="EQ-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="EQ-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
 <dl><dt><a name="EQ-__radd__"><strong>__radd__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="EQ-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <dl><dt><a name="EQ-__sub__"><strong>__sub__</strong></a>(x, y)</dt></dl>
 
@@ -178,18 +183,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ()</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from EQ:<br>
 <dl><dt><a name="EQ-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="EQ-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="EQ-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="EQ-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="EQ-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#EQ">EQ</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="EQ-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#EQ">EQ</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from EQ:<br>
-<dl><dt><a name="EQ-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#EQ">EQ</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="EQ-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#EQ">EQ</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from EQ:<br>
@@ -197,9 +208,11 @@ Static methods inherited from EQ:<br>
 
 <hr>
 Data and other attributes inherited from EQ:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ()</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
@@ -213,13 +226,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="EQ-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="EQ-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="EQ-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="EQ-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="EQ-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#EQ-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="EQ-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#EQ-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="EQ-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
@@ -237,13 +247,11 @@ Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Either">class <strong>Either</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>####&nbsp;<a href="#Either">Either</a>:<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%">Static methods defined here:<br>
-<dl><dt><a name="Either-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Either-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'Either'</dt></dl>
 
-<dl><dt><a name="Either-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Either-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'Either'</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -291,9 +299,13 @@ Methods defined here:<br>
 
 <dl><dt><a name="GT-__minBound__"><strong>__minBound__</strong></a>(self)</dt></dl>
 
+<dl><dt><a name="GT-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="GT-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
 <dl><dt><a name="GT-__radd__"><strong>__radd__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="GT-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <dl><dt><a name="GT-__sub__"><strong>__sub__</strong></a>(x, y)</dt></dl>
 
@@ -307,18 +319,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ()</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from GT:<br>
 <dl><dt><a name="GT-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="GT-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="GT-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="GT-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="GT-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#GT">GT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="GT-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#GT">GT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from GT:<br>
-<dl><dt><a name="GT-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#GT">GT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="GT-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#GT">GT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from GT:<br>
@@ -326,9 +344,11 @@ Static methods inherited from GT:<br>
 
 <hr>
 Data and other attributes inherited from GT:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ()</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
@@ -342,13 +362,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="GT-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="GT-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="GT-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="GT-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="GT-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#GT-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="GT-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#GT-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="GT-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
@@ -367,7 +384,9 @@ Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a
 <font color="#000000" face="helvetica, arial"><a name="IO">class <strong>IO</strong></a>(IO)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#IO">IO</a>(io_func,)<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#IO">IO</a>(io_func)<br>
+&nbsp;<br>
+<a href="#IO">IO</a>(io_func,)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="prelude.main.html#IO">IO</a></dd>
@@ -377,25 +396,37 @@ Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="IO-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="IO-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
-<dl><dt><a name="IO-__fmap__"><strong>__fmap__</strong></a>(self, func:'_coconut.typing.Callable[[Ta], Tb]') -&gt; 'IO'</dt></dl>
+<dl><dt><a name="IO-__fmap__"><strong>__fmap__</strong></a>(self, func: '_coconut.typing.Callable[[Ta], Tb]') -&gt; 'IO'</dt></dl>
 
 <dl><dt><a name="IO-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
 
 <dl><dt><a name="IO-__join__"><strong>__join__</strong></a>(self) -&gt; 'IO'</dt></dl>
 
-<dl><dt><a name="IO-__mappend__"><strong>__mappend__</strong></a>(self, other:'IO') -&gt; 'IO'</dt></dl>
+<dl><dt><a name="IO-__mappend__"><strong>__mappend__</strong></a>(self, other: 'IO') -&gt; 'IO'</dt></dl>
+
+<dl><dt><a name="IO-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
 
 <dl><dt><a name="IO-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
+<dl><dt><a name="IO-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
 <hr>
 Static methods defined here:<br>
-<dl><dt><a name="IO-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'IO'</dt></dl>
+<dl><dt><a name="IO-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'IO'</dt></dl>
 
 <dl><dt><a name="IO-__mempty__"><strong>__mempty__</strong></a>() -&gt; 'IO'</dt></dl>
 
-<dl><dt><a name="IO-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'IO'</dt></dl>
+<dl><dt><a name="IO-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'IO'</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('io_func',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
 
 <hr>
 Methods inherited from IO:<br>
@@ -403,13 +434,13 @@ Methods inherited from IO:<br>
 
 <dl><dt><a name="IO-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="IO-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="IO-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="IO-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="IO-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from IO:<br>
-<dl><dt><a name="IO-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="IO-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from IO:<br>
@@ -422,14 +453,14 @@ Data descriptors inherited from IO:<br>
 </dl>
 <hr>
 Data and other attributes inherited from IO:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ('io_func',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="IO-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="IO-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="IO-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
@@ -448,13 +479,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="IO-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
 
-<dl><dt><a name="IO-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="IO-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="IO-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="IO-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#IO-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="IO-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#IO-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="IO-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 </td></tr></table> <p>
@@ -464,7 +492,9 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 <font color="#000000" face="helvetica, arial"><a name="Just">class <strong>Just</strong></a>(Just, <a href="prelude.main.html#Maybe">Maybe</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Just">Just</a>(x,)<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#Just">Just</a>(x)<br>
+&nbsp;<br>
+<a href="#Just">Just</a>(x,)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="prelude.main.html#Just">Just</a></dd>
@@ -475,6 +505,8 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="Just-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="Just-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
 <dl><dt><a name="Just-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
@@ -487,7 +519,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="Just-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
 
+<dl><dt><a name="Just-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="Just-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Just-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -495,18 +531,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('x',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from Just:<br>
 <dl><dt><a name="Just-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="Just-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="Just-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="Just-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="Just-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Just">Just</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="Just-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Just">Just</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from Just:<br>
-<dl><dt><a name="Just-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Just">Just</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="Just-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Just">Just</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from Just:<br>
@@ -519,14 +561,14 @@ Data descriptors inherited from Just:<br>
 </dl>
 <hr>
 Data and other attributes inherited from Just:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ('x',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="Just-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="Just-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="Just-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
@@ -537,22 +579,19 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="Just-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="Just-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="Just-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="Just-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="Just-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Just-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="Just-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Just-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="Just-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
 Static methods inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
-<dl><dt><a name="Just-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'Maybe'</dt></dl>
+<dl><dt><a name="Just-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'Maybe'</dt></dl>
 
 <dl><dt><a name="Just-__mempty__"><strong>__mempty__</strong></a>() -&gt; 'Maybe'</dt></dl>
 
-<dl><dt><a name="Just-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'Maybe'</dt></dl>
+<dl><dt><a name="Just-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'Maybe'</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
@@ -597,9 +636,13 @@ Methods defined here:<br>
 
 <dl><dt><a name="LT-__minBound__"><strong>__minBound__</strong></a>(self)</dt></dl>
 
+<dl><dt><a name="LT-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="LT-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
 <dl><dt><a name="LT-__radd__"><strong>__radd__</strong></a>(x, y)</dt></dl>
+
+<dl><dt><a name="LT-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <dl><dt><a name="LT-__sub__"><strong>__sub__</strong></a>(x, y)</dt></dl>
 
@@ -613,18 +656,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ()</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from LT:<br>
 <dl><dt><a name="LT-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="LT-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="LT-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="LT-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="LT-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#LT">LT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="LT-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#LT">LT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from LT:<br>
-<dl><dt><a name="LT-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#LT">LT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="LT-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#LT">LT</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from LT:<br>
@@ -632,9 +681,11 @@ Static methods inherited from LT:<br>
 
 <hr>
 Data and other attributes inherited from LT:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ()</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
@@ -648,13 +699,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="LT-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="LT-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="LT-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="LT-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="LT-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#LT-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="LT-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#LT-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="LT-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
@@ -673,7 +721,9 @@ Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a
 <font color="#000000" face="helvetica, arial"><a name="Left">class <strong>Left</strong></a>(Left, <a href="prelude.main.html#Either">Either</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Left">Left</a>(x,)<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#Left">Left</a>(x)<br>
+&nbsp;<br>
+<a href="#Left">Left</a>(x,)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="prelude.main.html#Left">Left</a></dd>
@@ -684,9 +734,11 @@ Data descriptors inherited from <a href="prelude.main.html#Ordering">Ordering</a
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="Left-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="Left-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
-<dl><dt><a name="Left-__fmap__"><strong>__fmap__</strong></a>(self, func:'_coconut.typing.Callable[[Ta], Tb]') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Left-__fmap__"><strong>__fmap__</strong></a>(self, func: '_coconut.typing.Callable[[Ta], Tb]') -&gt; 'Either'</dt></dl>
 
 <dl><dt><a name="Left-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
 
@@ -698,7 +750,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="Left-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
 
+<dl><dt><a name="Left-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="Left-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Left-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <hr>
 Static methods defined here:<br>
@@ -710,18 +766,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('x',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from Left:<br>
 <dl><dt><a name="Left-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="Left-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="Left-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="Left-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="Left-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Left">Left</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="Left-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Left">Left</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from Left:<br>
-<dl><dt><a name="Left-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Left">Left</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="Left-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Left">Left</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from Left:<br>
@@ -734,14 +796,14 @@ Data descriptors inherited from Left:<br>
 </dl>
 <hr>
 Data and other attributes inherited from Left:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ('x',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="Left-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="Left-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="Left-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
@@ -752,20 +814,17 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="Left-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="Left-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="Left-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="Left-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="Left-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Left-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="Left-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Left-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="Left-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
 Static methods inherited from <a href="prelude.main.html#Either">Either</a>:<br>
-<dl><dt><a name="Left-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Left-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'Either'</dt></dl>
 
-<dl><dt><a name="Left-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Left-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'Either'</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<br>
@@ -782,11 +841,11 @@ Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<b
 <td colspan=2><tt>####&nbsp;<a href="#Maybe">Maybe</a>:<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%">Static methods defined here:<br>
-<dl><dt><a name="Maybe-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'Maybe'</dt></dl>
+<dl><dt><a name="Maybe-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'Maybe'</dt></dl>
 
 <dl><dt><a name="Maybe-__mempty__"><strong>__mempty__</strong></a>() -&gt; 'Maybe'</dt></dl>
 
-<dl><dt><a name="Maybe-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'Maybe'</dt></dl>
+<dl><dt><a name="Maybe-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'Maybe'</dt></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -813,15 +872,27 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="Mempty-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="Mempty-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
 <dl><dt><a name="Mempty-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
 
+<dl><dt><a name="Mempty-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="Mempty-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Mempty-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <hr>
 Static methods defined here:<br>
-<dl><dt><a name="Mempty-mempty_as"><strong>mempty_as</strong></a>(M:'TMonoid') -&gt; 'TMonoid'</dt></dl>
+<dl><dt><a name="Mempty-mempty_as"><strong>mempty_as</strong></a>(M: 'TMonoid') -&gt; 'TMonoid'</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ()</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
 
 <hr>
 Methods inherited from Mempty:<br>
@@ -829,13 +900,13 @@ Methods inherited from Mempty:<br>
 
 <dl><dt><a name="Mempty-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="Mempty-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="Mempty-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="Mempty-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Mempty">Mempty</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="Mempty-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Mempty">Mempty</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from Mempty:<br>
-<dl><dt><a name="Mempty-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Mempty">Mempty</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="Mempty-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Mempty">Mempty</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from Mempty:<br>
@@ -843,14 +914,14 @@ Static methods inherited from Mempty:<br>
 
 <hr>
 Data and other attributes inherited from Mempty:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ()</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="Mempty-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="Mempty-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="Mempty-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
@@ -869,13 +940,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="Mempty-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
 
-<dl><dt><a name="Mempty-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="Mempty-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="Mempty-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="Mempty-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Mempty-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="Mempty-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Mempty-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="Mempty-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 </td></tr></table> <p>
@@ -885,7 +953,7 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 <font color="#000000" face="helvetica, arial"><a name="Nothing">class <strong>Nothing</strong></a>(Nothing, <a href="prelude.main.html#Maybe">Maybe</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Nothing">Nothing</a>()<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt>--&nbsp;<a href="#Nothing">Nothing</a>&nbsp;is&nbsp;the&nbsp;data&nbsp;type;&nbsp;use&nbsp;nothing&nbsp;for&nbsp;the&nbsp;canonical&nbsp;instance<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="prelude.main.html#Nothing">Nothing</a></dd>
@@ -896,6 +964,8 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="Nothing-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="Nothing-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
 <dl><dt><a name="Nothing-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
@@ -908,7 +978,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="Nothing-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
 
+<dl><dt><a name="Nothing-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="Nothing-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Nothing-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -916,18 +990,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ()</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from Nothing:<br>
 <dl><dt><a name="Nothing-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="Nothing-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="Nothing-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="Nothing-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="Nothing-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Nothing">Nothing</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="Nothing-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Nothing">Nothing</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from Nothing:<br>
-<dl><dt><a name="Nothing-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Nothing">Nothing</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="Nothing-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Nothing">Nothing</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from Nothing:<br>
@@ -935,14 +1015,14 @@ Static methods inherited from Nothing:<br>
 
 <hr>
 Data and other attributes inherited from Nothing:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ()</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl...y copy and pickle.'<font color="#c040c0">\n</font>        return tuple(self)<font color="#c040c0">\n\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="Nothing-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="Nothing-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="Nothing-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
@@ -953,22 +1033,19 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="Nothing-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="Nothing-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="Nothing-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="Nothing-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="Nothing-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Nothing-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="Nothing-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Nothing-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="Nothing-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
 Static methods inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
-<dl><dt><a name="Nothing-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'Maybe'</dt></dl>
+<dl><dt><a name="Nothing-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'Maybe'</dt></dl>
 
 <dl><dt><a name="Nothing-__mempty__"><strong>__mempty__</strong></a>() -&gt; 'Maybe'</dt></dl>
 
-<dl><dt><a name="Nothing-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'Maybe'</dt></dl>
+<dl><dt><a name="Nothing-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'Maybe'</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
@@ -981,9 +1058,7 @@ Data descriptors inherited from <a href="prelude.main.html#Maybe">Maybe</a>:<br>
 <td colspan=3 valign=bottom>&nbsp;<br>
 <font color="#000000" face="helvetica, arial"><a name="Ordering">class <strong>Ordering</strong></a>(<a href="builtins.html#object">builtins.object</a>)</font></td></tr>
     
-<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>####&nbsp;<a href="#Ordering">Ordering</a>:<br>&nbsp;</tt></td></tr>
-<tr><td>&nbsp;</td>
+<tr><td bgcolor="#ffc8d8"><tt>&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%">Static methods defined here:<br>
 <dl><dt><a name="Ordering-__mempty__"><strong>__mempty__</strong></a>() -&gt; 'Ordering'</dt></dl>
 
@@ -1002,7 +1077,9 @@ Data descriptors defined here:<br>
 <font color="#000000" face="helvetica, arial"><a name="Right">class <strong>Right</strong></a>(Right, <a href="prelude.main.html#Either">Either</a>)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#Right">Right</a>(x,)<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#Right">Right</a>(x)<br>
+&nbsp;<br>
+<a href="#Right">Right</a>(x,)<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="prelude.main.html#Right">Right</a></dd>
@@ -1013,6 +1090,8 @@ Data descriptors defined here:<br>
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="Right-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="Right-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
 <dl><dt><a name="Right-__ge__"><strong>__ge__</strong></a>(x, y)</dt></dl>
@@ -1025,7 +1104,11 @@ Methods defined here:<br>
 
 <dl><dt><a name="Right-__lt__"><strong>__lt__</strong></a>(x, y)</dt></dl>
 
+<dl><dt><a name="Right-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="Right-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
+
+<dl><dt><a name="Right-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
 
 <hr>
 Data descriptors defined here:<br>
@@ -1033,18 +1116,24 @@ Data descriptors defined here:<br>
 <dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
 </dl>
 <hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('x',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
+
+<hr>
 Methods inherited from Right:<br>
 <dl><dt><a name="Right-__getnewargs__"><strong>__getnewargs__</strong></a>(self)</dt><dd><tt>Return&nbsp;self&nbsp;as&nbsp;a&nbsp;plain&nbsp;tuple.&nbsp;&nbsp;Used&nbsp;by&nbsp;copy&nbsp;and&nbsp;pickle.</tt></dd></dl>
 
 <dl><dt><a name="Right-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="Right-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="Right-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="Right-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Right">Right</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="Right-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#Right">Right</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from Right:<br>
-<dl><dt><a name="Right-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Right">Right</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="Right-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#Right">Right</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from Right:<br>
@@ -1057,14 +1146,14 @@ Data descriptors inherited from Right:<br>
 </dl>
 <hr>
 Data and other attributes inherited from Right:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ('x',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="Right-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="Right-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="Right-__getattribute__"><strong>__getattribute__</strong></a>(self, name, /)</dt><dd><tt>Return&nbsp;getattr(self,&nbsp;name).</tt></dd></dl>
@@ -1075,20 +1164,17 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="Right-__len__"><strong>__len__</strong></a>(self, /)</dt><dd><tt>Return&nbsp;len(self).</tt></dd></dl>
 
-<dl><dt><a name="Right-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="Right-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="Right-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="Right-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#Right-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="Right-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#Right-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="Right-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 <hr>
 Static methods inherited from <a href="prelude.main.html#Either">Either</a>:<br>
-<dl><dt><a name="Right-__fail__"><strong>__fail__</strong></a>(msg:'str') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Right-__fail__"><strong>__fail__</strong></a>(msg: 'str') -&gt; 'Either'</dt></dl>
 
-<dl><dt><a name="Right-__pure__"><strong>__pure__</strong></a>(x:'Ta') -&gt; 'Either'</dt></dl>
+<dl><dt><a name="Right-__pure__"><strong>__pure__</strong></a>(x: 'Ta') -&gt; 'Either'</dt></dl>
 
 <hr>
 Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<br>
@@ -1102,7 +1188,9 @@ Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<b
 <font color="#000000" face="helvetica, arial"><a name="fail">class <strong>fail</strong></a>(fail)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt>--&nbsp;<a href="#fail">fail</a>&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fail__&nbsp;method<br>&nbsp;</tt></td></tr>
+<td colspan=2><tt><a href="#fail">fail</a>(msg)<br>
+&nbsp;<br>
+--&nbsp;<a href="#fail">fail</a>&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fail__&nbsp;method<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
 <dd><a href="prelude.main.html#fail">fail</a></dd>
@@ -1112,19 +1200,31 @@ Data descriptors inherited from <a href="prelude.main.html#Either">Either</a>:<b
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="fail-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
 <dl><dt><a name="fail-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
-<dl><dt><a name="fail-__fmap__"><strong>__fmap__</strong></a>(self, func:'_coconut.typing.Callable[[Ta], Tb]') -&gt; 'T.Any'</dt></dl>
+<dl><dt><a name="fail-__fmap__"><strong>__fmap__</strong></a>(self, func: '_coconut.typing.Callable[[Ta], Tb]') -&gt; 'T.Any'</dt></dl>
 
 <dl><dt><a name="fail-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
 
+<dl><dt><a name="fail-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="fail-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
-<dl><dt><a name="fail-fail_as"><strong>fail_as</strong></a>(self, M:'TMonad') -&gt; 'TMonad'</dt></dl>
+<dl><dt><a name="fail-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="fail-fail_as"><strong>fail_as</strong></a>(self, M: 'TMonad') -&gt; 'TMonad'</dt></dl>
 
 <hr>
 Static methods defined here:<br>
 <dl><dt><a name="fail-__bool__"><strong>__bool__</strong></a>() -&gt; 'bool'</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('msg',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
 
 <hr>
 Methods inherited from fail:<br>
@@ -1132,13 +1232,13 @@ Methods inherited from fail:<br>
 
 <dl><dt><a name="fail-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="fail-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="fail-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="fail-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#fail">fail</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="fail-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#fail">fail</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from fail:<br>
-<dl><dt><a name="fail-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#fail">fail</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="fail-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#fail">fail</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from fail:<br>
@@ -1151,18 +1251,18 @@ Data descriptors inherited from fail:<br>
 </dl>
 <hr>
 Data and other attributes inherited from fail:<br>
-<dl><dt><strong>__annotations__</strong> = OrderedDict([('msg', _ForwardRef('str'))])</dl>
+<dl><dt><strong>__annotations__</strong> = {'msg': ForwardRef('str')}</dl>
 
-<dl><dt><strong>_field_types</strong> = OrderedDict([('msg', _ForwardRef('str'))])</dl>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
+<dl><dt><strong>_field_types</strong> = {'msg': ForwardRef('str')}</dl>
 
 <dl><dt><strong>_fields</strong> = ('msg',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="fail-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="fail-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="fail-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
@@ -1181,13 +1281,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="fail-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
 
-<dl><dt><a name="fail-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="fail-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="fail-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="fail-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#fail-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="fail-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#fail-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="fail-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 </td></tr></table> <p>
@@ -1197,7 +1294,9 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 <font color="#000000" face="helvetica, arial"><a name="pure">class <strong>pure</strong></a>(pure)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#return_">return_</a>&nbsp;=&nbsp;return<br>
+<td colspan=2><tt><a href="#pure">pure</a>(val)<br>
+&nbsp;<br>
+<a href="#return_">return_</a>&nbsp;=&nbsp;return<br>
 --&nbsp;<a href="#pure">pure</a>/return&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__pure__&nbsp;method<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -1208,15 +1307,29 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="pure-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__call__"><strong>__call__</strong></a>(self, arg: 'T.Any') -&gt; 'T.Any'</dt><dd><tt>Implicitly&nbsp;casts&nbsp;<a href="#pure">pure</a>&nbsp;to&nbsp;the&nbsp;Applicative&nbsp;function&nbsp;instance.</tt></dd></dl>
+
 <dl><dt><a name="pure-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
 <dl><dt><a name="pure-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
 
 <dl><dt><a name="pure-__join__"><strong>__join__</strong></a>(self) -&gt; 'T.Any'</dt></dl>
 
+<dl><dt><a name="pure-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="pure-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
-<dl><dt><a name="pure-pure_as"><strong>pure_as</strong></a>(self, M:'TApp') -&gt; 'TApp'</dt></dl>
+<dl><dt><a name="pure-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="pure-pure_as"><strong>pure_as</strong></a>(self, M: 'TApp') -&gt; 'TApp'</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('val',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
 
 <hr>
 Methods inherited from pure:<br>
@@ -1224,13 +1337,13 @@ Methods inherited from pure:<br>
 
 <dl><dt><a name="pure-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="pure-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="pure-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="pure-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="pure-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from pure:<br>
-<dl><dt><a name="pure-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="pure-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from pure:<br>
@@ -1243,14 +1356,14 @@ Data descriptors inherited from pure:<br>
 </dl>
 <hr>
 Data and other attributes inherited from pure:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ('val',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="pure-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="pure-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="pure-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
@@ -1269,13 +1382,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="pure-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
 
-<dl><dt><a name="pure-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="pure-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="pure-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="pure-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#pure-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="pure-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#pure-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="pure-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 </td></tr></table> <p>
@@ -1285,7 +1395,9 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 <font color="#000000" face="helvetica, arial"><strong>return_</strong> = <a name="return_">class pure</a>(pure)</font></td></tr>
     
 <tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
-<td colspan=2><tt><a href="#return_">return_</a>&nbsp;=&nbsp;return<br>
+<td colspan=2><tt><a href="#return_">return_</a>(val)<br>
+&nbsp;<br>
+<a href="#return_">return_</a>&nbsp;=&nbsp;return<br>
 --&nbsp;<a href="#pure">pure</a>/return&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__pure__&nbsp;method<br>&nbsp;</tt></td></tr>
 <tr><td>&nbsp;</td>
 <td width="100%"><dl><dt>Method resolution order:</dt>
@@ -1296,15 +1408,29 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
 </dl>
 <hr>
 Methods defined here:<br>
+<dl><dt><a name="pure-__add__"><strong>__add__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
+
+<dl><dt><a name="pure-__call__"><strong>__call__</strong></a>(self, arg: 'T.Any') -&gt; 'T.Any'</dt><dd><tt>Implicitly&nbsp;casts&nbsp;<a href="#pure">pure</a>&nbsp;to&nbsp;the&nbsp;Applicative&nbsp;function&nbsp;instance.</tt></dd></dl>
+
 <dl><dt><a name="pure-__eq__"><strong>__eq__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self==value.</tt></dd></dl>
 
 <dl><dt><a name="pure-__hash__"><strong>__hash__</strong></a>(self)</dt><dd><tt>Return&nbsp;hash(self).</tt></dd></dl>
 
 <dl><dt><a name="pure-__join__"><strong>__join__</strong></a>(self) -&gt; 'T.Any'</dt></dl>
 
+<dl><dt><a name="pure-__mul__"><strong>__mul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
+
 <dl><dt><a name="pure-__ne__"><strong>__ne__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self!=value.</tt></dd></dl>
 
-<dl><dt><a name="pure-pure_as"><strong>pure_as</strong></a>(self, M:'TApp') -&gt; 'TApp'</dt></dl>
+<dl><dt><a name="pure-__rmul__"><strong>__rmul__</strong></a>(self, other)</dt><dd><tt>Return&nbsp;value*self.</tt></dd></dl>
+
+<dl><dt><a name="pure-pure_as"><strong>pure_as</strong></a>(self, M: 'TApp') -&gt; 'TApp'</dt></dl>
+
+<hr>
+Data and other attributes defined here:<br>
+<dl><dt><strong>__match_args__</strong> = ('val',)</dl>
+
+<dl><dt><strong>_coconut_is_data</strong> = True</dl>
 
 <hr>
 Methods inherited from pure:<br>
@@ -1312,13 +1438,13 @@ Methods inherited from pure:<br>
 
 <dl><dt><a name="pure-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;nicely&nbsp;formatted&nbsp;representation&nbsp;string</tt></dd></dl>
 
-<dl><dt><a name="pure-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;OrderedDict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
+<dl><dt><a name="pure-_asdict"><strong>_asdict</strong></a>(self)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;dict&nbsp;which&nbsp;maps&nbsp;field&nbsp;names&nbsp;to&nbsp;their&nbsp;values.</tt></dd></dl>
 
-<dl><dt><a name="pure-_replace"><strong>_replace</strong></a>(_self, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
+<dl><dt><a name="pure-_replace"><strong>_replace</strong></a>(self, /, **kwds)</dt><dd><tt>Return&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;replacing&nbsp;specified&nbsp;fields&nbsp;with&nbsp;new&nbsp;values</tt></dd></dl>
 
 <hr>
 Class methods inherited from pure:<br>
-<dl><dt><a name="pure-_make"><strong>_make</strong></a>(iterable, new=&lt;built-in method __new__ of type object at 0x000000006EDEC0D0&gt;, len=&lt;built-in function len&gt;)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
+<dl><dt><a name="pure-_make"><strong>_make</strong></a>(iterable)<font color="#909090"><font face="helvetica, arial"> from <a href="builtins.html#type">builtins.type</a></font></font></dt><dd><tt>Make&nbsp;a&nbsp;new&nbsp;<a href="#pure">pure</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;from&nbsp;a&nbsp;sequence&nbsp;or&nbsp;iterable</tt></dd></dl>
 
 <hr>
 Static methods inherited from pure:<br>
@@ -1331,14 +1457,14 @@ Data descriptors inherited from pure:<br>
 </dl>
 <hr>
 Data and other attributes inherited from pure:<br>
+<dl><dt><strong>_field_defaults</strong> = {}</dl>
+
 <dl><dt><strong>_fields</strong> = ('val',)</dl>
 
-<dl><dt><strong>_source</strong> = "from builtins import property as _property, tupl..._itemgetter(0), doc='Alias for field number 0')<font color="#c040c0">\n\n</font>"</dl>
+<dl><dt><strong>_fields_defaults</strong> = {}</dl>
 
 <hr>
 Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
-<dl><dt><a name="pure-__add__"><strong>__add__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self+value.</tt></dd></dl>
-
 <dl><dt><a name="pure-__contains__"><strong>__contains__</strong></a>(self, key, /)</dt><dd><tt>Return&nbsp;key&nbsp;in&nbsp;self.</tt></dd></dl>
 
 <dl><dt><a name="pure-__ge__"><strong>__ge__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&gt;=value.</tt></dd></dl>
@@ -1357,13 +1483,10 @@ Methods inherited from <a href="builtins.html#tuple">builtins.tuple</a>:<br>
 
 <dl><dt><a name="pure-__lt__"><strong>__lt__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self&lt;value.</tt></dd></dl>
 
-<dl><dt><a name="pure-__mul__"><strong>__mul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.n</tt></dd></dl>
+<dl><dt><a name="pure-count"><strong>count</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value.</tt></dd></dl>
 
-<dl><dt><a name="pure-__rmul__"><strong>__rmul__</strong></a>(self, value, /)</dt><dd><tt>Return&nbsp;self*value.</tt></dd></dl>
-
-<dl><dt><a name="pure-count"><strong>count</strong></a>(...)</dt><dd><tt>T.<a href="#return_-count">count</a>(value)&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;number&nbsp;of&nbsp;occurrences&nbsp;of&nbsp;value</tt></dd></dl>
-
-<dl><dt><a name="pure-index"><strong>index</strong></a>(...)</dt><dd><tt>T.<a href="#return_-index">index</a>(value,&nbsp;[start,&nbsp;[stop]])&nbsp;-&gt;&nbsp;integer&nbsp;--&nbsp;return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+<dl><dt><a name="pure-index"><strong>index</strong></a>(self, value, start=0, stop=9223372036854775807, /)</dt><dd><tt>Return&nbsp;first&nbsp;index&nbsp;of&nbsp;value.<br>
+&nbsp;<br>
 Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present.</tt></dd></dl>
 
 </td></tr></table></td></tr></table><p>
@@ -1374,100 +1497,81 @@ Raises&nbsp;ValueError&nbsp;if&nbsp;the&nbsp;value&nbsp;is&nbsp;not&nbsp;present
     
 <tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><dl><dt><a name="-abs"><strong>abs</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;absolute&nbsp;value&nbsp;of&nbsp;the&nbsp;argument.</tt></dd></dl>
- <dl><dt><a name="-acos"><strong>acos</strong></a>(...)</dt><dd><tt><a href="#-acos">acos</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;arc&nbsp;cosine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-acosh"><strong>acosh</strong></a>(...)</dt><dd><tt><a href="#-acosh">acosh</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;cosine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-acos"><strong>acos</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;arc&nbsp;cosine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-acosh"><strong>acosh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;cosine&nbsp;of&nbsp;x.</tt></dd></dl>
  <dl><dt><a name="-and_"><strong>and_</strong></a> = all(iterable, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;bool(x)&nbsp;is&nbsp;True&nbsp;for&nbsp;all&nbsp;values&nbsp;x&nbsp;in&nbsp;the&nbsp;iterable.<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;True.</tt></dd></dl>
- <dl><dt><a name="-ap"><strong>ap</strong></a>(fs:'Applicative[_coconut.typing.Callable[[Ta], Tb]]', xs:'Applicative[Ta]') -&gt; 'Applicative[Tb]'</dt><dd><tt>ap&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b<br>
+ <dl><dt><a name="-ap"><strong>ap</strong></a>(fs: 'Applicative[_coconut.typing.Callable[[Ta], Tb]]', xs: 'Applicative[Ta]') -&gt; 'Applicative[Tb]'</dt><dd><tt>ap&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b<br>
 ap&nbsp;=&nbsp;(&lt;*&gt;)<br>
 --&nbsp;ap&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__ap__&nbsp;method<br>
 --&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;a&nbsp;__pure__&nbsp;method<br>
 --&nbsp;the&nbsp;default&nbsp;implementation&nbsp;uses&nbsp;join&nbsp;(__join__)&nbsp;and&nbsp;fmap&nbsp;(__fmap__)</tt></dd></dl>
- <dl><dt><a name="-appendFile"><strong>appendFile</strong></a>(fpath:'FilePath', text:'str') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-apply"><strong>apply</strong></a>(func:'_coconut.typing.Callable[[Ta], Tb]', arg:'Ta') -&gt; 'Tb'</dt><dd><tt>apply&nbsp;::&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b<br>
-apply&nbsp;=&nbsp;($)</tt></dd></dl>
- <dl><dt><a name="-asIO"><strong>asIO</strong></a>(io:'IO') -&gt; 'IO'</dt><dd><tt>asIO&nbsp;::&nbsp;<a href="#IO">IO</a>&nbsp;a&nbsp;-&gt;&nbsp;<a href="#IO">IO</a>&nbsp;a<br>
+ <dl><dt><a name="-appendFile"><strong>appendFile</strong></a>(fpath: 'FilePath', text: 'str') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-apply"><strong>apply</strong></a>(func, arg)</dt><dd><tt>apply&nbsp;::&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b<br>
+apply&nbsp;=&nbsp;($)<br>
+--&nbsp;apply&nbsp;will&nbsp;automatically&nbsp;curry&nbsp;functions&nbsp;as&nbsp;in&nbsp;Haskell&nbsp;function<br>
+--&nbsp;&nbsp;application&nbsp;(see&nbsp;also&nbsp;`of`&nbsp;for&nbsp;the&nbsp;more&nbsp;general&nbsp;version)</tt></dd></dl>
+ <dl><dt><a name="-asIO"><strong>asIO</strong></a>(io: 'IO') -&gt; 'IO'</dt><dd><tt>asIO&nbsp;::&nbsp;<a href="#IO">IO</a>&nbsp;a&nbsp;-&gt;&nbsp;<a href="#IO">IO</a>&nbsp;a<br>
 asIO&nbsp;=&nbsp;id<br>
 --&nbsp;<a href="#-asIO">asIO</a>(x)&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;x&nbsp;`asTypeOf`&nbsp;<a href="#IO">IO</a>(...)</tt></dd></dl>
- <dl><dt><a name="-asTypeOf"><strong>asTypeOf</strong></a>(x:'Ta', y:'Ta') -&gt; 'Ta'</dt><dd><tt>--&nbsp;use&nbsp;asTypeOf&nbsp;to&nbsp;resolve&nbsp;<a href="#pure">pure</a>,&nbsp;<a href="#fail">fail</a>,&nbsp;and&nbsp;mempty&nbsp;to&nbsp;the&nbsp;correct&nbsp;type<br>
+ <dl><dt><a name="-asTypeOf"><strong>asTypeOf</strong></a>(x: 'Ta', y: 'Ta') -&gt; 'Ta'</dt><dd><tt>--&nbsp;use&nbsp;asTypeOf&nbsp;to&nbsp;resolve&nbsp;<a href="#pure">pure</a>,&nbsp;<a href="#fail">fail</a>,&nbsp;and&nbsp;mempty&nbsp;to&nbsp;the&nbsp;correct&nbsp;type<br>
 --&nbsp;set&nbsp;asTypeOf.RECURSION_LIMIT&nbsp;to&nbsp;control&nbsp;recursive&nbsp;resolution</tt></dd></dl>
- <dl><dt><a name="-asin"><strong>asin</strong></a>(...)</dt><dd><tt><a href="#-asin">asin</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;arc&nbsp;sine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-asinh"><strong>asinh</strong></a>(...)</dt><dd><tt><a href="#-asinh">asinh</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;sine&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-at"><strong>at</strong></a>(xs:'_coconut.typing.Iterable[Ta]', i:'int') -&gt; 'Ta'</dt><dd><tt>at&nbsp;::&nbsp;[a]&nbsp;-&gt;&nbsp;Int&nbsp;-&gt;&nbsp;a<br>
+ <dl><dt><a name="-asin"><strong>asin</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;arc&nbsp;sine&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-asinh"><strong>asinh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;sine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-at"><strong>at</strong></a>(xs: '_coconut.typing.Iterable[Ta]', i: 'int') -&gt; 'Ta'</dt><dd><tt>at&nbsp;::&nbsp;[a]&nbsp;-&gt;&nbsp;Int&nbsp;-&gt;&nbsp;a<br>
 at&nbsp;=&nbsp;(!!)</tt></dd></dl>
- <dl><dt><a name="-atan"><strong>atan</strong></a>(...)</dt><dd><tt><a href="#-atan">atan</a>(x)<br>
+ <dl><dt><a name="-atan"><strong>atan</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-atan2"><strong>atan2</strong></a>(y, x, /)</dt><dd><tt>Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;y/x.<br>
 &nbsp;<br>
-Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-atan2"><strong>atan2</strong></a>(...)</dt><dd><tt><a href="#-atan2">atan2</a>(y,&nbsp;x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;arc&nbsp;tangent&nbsp;(measured&nbsp;in&nbsp;radians)&nbsp;of&nbsp;y/x.<br>
 Unlike&nbsp;<a href="#-atan">atan</a>(y/x),&nbsp;the&nbsp;signs&nbsp;of&nbsp;both&nbsp;x&nbsp;and&nbsp;y&nbsp;are&nbsp;considered.</tt></dd></dl>
- <dl><dt><a name="-atanh"><strong>atanh</strong></a>(...)</dt><dd><tt><a href="#-atanh">atanh</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-bind"><strong>bind</strong></a>(m:'Monad[Ta]', func:'_coconut.typing.Callable[[Ta], TMonad]') -&gt; 'TMonad'</dt><dd><tt>bind&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;m&nbsp;b)&nbsp;-&gt;&nbsp;m&nbsp;b<br>
+ <dl><dt><a name="-atanh"><strong>atanh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-bind"><strong>bind</strong></a>(m: 'Monad[Ta]', func: '_coconut.typing.Callable[[Ta], TMonad]') -&gt; 'TMonad'</dt><dd><tt>bind&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;m&nbsp;b)&nbsp;-&gt;&nbsp;m&nbsp;b<br>
 bind&nbsp;=&nbsp;(&gt;&gt;=)<br>
 --&nbsp;bind&nbsp;is&nbsp;overridden&nbsp;by&nbsp;overriding&nbsp;fmap&nbsp;(__fmap__)&nbsp;and&nbsp;join&nbsp;(__join__)</tt></dd></dl>
- <dl><dt><a name="-bindFrom"><strong>bindFrom</strong></a>(func:'_coconut.typing.Callable[[Ta], TMonad]', m:'Monad[Ta]') -&gt; 'TMonad'</dt><dd><tt>bindFrom&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;m&nbsp;b)&nbsp;-&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;m&nbsp;b<br>
+ <dl><dt><a name="-bindFrom"><strong>bindFrom</strong></a>(func: '_coconut.typing.Callable[[Ta], TMonad]', m: 'Monad[Ta]') -&gt; 'TMonad'</dt><dd><tt>bindFrom&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;m&nbsp;b)&nbsp;-&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;m&nbsp;b<br>
 bindFrom&nbsp;=&nbsp;(=&lt;&lt;)</tt></dd></dl>
- <dl><dt><a name="-break_"><strong>break_</strong></a>(cond:'_coconut.typing.Callable[[Ta], bool]', xs:'_coconut.typing.Sequence[Ta]') -&gt; '_coconut.typing.Sequence[Ta]'</dt><dd><tt>break_&nbsp;=&nbsp;break</tt></dd></dl>
- <dl><dt><a name="-cbv"><strong>cbv</strong></a>(func:'_coconut.typing.Callable[[Ta], Tb]', arg:'Ta') -&gt; 'Tb'</dt><dd><tt>cbv&nbsp;::&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b<br>
-cbv&nbsp;=&nbsp;($!)</tt></dd></dl>
- <dl><dt><a name="-ceiling"><strong>ceiling</strong></a> = ceil(...)</dt><dd><tt>ceil(x)<br>
+ <dl><dt><a name="-break_"><strong>break_</strong></a>(cond: '_coconut.typing.Callable[[Ta], bool]', xs: '_coconut.typing.Sequence[Ta]') -&gt; '_coconut.typing.Sequence[Ta]'</dt><dd><tt>break_&nbsp;=&nbsp;break</tt></dd></dl>
+ <dl><dt><a name="-cbv"><strong>cbv</strong></a>(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -&gt; 'Tb'</dt><dd><tt>cbv&nbsp;::&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;b<br>
+cbv&nbsp;=&nbsp;($!)<br>
+--&nbsp;cbv&nbsp;is&nbsp;just&nbsp;an&nbsp;apply&nbsp;that&nbsp;doesn't&nbsp;curry&nbsp;the&nbsp;provided&nbsp;function</tt></dd></dl>
+ <dl><dt><a name="-ceiling"><strong>ceiling</strong></a> = ceil(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;ceiling&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
 &nbsp;<br>
-Return&nbsp;the&nbsp;ceiling&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
 This&nbsp;is&nbsp;the&nbsp;smallest&nbsp;integer&nbsp;&gt;=&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-chain"><strong>chain</strong></a>(xs:'_coconut.typing.Iterable[Ta]', ys:'_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt><dd><tt>chain&nbsp;::&nbsp;[a]&nbsp;-&gt;&nbsp;[a]&nbsp;-&gt;&nbsp;[a]<br>
+ <dl><dt><a name="-chain"><strong>chain</strong></a>(xs: '_coconut.typing.Iterable[Ta]', ys: '_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt><dd><tt>chain&nbsp;::&nbsp;[a]&nbsp;-&gt;&nbsp;[a]&nbsp;-&gt;&nbsp;[a]<br>
 chain&nbsp;=&nbsp;(++)</tt></dd></dl>
  <dl><dt><a name="-chr"><strong>chr</strong></a>(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
- <dl><dt><a name="-concat"><strong>concat</strong></a>(xs:'Foldable[_coconut.typing.Iterable[Ta]]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-cons"><strong>cons</strong></a>(x:'Ta', xs:'_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt><dd><tt>cons&nbsp;::&nbsp;a&nbsp;-&gt;&nbsp;[a]&nbsp;-&gt;&nbsp;[a]<br>
+ <dl><dt><a name="-concat"><strong>concat</strong></a>(xs: 'Foldable[_coconut.typing.Iterable[Ta]]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-cons"><strong>cons</strong></a>(x: 'Ta', xs: '_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt><dd><tt>cons&nbsp;::&nbsp;a&nbsp;-&gt;&nbsp;[a]&nbsp;-&gt;&nbsp;[a]<br>
 cons&nbsp;=&nbsp;(:)</tt></dd></dl>
- <dl><dt><a name="-const"><strong>const</strong></a>(x:'Ta') -&gt; '_coconut.typing.Callable[[Tb], Ta]'</dt></dl>
- <dl><dt><a name="-cos"><strong>cos</strong></a>(...)</dt><dd><tt><a href="#-cos">cos</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
- <dl><dt><a name="-cosh"><strong>cosh</strong></a>(...)</dt><dd><tt><a href="#-cosh">cosh</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;hyperbolic&nbsp;cosine&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-curry"><strong>curry</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Tc]') -&gt; '_coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]'</dt></dl>
- <dl><dt><a name="-div"><strong>div</strong></a> = floordiv(...)</dt><dd><tt>floordiv(a,&nbsp;b)&nbsp;--&nbsp;Same&nbsp;as&nbsp;a&nbsp;//&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-cos"><strong>cos</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;cosine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-cosh"><strong>cosh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;hyperbolic&nbsp;cosine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-curry_tuple"><strong>curry_tuple</strong></a>(func: '_coconut.typing.Callable[[_coconut.typing.Tuple[Ta, Tb]], Tc]') -&gt; '_coconut.typing.Callable[[Ta, Tb], Tc]'</dt><dd><tt>--&nbsp;curry&nbsp;a&nbsp;function&nbsp;of&nbsp;a&nbsp;tuple&nbsp;into&nbsp;a&nbsp;Python-style&nbsp;multi-place&nbsp;function</tt></dd></dl>
+ <dl><dt><a name="-div"><strong>div</strong></a> = floordiv(a, b, /)</dt><dd><tt>Same&nbsp;as&nbsp;a&nbsp;//&nbsp;b.</tt></dd></dl>
  <dl><dt><a name="-divMod"><strong>divMod</strong></a> = divmod(x, y, /)</dt><dd><tt>Return&nbsp;the&nbsp;tuple&nbsp;(x//y,&nbsp;x%y).&nbsp;&nbsp;Invariant:&nbsp;div*y&nbsp;+&nbsp;mod&nbsp;==&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-dot"><strong>dot</strong></a>(f:'_coconut.typing.Callable[[Tb], Tc]', g:'_coconut.typing.Callable[[Ta], Tb]') -&gt; '_coconut.typing.Callable[[Ta], Tc]'</dt><dd><tt>dot&nbsp;::&nbsp;(b&nbsp;-&gt;&nbsp;c)&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;c<br>
+ <dl><dt><a name="-dot"><strong>dot</strong></a>(f: '_coconut.typing.Callable[[Tb], Tc]', g: '_coconut.typing.Callable[[Ta], Tb]') -&gt; '_coconut.typing.Callable[[Ta], Tc]'</dt><dd><tt>dot&nbsp;::&nbsp;(b&nbsp;-&gt;&nbsp;c)&nbsp;-&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;a&nbsp;-&gt;&nbsp;c<br>
 dot&nbsp;=&nbsp;(.)</tt></dd></dl>
- <dl><dt><a name="-drop"><strong>drop</strong></a>(n:'int', xs:'_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-elem"><strong>elem</strong></a>(e:'Ta', xs:'Foldable[Ta]') -&gt; 'bool'</dt></dl>
- <dl><dt><a name="-enumFrom"><strong>enumFrom</strong></a>(first:'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
- <dl><dt><a name="-enumFromThen"><strong>enumFromThen</strong></a>(first:'TEnum', second:'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
- <dl><dt><a name="-enumFromThenTo"><strong>enumFromThenTo</strong></a>(first:'TEnum', second:'TEnum', last:'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
- <dl><dt><a name="-enumFromTo"><strong>enumFromTo</strong></a>(first:'TEnum', last:'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
- <dl><dt><a name="-error"><strong>error</strong></a>(msg:'str') -&gt; 'None'</dt></dl>
- <dl><dt><a name="-errorWithoutStackTrace"><strong>errorWithoutStackTrace</strong></a>(msg:'str') -&gt; 'None'</dt></dl>
- <dl><dt><a name="-even"><strong>even</strong></a>(x:'int') -&gt; 'bool'</dt></dl>
- <dl><dt><a name="-exp"><strong>exp</strong></a>(...)</dt><dd><tt><a href="#-exp">exp</a>(x)<br>
+ <dl><dt><a name="-drop"><strong>drop</strong></a>(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-elem"><strong>elem</strong></a>(e: 'Ta', xs: 'Foldable[Ta]') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-enumFrom"><strong>enumFrom</strong></a>(first: 'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
+ <dl><dt><a name="-enumFromThen"><strong>enumFromThen</strong></a>(first: 'TEnum', second: 'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
+ <dl><dt><a name="-enumFromThenTo"><strong>enumFromThenTo</strong></a>(first: 'TEnum', second: 'TEnum', last: 'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
+ <dl><dt><a name="-enumFromTo"><strong>enumFromTo</strong></a>(first: 'TEnum', last: 'TEnum') -&gt; '_coconut.typing.Iterable[TEnum]'</dt></dl>
+ <dl><dt><a name="-error"><strong>error</strong></a>(msg: 'str') -&gt; 'None'</dt></dl>
+ <dl><dt><a name="-errorWithoutStackTrace"><strong>errorWithoutStackTrace</strong></a>(msg: 'str') -&gt; 'None'</dt></dl>
+ <dl><dt><a name="-even"><strong>even</strong></a>(x: 'int') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-exp"><strong>exp</strong></a>(x, /)</dt><dd><tt>Return&nbsp;e&nbsp;raised&nbsp;to&nbsp;the&nbsp;power&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-floatDigits"><strong>floatDigits</strong></a>(x: 'float') -&gt; 'int'</dt></dl>
+ <dl><dt><a name="-floatRadix"><strong>floatRadix</strong></a>(x: 'float') -&gt; 'int'</dt></dl>
+ <dl><dt><a name="-floatRange"><strong>floatRange</strong></a>(x: 'float') -&gt; '_coconut.typing.Tuple[int, int]'</dt></dl>
+ <dl><dt><a name="-floor"><strong>floor</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
 &nbsp;<br>
-Return&nbsp;e&nbsp;raised&nbsp;to&nbsp;the&nbsp;power&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-flip"><strong>flip</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Tc]') -&gt; '_coconut.typing.Callable[[Tb, Ta], Tc]'</dt></dl>
- <dl><dt><a name="-floatDigits"><strong>floatDigits</strong></a>(x:'float') -&gt; 'int'</dt></dl>
- <dl><dt><a name="-floatRadix"><strong>floatRadix</strong></a>(x:'float') -&gt; 'int'</dt></dl>
- <dl><dt><a name="-floatRange"><strong>floatRange</strong></a>(x:'float') -&gt; 'T.Tuple[int, int]'</dt></dl>
- <dl><dt><a name="-floor"><strong>floor</strong></a>(...)</dt><dd><tt><a href="#-floor">floor</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;floor&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
 This&nbsp;is&nbsp;the&nbsp;largest&nbsp;integer&nbsp;&lt;=&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-fmapConst"><strong>fmapConst</strong></a>(x:'Ta', xs:'Functor') -&gt; 'Functor[Ta]'</dt><dd><tt>fmapConst&nbsp;::&nbsp;Functor&nbsp;f&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b<br>
+ <dl><dt><a name="-fmap"><strong>fmap</strong></a>(f: '_coconut.typing.Callable[[Ta], Tb]', xs: 'Functor[Ta]') -&gt; 'Functor[Tb]'</dt><dd><tt>--&nbsp;fmap&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fmap__&nbsp;method</tt></dd></dl>
+ <dl><dt><a name="-fmapConst"><strong>fmapConst</strong></a>(x: 'Ta', xs: 'Functor') -&gt; 'Functor[Ta]'</dt><dd><tt>fmapConst&nbsp;::&nbsp;Functor&nbsp;f&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b<br>
 fmapConst&nbsp;=&nbsp;(&lt;$)</tt></dd></dl>
- <dl><dt><a name="-foldMap"><strong>foldMap</strong></a>(func:'_coconut.typing.Callable[[Ta], TMonoid]', xs:'Foldable[Ta]') -&gt; 'TMonoid'</dt></dl>
- <dl><dt><a name="-foldl"><strong>foldl</strong></a>(func:'_coconut.typing.Callable[[Tb, Ta], Tb]', init:'Tb', xs:'Foldable[Ta]') -&gt; 'Tb'</dt></dl>
+ <dl><dt><a name="-foldMap"><strong>foldMap</strong></a>(func: '_coconut.typing.Callable[[Ta], TMonoid]', xs: 'Foldable[Ta]') -&gt; 'TMonoid'</dt></dl>
+ <dl><dt><a name="-foldl"><strong>foldl</strong></a>(func: '_coconut.typing.Callable[[Tb, Ta], Tb]', init: 'Tb', xs: 'Foldable[Ta]') -&gt; 'Tb'</dt></dl>
  <dl><dt><a name="-foldl1"><strong>foldl1</strong></a> = reduce(...)</dt><dd><tt><a href="#-reduce">reduce</a>(function,&nbsp;sequence[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
 &nbsp;<br>
 Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence,<br>
@@ -1476,16 +1580,15 @@ For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp
 ((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
 of&nbsp;the&nbsp;sequence&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
 sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
- <dl><dt><a name="-foldr"><strong>foldr</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Tb]', init:'Tb', xs:'Foldable[Ta]') -&gt; 'Tb'</dt></dl>
- <dl><dt><a name="-foldr1"><strong>foldr1</strong></a>(func:'_coconut.typing.Callable[[Ta, Ta], Ta]', xs:'Foldable[Ta]') -&gt; 'Ta'</dt></dl>
- <dl><dt><a name="-fromInteger"><strong>fromInteger</strong></a>(x:'Integer') -&gt; 'Num'</dt></dl>
- <dl><dt><a name="-fromIntegral"><strong>fromIntegral</strong></a> = fromInteger(x:'Integer') -&gt; 'Num'</dt></dl>
- <dl><dt><a name="-fromRational"><strong>fromRational</strong></a>(x:'Rational') -&gt; 'Fractional'</dt></dl>
+ <dl><dt><a name="-foldr"><strong>foldr</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb], Tb]', init: 'Tb', xs: 'Foldable[Ta]') -&gt; 'Tb'</dt></dl>
+ <dl><dt><a name="-foldr1"><strong>foldr1</strong></a>(func: '_coconut.typing.Callable[[Ta, Ta], Ta]', xs: 'Foldable[Ta]') -&gt; 'Ta'</dt></dl>
+ <dl><dt><a name="-fromInteger"><strong>fromInteger</strong></a>(x: 'Integer') -&gt; 'Num'</dt></dl>
+ <dl><dt><a name="-fromIntegral"><strong>fromIntegral</strong></a> = fromInteger(x: 'Integer') -&gt; 'Num'</dt></dl>
+ <dl><dt><a name="-fromRational"><strong>fromRational</strong></a>(x: 'Rational') -&gt; 'Fractional'</dt></dl>
  <dl><dt><a name="-hex"><strong>hex</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
 '0xc0ffee'</tt></dd></dl>
- <dl><dt><a name="-id"><strong>id</strong></a>(x:'Ta') -&gt; 'Ta'</dt><dd><tt>##&nbsp;Miscellaneous&nbsp;functions:</tt></dd></dl>
  <dl><dt><a name="-input"><strong>input</strong></a>(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
 &nbsp;<br>
 The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
@@ -1493,31 +1596,27 @@ trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
 On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
- <dl><dt><a name="-interact"><strong>interact</strong></a>(func:'_coconut.typing.Callable[[str], str]') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-ioError"><strong>ioError</strong></a>(err:'IOError') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-isIEEE"><strong>isIEEE</strong></a>(x:'float') -&gt; 'bool'</dt></dl>
- <dl><dt><a name="-isInfinite"><strong>isInfinite</strong></a> = isinf(...)</dt><dd><tt>isinf(x)&nbsp;-&gt;&nbsp;bool<br>
-&nbsp;<br>
-Return&nbsp;True&nbsp;if&nbsp;x&nbsp;is&nbsp;a&nbsp;positive&nbsp;or&nbsp;negative&nbsp;infinity,&nbsp;and&nbsp;False&nbsp;otherwise.</tt></dd></dl>
- <dl><dt><a name="-isNaN"><strong>isNaN</strong></a> = isnan(...)</dt><dd><tt>isnan(x)&nbsp;-&gt;&nbsp;bool<br>
-&nbsp;<br>
-Return&nbsp;True&nbsp;if&nbsp;x&nbsp;is&nbsp;a&nbsp;NaN&nbsp;(not&nbsp;a&nbsp;number),&nbsp;and&nbsp;False&nbsp;otherwise.</tt></dd></dl>
- <dl><dt><a name="-isNegativeZero"><strong>isNegativeZero</strong></a>(x:'float') -&gt; 'bool'</dt></dl>
- <dl><dt><a name="-join"><strong>join</strong></a>(ms:'Monad[TMonad]') -&gt; 'TMonad'</dt><dd><tt>import&nbsp;Control.Monad<br>
+ <dl><dt><a name="-interact"><strong>interact</strong></a>(func: '_coconut.typing.Callable[[str], str]') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-ioError"><strong>ioError</strong></a>(err: 'IOError') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-isIEEE"><strong>isIEEE</strong></a>(x: 'float') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-isInfinite"><strong>isInfinite</strong></a> = isinf(x, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;x&nbsp;is&nbsp;a&nbsp;positive&nbsp;or&nbsp;negative&nbsp;infinity,&nbsp;and&nbsp;False&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-isNaN"><strong>isNaN</strong></a> = isnan(x, /)</dt><dd><tt>Return&nbsp;True&nbsp;if&nbsp;x&nbsp;is&nbsp;a&nbsp;NaN&nbsp;(not&nbsp;a&nbsp;number),&nbsp;and&nbsp;False&nbsp;otherwise.</tt></dd></dl>
+ <dl><dt><a name="-isNegativeZero"><strong>isNegativeZero</strong></a>(x: 'float') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-join"><strong>join</strong></a>(ms: 'Monad[TMonad]') -&gt; 'TMonad'</dt><dd><tt>import&nbsp;Control.Monad<br>
 join&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;(m&nbsp;a)&nbsp;-&gt;&nbsp;m&nbsp;a<br>
 --&nbsp;join&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__join__&nbsp;method<br>
 --&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;__pure__&nbsp;and&nbsp;__fail__&nbsp;methods&nbsp;(<a href="#pure">pure</a>&nbsp;=&nbsp;return)<br>
---&nbsp;the&nbsp;default&nbsp;implementation&nbsp;identifies&nbsp;non-failures&nbsp;using&nbsp;__bool__</tt></dd></dl>
+--&nbsp;the&nbsp;default&nbsp;implementation&nbsp;uses&nbsp;__bool__&nbsp;and&nbsp;__iter__</tt></dd></dl>
  <dl><dt><a name="-length"><strong>length</strong></a> = len(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;number&nbsp;of&nbsp;items&nbsp;in&nbsp;a&nbsp;container.</tt></dd></dl>
- <dl><dt><a name="-liftA2"><strong>liftA2</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Tc]') -&gt; '_coconut.typing.Callable[[Applicative[Ta], Applicative[Tb]], Applicative[Tc]]'</dt><dd><tt>import&nbsp;Control.Applicative<br>
+ <dl><dt><a name="-liftA2"><strong>liftA2</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb], Tc]') -&gt; '_coconut.typing.Callable[[Applicative[Ta], Applicative[Tb]], Applicative[Tc]]'</dt><dd><tt>import&nbsp;Control.Applicative<br>
 liftA2&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;(a&nbsp;-&gt;&nbsp;b&nbsp;-&gt;&nbsp;c)&nbsp;-&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;c</tt></dd></dl>
- <dl><dt><a name="-log"><strong>log</strong></a>(...)</dt><dd><tt><a href="#-log">log</a>(x[,&nbsp;base])<br>
-&nbsp;<br>
+ <dl><dt><a name="-log"><strong>log</strong></a>(...)</dt><dd><tt><a href="#-log">log</a>(x,&nbsp;[base=math.e])<br>
 Return&nbsp;the&nbsp;logarithm&nbsp;of&nbsp;x&nbsp;to&nbsp;the&nbsp;given&nbsp;base.<br>
+&nbsp;<br>
 If&nbsp;the&nbsp;base&nbsp;not&nbsp;specified,&nbsp;returns&nbsp;the&nbsp;natural&nbsp;logarithm&nbsp;(base&nbsp;e)&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-logBase"><strong>logBase</strong></a>(base:'float', x:'float') -&gt; 'float'</dt></dl>
- <dl><dt><a name="-lookup"><strong>lookup</strong></a>(key:'Ta', assocs:'_coconut.typing.Iterable[T.Tuple[Ta, Tb]]') -&gt; 'Maybe'</dt></dl>
- <dl><dt><a name="-mappend"><strong>mappend</strong></a>(x:'TMonoid', y:'TMonoid') -&gt; 'TMonoid'</dt><dd><tt>--&nbsp;mappend&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__mappend__&nbsp;method<br>
+ <dl><dt><a name="-logBase"><strong>logBase</strong></a>(base: 'float', x: 'float') -&gt; 'float'</dt></dl>
+ <dl><dt><a name="-lookup"><strong>lookup</strong></a>(key: 'Ta', assocs: '_coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]') -&gt; 'Maybe'</dt></dl>
+ <dl><dt><a name="-mappend"><strong>mappend</strong></a>(x: 'TMonoid', y: 'TMonoid') -&gt; 'TMonoid'</dt><dd><tt>--&nbsp;mappend&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__mappend__&nbsp;method<br>
 --&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;a&nbsp;__mempty__&nbsp;method<br>
 --&nbsp;the&nbsp;default&nbsp;implementation&nbsp;identifies&nbsp;non-identities&nbsp;using&nbsp;__bool__</tt></dd></dl>
  <dl><dt><a name="-max"><strong>max</strong></a>(...)</dt><dd><tt><a href="#-max">max</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
@@ -1527,7 +1626,7 @@ With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;b
 default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
 the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
 With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;largest&nbsp;argument.</tt></dd></dl>
- <dl><dt><a name="-maxBound"><strong>maxBound</strong></a>(b:'TBounded') -&gt; 'TBounded'</dt><dd><tt>--&nbsp;maxBound&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__maxBound__&nbsp;method<br>
+ <dl><dt><a name="-maxBound"><strong>maxBound</strong></a>(b: 'TBounded') -&gt; 'TBounded'</dt><dd><tt>--&nbsp;maxBound&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__maxBound__&nbsp;method<br>
 --&nbsp;the&nbsp;default&nbsp;implementation&nbsp;recursively&nbsp;calls&nbsp;fmap&nbsp;(__fmap__)&nbsp;with&nbsp;maxBound</tt></dd></dl>
  <dl><dt><a name="-maximum"><strong>maximum</strong></a> = max(...)</dt><dd><tt><a href="#-max">max</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
 <a href="#-max">max</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
@@ -1536,7 +1635,7 @@ With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;b
 default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
 the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
 With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;largest&nbsp;argument.</tt></dd></dl>
- <dl><dt><a name="-mconcat"><strong>mconcat</strong></a>(ms:'_coconut.typing.Sequence[TMonoid]') -&gt; 'TMonoid'</dt></dl>
+ <dl><dt><a name="-mconcat"><strong>mconcat</strong></a>(ms: '_coconut.typing.Sequence[TMonoid]') -&gt; 'TMonoid'</dt></dl>
  <dl><dt><a name="-min"><strong>min</strong></a>(...)</dt><dd><tt><a href="#-min">min</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
 <a href="#-min">min</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
 &nbsp;<br>
@@ -1544,7 +1643,7 @@ With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;s
 default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
 the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
 With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;smallest&nbsp;argument.</tt></dd></dl>
- <dl><dt><a name="-minBound"><strong>minBound</strong></a>(b:'TBounded') -&gt; 'TBounded'</dt><dd><tt>--&nbsp;minBound&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__minBound__&nbsp;method<br>
+ <dl><dt><a name="-minBound"><strong>minBound</strong></a>(b: 'TBounded') -&gt; 'TBounded'</dt><dd><tt>--&nbsp;minBound&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__minBound__&nbsp;method<br>
 --&nbsp;the&nbsp;default&nbsp;implementation&nbsp;recursively&nbsp;calls&nbsp;fmap&nbsp;(__fmap__)&nbsp;with&nbsp;minBound</tt></dd></dl>
  <dl><dt><a name="-minimum"><strong>minimum</strong></a> = min(...)</dt><dd><tt><a href="#-min">min</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
 <a href="#-min">min</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
@@ -1553,16 +1652,16 @@ With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;s
 default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
 the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
 With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;smallest&nbsp;argument.</tt></dd></dl>
- <dl><dt><a name="-mod"><strong>mod</strong></a>(...)</dt><dd><tt><a href="#-mod">mod</a>(a,&nbsp;b)&nbsp;--&nbsp;Same&nbsp;as&nbsp;a&nbsp;%&nbsp;b.</tt></dd></dl>
- <dl><dt><a name="-notElem"><strong>notElem</strong></a>(e:'Ta', xs:'_coconut.typing.Sequence[Ta]') -&gt; 'bool'</dt><dd><tt>##&nbsp;Searching&nbsp;lists:</tt></dd></dl>
- <dl><dt><a name="-not_"><strong>not_</strong></a>(...)</dt><dd><tt><a href="#-not_">not_</a>(a)&nbsp;--&nbsp;Same&nbsp;as&nbsp;not&nbsp;a.</tt></dd></dl>
- <dl><dt><a name="-null"><strong>null</strong></a>(xs:'Foldable[Ta]') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-mod"><strong>mod</strong></a>(a, b, /)</dt><dd><tt>Same&nbsp;as&nbsp;a&nbsp;%&nbsp;b.</tt></dd></dl>
+ <dl><dt><a name="-notElem"><strong>notElem</strong></a>(e: 'Ta', xs: '_coconut.typing.Sequence[Ta]') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-not_"><strong>not_</strong></a>(a, /)</dt><dd><tt>Same&nbsp;as&nbsp;not&nbsp;a.</tt></dd></dl>
+ <dl><dt><a name="-null"><strong>null</strong></a>(xs: 'Foldable[Ta]') -&gt; 'bool'</dt></dl>
  <dl><dt><a name="-oct"><strong>oct</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
 '0o1234567'</tt></dd></dl>
- <dl><dt><a name="-odd"><strong>odd</strong></a>(x:'int') -&gt; 'bool'</dt></dl>
- <dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;IOError&nbsp;upon&nbsp;failure.<br>
+ <dl><dt><a name="-odd"><strong>odd</strong></a>(x: 'int') -&gt; 'bool'</dt></dl>
+ <dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;OSError&nbsp;upon&nbsp;failure.<br>
 &nbsp;<br>
 file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
 if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
@@ -1686,11 +1785,17 @@ If&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;False.</tt></dd><
  <dl><dt><a name="-over"><strong>over</strong></a>(x, y)</dt><dd><tt>import&nbsp;Data.Ratio<br>
 over&nbsp;::&nbsp;Integer&nbsp;-&gt;&nbsp;Integer&nbsp;-&gt;&nbsp;Rational<br>
 over&nbsp;=&nbsp;(%)</tt></dd></dl>
- <dl><dt><a name="-print"><strong>print</strong></a>(x:'Ta') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-properFraction"><strong>properFraction</strong></a>(x:'RealFrac') -&gt; 'T.Tuple[int, RealFrac]'</dt></dl>
- <dl><dt><a name="-putChar"><strong>putChar</strong></a> = putStr(s:'str') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-putStr"><strong>putStr</strong></a>(s:'str') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-putStrLn"><strong>putStrLn</strong></a>(s:'str') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-print"><strong>print</strong></a>(x: 'Ta') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-properFraction"><strong>properFraction</strong></a>(x: 'RealFrac') -&gt; '_coconut.typing.Tuple[int, RealFrac]'</dt></dl>
+ <dl><dt><a name="-putChar"><strong>putChar</strong></a> = putStr(s: 'str') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-putStr"><strong>putStr</strong></a>(s: 'str') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-putStrLn"><strong>putStrLn</strong></a>(s: 'str') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-py_breakpoint"><strong>py_breakpoint</strong></a> = breakpoint(...)</dt><dd><tt>breakpoint(*args,&nbsp;**kws)<br>
+&nbsp;<br>
+Call&nbsp;sys.breakpointhook(*args,&nbsp;**kws).&nbsp;&nbsp;sys.breakpointhook()&nbsp;must&nbsp;accept<br>
+whatever&nbsp;arguments&nbsp;are&nbsp;passed.<br>
+&nbsp;<br>
+By&nbsp;default,&nbsp;this&nbsp;drops&nbsp;you&nbsp;into&nbsp;the&nbsp;pdb&nbsp;debugger.</tt></dd></dl>
  <dl><dt><a name="-py_chr"><strong>py_chr</strong></a> = chr(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
  <dl><dt><a name="-py_hex"><strong>py_hex</strong></a> = hex(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
@@ -1707,7 +1812,7 @@ On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;availabl
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
 '0o1234567'</tt></dd></dl>
- <dl><dt><a name="-py_open"><strong>py_open</strong></a> = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;IOError&nbsp;upon&nbsp;failure.<br>
+ <dl><dt><a name="-py_open"><strong>py_open</strong></a> = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;OSError&nbsp;upon&nbsp;failure.<br>
 &nbsp;<br>
 file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
 if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
@@ -1835,12 +1940,12 @@ end:&nbsp;&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;va
 flush:&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</tt></dd></dl>
  <dl><dt><a name="-py_repr"><strong>py_repr</strong></a> = repr(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.<br>
 &nbsp;<br>
-For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(repr(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
- <dl><dt><a name="-quot"><strong>quot</strong></a>(x:'int', y:'int') -&gt; 'int'</dt></dl>
- <dl><dt><a name="-quotRem"><strong>quotRem</strong></a>(x:'int', y:'int') -&gt; 'T.Tuple[int, int]'</dt></dl>
- <dl><dt><a name="-read"><strong>read</strong></a>(s:'str') -&gt; 'Read'</dt></dl>
- <dl><dt><a name="-readFile"><strong>readFile</strong></a>(fpath:'FilePath') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-readIO"><strong>readIO</strong></a>(s:'str') -&gt; 'IO'</dt></dl>
+For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
+ <dl><dt><a name="-quot"><strong>quot</strong></a>(x: 'int', y: 'int') -&gt; 'int'</dt></dl>
+ <dl><dt><a name="-quotRem"><strong>quotRem</strong></a>(x: 'int', y: 'int') -&gt; '_coconut.typing.Tuple[int, int]'</dt></dl>
+ <dl><dt><a name="-read"><strong>read</strong></a>(s: 'str') -&gt; 'Read'</dt></dl>
+ <dl><dt><a name="-readFile"><strong>readFile</strong></a>(fpath: 'FilePath') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-readIO"><strong>readIO</strong></a>(s: 'str') -&gt; 'IO'</dt></dl>
  <dl><dt><a name="-readLn"><strong>readLn</strong></a>() -&gt; 'IO'</dt></dl>
  <dl><dt><a name="-reduce"><strong>reduce</strong></a>(...)</dt><dd><tt><a href="#-reduce">reduce</a>(function,&nbsp;sequence[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
 &nbsp;<br>
@@ -1850,59 +1955,51 @@ For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp
 ((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
 of&nbsp;the&nbsp;sequence&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
 sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
- <dl><dt><a name="-rem"><strong>rem</strong></a>(x:'int', y:'int') -&gt; 'int'</dt></dl>
- <dl><dt><a name="-replicate"><strong>replicate</strong></a>(n:'int', x:'Ta') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-round"><strong>round</strong></a>(...)</dt><dd><tt><a href="#-round">round</a>(number[,&nbsp;ndigits])&nbsp;-&gt;&nbsp;number<br>
+ <dl><dt><a name="-rem"><strong>rem</strong></a>(x: 'int', y: 'int') -&gt; 'int'</dt></dl>
+ <dl><dt><a name="-replicate"><strong>replicate</strong></a>(n: 'int', x: 'Ta') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-repr"><strong>repr</strong></a>(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.<br>
 &nbsp;<br>
-Round&nbsp;a&nbsp;number&nbsp;to&nbsp;a&nbsp;given&nbsp;precision&nbsp;in&nbsp;decimal&nbsp;digits&nbsp;(default&nbsp;0&nbsp;digits).<br>
-This&nbsp;returns&nbsp;an&nbsp;int&nbsp;when&nbsp;called&nbsp;with&nbsp;one&nbsp;argument,&nbsp;otherwise&nbsp;the<br>
-same&nbsp;type&nbsp;as&nbsp;the&nbsp;number.&nbsp;ndigits&nbsp;may&nbsp;be&nbsp;negative.</tt></dd></dl>
- <dl><dt><a name="-scaleFloat"><strong>scaleFloat</strong></a>(power:'int', x:'float') -&gt; 'float'</dt></dl>
- <dl><dt><a name="-scanl"><strong>scanl</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Ta]', init:'Ta', xs:'_coconut.typing.Iterable[Tb]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-scanr"><strong>scanr</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Ta]', init:'Ta', xs:'_coconut.typing.Sequence[Tb]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-scanr1"><strong>scanr1</strong></a>(func:'_coconut.typing.Callable[[Ta, Ta], Ta]', xs:'_coconut.typing.Sequence[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-seq"><strong>seq</strong></a>(x:'Ta', y:'Tb') -&gt; 'Tb'</dt></dl>
- <dl><dt><a name="-seqAl"><strong>seqAl</strong></a>(f1:'TApp', f2:'Applicative') -&gt; 'TApp'</dt><dd><tt>seqAl&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;a<br>
+For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
+ <dl><dt><a name="-round"><strong>round</strong></a>(number, ndigits=None)</dt><dd><tt>Round&nbsp;a&nbsp;number&nbsp;to&nbsp;a&nbsp;given&nbsp;precision&nbsp;in&nbsp;decimal&nbsp;digits.<br>
+&nbsp;<br>
+The&nbsp;return&nbsp;value&nbsp;is&nbsp;an&nbsp;integer&nbsp;if&nbsp;ndigits&nbsp;is&nbsp;omitted&nbsp;or&nbsp;None.&nbsp;&nbsp;Otherwise<br>
+the&nbsp;return&nbsp;value&nbsp;has&nbsp;the&nbsp;same&nbsp;type&nbsp;as&nbsp;the&nbsp;number.&nbsp;&nbsp;ndigits&nbsp;may&nbsp;be&nbsp;negative.</tt></dd></dl>
+ <dl><dt><a name="-scaleFloat"><strong>scaleFloat</strong></a>(power: 'int', x: 'float') -&gt; 'float'</dt></dl>
+ <dl><dt><a name="-scanl"><strong>scanl</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb], Ta]', init: 'Ta', xs: '_coconut.typing.Iterable[Tb]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-scanr"><strong>scanr</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb], Ta]', init: 'Ta', xs: '_coconut.typing.Sequence[Tb]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-scanr1"><strong>scanr1</strong></a>(func: '_coconut.typing.Callable[[Ta, Ta], Ta]', xs: '_coconut.typing.Sequence[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-seq"><strong>seq</strong></a>(x: 'Ta', y: 'Tb') -&gt; 'Tb'</dt><dd><tt>--&nbsp;seq&nbsp;doesn't&nbsp;actually&nbsp;do&nbsp;anything&nbsp;here,&nbsp;since&nbsp;Python&nbsp;isn't&nbsp;lazy</tt></dd></dl>
+ <dl><dt><a name="-seqAl"><strong>seqAl</strong></a>(f1: 'TApp', f2: 'Applicative') -&gt; 'TApp'</dt><dd><tt>seqAl&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;a<br>
 seqAl&nbsp;=&nbsp;(&lt;*)</tt></dd></dl>
- <dl><dt><a name="-seqAr"><strong>seqAr</strong></a>(f1:'Applicative', f2:'TApp') -&gt; 'TApp'</dt><dd><tt>seqAr&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;b<br>
+ <dl><dt><a name="-seqAr"><strong>seqAr</strong></a>(f1: 'Applicative', f2: 'TApp') -&gt; 'TApp'</dt><dd><tt>seqAr&nbsp;::&nbsp;Applicative&nbsp;f&nbsp;=&gt;&nbsp;f&nbsp;a&nbsp;-&gt;&nbsp;f&nbsp;b&nbsp;-&gt;&nbsp;f&nbsp;b<br>
 seqAr&nbsp;=&nbsp;(*&gt;)</tt></dd></dl>
- <dl><dt><a name="-seqM"><strong>seqM</strong></a>(m1:'Monad', m2:'TMonad') -&gt; 'TMonad'</dt><dd><tt>seqM&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;m&nbsp;b&nbsp;-&gt;&nbsp;m&nbsp;b<br>
+ <dl><dt><a name="-seqM"><strong>seqM</strong></a>(m1: 'Monad', m2: 'TMonad') -&gt; 'TMonad'</dt><dd><tt>seqM&nbsp;::&nbsp;Monad&nbsp;m&nbsp;=&gt;&nbsp;m&nbsp;a&nbsp;-&gt;&nbsp;m&nbsp;b&nbsp;-&gt;&nbsp;m&nbsp;b<br>
 seqM&nbsp;=&nbsp;(&gt;&gt;)</tt></dd></dl>
- <dl><dt><a name="-sequence"><strong>sequence</strong></a> = sequenceA(fs:'Traversable[Applicative[Ta]]') -&gt; 'Applicative[Traversable[Ta]]'</dt></dl>
- <dl><dt><a name="-sequenceA"><strong>sequenceA</strong></a>(fs:'Traversable[Applicative[Ta]]') -&gt; 'Applicative[Traversable[Ta]]'</dt></dl>
- <dl><dt><a name="-sequence_"><strong>sequence_</strong></a>(ms:'Foldable[Monad]') -&gt; 'Monad'</dt></dl>
+ <dl><dt><a name="-sequence"><strong>sequence</strong></a> = sequenceA(fs: 'Traversable[Applicative[Ta]]') -&gt; 'Applicative[Traversable[Ta]]'</dt></dl>
+ <dl><dt><a name="-sequenceA"><strong>sequenceA</strong></a>(fs: 'Traversable[Applicative[Ta]]') -&gt; 'Applicative[Traversable[Ta]]'</dt></dl>
+ <dl><dt><a name="-sequence_"><strong>sequence_</strong></a>(ms: 'Foldable[Monad]') -&gt; 'Monad'</dt></dl>
  <dl><dt><a name="-show"><strong>show</strong></a> = repr(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;<a href="builtins.html#object">object</a>.<br>
 &nbsp;<br>
-For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(repr(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
- <dl><dt><a name="-showChar"><strong>showChar</strong></a> = showString(x:'str') -&gt; 'ShowS'</dt></dl>
- <dl><dt><a name="-showList"><strong>showList</strong></a>(xs:'_coconut.typing.Iterable[Show]') -&gt; 'ShowS'</dt></dl>
- <dl><dt><a name="-showParen"><strong>showParen</strong></a>(parens:'bool', showFunc:'ShowS') -&gt; 'ShowS'</dt></dl>
- <dl><dt><a name="-showString"><strong>showString</strong></a>(x:'str') -&gt; 'ShowS'</dt></dl>
- <dl><dt><a name="-shows"><strong>shows</strong></a>(x:'Show') -&gt; 'ShowS'</dt></dl>
- <dl><dt><a name="-sin"><strong>sin</strong></a>(...)</dt><dd><tt><a href="#-sin">sin</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;sine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
- <dl><dt><a name="-sinh"><strong>sinh</strong></a>(...)</dt><dd><tt><a href="#-sinh">sinh</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;hyperbolic&nbsp;sine&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-splitAt"><strong>splitAt</strong></a>(n:'int', xs:'_coconut.typing.Iterable[Ta]') -&gt; 'T.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]]'</dt></dl>
- <dl><dt><a name="-sqrt"><strong>sqrt</strong></a>(...)</dt><dd><tt><a href="#-sqrt">sqrt</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-subtract"><strong>subtract</strong></a>(x, y)</dt><dd><tt>###&nbsp;Numeric&nbsp;functions:</tt></dd></dl>
- <dl><dt><a name="-sum"><strong>sum</strong></a>(iterable, start=0, /)</dt><dd><tt>Return&nbsp;the&nbsp;sum&nbsp;of&nbsp;a&nbsp;'start'&nbsp;value&nbsp;(default:&nbsp;0)&nbsp;plus&nbsp;an&nbsp;iterable&nbsp;of&nbsp;numbers<br>
+For&nbsp;many&nbsp;<a href="builtins.html#object">object</a>&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
+ <dl><dt><a name="-showChar"><strong>showChar</strong></a> = showString(x: 'str') -&gt; 'ShowS'</dt></dl>
+ <dl><dt><a name="-showList"><strong>showList</strong></a>(xs: '_coconut.typing.Iterable[Show]') -&gt; 'ShowS'</dt></dl>
+ <dl><dt><a name="-showParen"><strong>showParen</strong></a>(parens: 'bool', showFunc: 'ShowS') -&gt; 'ShowS'</dt></dl>
+ <dl><dt><a name="-showString"><strong>showString</strong></a>(x: 'str') -&gt; 'ShowS'</dt></dl>
+ <dl><dt><a name="-shows"><strong>shows</strong></a>(x: 'Show') -&gt; 'ShowS'</dt></dl>
+ <dl><dt><a name="-sin"><strong>sin</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;sine&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-sinh"><strong>sinh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;hyperbolic&nbsp;sine&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-splitAt"><strong>splitAt</strong></a>(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]]'</dt></dl>
+ <dl><dt><a name="-sqrt"><strong>sqrt</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;square&nbsp;root&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-subtract"><strong>subtract</strong></a>(x, y)</dt></dl>
+ <dl><dt><a name="-sum"><strong>sum</strong></a>(iterable, /, start=0)</dt><dd><tt>Return&nbsp;the&nbsp;sum&nbsp;of&nbsp;a&nbsp;'start'&nbsp;value&nbsp;(default:&nbsp;0)&nbsp;plus&nbsp;an&nbsp;iterable&nbsp;of&nbsp;numbers<br>
 &nbsp;<br>
 When&nbsp;the&nbsp;iterable&nbsp;is&nbsp;empty,&nbsp;return&nbsp;the&nbsp;start&nbsp;value.<br>
 This&nbsp;function&nbsp;is&nbsp;intended&nbsp;specifically&nbsp;for&nbsp;use&nbsp;with&nbsp;numeric&nbsp;values&nbsp;and&nbsp;may<br>
 reject&nbsp;non-numeric&nbsp;types.</tt></dd></dl>
- <dl><dt><a name="-take"><strong>take</strong></a>(n:'int', xs:'_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
- <dl><dt><a name="-tan"><strong>tan</strong></a>(...)</dt><dd><tt><a href="#-tan">tan</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;tangent&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
- <dl><dt><a name="-tanh"><strong>tanh</strong></a>(...)</dt><dd><tt><a href="#-tanh">tanh</a>(x)<br>
-&nbsp;<br>
-Return&nbsp;the&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
- <dl><dt><a name="-unIO"><strong>unIO</strong></a>(io:'IO') -&gt; 'Ta'</dt><dd><tt>The&nbsp;unIO&nbsp;function&nbsp;is&nbsp;an&nbsp;impure&nbsp;function&nbsp;which&nbsp;performs&nbsp;the<br>
+ <dl><dt><a name="-take"><strong>take</strong></a>(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
+ <dl><dt><a name="-tan"><strong>tan</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;tangent&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
+ <dl><dt><a name="-tanh"><strong>tanh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-unIO"><strong>unIO</strong></a>(io: 'IO') -&gt; 'T.Any'</dt><dd><tt>The&nbsp;unIO&nbsp;function&nbsp;is&nbsp;an&nbsp;impure&nbsp;function&nbsp;which&nbsp;performs&nbsp;the<br>
 I/O&nbsp;contained&nbsp;in&nbsp;the&nbsp;given&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;returns&nbsp;the&nbsp;result.<br>
 In&nbsp;particular,&nbsp;the&nbsp;recommendation&nbsp;is&nbsp;to&nbsp;write<br>
 &nbsp;&nbsp;&nbsp;&nbsp;@unIO<br>
@@ -1914,19 +2011,21 @@ which&nbsp;is&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;Haskell&nbsp;code<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r1&nbsp;&lt;-&nbsp;io1<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;r2&nbsp;&lt;-&nbsp;io2<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...</tt></dd></dl>
- <dl><dt><a name="-uncurry"><strong>uncurry</strong></a>(func:'_coconut.typing.Callable[[Ta], _coconut.typing.Callable[[Tb], Tc]]') -&gt; '_coconut.typing.Callable[[Ta, Tb], Tc]'</dt></dl>
- <dl><dt><a name="-unlines"><strong>unlines</strong></a>(strs:'_coconut.typing.Iterable[str]') -&gt; 'str'</dt></dl>
- <dl><dt><a name="-until"><strong>until</strong></a>(cond:'_coconut.typing.Callable[[Ta], bool]', func:'_coconut.typing.Callable[[Ta], Ta]', x:'Ta') -&gt; 'Ta'</dt></dl>
- <dl><dt><a name="-unwords"><strong>unwords</strong></a> = join(...)<font color="#909090"><font face="helvetica, arial"> method of <a href="builtins.html#str">builtins.str</a> instance</font></font></dt><dd><tt>S.<a href="#-join">join</a>(iterable)&nbsp;-&gt;&nbsp;str<br>
+ <dl><dt><a name="-uncurry_tuple"><strong>uncurry_tuple</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb], Tc]') -&gt; '_coconut.typing.Callable[[_coconut.typing.Tuple[Ta, Tb]], Tc]'</dt><dd><tt>--&nbsp;uncurry&nbsp;a&nbsp;Python-style&nbsp;multi-place&nbsp;function&nbsp;into&nbsp;a&nbsp;function&nbsp;of&nbsp;a&nbsp;tuple</tt></dd></dl>
+ <dl><dt><a name="-unlines"><strong>unlines</strong></a>(strs: '_coconut.typing.Iterable[str]') -&gt; 'str'</dt></dl>
+ <dl><dt><a name="-until"><strong>until</strong></a>(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -&gt; 'Ta'</dt></dl>
+ <dl><dt><a name="-unwords"><strong>unwords</strong></a> = join(iterable, /)<font color="#909090"><font face="helvetica, arial"> method of <a href="builtins.html#str">builtins.str</a> instance</font></font></dt><dd><tt>Concatenate&nbsp;any&nbsp;number&nbsp;of&nbsp;strings.<br>
 &nbsp;<br>
-Return&nbsp;a&nbsp;string&nbsp;which&nbsp;is&nbsp;the&nbsp;concatenation&nbsp;of&nbsp;the&nbsp;strings&nbsp;in&nbsp;the<br>
-iterable.&nbsp;&nbsp;The&nbsp;separator&nbsp;between&nbsp;elements&nbsp;is&nbsp;S.</tt></dd></dl>
- <dl><dt><a name="-unzip"><strong>unzip</strong></a>(xs:'_coconut.typing.Iterable[T.Tuple[Ta, Tb]]') -&gt; 'T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]'</dt></dl>
- <dl><dt><a name="-unzip3"><strong>unzip3</strong></a> = unzip(xs:'_coconut.typing.Iterable[T.Tuple[Ta, Tb]]') -&gt; 'T.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]'</dt></dl>
- <dl><dt><a name="-userError"><strong>userError</strong></a>(msg:'str') -&gt; 'IOError'</dt></dl>
- <dl><dt><a name="-writeFile"><strong>writeFile</strong></a>(fpath:'FilePath', text:'str') -&gt; 'IO'</dt></dl>
- <dl><dt><a name="-zipWith"><strong>zipWith</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb], Tc]', xs1:'_coconut.typing.Iterable[Ta]', xs2:'_coconut.typing.Iterable[Tb]') -&gt; '_coconut.typing.Iterable[Tc]'</dt></dl>
- <dl><dt><a name="-zipWith3"><strong>zipWith3</strong></a>(func:'_coconut.typing.Callable[[Ta, Tb, Tc], Td]', xs1:'_coconut.typing.Iterable[Ta]', xs2:'_coconut.typing.Iterable[Tb]', xs3:'_coconut.typing.Iterable[Tc]') -&gt; '_coconut.typing.Iterable[Td]'</dt></dl>
+The&nbsp;string&nbsp;whose&nbsp;method&nbsp;is&nbsp;called&nbsp;is&nbsp;inserted&nbsp;in&nbsp;between&nbsp;each&nbsp;given&nbsp;string.<br>
+The&nbsp;result&nbsp;is&nbsp;returned&nbsp;as&nbsp;a&nbsp;new&nbsp;string.<br>
+&nbsp;<br>
+Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-&gt;&nbsp;'ab.pq.rs'</tt></dd></dl>
+ <dl><dt><a name="-unzip"><strong>unzip</strong></a>(xs: '_coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]') -&gt; '_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]'</dt></dl>
+ <dl><dt><a name="-unzip3"><strong>unzip3</strong></a> = unzip(xs: '_coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]') -&gt; '_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]]'</dt></dl>
+ <dl><dt><a name="-userError"><strong>userError</strong></a>(msg: 'str') -&gt; 'IOError'</dt></dl>
+ <dl><dt><a name="-writeFile"><strong>writeFile</strong></a>(fpath: 'FilePath', text: 'str') -&gt; 'IO'</dt></dl>
+ <dl><dt><a name="-zipWith"><strong>zipWith</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', xs1: '_coconut.typing.Iterable[Ta]', xs2: '_coconut.typing.Iterable[Tb]') -&gt; '_coconut.typing.Iterable[Tc]'</dt></dl>
+ <dl><dt><a name="-zipWith3"><strong>zipWith3</strong></a>(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', xs1: '_coconut.typing.Iterable[Ta]', xs2: '_coconut.typing.Iterable[Tb]', xs3: '_coconut.typing.Iterable[Tc]') -&gt; '_coconut.typing.Iterable[Td]'</dt></dl>
 </td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#55aa55">
@@ -1934,12 +2033,18 @@ iterable.&nbsp;&nbsp;The&nbsp;separator&nbsp;between&nbsp;elements&nbsp;is&nbsp;
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>Bounded</strong> = typing.Union[bool, typing.Iterable]<br>
+<td width="100%"><strong>Applicative</strong> = typing.Iterable<br>
+<strong>Bounded</strong> = typing.Union[bool, typing.Iterable]<br>
+<strong>Foldable</strong> = typing.Sequence<br>
+<strong>Functor</strong> = typing.Iterable<br>
+<strong>Monad</strong> = typing.Iterable<br>
+<strong>Monoid</strong> = typing.Iterable<br>
 <strong>Num</strong> = typing.Union[int, float, fractions.Fraction]<br>
-<strong>Read</strong> = typing.Union[str, int, float, NoneType, tuple, list, dict]<br>
+<strong>Read</strong> = typing.Union[str, int, float, bool, NoneType, tuple, list, dict]<br>
 <strong>ReadS</strong> = NotImplemented<br>
 <strong>Real</strong> = typing.Union[int, float, fractions.Fraction]<br>
 <strong>Show</strong> = typing.Any<br>
+<strong>ShowS</strong> = typing.Callable[[str], str]<br>
 <strong>TApp</strong> = ~TApp<br>
 <strong>TBounded</strong> = ~TBounded<br>
 <strong>TEnum</strong> = ~TEnum<br>
@@ -1953,21 +2058,23 @@ iterable.&nbsp;&nbsp;The&nbsp;separator&nbsp;between&nbsp;elements&nbsp;is&nbsp;
 <strong>Tb</strong> = ~Tb<br>
 <strong>Tc</strong> = ~Tc<br>
 <strong>Td</strong> = ~Td<br>
+<strong>Traversable</strong> = typing.Iterable<br>
 <strong>__annotations__</strong> = {'_abs': '_coconut.typing.Callable[..., T.Any]', '_all': '_coconut.typing.Callable[..., T.Any]', '_any': '_coconut.typing.Callable[..., T.Any]', '_ceil': '_coconut.typing.Callable[..., T.Any]', '_filter': '_coconut.typing.Callable[..., T.Any]', '_floor': '_coconut.typing.Callable[..., T.Any]', '_fmap': '_coconut.typing.Callable[..., T.Any]', '_int': '_coconut.typing.Callable[..., T.Any]', '_map': '_coconut.typing.Callable[..., T.Any]', '_max': '_coconut.typing.Callable[..., T.Any]', ...}<br>
+<strong>annotations</strong> = _Feature((3, 7, 0, 'beta', 1), (3, 10, 0, 'alpha', 0), 16777216)<br>
 <strong>decodeFloat</strong> = NotImplemented<br>
 <strong>encodeFloat</strong> = NotImplemented<br>
 <strong>eq</strong> = EQ()<br>
 <strong>exponent</strong> = NotImplemented<br>
 <strong>fst</strong> = operator.itemgetter(0)<br>
-<strong>generator_stop</strong> = _Feature((3, 5, 0, 'beta', 1), (3, 7, 0, 'alpha', 0), 524288)<br>
-<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x000001E1C5E38558&gt;, 1))<br>
-<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x000001E1C5E38558&gt;)<br>
+<strong>generator_stop</strong> = _Feature((3, 5, 0, 'beta', 1), (3, 7, 0, 'alpha', 0), 8388608)<br>
+<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x0000026E64A8EAD0&gt;, 1))<br>
+<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x0000026E64A8EAD0&gt;)<br>
 <strong>getLine</strong> = IO(io_func=&lt;built-in function input&gt;)<br>
 <strong>gt</strong> = GT()<br>
-<strong>head</strong> = functools.partial(&lt;function _coconut_igetitem at 0x000001E1C828D950&gt;, index=0)<br>
-<strong>init</strong> = functools.partial(&lt;function _coconut_igetitem at 0x000001E1C828D950&gt;, index=slice(None, -1, None))<br>
+<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x0000026E690A2430&gt;, index=0)<br>
+<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x0000026E690A2430&gt;, index=slice(None, -1, None))<br>
 <strong>isDenormalized</strong> = NotImplemented<br>
-<strong>last</strong> = functools.partial(&lt;function _coconut_igetitem at 0x000001E1C828D950&gt;, index=-1)<br>
+<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x0000026E690A2430&gt;, index=-1)<br>
 <strong>lex</strong> = NotImplemented<br>
 <strong>lines</strong> = operator.methodcaller('splitlines')<br>
 <strong>lt</strong> = LT()<br>
@@ -1975,7 +2082,7 @@ iterable.&nbsp;&nbsp;The&nbsp;separator&nbsp;between&nbsp;elements&nbsp;is&nbsp;
 <strong>nothing</strong> = Nothing()<br>
 <strong>otherwise</strong> = True<br>
 <strong>pi</strong> = 3.141592653589793<br>
-<strong>pred</strong> = &lt;function _coconut_minus at 0x000001E1C8267598&gt;$(?, 1)<br>
+<strong>pred</strong> = &lt;function _coconut_minus at 0x0000026E690A3310&gt;$(?, 1)<br>
 <strong>product</strong> = functools.partial(&lt;built-in function reduce&gt;, &lt;built-in function mul&gt;)<br>
 <strong>readList</strong> = NotImplemented<br>
 <strong>readParen</strong> = NotImplemented<br>
@@ -1986,7 +2093,7 @@ iterable.&nbsp;&nbsp;The&nbsp;separator&nbsp;between&nbsp;elements&nbsp;is&nbsp;
 <strong>significand</strong> = NotImplemented<br>
 <strong>snd</strong> = operator.itemgetter(1)<br>
 <strong>succ</strong> = functools.partial(&lt;built-in function add&gt;, 1)<br>
-<strong>tail</strong> = functools.partial(&lt;function _coconut_igetitem at 0x000001E1C828D950&gt;, index=slice(1, None, None))<br>
+<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x0000026E690A2430&gt;, index=slice(1, None, None))<br>
 <strong>toEnum</strong> = NotImplemented<br>
 <strong>undefined</strong> = None<br>
 <strong>words</strong> = operator.methodcaller('split')</td></tr></table>
