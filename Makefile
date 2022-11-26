@@ -1,5 +1,8 @@
+.PHONY: all
+all: docs test
+
 .PHONY: test
-test: docs
+test: install
 	python -m pytest --strict-markers -s ./prelude
 
 .PHONY: clean-install
