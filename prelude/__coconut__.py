@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 2.1.1-post_dev6 [The Spanish Inquisition]
+# Compiled with Coconut version 2.1.1-post_dev7 [The Spanish Inquisition]
 
 """Built-in Coconut utilities."""
 
