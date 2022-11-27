@@ -1,6 +1,6 @@
 # coconut-prelude
 
-An implementation of [Haskell's Prelude](https://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html) in Python 3.7+ using [Coconut](http://coconut-lang.org).
+An implementation of [Haskell's Prelude](https://hackage.haskell.org/package/base-4.10.1.0/docs/Prelude.html) in Python 3.8+ using [Coconut](http://coconut-lang.org).
 
 ## Installation
 
@@ -20,9 +20,9 @@ fmapConst = (<$)
 ap = (<*>)
 seqAr = (*>)
 seqAl = (<*)
-bind = (>>=)
-seqM = (>>)
-bindFrom = (=<<)
+bind = (>>>=)
+seqM = (>>>)
+bindFrom = (=<<<)
 dot = (.)
 apply = ($)
 cbv = ($!)

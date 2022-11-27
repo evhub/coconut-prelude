@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x66281712
+# __coconut_hash__ = 0xed9eb2a6
 
 # Compiled with Coconut version 2.1.1-post_dev6 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import generator_stop, annotations
+from __future__ import generator_stop
 import sys as _coconut_sys, os as _coconut_os
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_cached_module = _coconut_sys.modules.get("__coconut__")
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _namedtuple_of, _coconut, _coconut_super, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_super, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -40,35 +40,35 @@ from prelude.typevars import *  # type: ignore  #2 (line in Coconut source)
 # Function application:
 if TYPE_CHECKING:  #6 (line in Coconut source)
     @T.overload  # type: ignore  #7 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[[Ta], Tb], _x: Ta) -> Tb:  #8 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[[Ta], Tb]', _x: 'Ta') -> 'Tb':  #8 (line in Coconut source)
         ...  #9 (line in Coconut source)
 
     @T.overload  #10 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[[Ta, Tb], Tc], _x: Ta) -> _coconut.typing.Callable[[Tb], Tc]:  #11 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb], Tc]':  #11 (line in Coconut source)
         ...  #12 (line in Coconut source)
 
     @T.overload  #13 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], _x: Ta) -> _coconut.typing.Callable[[Tb, Tc], Td]:  #14 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta') -> '_coconut.typing.Callable[[Tb, Tc], Td]':  #14 (line in Coconut source)
         ...  #15 (line in Coconut source)
 
     @T.overload  #16 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[..., Tb], _x: Ta) -> T.Any:  #17 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[..., Tb]', _x: 'Ta') -> 'T.Any':  #17 (line in Coconut source)
         ...  #18 (line in Coconut source)
 
     @T.overload  #19 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[[Ta, Tb], Tc], _x: Ta, _y: Tb) -> Tc:  #20 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', _x: 'Ta', _y: 'Tb') -> 'Tc':  #20 (line in Coconut source)
         ...  #21 (line in Coconut source)
 
     @T.overload  #22 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], _x: Ta, _y: Tb) -> _coconut.typing.Callable[[Tc], Td]:  #23 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb') -> '_coconut.typing.Callable[[Tc], Td]':  #23 (line in Coconut source)
         ...  #24 (line in Coconut source)
 
     @T.overload  #25 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[[Ta, Tb, Tc], Td], _x: Ta, _y: Tb, _z: Tc) -> Td:  #26 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', _x: 'Ta', _y: 'Tb', _z: 'Tc') -> 'Td':  #26 (line in Coconut source)
         ...  #27 (line in Coconut source)
 
     @T.overload  #28 (line in Coconut source)
-    def of(func: _coconut.typing.Callable[..., T.Any], *args: T.Any, **kwargs: T.Any) -> T.Any:  #29 (line in Coconut source)
+    def of(func: '_coconut.typing.Callable[..., T.Any]', *args: 'T.Any', **kwargs: 'T.Any') -> 'T.Any':  #29 (line in Coconut source)
         ...  #30 (line in Coconut source)
 
     def of(func, *args, **kwargs):  #31 (line in Coconut source)
@@ -110,7 +110,7 @@ def uncurry(func):  #55 (line in Coconut source)
 
 # Deriving:
 
-def derivingOrd(*valueConstructors: TType) -> None:  #65 (line in Coconut source)
+def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line in Coconut source)
     """
     The expression
         derivingOrd(valueConstructor1, valueConstructor2, ...)
@@ -168,7 +168,7 @@ def derivingOrd(*valueConstructors: TType) -> None:  #65 (line in Coconut source
             __gt__ = _coconut_name_store_3  #89 (line in Coconut source)
 
 
-def derivingBoundedEnum(*valueConstructors: TType) -> None:  #89 (line in Coconut source)
+def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Coconut source)
     """
     The expression
         derivingBoundedEnum(valueConstructor1, valueConstructor2, ...)
@@ -253,7 +253,7 @@ def derivingBoundedEnum(*valueConstructors: TType) -> None:  #89 (line in Coconu
             __sub__ = _coconut_name_store_9  #119 (line in Coconut source)
 
 
-def definesBind(dataType: TType) -> TType:  #119 (line in Coconut source)
+def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
     """
     Decorator to declare that a data type defines __bind__
     instead of __join__. Will also create an __fmap__ method
@@ -294,7 +294,7 @@ def definesBind(dataType: TType) -> TType:  #119 (line in Coconut source)
     return (dataType)  #138 (line in Coconut source)
 
 
-def definesReturn(dataType: TType) -> TType:  #140 (line in Coconut source)
+def definesReturn(dataType: 'TType') -> 'TType':  #140 (line in Coconut source)
     """
     A simple decorator to set __pure__ equal to __return__.
     If used with definesBind, definesReturn must be applied

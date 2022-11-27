@@ -21,8 +21,8 @@ install-univ: build-univ base-install
 
 .PHONY: build
 build:
-	coconut setup.coco --strict --target 3.7
-	coconut "prelude-source" prelude --strict --target 3.7 --jobs sys --mypy
+	coconut setup.coco --strict --target 3.5
+	coconut "prelude-source" prelude --strict --target 3.5 --jobs sys --mypy
 
 .PHONY: build-univ
 build-univ:
@@ -58,4 +58,4 @@ clean:
 
 .PHONY: watch
 watch: install
-	coconut "prelude-source" prelude --watch --strict --target 3.7 --mypy
+	coconut "prelude-source" prelude --watch --strict --target 3.5 --mypy

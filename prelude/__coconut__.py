@@ -8,14 +8,36 @@
 
 # Coconut Header: -------------------------------------------------------------
 
-from __future__ import generator_stop, annotations
+from __future__ import generator_stop
 import sys as _coconut_sys
 from builtins import chr, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
 py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_super, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
 _coconut_py_str, _coconut_py_super = str, super
 from functools import wraps as _coconut_wraps
 exec("_coconut_exec = exec")
-py_breakpoint = breakpoint
+if _coconut_sys.version_info < (3, 7):
+    def _coconut_default_breakpointhook(*args, **kwargs):
+        hookname = _coconut.os.getenv("PYTHONBREAKPOINT")
+        if hookname != "0":
+            if not hookname:
+                hookname = "pdb.set_trace"
+            modname, dot, funcname = hookname.rpartition(".")
+            if not dot:
+                modname = "builtins" if _coconut_sys.version_info >= (3,) else "__builtin__"
+            if _coconut_sys.version_info >= (2, 7):
+                import importlib
+                module = importlib.import_module(modname)
+            else:
+                import imp
+                module = imp.load_module(modname, *imp.find_module(modname))
+            hook = _coconut.getattr(module, funcname)
+            return hook(*args, **kwargs)
+    if not hasattr(_coconut_sys, "__breakpointhook__"):
+        _coconut_sys.__breakpointhook__ = _coconut_default_breakpointhook
+    def breakpoint(*args, **kwargs):
+        return _coconut.getattr(_coconut_sys, "breakpointhook", _coconut_default_breakpointhook)(*args, **kwargs)
+else:
+    py_breakpoint = breakpoint
 @_coconut_wraps(_coconut_py_super)
 def _coconut_super(type=None, object_or_type=None):
     if type is None:
@@ -39,6 +61,11 @@ class _coconut:
     OrderedDict = collections.OrderedDict
     import collections.abc as abc
     import typing
+    if _coconut_sys.version_info < (3, 6):
+        def NamedTuple(name, fields):
+            return _coconut.collections.namedtuple(name, [x for x, t in fields])
+        typing.NamedTuple = NamedTuple
+        NamedTuple = staticmethod(NamedTuple)
     if _coconut_sys.version_info < (3, 10):
         try:
             from typing_extensions import TypeAlias, ParamSpec, Concatenate
@@ -936,14 +963,18 @@ def _coconut_get_function_match_error():
     ctx.taken = True
     return ctx.exc_class
 class _coconut_base_pattern_func(_coconut_base_hashable):
-    __slots__ = ("FunctionMatchError", "patterns", "__doc__", "__name__", "__qualname__")
+    if _coconut_sys.version_info < (3, 7):
+        __slots__ = ("FunctionMatchError", "patterns", "__doc__", "__name__")
+    else:
+        __slots__ = ("FunctionMatchError", "patterns", "__doc__", "__name__", "__qualname__")
     _coconut_is_match = True
     def __init__(self, *funcs):
         self.FunctionMatchError = _coconut.type(_coconut_py_str("MatchError"), (_coconut_MatchError,), {})
         self.patterns = []
         self.__doc__ = None
         self.__name__ = None
-        self.__qualname__ = None
+        if _coconut_sys.version_info >= (3, 7):
+            self.__qualname__ = None
         for func in funcs:
             self.add_pattern(func)
     def add_pattern(self, func):
@@ -953,7 +984,8 @@ class _coconut_base_pattern_func(_coconut_base_hashable):
             self.patterns.append(func)
         self.__doc__ = _coconut.getattr(func, "__doc__", self.__doc__)
         self.__name__ = _coconut.getattr(func, "__name__", self.__name__)
-        self.__qualname__ = _coconut.getattr(func, "__qualname__", self.__qualname__)
+        if _coconut_sys.version_info >= (3, 7):
+            self.__qualname__ = _coconut.getattr(func, "__qualname__", self.__qualname__)
     def __call__(self, *args, **kwargs):
         for func in self.patterns[:-1]:
             try:
@@ -1151,7 +1183,12 @@ def memoize(maxsize=None, *args, **kwargs):
     """Decorator that memoizes a function, preventing it from being recomputed
     if it is called multiple times with the same arguments."""
     return _coconut.functools.lru_cache(maxsize, *args, **kwargs)
-def _coconut_call_set_names(cls): pass
+def _coconut_call_set_names(cls):
+    if _coconut_sys.version_info < (3, 6):
+        for k, v in _coconut.vars(cls).items():
+            set_name = _coconut.getattr(v, "__set_name__", None)
+            if set_name is not None:
+                set_name(cls, k)
 class override(_coconut_base_hashable):
     __slots__ = ("func",)
     def __init__(self, func):
@@ -1325,7 +1362,10 @@ def collectby(key_func, iterable, value_func=None, reduce_func=None):
     return collection
 def _namedtuple_of(**kwargs):
     """Construct an anonymous namedtuple of the given keyword arguments."""
-    return _coconut_mk_anon_namedtuple(kwargs.keys(), of_kwargs=kwargs)
+    if _coconut_sys.version_info < (3, 6):
+        raise _coconut.RuntimeError("_namedtuple_of is not available on Python < 3.6 (use anonymous namedtuple literals instead)")
+    else:
+        return _coconut_mk_anon_namedtuple(kwargs.keys(), of_kwargs=kwargs)
 def _coconut_mk_anon_namedtuple(fields, types=None, of_kwargs=None):
     if types is None:
         NT = _coconut.collections.namedtuple("_namedtuple_of", fields)
