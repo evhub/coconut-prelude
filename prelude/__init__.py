@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xce844d90
+# __coconut_hash__ = 0xf6b02c40
 
-# Compiled with Coconut version 2.1.1-post_dev7 [The Spanish Inquisition]
+# Compiled with Coconut version 2.1.1-post_dev8 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
