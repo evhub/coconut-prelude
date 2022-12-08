@@ -39,6 +39,7 @@ _int: -> T.Any = int
 _sum: -> T.Any = sum
 _reversed: -> T.Any = reversed
 _print: -> T.Any = print
+_cycle: -> T.Any = cycle
 _ceil: -> T.Any = _math.ceil
 _floor: -> T.Any = _math.floor
 
@@ -994,12 +995,12 @@ def replicate(n: int, x: Ta) -> Ta$[] =
     repeat(x)$[:n]
 
 if TYPE_CHECKING:
-    def cycle(xs: Ta[]) -> Ta$[]:
+    def \cycle(xs: Ta[]) -> Ta$[]:  # type: ignore
         ...
 else:
     @recursive_iterator
-    def cycle(xs if len(xs) > 0) =
-        xs :: cycle(xs)
+    def \cycle(xs if len(xs) > 0) =
+        _cycle(xs)
 
 
 

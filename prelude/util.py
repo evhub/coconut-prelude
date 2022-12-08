@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x1867ce99
+# __coconut_hash__ = 0xf303b912
 
-# Compiled with Coconut version 2.1.1-post_dev8 [The Spanish Inquisition]
+# Compiled with Coconut version 2.1.1-post_dev27 [The Spanish Inquisition]
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -28,7 +28,7 @@ if _coconut_module_name and _coconut_module_name[0].isalpha() and all(c.isalpha(
                     _coconut_v_type.__module__ = _coconut_full_module_name
     _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_super, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_super, _coconut_Expected, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset
 _coconut_sys.path.pop(0)
 
 # Compiled Coconut: -----------------------------------------------------------
@@ -126,46 +126,42 @@ def derivingOrd(*valueConstructors: 'TType') -> 'None':  #65 (line in Coconut so
     for valCon in (valueConstructors):  #77 (line in Coconut source)
 
 # Ord
-        try:  #80 (line in Coconut source)
-            _coconut_name_store_0 = __lt__  #80 (line in Coconut source)
-        except _coconut.NameError:  #80 (line in Coconut source)
-            _coconut_name_store_0 = _coconut_sentinel  #80 (line in Coconut source)
-        def __lt__(x, y):  #80 (line in Coconut source)
+        def _coconut___lt___0(x, y):  #80 (line in Coconut source)
             return (tuple.__lt__(x, y) if type(x) is type(y) else ind(x) < ind(y))  #81 (line in Coconut source)
-        valCon.__lt__ = __lt__  #82 (line in Coconut source)
-        if _coconut_name_store_0 is not _coconut_sentinel:  #82 (line in Coconut source)
-            __lt__ = _coconut_name_store_0  #82 (line in Coconut source)
 
-        try:  #82 (line in Coconut source)
-            _coconut_name_store_1 = __le__  #82 (line in Coconut source)
-        except _coconut.NameError:  #82 (line in Coconut source)
-            _coconut_name_store_1 = _coconut_sentinel  #82 (line in Coconut source)
-        def __le__(x, y):  #82 (line in Coconut source)
+        _coconut___lt___0.__name__ = _coconut_py_str("__lt__")  #82 (line in Coconut source)
+        _coconut_qualname_0 = _coconut.getattr(_coconut___lt___0, "__qualname__", None)  #82 (line in Coconut source)
+        if _coconut_qualname_0 is not None:  #82 (line in Coconut source)
+            _coconut___lt___0.__qualname__ = _coconut_py_str("valCon.__lt__" if "." not in _coconut_qualname_0 else _coconut_qualname_0.rsplit(".", 1)[0] + ".valCon.__lt__")  #82 (line in Coconut source)
+        valCon.__lt__ = _coconut___lt___0  #82 (line in Coconut source)
+
+        def _coconut___le___0(x, y):  #82 (line in Coconut source)
             return (tuple.__le__(x, y) if type(x) is type(y) else ind(x) <= ind(y))  #83 (line in Coconut source)
-        valCon.__le__ = __le__  #84 (line in Coconut source)
-        if _coconut_name_store_1 is not _coconut_sentinel:  #84 (line in Coconut source)
-            __le__ = _coconut_name_store_1  #84 (line in Coconut source)
 
-        try:  #84 (line in Coconut source)
-            _coconut_name_store_2 = __ge__  #84 (line in Coconut source)
-        except _coconut.NameError:  #84 (line in Coconut source)
-            _coconut_name_store_2 = _coconut_sentinel  #84 (line in Coconut source)
-        def __ge__(x, y):  #84 (line in Coconut source)
+        _coconut___le___0.__name__ = _coconut_py_str("__le__")  #84 (line in Coconut source)
+        _coconut_qualname_1 = _coconut.getattr(_coconut___le___0, "__qualname__", None)  #84 (line in Coconut source)
+        if _coconut_qualname_1 is not None:  #84 (line in Coconut source)
+            _coconut___le___0.__qualname__ = _coconut_py_str("valCon.__le__" if "." not in _coconut_qualname_1 else _coconut_qualname_1.rsplit(".", 1)[0] + ".valCon.__le__")  #84 (line in Coconut source)
+        valCon.__le__ = _coconut___le___0  #84 (line in Coconut source)
+
+        def _coconut___ge___0(x, y):  #84 (line in Coconut source)
             return (tuple.__ge__(x, y) if type(x) is type(y) else ind(x) >= ind(y))  #85 (line in Coconut source)
-        valCon.__ge__ = __ge__  #86 (line in Coconut source)
-        if _coconut_name_store_2 is not _coconut_sentinel:  #86 (line in Coconut source)
-            __ge__ = _coconut_name_store_2  #86 (line in Coconut source)
 
-        try:  #86 (line in Coconut source)
-            _coconut_name_store_3 = __gt__  #86 (line in Coconut source)
-        except _coconut.NameError:  #86 (line in Coconut source)
-            _coconut_name_store_3 = _coconut_sentinel  #86 (line in Coconut source)
-        def __gt__(x, y):  #86 (line in Coconut source)
+        _coconut___ge___0.__name__ = _coconut_py_str("__ge__")  #86 (line in Coconut source)
+        _coconut_qualname_2 = _coconut.getattr(_coconut___ge___0, "__qualname__", None)  #86 (line in Coconut source)
+        if _coconut_qualname_2 is not None:  #86 (line in Coconut source)
+            _coconut___ge___0.__qualname__ = _coconut_py_str("valCon.__ge__" if "." not in _coconut_qualname_2 else _coconut_qualname_2.rsplit(".", 1)[0] + ".valCon.__ge__")  #86 (line in Coconut source)
+        valCon.__ge__ = _coconut___ge___0  #86 (line in Coconut source)
+
+        def _coconut___gt___0(x, y):  #86 (line in Coconut source)
             return (tuple.__gt__(x, y) if type(x) is type(y) else ind(x) > ind(y))  #87 (line in Coconut source)
 
-        valCon.__gt__ = __gt__  #89 (line in Coconut source)
-        if _coconut_name_store_3 is not _coconut_sentinel:  #89 (line in Coconut source)
-            __gt__ = _coconut_name_store_3  #89 (line in Coconut source)
+
+        _coconut___gt___0.__name__ = _coconut_py_str("__gt__")  #89 (line in Coconut source)
+        _coconut_qualname_3 = _coconut.getattr(_coconut___gt___0, "__qualname__", None)  #89 (line in Coconut source)
+        if _coconut_qualname_3 is not None:  #89 (line in Coconut source)
+            _coconut___gt___0.__qualname__ = _coconut_py_str("valCon.__gt__" if "." not in _coconut_qualname_3 else _coconut_qualname_3.rsplit(".", 1)[0] + ".valCon.__gt__")  #89 (line in Coconut source)
+        valCon.__gt__ = _coconut___gt___0  #89 (line in Coconut source)
 
 
 def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Coconut source)
@@ -184,73 +180,67 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
     for valCon in (valueConstructors):  #101 (line in Coconut source)
 
 # Bounded
-        try:  #104 (line in Coconut source)
-            _coconut_name_store_4 = __minBound__  #104 (line in Coconut source)
-        except _coconut.NameError:  #104 (line in Coconut source)
-            _coconut_name_store_4 = _coconut_sentinel  #104 (line in Coconut source)
         @_coconut_tco  #104 (line in Coconut source)
-        def __minBound__(self):  #104 (line in Coconut source)
+        def _coconut___minBound___0(self):  #104 (line in Coconut source)
             return _coconut_tail_call(valueConstructors[0])  #105 (line in Coconut source)
-        valCon.__minBound__ = __minBound__  #106 (line in Coconut source)
-        if _coconut_name_store_4 is not _coconut_sentinel:  #106 (line in Coconut source)
-            __minBound__ = _coconut_name_store_4  #106 (line in Coconut source)
 
-        try:  #106 (line in Coconut source)
-            _coconut_name_store_5 = __maxBound__  #106 (line in Coconut source)
-        except _coconut.NameError:  #106 (line in Coconut source)
-            _coconut_name_store_5 = _coconut_sentinel  #106 (line in Coconut source)
+        _coconut___minBound___0.__name__ = _coconut_py_str("__minBound__")  #106 (line in Coconut source)
+        _coconut_qualname_4 = _coconut.getattr(_coconut___minBound___0, "__qualname__", None)  #106 (line in Coconut source)
+        if _coconut_qualname_4 is not None:  #106 (line in Coconut source)
+            _coconut___minBound___0.__qualname__ = _coconut_py_str("valCon.__minBound__" if "." not in _coconut_qualname_4 else _coconut_qualname_4.rsplit(".", 1)[0] + ".valCon.__minBound__")  #106 (line in Coconut source)
+        valCon.__minBound__ = _coconut___minBound___0  #106 (line in Coconut source)
+
         @_coconut_tco  #106 (line in Coconut source)
-        def __maxBound__(self):  #106 (line in Coconut source)
+        def _coconut___maxBound___0(self):  #106 (line in Coconut source)
             return _coconut_tail_call(valueConstructors[-1])  #107 (line in Coconut source)
 
 # Enum
-        valCon.__maxBound__ = __maxBound__  #110 (line in Coconut source)
-        if _coconut_name_store_5 is not _coconut_sentinel:  #110 (line in Coconut source)
-            __maxBound__ = _coconut_name_store_5  #110 (line in Coconut source)
 
-        try:  #110 (line in Coconut source)
-            _coconut_name_store_6 = __int__  #110 (line in Coconut source)
-        except _coconut.NameError:  #110 (line in Coconut source)
-            _coconut_name_store_6 = _coconut_sentinel  #110 (line in Coconut source)
+        _coconut___maxBound___0.__name__ = _coconut_py_str("__maxBound__")  #110 (line in Coconut source)
+        _coconut_qualname_5 = _coconut.getattr(_coconut___maxBound___0, "__qualname__", None)  #110 (line in Coconut source)
+        if _coconut_qualname_5 is not None:  #110 (line in Coconut source)
+            _coconut___maxBound___0.__qualname__ = _coconut_py_str("valCon.__maxBound__" if "." not in _coconut_qualname_5 else _coconut_qualname_5.rsplit(".", 1)[0] + ".valCon.__maxBound__")  #110 (line in Coconut source)
+        valCon.__maxBound__ = _coconut___maxBound___0  #110 (line in Coconut source)
+
         @_coconut_tco  #110 (line in Coconut source)
-        def __int__(x):  #110 (line in Coconut source)
+        def _coconut___int___0(x):  #110 (line in Coconut source)
             return _coconut_tail_call(ind, x)  #110 (line in Coconut source)
-        valCon.__int__ = __int__  #111 (line in Coconut source)
-        if _coconut_name_store_6 is not _coconut_sentinel:  #111 (line in Coconut source)
-            __int__ = _coconut_name_store_6  #111 (line in Coconut source)
 
-        try:  #111 (line in Coconut source)
-            _coconut_name_store_7 = __add__  #111 (line in Coconut source)
-        except _coconut.NameError:  #111 (line in Coconut source)
-            _coconut_name_store_7 = _coconut_sentinel  #111 (line in Coconut source)
-        def __add__(x, y):  #111 (line in Coconut source)
+        _coconut___int___0.__name__ = _coconut_py_str("__int__")  #111 (line in Coconut source)
+        _coconut_qualname_6 = _coconut.getattr(_coconut___int___0, "__qualname__", None)  #111 (line in Coconut source)
+        if _coconut_qualname_6 is not None:  #111 (line in Coconut source)
+            _coconut___int___0.__qualname__ = _coconut_py_str("valCon.__int__" if "." not in _coconut_qualname_6 else _coconut_qualname_6.rsplit(".", 1)[0] + ".valCon.__int__")  #111 (line in Coconut source)
+        valCon.__int__ = _coconut___int___0  #111 (line in Coconut source)
+
+        def _coconut___add___0(x, y):  #111 (line in Coconut source)
             return (valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y))  #112 (line in Coconut source)
-        valCon.__add__ = __add__  #113 (line in Coconut source)
-        if _coconut_name_store_7 is not _coconut_sentinel:  #113 (line in Coconut source)
-            __add__ = _coconut_name_store_7  #113 (line in Coconut source)
 
-        try:  #113 (line in Coconut source)
-            _coconut_name_store_8 = __radd__  #113 (line in Coconut source)
-        except _coconut.NameError:  #113 (line in Coconut source)
-            _coconut_name_store_8 = _coconut_sentinel  #113 (line in Coconut source)
-        def __radd__(x, y):  #113 (line in Coconut source)
+        _coconut___add___0.__name__ = _coconut_py_str("__add__")  #113 (line in Coconut source)
+        _coconut_qualname_7 = _coconut.getattr(_coconut___add___0, "__qualname__", None)  #113 (line in Coconut source)
+        if _coconut_qualname_7 is not None:  #113 (line in Coconut source)
+            _coconut___add___0.__qualname__ = _coconut_py_str("valCon.__add__" if "." not in _coconut_qualname_7 else _coconut_qualname_7.rsplit(".", 1)[0] + ".valCon.__add__")  #113 (line in Coconut source)
+        valCon.__add__ = _coconut___add___0  #113 (line in Coconut source)
+
+        def _coconut___radd___0(x, y):  #113 (line in Coconut source)
             return (x + y)  #113 (line in Coconut source)
-        valCon.__radd__ = __radd__  #114 (line in Coconut source)
-        if _coconut_name_store_8 is not _coconut_sentinel:  #114 (line in Coconut source)
-            __radd__ = _coconut_name_store_8  #114 (line in Coconut source)
 
-        try:  #114 (line in Coconut source)
-            _coconut_name_store_9 = __sub__  #114 (line in Coconut source)
-        except _coconut.NameError:  #114 (line in Coconut source)
-            _coconut_name_store_9 = _coconut_sentinel  #114 (line in Coconut source)
-        def __sub__(x, y):  #114 (line in Coconut source)
+        _coconut___radd___0.__name__ = _coconut_py_str("__radd__")  #114 (line in Coconut source)
+        _coconut_qualname_8 = _coconut.getattr(_coconut___radd___0, "__qualname__", None)  #114 (line in Coconut source)
+        if _coconut_qualname_8 is not None:  #114 (line in Coconut source)
+            _coconut___radd___0.__qualname__ = _coconut_py_str("valCon.__radd__" if "." not in _coconut_qualname_8 else _coconut_qualname_8.rsplit(".", 1)[0] + ".valCon.__radd__")  #114 (line in Coconut source)
+        valCon.__radd__ = _coconut___radd___0  #114 (line in Coconut source)
+
+        def _coconut___sub___0(x, y):  #114 (line in Coconut source)
             return (valueConstructors[ind(x) - y]() if isinstance(y, int) else tuple.__sub__(x, y))  #115 (line in Coconut source)
 
 
 # Monads:
-        valCon.__sub__ = __sub__  #119 (line in Coconut source)
-        if _coconut_name_store_9 is not _coconut_sentinel:  #119 (line in Coconut source)
-            __sub__ = _coconut_name_store_9  #119 (line in Coconut source)
+
+        _coconut___sub___0.__name__ = _coconut_py_str("__sub__")  #119 (line in Coconut source)
+        _coconut_qualname_9 = _coconut.getattr(_coconut___sub___0, "__qualname__", None)  #119 (line in Coconut source)
+        if _coconut_qualname_9 is not None:  #119 (line in Coconut source)
+            _coconut___sub___0.__qualname__ = _coconut_py_str("valCon.__sub__" if "." not in _coconut_qualname_9 else _coconut_qualname_9.rsplit(".", 1)[0] + ".valCon.__sub__")  #119 (line in Coconut source)
+        valCon.__sub__ = _coconut___sub___0  #119 (line in Coconut source)
 
 
 def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
@@ -265,31 +255,29 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
     if not (hasattr)(dataType, "__fmap__"):  #127 (line in Coconut source)
         if not (hasattr)(dataType, "__pure__"):  #128 (line in Coconut source)
             raise TypeError("data types which define __bind__ must define either __fmap__ or __pure__")  #129 (line in Coconut source)
-        try:  #130 (line in Coconut source)
-            _coconut_name_store_10 = __fmap__  #130 (line in Coconut source)
-        except _coconut.NameError:  #130 (line in Coconut source)
-            _coconut_name_store_10 = _coconut_sentinel  #130 (line in Coconut source)
         @_coconut_tco  #130 (line in Coconut source)
-        def __fmap__(self, func):  #130 (line in Coconut source)
+        def _coconut___fmap___0(self, func):  #130 (line in Coconut source)
             return _coconut_tail_call(self.__bind__, lambda x: dataType.__pure__(func(x)))  #131 (line in Coconut source)
 
-        dataType.__fmap__ = __fmap__  #133 (line in Coconut source)
-        if _coconut_name_store_10 is not _coconut_sentinel:  #133 (line in Coconut source)
-            __fmap__ = _coconut_name_store_10  #133 (line in Coconut source)
+
+        _coconut___fmap___0.__name__ = _coconut_py_str("__fmap__")  #133 (line in Coconut source)
+        _coconut_qualname_10 = _coconut.getattr(_coconut___fmap___0, "__qualname__", None)  #133 (line in Coconut source)
+        if _coconut_qualname_10 is not None:  #133 (line in Coconut source)
+            _coconut___fmap___0.__qualname__ = _coconut_py_str("dataType.__fmap__" if "." not in _coconut_qualname_10 else _coconut_qualname_10.rsplit(".", 1)[0] + ".dataType.__fmap__")  #133 (line in Coconut source)
+        dataType.__fmap__ = _coconut___fmap___0  #133 (line in Coconut source)
 
     if (hasattr)(dataType, "__join__"):  #133 (line in Coconut source)
         raise TypeError("data types which define __bind__ cannot define __join__")  #134 (line in Coconut source)
-    try:  #135 (line in Coconut source)
-        _coconut_name_store_11 = __join__  #135 (line in Coconut source)
-    except _coconut.NameError:  #135 (line in Coconut source)
-        _coconut_name_store_11 = _coconut_sentinel  #135 (line in Coconut source)
     @_coconut_tco  #135 (line in Coconut source)
-    def __join__(self):  #135 (line in Coconut source)
+    def _coconut___join___0(self):  #135 (line in Coconut source)
         return _coconut_tail_call(self.__bind__, lambda x: x)  #136 (line in Coconut source)
 
-    dataType.__join__ = __join__  #138 (line in Coconut source)
-    if _coconut_name_store_11 is not _coconut_sentinel:  #138 (line in Coconut source)
-        __join__ = _coconut_name_store_11  #138 (line in Coconut source)
+
+    _coconut___join___0.__name__ = _coconut_py_str("__join__")  #138 (line in Coconut source)
+    _coconut_qualname_11 = _coconut.getattr(_coconut___join___0, "__qualname__", None)  #138 (line in Coconut source)
+    if _coconut_qualname_11 is not None:  #138 (line in Coconut source)
+        _coconut___join___0.__qualname__ = _coconut_py_str("dataType.__join__" if "." not in _coconut_qualname_11 else _coconut_qualname_11.rsplit(".", 1)[0] + ".dataType.__join__")  #138 (line in Coconut source)
+    dataType.__join__ = _coconut___join___0  #138 (line in Coconut source)
 
     return (dataType)  #138 (line in Coconut source)
 
