@@ -61,7 +61,7 @@ otherwise: bool = True
 #### Maybe:
 class Maybe:
     @staticmethod
-    def __pure__(x: Ta) -> Maybe = Just x
+    def __pure__(x: Ta) -> Maybe = Just(x)
 
     @staticmethod
     def __fail__(msg: str) -> Maybe = nothing
@@ -90,10 +90,10 @@ else:
 #### Either:
 class Either:
     @staticmethod
-    def __pure__(x: Ta) -> Either = Right x
+    def __pure__(x: Ta) -> Either = Right(x)
 
     @staticmethod
-    def __fail__(msg: str) -> Either = Left msg
+    def __fail__(msg: str) -> Either = Left(msg)
 
 data Left(x) from Either:
     @staticmethod
@@ -383,7 +383,7 @@ from math import (
 )  # NOQA
 
 def logBase(base: float, x: float) -> float =
-    log x base
+    log(x, base)
 
 #### RealFrac:
 RealFrac = Rational
@@ -1276,4 +1276,4 @@ def ioError(err: IOError) -> IO =
     IO(def () -> raise err)
 
 def userError(msg: str) -> IOError =
-    IOError msg
+    IOError(msg)
