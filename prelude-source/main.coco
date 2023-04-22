@@ -29,7 +29,7 @@ _min: -> T.Any = min
 _zip: -> T.Any = zip
 _abs: -> T.Any = abs
 _round: -> T.Any = round
-_fmap: -> T.Any = fmap
+_fmap: -> T.Any = fmap  # type: ignore
 _reduce: -> T.Any = reduce
 _all: -> T.Any = all
 _any: -> T.Any = any
@@ -39,7 +39,7 @@ _int: -> T.Any = int
 _sum: -> T.Any = sum
 _reversed: -> T.Any = reversed
 _print: -> T.Any = print
-_cycle: -> T.Any = cycle
+_cycle: -> T.Any = cycle  # type: ignore
 _ceil: -> T.Any = _math.ceil
 _floor: -> T.Any = _math.floor
 

@@ -1,14 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xa219344e
+# __coconut_hash__ = 0x9d160fd
 
-# Compiled with Coconut version 3.0.0-a_dev1
+# Compiled with Coconut version 3.0.0-a_dev27
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
-_coconut_header_info = ('3.0.0-a_dev1', '35', True)
+_coconut_header_info = ('3.0.0-a_dev27', '35', True)
 import os as _coconut_os
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
@@ -34,7 +34,7 @@ if _coconut_cached__coconut__ is None or getattr(_coconut_cached__coconut__, "_c
                         _coconut_v_type.__module__ = _coconut_full_module_name
         _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_super, _coconut_Expected, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset, _coconut_back_none_pipe, _coconut_back_none_star_pipe, _coconut_back_none_dubstar_pipe, _coconut_forward_none_compose, _coconut_back_none_compose, _coconut_forward_none_star_compose, _coconut_back_none_star_compose, _coconut_forward_none_dubstar_compose, _coconut_back_none_dubstar_compose, _coconut_call_or_coefficient
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_Expected, _coconut_MatchError, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset, _coconut_back_none_pipe, _coconut_back_none_star_pipe, _coconut_back_none_dubstar_pipe, _coconut_forward_none_compose, _coconut_back_none_compose, _coconut_forward_none_star_compose, _coconut_back_none_star_compose, _coconut_forward_none_dubstar_compose, _coconut_back_none_dubstar_compose, _coconut_call_or_coefficient, _coconut_in, _coconut_not_in
 if _coconut_pop_path:
     _coconut_sys.path.pop(0)
 
@@ -187,7 +187,6 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
     for valCon in (valueConstructors):  #101 (line in Coconut source)
 
 # Bounded
-        @_coconut_tco  #104 (line in Coconut source)
         def _coconut___minBound___0(self):  #104 (line in Coconut source)
             return _coconut_tail_call(valueConstructors[0])  #105 (line in Coconut source)
 
@@ -195,9 +194,8 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
         _coconut_qualname_4 = _coconut.getattr(_coconut___minBound___0, "__qualname__", None)  #106 (line in Coconut source)
         if _coconut_qualname_4 is not None:  #106 (line in Coconut source)
             _coconut___minBound___0.__qualname__ = _coconut_py_str("valCon.__minBound__" if "." not in _coconut_qualname_4 else _coconut_qualname_4.rsplit(".", 1)[0] + ".valCon.__minBound__")  #106 (line in Coconut source)
-        valCon.__minBound__ = _coconut___minBound___0  #106 (line in Coconut source)
+        valCon.__minBound__ = (_coconut_tco)(_coconut___minBound___0)  #106 (line in Coconut source)
 
-        @_coconut_tco  #106 (line in Coconut source)
         def _coconut___maxBound___0(self):  #106 (line in Coconut source)
             return _coconut_tail_call(valueConstructors[-1])  #107 (line in Coconut source)
 
@@ -207,9 +205,8 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
         _coconut_qualname_5 = _coconut.getattr(_coconut___maxBound___0, "__qualname__", None)  #110 (line in Coconut source)
         if _coconut_qualname_5 is not None:  #110 (line in Coconut source)
             _coconut___maxBound___0.__qualname__ = _coconut_py_str("valCon.__maxBound__" if "." not in _coconut_qualname_5 else _coconut_qualname_5.rsplit(".", 1)[0] + ".valCon.__maxBound__")  #110 (line in Coconut source)
-        valCon.__maxBound__ = _coconut___maxBound___0  #110 (line in Coconut source)
+        valCon.__maxBound__ = (_coconut_tco)(_coconut___maxBound___0)  #110 (line in Coconut source)
 
-        @_coconut_tco  #110 (line in Coconut source)
         def _coconut___int___0(x):  #110 (line in Coconut source)
             return _coconut_tail_call(ind, x)  #110 (line in Coconut source)
 
@@ -217,7 +214,7 @@ def derivingBoundedEnum(*valueConstructors: 'TType') -> 'None':  #89 (line in Co
         _coconut_qualname_6 = _coconut.getattr(_coconut___int___0, "__qualname__", None)  #111 (line in Coconut source)
         if _coconut_qualname_6 is not None:  #111 (line in Coconut source)
             _coconut___int___0.__qualname__ = _coconut_py_str("valCon.__int__" if "." not in _coconut_qualname_6 else _coconut_qualname_6.rsplit(".", 1)[0] + ".valCon.__int__")  #111 (line in Coconut source)
-        valCon.__int__ = _coconut___int___0  #111 (line in Coconut source)
+        valCon.__int__ = (_coconut_tco)(_coconut___int___0)  #111 (line in Coconut source)
 
         def _coconut___add___0(x, y):  #111 (line in Coconut source)
             return (valueConstructors[ind(x) + y]() if isinstance(y, int) else tuple.__add__(x, y))  #112 (line in Coconut source)
@@ -262,7 +259,6 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
     if not (hasattr)(dataType, "__fmap__"):  #127 (line in Coconut source)
         if not (hasattr)(dataType, "__pure__"):  #128 (line in Coconut source)
             raise TypeError("data types which define __bind__ must define either __fmap__ or __pure__")  #129 (line in Coconut source)
-        @_coconut_tco  #130 (line in Coconut source)
         def _coconut___fmap___0(self, func):  #130 (line in Coconut source)
             return _coconut_tail_call(self.__bind__, lambda x: dataType.__pure__(func(x)))  #131 (line in Coconut source)
 
@@ -271,11 +267,10 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
         _coconut_qualname_10 = _coconut.getattr(_coconut___fmap___0, "__qualname__", None)  #133 (line in Coconut source)
         if _coconut_qualname_10 is not None:  #133 (line in Coconut source)
             _coconut___fmap___0.__qualname__ = _coconut_py_str("dataType.__fmap__" if "." not in _coconut_qualname_10 else _coconut_qualname_10.rsplit(".", 1)[0] + ".dataType.__fmap__")  #133 (line in Coconut source)
-        dataType.__fmap__ = _coconut___fmap___0  #133 (line in Coconut source)
+        dataType.__fmap__ = (_coconut_tco)(_coconut___fmap___0)  #133 (line in Coconut source)
 
     if (hasattr)(dataType, "__join__"):  #133 (line in Coconut source)
         raise TypeError("data types which define __bind__ cannot define __join__")  #134 (line in Coconut source)
-    @_coconut_tco  #135 (line in Coconut source)
     def _coconut___join___0(self):  #135 (line in Coconut source)
         return _coconut_tail_call(self.__bind__, lambda x: x)  #136 (line in Coconut source)
 
@@ -284,7 +279,7 @@ def definesBind(dataType: 'TType') -> 'TType':  #119 (line in Coconut source)
     _coconut_qualname_11 = _coconut.getattr(_coconut___join___0, "__qualname__", None)  #138 (line in Coconut source)
     if _coconut_qualname_11 is not None:  #138 (line in Coconut source)
         _coconut___join___0.__qualname__ = _coconut_py_str("dataType.__join__" if "." not in _coconut_qualname_11 else _coconut_qualname_11.rsplit(".", 1)[0] + ".dataType.__join__")  #138 (line in Coconut source)
-    dataType.__join__ = _coconut___join___0  #138 (line in Coconut source)
+    dataType.__join__ = (_coconut_tco)(_coconut___join___0)  #138 (line in Coconut source)
 
     return (dataType)  #138 (line in Coconut source)
 

@@ -1,20 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xff38af9
+# __coconut_hash__ = 0xa7d4ca09
 
-# Compiled with Coconut version 3.0.0-a_dev1
+# Compiled with Coconut version 3.0.0-a_dev27
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 _coconut_cached__coconut__ = _coconut_sys.modules.get('_coconut_cached__coconut__', _coconut_sys.modules.get('__coconut__'))
-from builtins import chr, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
-py_chr, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_super, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
-_coconut_py_str, _coconut_py_super = str, super
+from builtins import chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
+py_chr, py_dict, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_super, py_zip, py_filter, py_reversed, py_enumerate, py_repr = chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
+_coconut_py_str, _coconut_py_super, _coconut_py_dict = str, super, dict
 from functools import wraps as _coconut_wraps
 exec("_coconut_exec = exec")
 if _coconut_sys.version_info < (3, 7):
+    from collections import OrderedDict as _coconut_OrderedDict
     def _coconut_default_breakpointhook(*args, **kwargs):
         hookname = _coconut.os.getenv("PYTHONBREAKPOINT")
         if hookname != "0":
@@ -35,6 +36,29 @@ if _coconut_sys.version_info < (3, 7):
         _coconut_sys.__breakpointhook__ = _coconut_default_breakpointhook
     def breakpoint(*args, **kwargs):
         return _coconut.getattr(_coconut_sys, "breakpointhook", _coconut_default_breakpointhook)(*args, **kwargs)
+    class _coconut_dict_meta(type):
+        def __instancecheck__(cls, inst):
+            return _coconut.isinstance(inst, _coconut_py_dict)
+        def __subclasscheck__(cls, subcls):
+            return _coconut.issubclass(subcls, _coconut_py_dict)
+    class _coconut_dict_base(_coconut_OrderedDict):
+        __slots__ = ()
+        __doc__ = getattr(_coconut_OrderedDict, "__doc__", "<see help(py_dict)>")
+        __eq__ = _coconut_py_dict.__eq__
+        def __repr__(self):
+            return "{" + ", ".join("{k!r}: {v!r}".format(k=k, v=v) for k, v in self.items()) + "}"
+        def __or__(self, other):
+            out = self.copy()
+            out.update(other)
+            return out
+        def __ror__(self, other):
+            out = self.__class__(other)
+            out.update(self)
+            return out
+        def __ior__(self, other):
+            self.update(other)
+            return self
+    dict = _coconut_dict_meta(py_str("dict"), _coconut_dict_base.__bases__, _coconut_dict_base.__dict__.copy())
 else:
     py_breakpoint = breakpoint
 @_coconut_wraps(_coconut_py_super)
@@ -50,7 +74,7 @@ def _coconut_super(type=None, object_or_type=None):
         self = frame.f_locals[frame.f_code.co_varnames[0]]
         return _coconut_py_super(cls, self)
     return _coconut_py_super(type, object_or_type)
-super = _coconut_super
+super = py_super
 class _coconut:
     import collections, copy, functools, types, itertools, operator, threading, os, warnings, contextlib, traceback, weakref, multiprocessing
     from multiprocessing import dummy as multiprocessing_dummy
@@ -93,12 +117,12 @@ class _coconut:
         numpy = you_need_to_install_numpy()
     else:
         abc.Sequence.register(numpy.ndarray)
-    numpy_modules = ('numpy', 'pandas', 'jaxlib.xla_extension')
+    numpy_modules = ('numpy', 'pandas', 'torch', 'jaxlib.xla_extension')
     jax_numpy_modules = ('jaxlib.xla_extension',)
     tee_type = type(itertools.tee((), 1)[0])
     reiterables = abc.Sequence, abc.Mapping, abc.Set
     abc.Sequence.register(collections.deque)
-    Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, classmethod, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, map, min, max, next, object, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print = Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, classmethod, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, map, min, max, next, object, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print
+    Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, classmethod, complex, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print = Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, classmethod, complex, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print
 def _coconut_handle_cls_kwargs(**kwargs):
     """Some code taken from six under the terms of its MIT license."""
     metaclass = kwargs.pop("metaclass", None)
@@ -122,7 +146,7 @@ def _coconut_handle_cls_kwargs(**kwargs):
     return coconut_handle_cls_kwargs_wrapper
 def _coconut_handle_cls_stargs(*args):
     temp_names = ["_coconut_base_cls_%s" % (i,) for i in _coconut.range(_coconut.len(args))]
-    ns = _coconut.dict(_coconut.zip(temp_names, args))
+    ns = _coconut_py_dict(_coconut.zip(temp_names, args))
     _coconut_exec("class _coconut_cls_stargs_base(" + ", ".join(temp_names) + "): pass", ns)
     return ns["_coconut_cls_stargs_base"]
 class _coconut_baseclass:
@@ -186,7 +210,7 @@ class _coconut_tail_call(_coconut_baseclass):
         self.kwargs = kwargs
     def __reduce__(self):
         return (self.__class__, (self.func, self.args, self.kwargs))
-_coconut_tco_func_dict = {}
+_coconut_tco_func_dict = _coconut.dict()
 def _coconut_tco(func):
     @_coconut.functools.wraps(func)
     def tail_call_optimized_func(*args, **kwargs):
@@ -538,6 +562,12 @@ def _coconut_bool_and(a, b):
 def _coconut_bool_or(a, b):
     """Boolean or operator (or). Equivalent to (a, b) -> a or b."""
     return a or b
+def _coconut_in(a, b):
+    """Containment operator (in). Equivalent to (a, b) -> a in b."""
+    return a in b
+def _coconut_not_in(a, b):
+    """Negative containment operator (not in). Equivalent to (a, b) -> a not in b."""
+    return a not in b
 def _coconut_none_coalesce(a, b):
     """None coalescing operator (??). Equivalent to (a, b) -> a if a is not None else b."""
     return b if a is None else a
@@ -1023,7 +1053,7 @@ class multi_enumerate(_coconut_has_iter):
     in each inner iterable. Supports indexing.
 
     For numpy arrays, effectively equivalent to:
-        it = np.nditer(iterable, flags=["multi_index"])
+        it = np.nditer(iterable, flags=["multi_index", "refs_ok"])
         for x in it:
             yield it.multi_index, x
 
@@ -1041,8 +1071,9 @@ class multi_enumerate(_coconut_has_iter):
         return self.iter.__class__.__module__ in _coconut.numpy_modules
     def __iter__(self):
         if self.is_numpy:
-            it = _coconut.numpy.nditer(self.iter, flags=["multi_index"])
+            it = _coconut.numpy.nditer(self.iter, ["multi_index", "refs_ok"], [["readonly"]])
             for x in it:
+                x, = x.flatten()
                 yield it.multi_index, x
         else:
             ind = [-1]
@@ -1267,7 +1298,7 @@ class recursive_iterator(_coconut_baseclass):
     __slots__ = ("func", "reit_store", "backup_reit_store")
     def __init__(self, func):
         self.func = func
-        self.reit_store = {}
+        self.reit_store = _coconut.dict()
         self.backup_reit_store = []
     def __call__(self, *args, **kwargs):
         key = (args, _coconut.frozenset(kwargs.items()))
@@ -1327,7 +1358,7 @@ def _coconut_get_function_match_error():
 class _coconut_base_pattern_func(_coconut_baseclass):
     _coconut_is_match = True
     def __init__(self, *funcs):
-        self.FunctionMatchError = _coconut.type(_coconut_py_str("MatchError"), (_coconut_MatchError,), {})
+        self.FunctionMatchError = _coconut.type(_coconut_py_str("MatchError"), (_coconut_MatchError,), _coconut_py_dict())
         self.patterns = []
         self.__doc__ = None
         self.__name__ = None
@@ -1656,7 +1687,7 @@ def reveal_locals():
 def _coconut_dict_merge(*dicts, **kwargs):
     for_func = kwargs.pop("for_func", False)
     assert not kwargs, "error with internal Coconut function _coconut_dict_merge (you should report this at https://github.com/evhub/coconut/issues/new)"
-    newdict = {}
+    newdict = _coconut.dict()
     prevlen = 0
     for d in dicts:
         newdict.update(d)
@@ -1841,7 +1872,7 @@ class _coconut_lifted(_coconut_baseclass):
     def __reduce__(self):
         return (self.__class__, (self.func,) + self.func_args, {"func_kwargs": self.func_kwargs})
     def __call__(self, *args, **kwargs):
-        return self.func(*(g(*args, **kwargs) for g in self.func_args), **_coconut.dict((k, h(*args, **kwargs)) for k, h in self.func_kwargs.items()))
+        return self.func(*(g(*args, **kwargs) for g in self.func_args), **_coconut_py_dict((k, h(*args, **kwargs)) for k, h in self.func_kwargs.items()))
     def __repr__(self):
         return "lift(%r)(%s%s)" % (self.func, ", ".join(_coconut.repr(g) for g in self.func_args), ", ".join(k + "=" + _coconut.repr(h) for k, h in self.func_kwargs.items()))
 class lift(_coconut_baseclass):
@@ -1891,7 +1922,7 @@ def collectby(key_func, iterable, value_func=None, reduce_func=None):
     If reduce_func is passed, instead of collecting the items into lists, reduce over
     the items of each key with reduce_func, effectively implementing a MapReduce operation.
     """
-    collection = _coconut.collections.defaultdict(_coconut.list) if reduce_func is None else {}
+    collection = _coconut.collections.defaultdict(_coconut.list) if reduce_func is None else _coconut.dict()
     for item in iterable:
         key = key_func(item)
         if value_func is not None:
@@ -1966,8 +1997,11 @@ def _coconut_multi_dim_arr(arrs, dim):
 def _coconut_call_or_coefficient(func, *args):
     if _coconut.callable(func):
         return func(*args)
+    if not _coconut.isinstance(func, (_coconut.int, _coconut.float, _coconut.complex)) and func.__class__.__module__ not in _coconut.numpy_modules:
+        raise _coconut.TypeError("implicit function application and coefficient syntax only supported for Callable, int, float, complex, and numpy objects")
+    func = func
     for x in args:
-        func *= x
+        func = func * x
     return func
 _coconut_self_match_types = (bool, bytearray, bytes, dict, float, frozenset, int, py_int, list, set, str, py_str, tuple)
 _coconut_Expected, _coconut_MatchError, _coconut_count, _coconut_enumerate, _coconut_flatten, _coconut_filter, _coconut_ident, _coconut_map, _coconut_multiset, _coconut_range, _coconut_reiterable, _coconut_reversed, _coconut_starmap, _coconut_tee, _coconut_zip, TYPE_CHECKING, reduce, takewhile, dropwhile = Expected, MatchError, count, enumerate, flatten, filter, ident, map, multiset, range, reiterable, reversed, starmap, tee, zip, False, _coconut.functools.reduce, _coconut.itertools.takewhile, _coconut.itertools.dropwhile
@@ -1978,4 +2012,4 @@ import setuptools  # type: ignore
 
 VERSION = "0.2.5"
 
-setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", long_description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages(), install_requires=["coconut[mypy]",], extras_require={":python_version<'3.5'": ["typing",], "dev": ["pytest",]})
+setuptools.setup(name="coconut-prelude", version=VERSION, description="An implementation of Haskell's Prelude in Python using Coconut.", long_description="An implementation of Haskell's Prelude in Python using Coconut.", url="https://github.com/evhub/coconut-prelude", author="Evan Hubinger", author_email="evanjhub@gmail.com", packages=setuptools.find_packages(), install_requires=["coconut[mypy]",], extras_require=_coconut.dict(((":python_version<'3.5'", ["typing",]), ("dev", ["pytest",]))))
