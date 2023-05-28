@@ -10,7 +10,7 @@
 ><td align=right valign=bottom
 ><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cmain.py">c:\users\evanj\github\coconut-prelude\prelude\main.py</a></font></td></tr></table>
     <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;__coconut_hash__&nbsp;=&nbsp;0xdf47aa1</tt></p>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0xc65ee0b0</tt></p>
 <p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#aa55cc">
@@ -1615,6 +1615,8 @@ Return&nbsp;the&nbsp;logarithm&nbsp;of&nbsp;x&nbsp;to&nbsp;the&nbsp;given&nbsp;b
 If&nbsp;the&nbsp;base&nbsp;not&nbsp;specified,&nbsp;returns&nbsp;the&nbsp;natural&nbsp;logarithm&nbsp;(base&nbsp;e)&nbsp;of&nbsp;x.</tt></dd></dl>
  <dl><dt><a name="-logBase"><strong>logBase</strong></a>(base: 'float', x: 'float') -&gt; 'float'</dt></dl>
  <dl><dt><a name="-lookup"><strong>lookup</strong></a>(key: 'Ta', assocs: '_coconut.typing.Iterable[_coconut.typing.Tuple[Ta, Tb]]') -&gt; 'Maybe'</dt></dl>
+ <dl><dt><a name="-mapM"><strong>mapM</strong></a> = fmap(f: '_coconut.typing.Callable[[Ta], Tb]', xs: 'Functor[Ta]') -&gt; 'Functor[Tb]'</dt><dd><tt>--&nbsp;fmap&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fmap__&nbsp;method</tt></dd></dl>
+ <dl><dt><a name="-mapM_"><strong>mapM_</strong></a> = fmap(f: '_coconut.typing.Callable[[Ta], Tb]', xs: 'Functor[Ta]') -&gt; 'Functor[Tb]'</dt><dd><tt>--&nbsp;fmap&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fmap__&nbsp;method</tt></dd></dl>
  <dl><dt><a name="-mappend"><strong>mappend</strong></a>(x: 'TMonoid', y: 'TMonoid') -&gt; 'TMonoid'</dt><dd><tt>--&nbsp;mappend&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__mappend__&nbsp;method<br>
 --&nbsp;you&nbsp;may&nbsp;also&nbsp;want&nbsp;to&nbsp;define&nbsp;a&nbsp;__mempty__&nbsp;method<br>
 --&nbsp;the&nbsp;default&nbsp;implementation&nbsp;identifies&nbsp;non-identities&nbsp;using&nbsp;__bool__</tt></dd></dl>
@@ -1998,6 +2000,7 @@ reject&nbsp;non-numeric&nbsp;types.</tt></dd></dl>
  <dl><dt><a name="-take"><strong>take</strong></a>(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -&gt; '_coconut.typing.Iterable[Ta]'</dt></dl>
  <dl><dt><a name="-tan"><strong>tan</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;tangent&nbsp;of&nbsp;x&nbsp;(measured&nbsp;in&nbsp;radians).</tt></dd></dl>
  <dl><dt><a name="-tanh"><strong>tanh</strong></a>(x, /)</dt><dd><tt>Return&nbsp;the&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</tt></dd></dl>
+ <dl><dt><a name="-traverse"><strong>traverse</strong></a> = fmap(f: '_coconut.typing.Callable[[Ta], Tb]', xs: 'Functor[Ta]') -&gt; 'Functor[Tb]'</dt><dd><tt>--&nbsp;fmap&nbsp;is&nbsp;overridden&nbsp;by&nbsp;the&nbsp;__fmap__&nbsp;method</tt></dd></dl>
  <dl><dt><a name="-unIO"><strong>unIO</strong></a>(io: 'IO') -&gt; 'T.Any'</dt><dd><tt>The&nbsp;unIO&nbsp;function&nbsp;is&nbsp;an&nbsp;impure&nbsp;function&nbsp;which&nbsp;performs&nbsp;the<br>
 I/O&nbsp;contained&nbsp;in&nbsp;the&nbsp;given&nbsp;<a href="#IO">IO</a>&nbsp;<a href="builtins.html#object">object</a>&nbsp;and&nbsp;returns&nbsp;the&nbsp;result.<br>
 In&nbsp;particular,&nbsp;the&nbsp;recommendation&nbsp;is&nbsp;to&nbsp;write<br>
@@ -2039,7 +2042,7 @@ Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-
 <strong>Monad</strong> = typing.Iterable<br>
 <strong>Monoid</strong> = typing.Iterable<br>
 <strong>Num</strong> = typing.Union[int, float, fractions.Fraction]<br>
-<strong>Read</strong> = typing.Union[str, int, float, bool, NoneType, tuple, list, dict]<br>
+<strong>Read</strong> = typing.Union[str, int, float, bool, NoneType, tuple, list, prelude.__coconut__.dict]<br>
 <strong>ReadS</strong> = NotImplemented<br>
 <strong>Real</strong> = typing.Union[int, float, fractions.Fraction]<br>
 <strong>Show</strong> = typing.Any<br>
@@ -2065,14 +2068,14 @@ Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-
 <strong>exponent</strong> = NotImplemented<br>
 <strong>fst</strong> = operator.itemgetter(0)<br>
 <strong>generator_stop</strong> = _Feature((3, 5, 0, 'beta', 1), (3, 7, 0, 'alpha', 0), 8388608)<br>
-<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x000001F0BD13EAD0&gt;, 1))<br>
-<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x000001F0BD13EAD0&gt;)<br>
+<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x000001676559EAD0&gt;, 1))<br>
+<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x000001676559EAD0&gt;)<br>
 <strong>getLine</strong> = IO(io_func=&lt;built-in function input&gt;)<br>
 <strong>gt</strong> = GT()<br>
-<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001F0C13F2AF0&gt;, index=0)<br>
-<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x000001F0C13F2AF0&gt;, index=slice(None, -1, None))<br>
+<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x0000016769C0ECA0&gt;, index=0)<br>
+<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x0000016769C0ECA0&gt;, index=slice(None, -1, None))<br>
 <strong>isDenormalized</strong> = NotImplemented<br>
-<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001F0C13F2AF0&gt;, index=-1)<br>
+<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x0000016769C0ECA0&gt;, index=-1)<br>
 <strong>lex</strong> = NotImplemented<br>
 <strong>lines</strong> = operator.methodcaller('splitlines')<br>
 <strong>lt</strong> = LT()<br>
@@ -2080,7 +2083,7 @@ Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-
 <strong>nothing</strong> = Nothing()<br>
 <strong>otherwise</strong> = True<br>
 <strong>pi</strong> = 3.141592653589793<br>
-<strong>pred</strong> = &lt;function _coconut_minus at 0x000001F0C13F4040&gt;$(?, 1)<br>
+<strong>pred</strong> = &lt;function _coconut_minus at 0x0000016769C101F0&gt;$(?, 1)<br>
 <strong>product</strong> = functools.partial(&lt;built-in function reduce&gt;, &lt;built-in function mul&gt;)<br>
 <strong>readList</strong> = NotImplemented<br>
 <strong>readParen</strong> = NotImplemented<br>
@@ -2091,7 +2094,7 @@ Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-
 <strong>significand</strong> = NotImplemented<br>
 <strong>snd</strong> = operator.itemgetter(1)<br>
 <strong>succ</strong> = functools.partial(&lt;built-in function add&gt;, 1)<br>
-<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x000001F0C13F2AF0&gt;, index=slice(1, None, None))<br>
+<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x0000016769C0ECA0&gt;, index=slice(1, None, None))<br>
 <strong>toEnum</strong> = NotImplemented<br>
 <strong>undefined</strong> = None<br>
 <strong>words</strong> = operator.methodcaller('split')</td></tr></table>
