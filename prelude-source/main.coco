@@ -983,11 +983,11 @@ def scanr1(func: (Ta, Ta) -> Ta, xs: Ta[]) -> Ta$[] =
     scan(func, reversed(xs))$[::-1]
 
 ### Infinite lists:
-@recursive_iterator
+@recursive_generator
 def iterate(func: Ta -> Ta, x: Ta) -> Ta$[] =
     [x] :: iterate(func, func(x))
 
-@recursive_iterator
+@recursive_generator
 def repeat(x: Ta) -> Ta$[] =
     [x] :: repeat(x)
 
@@ -998,7 +998,7 @@ if TYPE_CHECKING:
     def \cycle(xs: Ta[]) -> Ta$[]:  # type: ignore
         ...
 else:
-    @recursive_iterator
+    @recursive_generator
     def \cycle(xs if len(xs) > 0) =
         _cycle(xs)
 

@@ -1,76 +1,74 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<html><head><title>Python: module prelude.util</title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-</head><body bgcolor="#f0f0f8">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Python: module prelude.util</title>
+</head><body>
 
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
-<tr bgcolor="#7799ee">
-<td valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="prelude.html"><font color="#ffffff">prelude</font></a>.util</strong></big></big></font></td
-><td align=right valign=bottom
-><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cutil.py">c:\users\evanj\github\coconut-prelude\prelude\util.py</a></font></td></tr></table>
-    <p><tt>#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x5fbb120b</tt></p>
+<table class="heading">
+<tr class="heading-text decor">
+<td class="title">&nbsp;<br><strong class="title"><a href="prelude.html" class="white">prelude</a>.util</strong></td>
+<td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Conedrive%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cutil.py">c:\users\evanj\onedrive\documents\github\coconut-prelude\prelude\util.py</a></td></tr></table>
+    <p><span class="code">#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x46405004</span></p>
 <p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#aa55cc">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+<table class="section">
+<tr class="decor pkg-content-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Modules</strong></td></tr>
     
-<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="typing.html">typing</a><br>
-</td><td width="25%" valign=top><a href="prelude.__coconut__.html">prelude.__coconut__</a><br>
-</td><td width="25%" valign=top><a href="os.html">os</a><br>
-</td><td width="25%" valign=top><a href="sys.html">sys</a><br>
+<tr><td class="decor pkg-content-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><table><tr><td class="multicolumn"><a href="typing.html">typing</a><br>
+</td><td class="multicolumn"><a href="prelude.__coconut__.html">prelude.__coconut__</a><br>
+</td><td class="multicolumn"><a href="os.html">os</a><br>
+</td><td class="multicolumn"><a href="sys.html">sys</a><br>
 </td></tr></table></td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#eeaa77">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+<table class="section">
+<tr class="decor functions-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Functions</strong></td></tr>
     
-<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><dl><dt><a name="-chr"><strong>chr</strong></a>(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
- <dl><dt><a name="-curry"><strong>curry</strong></a>(func)</dt><dd><tt>--&nbsp;curry&nbsp;a&nbsp;Python-style&nbsp;multi-place&nbsp;function&nbsp;into<br>
+<tr><td class="decor functions-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><dl><dt><a name="-chr"><strong>chr</strong></a>(i, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</span></dd></dl>
+ <dl><dt><a name="-curry"><strong>curry</strong></a>(func)</dt><dd><span class="code">--&nbsp;curry&nbsp;a&nbsp;Python-style&nbsp;multi-place&nbsp;function&nbsp;into<br>
 --&nbsp;&nbsp;a&nbsp;Haskell-style&nbsp;function&nbsp;that&nbsp;returns&nbsp;a&nbsp;function<br>
---&nbsp;&nbsp;(see&nbsp;also&nbsp;curry_tuple&nbsp;for&nbsp;functions&nbsp;of&nbsp;tuples)</tt></dd></dl>
- <dl><dt><a name="-definesBind"><strong>definesBind</strong></a>(dataType: 'TType') -&gt; 'TType'</dt><dd><tt>Decorator&nbsp;to&nbsp;declare&nbsp;that&nbsp;a&nbsp;data&nbsp;type&nbsp;defines&nbsp;__bind__<br>
+--&nbsp;&nbsp;(see&nbsp;also&nbsp;curry_tuple&nbsp;for&nbsp;functions&nbsp;of&nbsp;tuples)</span></dd></dl>
+ <dl><dt><a name="-definesBind"><strong>definesBind</strong></a>(dataType: 'TType') -&gt; 'TType'</dt><dd><span class="code">Decorator&nbsp;to&nbsp;declare&nbsp;that&nbsp;a&nbsp;data&nbsp;type&nbsp;defines&nbsp;__bind__<br>
 instead&nbsp;of&nbsp;__join__.&nbsp;Will&nbsp;also&nbsp;create&nbsp;an&nbsp;__fmap__&nbsp;method<br>
-if&nbsp;none&nbsp;exists,&nbsp;though&nbsp;then&nbsp;a&nbsp;__pure__&nbsp;method&nbsp;is&nbsp;required.</tt></dd></dl>
- <dl><dt><a name="-definesReturn"><strong>definesReturn</strong></a>(dataType: 'TType') -&gt; 'TType'</dt><dd><tt>A&nbsp;simple&nbsp;decorator&nbsp;to&nbsp;set&nbsp;__pure__&nbsp;equal&nbsp;to&nbsp;__return__.<br>
+if&nbsp;none&nbsp;exists,&nbsp;though&nbsp;then&nbsp;a&nbsp;__pure__&nbsp;method&nbsp;is&nbsp;required.</span></dd></dl>
+ <dl><dt><a name="-definesReturn"><strong>definesReturn</strong></a>(dataType: 'TType') -&gt; 'TType'</dt><dd><span class="code">A&nbsp;simple&nbsp;decorator&nbsp;to&nbsp;set&nbsp;__pure__&nbsp;equal&nbsp;to&nbsp;__return__.<br>
 If&nbsp;used&nbsp;with&nbsp;definesBind,&nbsp;definesReturn&nbsp;must&nbsp;be&nbsp;applied<br>
-first&nbsp;(i.e.&nbsp;be&nbsp;a&nbsp;more&nbsp;inner&nbsp;decorator).</tt></dd></dl>
- <dl><dt><a name="-derivingBoundedEnum"><strong>derivingBoundedEnum</strong></a>(*valueConstructors: 'TType') -&gt; 'None'</dt><dd><tt>The&nbsp;expression<br>
+first&nbsp;(i.e.&nbsp;be&nbsp;a&nbsp;more&nbsp;inner&nbsp;decorator).</span></dd></dl>
+ <dl><dt><a name="-derivingBoundedEnum"><strong>derivingBoundedEnum</strong></a>(*valueConstructors: 'TType') -&gt; 'None'</dt><dd><span class="code">The&nbsp;expression<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-derivingBoundedEnum">derivingBoundedEnum</a>(valueConstructor1,&nbsp;valueConstructor2,&nbsp;...)<br>
 is&nbsp;equivalent&nbsp;to&nbsp;stating&nbsp;that&nbsp;for&nbsp;some&nbsp;data&nbsp;type&nbsp;defined&nbsp;as<br>
 &nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;dataType&nbsp;=&nbsp;valueConstructor1&nbsp;...&nbsp;|&nbsp;valueConstructor2&nbsp;...&nbsp;|&nbsp;...<br>
 we&nbsp;should&nbsp;add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;(Bounded,&nbsp;Enum)</tt></dd></dl>
- <dl><dt><a name="-derivingOrd"><strong>derivingOrd</strong></a>(*valueConstructors: 'TType') -&gt; 'None'</dt><dd><tt>The&nbsp;expression<br>
+&nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;(Bounded,&nbsp;Enum)</span></dd></dl>
+ <dl><dt><a name="-derivingOrd"><strong>derivingOrd</strong></a>(*valueConstructors: 'TType') -&gt; 'None'</dt><dd><span class="code">The&nbsp;expression<br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#-derivingOrd">derivingOrd</a>(valueConstructor1,&nbsp;valueConstructor2,&nbsp;...)<br>
 is&nbsp;equivalent&nbsp;to&nbsp;stating&nbsp;that&nbsp;for&nbsp;some&nbsp;data&nbsp;type&nbsp;defined&nbsp;as<br>
 &nbsp;&nbsp;&nbsp;&nbsp;data&nbsp;dataType&nbsp;=&nbsp;valueConstructor1&nbsp;...&nbsp;|&nbsp;valueConstructor2&nbsp;...&nbsp;|&nbsp;...<br>
 we&nbsp;should&nbsp;add<br>
-&nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;Ord</tt></dd></dl>
- <dl><dt><a name="-hex"><strong>hex</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;deriving&nbsp;Ord</span></dd></dl>
+ <dl><dt><a name="-hex"><strong>hex</strong></a>(number, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
-'0xc0ffee'</tt></dd></dl>
- <dl><dt><a name="-input"><strong>input</strong></a>(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
+'0xc0ffee'</span></dd></dl>
+ <dl><dt><a name="-input"><strong>input</strong></a>(prompt='', /)</dt><dd><span class="code">Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
 &nbsp;<br>
 The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
 trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
-On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
- <dl><dt><a name="-oct"><strong>oct</strong></a>(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</span></dd></dl>
+ <dl><dt><a name="-oct"><strong>oct</strong></a>(number, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
-'0o1234567'</tt></dd></dl>
- <dl><dt><a name="-of"><strong>of</strong></a>(func, *args, **kwargs)</dt><dd><tt>of&nbsp;=&nbsp;($)<br>
+'0o1234567'</span></dd></dl>
+ <dl><dt><a name="-of"><strong>of</strong></a>(func, *args, **kwargs)</dt><dd><span class="code">of&nbsp;=&nbsp;($)<br>
 --&nbsp;<a href="#-of">of</a>(func,&nbsp;*args,&nbsp;**kwargs)&nbsp;attempts&nbsp;to&nbsp;call&nbsp;func(*args,&nbsp;**kwargs),<br>
 --&nbsp;&nbsp;but&nbsp;in&nbsp;case&nbsp;of&nbsp;TypeError&nbsp;curries&nbsp;func$(*args,&nbsp;**kwargs)&nbsp;instead,<br>
---&nbsp;&nbsp;as&nbsp;in&nbsp;Haskell&nbsp;function&nbsp;application&nbsp;(see&nbsp;also&nbsp;curry,&nbsp;uncurry)</tt></dd></dl>
- <dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;OSError&nbsp;upon&nbsp;failure.<br>
+--&nbsp;&nbsp;as&nbsp;in&nbsp;Haskell&nbsp;function&nbsp;application&nbsp;(see&nbsp;also&nbsp;curry,&nbsp;uncurry)</span></dd></dl>
+ <dl><dt><a name="-open"><strong>open</strong></a>(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><span class="code">Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;OSError&nbsp;upon&nbsp;failure.<br>
 &nbsp;<br>
 file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
 if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
@@ -85,9 +83,9 @@ it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writ
 'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
 append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
 In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
-dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
-current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
-mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+dependent:&nbsp;locale.getencoding()&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the&nbsp;current&nbsp;locale&nbsp;encoding.<br>
+(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary&nbsp;mode&nbsp;and&nbsp;leave&nbsp;encoding<br>
+unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
 &nbsp;<br>
 =========&nbsp;===============================================================<br>
 Character&nbsp;Meaning<br>
@@ -99,7 +97,6 @@ Character&nbsp;Meaning<br>
 'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
 't'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
 '+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
-'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
 =========&nbsp;===============================================================<br>
 &nbsp;<br>
 The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
@@ -114,10 +111,6 @@ bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;m
 't'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
 returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
 platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
-&nbsp;<br>
-'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
-of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
-universal&nbsp;newlines&nbsp;mode.<br>
 &nbsp;<br>
 buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
 Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
@@ -187,38 +180,40 @@ a&nbsp;BufferedRandom.<br>
 It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
 reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;StringIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
 opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;BytesIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
-opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
- <dl><dt><a name="-print"><strong>print</strong></a>(...)</dt><dd><tt><a href="#-print">print</a>(value,&nbsp;...,&nbsp;sep='&nbsp;',&nbsp;end='\n',&nbsp;file=sys.stdout,&nbsp;flush=False)<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</span></dd></dl>
+ <dl><dt><a name="-print"><strong>print</strong></a>(*args, sep=' ', end='\n', file=None, flush=False)</dt><dd><span class="code">Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
 &nbsp;<br>
-Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
-Optional&nbsp;keyword&nbsp;arguments:<br>
-file:&nbsp;&nbsp;a&nbsp;file-like&nbsp;object&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
-sep:&nbsp;&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
-end:&nbsp;&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
-flush:&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</tt></dd></dl>
- <dl><dt><a name="-py_breakpoint"><strong>py_breakpoint</strong></a> = breakpoint(...)</dt><dd><tt>breakpoint(*args,&nbsp;**kws)<br>
+sep<br>
+&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
+end<br>
+&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
+file<br>
+&nbsp;&nbsp;a&nbsp;file-like&nbsp;object&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
+flush<br>
+&nbsp;&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</span></dd></dl>
+ <dl><dt><a name="-py_breakpoint"><strong>py_breakpoint</strong></a> = breakpoint(...)</dt><dd><span class="code">breakpoint(*args,&nbsp;**kws)<br>
 &nbsp;<br>
 Call&nbsp;sys.breakpointhook(*args,&nbsp;**kws).&nbsp;&nbsp;sys.breakpointhook()&nbsp;must&nbsp;accept<br>
 whatever&nbsp;arguments&nbsp;are&nbsp;passed.<br>
 &nbsp;<br>
-By&nbsp;default,&nbsp;this&nbsp;drops&nbsp;you&nbsp;into&nbsp;the&nbsp;pdb&nbsp;debugger.</tt></dd></dl>
- <dl><dt><a name="-py_chr"><strong>py_chr</strong></a> = chr(i, /)</dt><dd><tt>Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</tt></dd></dl>
- <dl><dt><a name="-py_hex"><strong>py_hex</strong></a> = hex(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+By&nbsp;default,&nbsp;this&nbsp;drops&nbsp;you&nbsp;into&nbsp;the&nbsp;pdb&nbsp;debugger.</span></dd></dl>
+ <dl><dt><a name="-py_chr"><strong>py_chr</strong></a> = chr(i, /)</dt><dd><span class="code">Return&nbsp;a&nbsp;Unicode&nbsp;string&nbsp;of&nbsp;one&nbsp;character&nbsp;with&nbsp;ordinal&nbsp;i;&nbsp;0&nbsp;&lt;=&nbsp;i&nbsp;&lt;=&nbsp;0x10ffff.</span></dd></dl>
+ <dl><dt><a name="-py_hex"><strong>py_hex</strong></a> = hex(number, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;hexadecimal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-hex">hex</a>(12648430)<br>
-'0xc0ffee'</tt></dd></dl>
- <dl><dt><a name="-py_input"><strong>py_input</strong></a> = input(prompt=None, /)</dt><dd><tt>Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
+'0xc0ffee'</span></dd></dl>
+ <dl><dt><a name="-py_input"><strong>py_input</strong></a> = input(prompt='', /)</dt><dd><span class="code">Read&nbsp;a&nbsp;string&nbsp;from&nbsp;standard&nbsp;input.&nbsp;&nbsp;The&nbsp;trailing&nbsp;newline&nbsp;is&nbsp;stripped.<br>
 &nbsp;<br>
 The&nbsp;prompt&nbsp;string,&nbsp;if&nbsp;given,&nbsp;is&nbsp;printed&nbsp;to&nbsp;standard&nbsp;output&nbsp;without&nbsp;a<br>
 trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
-On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</tt></dd></dl>
- <dl><dt><a name="-py_oct"><strong>py_oct</strong></a> = oct(number, /)</dt><dd><tt>Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
+On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</span></dd></dl>
+ <dl><dt><a name="-py_oct"><strong>py_oct</strong></a> = oct(number, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
-'0o1234567'</tt></dd></dl>
- <dl><dt><a name="-py_open"><strong>py_open</strong></a> = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><tt>Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;OSError&nbsp;upon&nbsp;failure.<br>
+'0o1234567'</span></dd></dl>
+ <dl><dt><a name="-py_open"><strong>py_open</strong></a> = open(file, mode='r', buffering=-1, encoding=None, errors=None, newline=None, closefd=True, opener=None)</dt><dd><span class="code">Open&nbsp;file&nbsp;and&nbsp;return&nbsp;a&nbsp;stream.&nbsp;&nbsp;Raise&nbsp;OSError&nbsp;upon&nbsp;failure.<br>
 &nbsp;<br>
 file&nbsp;is&nbsp;either&nbsp;a&nbsp;text&nbsp;or&nbsp;byte&nbsp;string&nbsp;giving&nbsp;the&nbsp;name&nbsp;(and&nbsp;the&nbsp;path<br>
 if&nbsp;the&nbsp;file&nbsp;isn't&nbsp;in&nbsp;the&nbsp;current&nbsp;working&nbsp;directory)&nbsp;of&nbsp;the&nbsp;file&nbsp;to<br>
@@ -233,9 +228,9 @@ it&nbsp;already&nbsp;exists),&nbsp;'x'&nbsp;for&nbsp;creating&nbsp;and&nbsp;writ
 'a'&nbsp;for&nbsp;appending&nbsp;(which&nbsp;on&nbsp;some&nbsp;Unix&nbsp;systems,&nbsp;means&nbsp;that&nbsp;all&nbsp;writes<br>
 append&nbsp;to&nbsp;the&nbsp;end&nbsp;of&nbsp;the&nbsp;file&nbsp;regardless&nbsp;of&nbsp;the&nbsp;current&nbsp;seek&nbsp;position).<br>
 In&nbsp;text&nbsp;mode,&nbsp;if&nbsp;encoding&nbsp;is&nbsp;not&nbsp;specified&nbsp;the&nbsp;encoding&nbsp;used&nbsp;is&nbsp;platform<br>
-dependent:&nbsp;locale.getpreferredencoding(False)&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the<br>
-current&nbsp;locale&nbsp;encoding.&nbsp;(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary<br>
-mode&nbsp;and&nbsp;leave&nbsp;encoding&nbsp;unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
+dependent:&nbsp;locale.getencoding()&nbsp;is&nbsp;called&nbsp;to&nbsp;get&nbsp;the&nbsp;current&nbsp;locale&nbsp;encoding.<br>
+(For&nbsp;reading&nbsp;and&nbsp;writing&nbsp;raw&nbsp;bytes&nbsp;use&nbsp;binary&nbsp;mode&nbsp;and&nbsp;leave&nbsp;encoding<br>
+unspecified.)&nbsp;The&nbsp;available&nbsp;modes&nbsp;are:<br>
 &nbsp;<br>
 =========&nbsp;===============================================================<br>
 Character&nbsp;Meaning<br>
@@ -247,7 +242,6 @@ Character&nbsp;Meaning<br>
 'b'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;binary&nbsp;mode<br>
 't'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;text&nbsp;mode&nbsp;(default)<br>
 '+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;open&nbsp;a&nbsp;disk&nbsp;file&nbsp;for&nbsp;updating&nbsp;(reading&nbsp;and&nbsp;writing)<br>
-'U'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;universal&nbsp;newline&nbsp;mode&nbsp;(deprecated)<br>
 =========&nbsp;===============================================================<br>
 &nbsp;<br>
 The&nbsp;default&nbsp;mode&nbsp;is&nbsp;'rt'&nbsp;(open&nbsp;for&nbsp;reading&nbsp;text).&nbsp;For&nbsp;binary&nbsp;random<br>
@@ -262,10 +256,6 @@ bytes&nbsp;objects&nbsp;without&nbsp;any&nbsp;decoding.&nbsp;In&nbsp;text&nbsp;m
 't'&nbsp;is&nbsp;appended&nbsp;to&nbsp;the&nbsp;mode&nbsp;argument),&nbsp;the&nbsp;contents&nbsp;of&nbsp;the&nbsp;file&nbsp;are<br>
 returned&nbsp;as&nbsp;strings,&nbsp;the&nbsp;bytes&nbsp;having&nbsp;been&nbsp;first&nbsp;decoded&nbsp;using&nbsp;a<br>
 platform-dependent&nbsp;encoding&nbsp;or&nbsp;using&nbsp;the&nbsp;specified&nbsp;encoding&nbsp;if&nbsp;given.<br>
-&nbsp;<br>
-'U'&nbsp;mode&nbsp;is&nbsp;deprecated&nbsp;and&nbsp;will&nbsp;raise&nbsp;an&nbsp;exception&nbsp;in&nbsp;future&nbsp;versions<br>
-of&nbsp;Python.&nbsp;&nbsp;It&nbsp;has&nbsp;no&nbsp;effect&nbsp;in&nbsp;Python&nbsp;3.&nbsp;&nbsp;Use&nbsp;newline&nbsp;to&nbsp;control<br>
-universal&nbsp;newlines&nbsp;mode.<br>
 &nbsp;<br>
 buffering&nbsp;is&nbsp;an&nbsp;optional&nbsp;integer&nbsp;used&nbsp;to&nbsp;set&nbsp;the&nbsp;buffering&nbsp;policy.<br>
 Pass&nbsp;0&nbsp;to&nbsp;switch&nbsp;buffering&nbsp;off&nbsp;(only&nbsp;allowed&nbsp;in&nbsp;binary&nbsp;mode),&nbsp;1&nbsp;to&nbsp;select<br>
@@ -335,44 +325,44 @@ a&nbsp;BufferedRandom.<br>
 It&nbsp;is&nbsp;also&nbsp;possible&nbsp;to&nbsp;use&nbsp;a&nbsp;string&nbsp;or&nbsp;bytearray&nbsp;as&nbsp;a&nbsp;file&nbsp;for&nbsp;both<br>
 reading&nbsp;and&nbsp;writing.&nbsp;For&nbsp;strings&nbsp;StringIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
 opened&nbsp;in&nbsp;a&nbsp;text&nbsp;mode,&nbsp;and&nbsp;for&nbsp;bytes&nbsp;a&nbsp;BytesIO&nbsp;can&nbsp;be&nbsp;used&nbsp;like&nbsp;a&nbsp;file<br>
-opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</tt></dd></dl>
- <dl><dt><a name="-py_print"><strong>py_print</strong></a> = print(...)</dt><dd><tt><a href="#-print">print</a>(value,&nbsp;...,&nbsp;sep='&nbsp;',&nbsp;end='\n',&nbsp;file=sys.stdout,&nbsp;flush=False)<br>
+opened&nbsp;in&nbsp;a&nbsp;binary&nbsp;mode.</span></dd></dl>
+ <dl><dt><a name="-py_print"><strong>py_print</strong></a> = print(*args, sep=' ', end='\n', file=None, flush=False)</dt><dd><span class="code">Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
 &nbsp;<br>
-Prints&nbsp;the&nbsp;values&nbsp;to&nbsp;a&nbsp;stream,&nbsp;or&nbsp;to&nbsp;sys.stdout&nbsp;by&nbsp;default.<br>
-Optional&nbsp;keyword&nbsp;arguments:<br>
-file:&nbsp;&nbsp;a&nbsp;file-like&nbsp;object&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
-sep:&nbsp;&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
-end:&nbsp;&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
-flush:&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</tt></dd></dl>
- <dl><dt><a name="-py_repr"><strong>py_repr</strong></a> = repr(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;object.<br>
+sep<br>
+&nbsp;&nbsp;string&nbsp;inserted&nbsp;between&nbsp;values,&nbsp;default&nbsp;a&nbsp;space.<br>
+end<br>
+&nbsp;&nbsp;string&nbsp;appended&nbsp;after&nbsp;the&nbsp;last&nbsp;value,&nbsp;default&nbsp;a&nbsp;newline.<br>
+file<br>
+&nbsp;&nbsp;a&nbsp;file-like&nbsp;object&nbsp;(stream);&nbsp;defaults&nbsp;to&nbsp;the&nbsp;current&nbsp;sys.stdout.<br>
+flush<br>
+&nbsp;&nbsp;whether&nbsp;to&nbsp;forcibly&nbsp;flush&nbsp;the&nbsp;stream.</span></dd></dl>
+ <dl><dt><a name="-py_repr"><strong>py_repr</strong></a> = repr(obj, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;object.<br>
 &nbsp;<br>
-For&nbsp;many&nbsp;object&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
- <dl><dt><a name="-reduce"><strong>reduce</strong></a>(...)</dt><dd><tt><a href="#-reduce">reduce</a>(function,&nbsp;sequence[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
+For&nbsp;many&nbsp;object&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</span></dd></dl>
+ <dl><dt><a name="-reduce"><strong>reduce</strong></a>(...)</dt><dd><span class="code"><a href="#-reduce">reduce</a>(function,&nbsp;iterable[,&nbsp;initial])&nbsp;-&gt;&nbsp;value<br>
 &nbsp;<br>
-Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence,<br>
-from&nbsp;left&nbsp;to&nbsp;right,&nbsp;so&nbsp;as&nbsp;to&nbsp;reduce&nbsp;the&nbsp;sequence&nbsp;to&nbsp;a&nbsp;single&nbsp;value.<br>
-For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp;x+y,&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5])&nbsp;calculates<br>
+Apply&nbsp;a&nbsp;function&nbsp;of&nbsp;two&nbsp;arguments&nbsp;cumulatively&nbsp;to&nbsp;the&nbsp;items&nbsp;of&nbsp;a&nbsp;sequence<br>
+or&nbsp;iterable,&nbsp;from&nbsp;left&nbsp;to&nbsp;right,&nbsp;so&nbsp;as&nbsp;to&nbsp;reduce&nbsp;the&nbsp;iterable&nbsp;to&nbsp;a&nbsp;single<br>
+value.&nbsp;&nbsp;For&nbsp;example,&nbsp;<a href="#-reduce">reduce</a>(lambda&nbsp;x,&nbsp;y:&nbsp;x+y,&nbsp;[1,&nbsp;2,&nbsp;3,&nbsp;4,&nbsp;5])&nbsp;calculates<br>
 ((((1+2)+3)+4)+5).&nbsp;&nbsp;If&nbsp;initial&nbsp;is&nbsp;present,&nbsp;it&nbsp;is&nbsp;placed&nbsp;before&nbsp;the&nbsp;items<br>
-of&nbsp;the&nbsp;sequence&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
-sequence&nbsp;is&nbsp;empty.</tt></dd></dl>
- <dl><dt><a name="-repr"><strong>repr</strong></a>(obj, /)</dt><dd><tt>Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;object.<br>
+of&nbsp;the&nbsp;iterable&nbsp;in&nbsp;the&nbsp;calculation,&nbsp;and&nbsp;serves&nbsp;as&nbsp;a&nbsp;default&nbsp;when&nbsp;the<br>
+iterable&nbsp;is&nbsp;empty.</span></dd></dl>
+ <dl><dt><a name="-repr"><strong>repr</strong></a>(obj, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;canonical&nbsp;string&nbsp;representation&nbsp;of&nbsp;the&nbsp;object.<br>
 &nbsp;<br>
-For&nbsp;many&nbsp;object&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</tt></dd></dl>
- <dl><dt><a name="-uncurry"><strong>uncurry</strong></a>(func)</dt><dd><tt>--&nbsp;uncurry&nbsp;a&nbsp;Haskell-style&nbsp;function&nbsp;that&nbsp;returns&nbsp;a&nbsp;function<br>
+For&nbsp;many&nbsp;object&nbsp;types,&nbsp;including&nbsp;most&nbsp;builtins,&nbsp;eval(<a href="#-repr">repr</a>(obj))&nbsp;==&nbsp;obj.</span></dd></dl>
+ <dl><dt><a name="-uncurry"><strong>uncurry</strong></a>(func)</dt><dd><span class="code">--&nbsp;uncurry&nbsp;a&nbsp;Haskell-style&nbsp;function&nbsp;that&nbsp;returns&nbsp;a&nbsp;function<br>
 --&nbsp;&nbsp;into&nbsp;a&nbsp;Python-style&nbsp;multi-place&nbsp;function<br>
---&nbsp;&nbsp;(see&nbsp;also&nbsp;uncurry_tuple&nbsp;for&nbsp;functions&nbsp;of&nbsp;tuples)</tt></dd></dl>
+--&nbsp;&nbsp;(see&nbsp;also&nbsp;uncurry_tuple&nbsp;for&nbsp;functions&nbsp;of&nbsp;tuples)</span></dd></dl>
 </td></tr></table><p>
-<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
-<tr bgcolor="#55aa55">
-<td colspan=3 valign=bottom>&nbsp;<br>
-<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+<table class="section">
+<tr class="decor data-decor heading-text">
+<td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
     
-<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>TType</strong> = ~TType<br>
+<tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
+<td class="singlecolumn"><strong>TType</strong> = ~TType<br>
 <strong>TYPE_CHECKING</strong> = False<br>
 <strong>Ta</strong> = ~Ta<br>
 <strong>Tb</strong> = ~Tb<br>
 <strong>Tc</strong> = ~Tc<br>
-<strong>Td</strong> = ~Td<br>
-<strong>generator_stop</strong> = _Feature((3, 5, 0, 'beta', 1), (3, 7, 0, 'alpha', 0), 8388608)</td></tr></table>
+<strong>Td</strong> = ~Td</td></tr></table>
 </body></html>

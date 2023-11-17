@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xd1ab3533
+# __coconut_hash__ = 0xc0728c01
 
-# Compiled with Coconut version 3.0.1-post_dev12
+# Compiled with Coconut version 3.0.3-post_dev32
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
-_coconut_header_info = ('3.0.1-post_dev12', '35', True)
 import os as _coconut_os
+_coconut_header_info = ('3.0.3-post_dev32', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False
@@ -34,9 +34,24 @@ if _coconut_cached__coconut__ is None or getattr(_coconut_cached__coconut__, "_c
                         _coconut_v_type.__module__ = _coconut_full_module_name
         _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_Expected, _coconut_MatchError, _coconut_SupportsAdd, _coconut_SupportsMinus, _coconut_SupportsMul, _coconut_SupportsPow, _coconut_SupportsTruediv, _coconut_SupportsFloordiv, _coconut_SupportsMod, _coconut_SupportsAnd, _coconut_SupportsXor, _coconut_SupportsOr, _coconut_SupportsLshift, _coconut_SupportsRshift, _coconut_SupportsMatmul, _coconut_SupportsInv, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset, _coconut_back_none_pipe, _coconut_back_none_star_pipe, _coconut_back_none_dubstar_pipe, _coconut_forward_none_compose, _coconut_back_none_compose, _coconut_forward_none_star_compose, _coconut_back_none_star_compose, _coconut_forward_none_dubstar_compose, _coconut_back_none_dubstar_compose, _coconut_call_or_coefficient, _coconut_in, _coconut_not_in
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_Expected, _coconut_MatchError, _coconut_SupportsAdd, _coconut_SupportsMinus, _coconut_SupportsMul, _coconut_SupportsPow, _coconut_SupportsTruediv, _coconut_SupportsFloordiv, _coconut_SupportsMod, _coconut_SupportsAnd, _coconut_SupportsXor, _coconut_SupportsOr, _coconut_SupportsLshift, _coconut_SupportsRshift, _coconut_SupportsMatmul, _coconut_SupportsInv, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_complex_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset, _coconut_back_none_pipe, _coconut_back_none_star_pipe, _coconut_back_none_dubstar_pipe, _coconut_forward_none_compose, _coconut_back_none_compose, _coconut_forward_none_star_compose, _coconut_back_none_star_compose, _coconut_forward_none_dubstar_compose, _coconut_back_none_dubstar_compose, _coconut_call_or_coefficient, _coconut_in, _coconut_not_in, _coconut_attritemgetter
 if _coconut_pop_path:
     _coconut_sys.path.pop(0)
+try:
+    __file__ = _coconut_os.path.abspath(__file__) if __file__ else __file__
+except NameError:
+    pass
+else:
+    if __file__ and '__coconut_cache__' in __file__:
+        _coconut_file_comps = []
+        while __file__:
+            __file__, _coconut_file_comp = _coconut_os.path.split(__file__)
+            if not _coconut_file_comp:
+                _coconut_file_comps.append(__file__)
+                break
+            if _coconut_file_comp != '__coconut_cache__':
+                _coconut_file_comps.append(_coconut_file_comp)
+        __file__ = _coconut_os.path.join(*reversed(_coconut_file_comps))
 
 # Compiled Coconut: -----------------------------------------------------------
 
@@ -60,8 +75,8 @@ def test_Maybe():  #11 (line in Coconut source)
     assert Just(2) > Just(1) > nothing  #17 (line in Coconut source)
     assert Just(1) >= Just(1) >= nothing  #18 (line in Coconut source)
     assert Just(1) == Just(1)  #19 (line in Coconut source)
-    assert maybe(1, _coconut.functools.partial((_coconut.operator.add), 1), nothing) == 1  #20 (line in Coconut source)
-    assert maybe(1, _coconut.functools.partial((_coconut.operator.add), 1), Just(1)) == 2  #21 (line in Coconut source)
+    assert maybe(1, _coconut_partial((_coconut.operator.add), 1), nothing) == 1  #20 (line in Coconut source)
+    assert maybe(1, _coconut_partial((_coconut.operator.add), 1), Just(1)) == 2  #21 (line in Coconut source)
 
 
 def test_Either():  #23 (line in Coconut source)
@@ -241,19 +256,19 @@ def test_Monoids():  #150 (line in Coconut source)
 
 def test_Functor():  #163 (line in Coconut source)
     assert (fmap)(error, nothing) == nothing  #164 (line in Coconut source)
-    assert (fmap)(_coconut.functools.partial((_coconut.operator.add), 1), Just(2)) == Just(3)  #165 (line in Coconut source)
-    assert (fmap)(_coconut.functools.partial((_coconut.operator.add), 1), Left(10)) == Left(10)  #166 (line in Coconut source)
-    assert (fmap)(_coconut.functools.partial((_coconut.operator.add), 1), [1, 2, 3]) == [2, 3, 4]  #167 (line in Coconut source)
+    assert (fmap)(_coconut_partial((_coconut.operator.add), 1), Just(2)) == Just(3)  #165 (line in Coconut source)
+    assert (fmap)(_coconut_partial((_coconut.operator.add), 1), Left(10)) == Left(10)  #166 (line in Coconut source)
+    assert (fmap)(_coconut_partial((_coconut.operator.add), 1), [1, 2, 3]) == [2, 3, 4]  #167 (line in Coconut source)
     assert (fmapConst)(10, [1, 2, 3]) == [10, 10, 10]  #168 (line in Coconut source)
-    assert (fmap)(_coconut.functools.partial((_coconut.operator.add), 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))  #169 (line in Coconut source)
+    assert (fmap)(_coconut_partial((_coconut.operator.add), 1), _coconut.frozenset((1, 2))) == _coconut.frozenset((2, 3))  #169 (line in Coconut source)
 
 
 def test_Applicative():  #171 (line in Coconut source)
     assert pure("12") == (fmap)(lambda s: s + "2", pure("1"))  #172 (line in Coconut source)
     assert (ap)(nothing, Just(10)) == nothing  #173 (line in Coconut source)
-    assert (ap)(Just(_coconut.functools.partial((_coconut.operator.add), 1)), Just(2)) == Just(3)  #174 (line in Coconut source)
-    assert (ap)([_coconut.functools.partial((_coconut.operator.add), 1), _coconut.functools.partial((_coconut.operator.mul), 3)], [10, 20, 30]) == [11, 21, 31, 30, 60, 90]  #175 (line in Coconut source)
-    assert (ap)((_coconut.functools.partial((_coconut.operator.add), 1), _coconut.functools.partial((_coconut.operator.mul), 3)), (10, 20, 30)) == (11, 21, 31, 30, 60, 90)  #176 (line in Coconut source)
+    assert (ap)(Just(_coconut_partial((_coconut.operator.add), 1)), Just(2)) == Just(3)  #174 (line in Coconut source)
+    assert (ap)([_coconut_partial((_coconut.operator.add), 1), _coconut_partial((_coconut.operator.mul), 3)], [10, 20, 30]) == [11, 21, 31, 30, 60, 90]  #175 (line in Coconut source)
+    assert (ap)((_coconut_partial((_coconut.operator.add), 1), _coconut_partial((_coconut.operator.mul), 3)), (10, 20, 30)) == (11, 21, 31, 30, 60, 90)  #176 (line in Coconut source)
     assert (ap)(pure(error), nothing) == nothing  #177 (line in Coconut source)
     assert (ap)(pure(lambda _=None: _ + 1), Just(2)) == Just(3)  #178 (line in Coconut source)
     assert (ap)(pure(lambda _=None: _ + 1), Left(10)) == Left(10)  #179 (line in Coconut source)
@@ -279,7 +294,7 @@ def test_Monad():  #188 (line in Coconut source)
     assert Right(2) == (seqM)(Right(1), Right(2))  #198 (line in Coconut source)
     assert Left(1) == (seqM)(Left(1), Right(2))  #199 (line in Coconut source)
     assert [] == (seqM)([], [1,])  #200 (line in Coconut source)
-    assert fail("derp") == (fmap)(_coconut.functools.partial((_coconut.operator.add), 1), fail("derp"))  #201 (line in Coconut source)
+    assert fail("derp") == (fmap)(_coconut_partial((_coconut.operator.add), 1), fail("derp"))  #201 (line in Coconut source)
     assert nothing == (bind)(Just(1), _coconut_forward_compose(str, fail))  #202 (line in Coconut source)
     assert Left(1) == (bind)(Left(1), _coconut_forward_compose(str, fail))  #203 (line in Coconut source)
     assert Left("1") == (bind)(Right(1), _coconut_forward_compose(str, fail))  #204 (line in Coconut source)
@@ -300,7 +315,7 @@ def test_Monad():  #188 (line in Coconut source)
     assert [1, 2, 3, 4, 5, 6] == join([[1, 2, 3], [], [4,], [5, 6]])  #219 (line in Coconut source)
     assert [1,] == join([fail("derp"), return_(1)])  #220 (line in Coconut source)
     assert Left(3) == do([Right(1), Right(2), Left(3), Right(4)], lambda *xs: error(repr(xs)))  #221 (line in Coconut source)
-    _coconut_decorator_0 = _coconut.functools.partial(do, [Right(1), Right(2)])  #227 (line in Coconut source)
+    _coconut_decorator_0 = _coconut_partial(do, [Right(1), Right(2)])  #227 (line in Coconut source)
     @_coconut_decorator_0  #228 (line in Coconut source)
     @_coconut_tco  #228 (line in Coconut source)
     def right3(x, y):  #228 (line in Coconut source)
@@ -365,7 +380,7 @@ def test_Miscellaneous_functions():  #270 (line in Coconut source)
     assert (apply)(abs, -2) == 2  #275 (line in Coconut source)
     assert ((apply)((_coconut.operator.truediv), 6))(2) == 3  #276 (line in Coconut source)
     assert (apply)((apply)((apply)((lambda x, y, z: (x, y, z)), 1), 2), 3) == (1, 2, 3)  #277 (line in Coconut source)
-    assert until(lambda x: x < 0, _coconut.functools.partial(subtract, 1), 10) == -1  #278 (line in Coconut source)
+    assert until(lambda x: x < 0, _coconut_partial(subtract, 1), 10) == -1  #278 (line in Coconut source)
     assert asTypeOf(5, 10) == 5  #279 (line in Coconut source)
     assert asTypeOf(pure([]), nothing) == Just([])  #280 (line in Coconut source)
     assert asTypeOf(fail("herp"), Right(1)) == Left("herp")  #281 (line in Coconut source)
@@ -409,7 +424,7 @@ def test_Miscellaneous_functions():  #270 (line in Coconut source)
 
 def test_List_operations():  #301 (line in Coconut source)
     assert (list)((cons)(1, [2, 3])) == [1, 2, 3]  #302 (line in Coconut source)
-    assert (list)(map(_coconut.functools.partial((_coconut.operator.add), 1), [1, 2, 3])) == [2, 3, 4]  #303 (line in Coconut source)
+    assert (list)(map(_coconut_partial((_coconut.operator.add), 1), [1, 2, 3])) == [2, 3, 4]  #303 (line in Coconut source)
     assert (list)((chain)([1, 2], [3, 4])) == [1, 2, 3, 4]  #304 (line in Coconut source)
     assert (list)(filter(lambda x: x > 1, [1, 2, 3])) == [2, 3]  #305 (line in Coconut source)
     assert head([1, 2, 3]) == 1  #306 (line in Coconut source)
@@ -423,8 +438,8 @@ def test_List_operations():  #301 (line in Coconut source)
 def test_Special_folds():  #313 (line in Coconut source)
     assert and_([True, True])  #314 (line in Coconut source)
     assert or_([False, True])  #315 (line in Coconut source)
-    assert any(_coconut.functools.partial((_coconut.operator.eq), 2), [1, 2, 3])  #316 (line in Coconut source)
-    assert not all(_coconut.functools.partial((_coconut.operator.eq), 2), [1, 2, 3])  #317 (line in Coconut source)
+    assert any(_coconut_partial((_coconut.operator.eq), 2), [1, 2, 3])  #316 (line in Coconut source)
+    assert not all(_coconut_partial((_coconut.operator.eq), 2), [1, 2, 3])  #317 (line in Coconut source)
     assert (list)(concat([])) == []  #318 (line in Coconut source)
     assert (list)(concat([[],])) == []  #319 (line in Coconut source)
     assert (list)(concat([[1,], [2, 3]])) == [1, 2, 3]  #320 (line in Coconut source)
@@ -439,7 +454,7 @@ def test_Scans():  #323 (line in Coconut source)
 
 
 def test_Infinite_lists():  #329 (line in Coconut source)
-    assert (list)((take)(3, iterate(_coconut.functools.partial(subtract, 1), 3))) == [3, 2, 1]  #330 (line in Coconut source)
+    assert (list)((take)(3, iterate(_coconut_partial(subtract, 1), 3))) == [3, 2, 1]  #330 (line in Coconut source)
     assert (list)(_coconut_iter_getitem(repeat(1), _coconut.slice(None, 3))) == [1, 1, 1] == (list)(replicate(3, 1))  #331 (line in Coconut source)
     assert (list)(_coconut_iter_getitem(cycle([1, 2]), _coconut.slice(None, 4))) == [1, 2, 1, 2]  #332 (line in Coconut source)
 
@@ -448,10 +463,10 @@ def test_Sublists():  #334 (line in Coconut source)
     assert take(2, [1, 2, 3]) == [1, 2]  #335 (line in Coconut source)
     assert drop(2, [1, 2, 3]) == [3,]  #336 (line in Coconut source)
     assert (fmap)(list, splitAt(2, [1, 2, 3, 4])) == ([1, 2], [3, 4])  #337 (line in Coconut source)
-    assert (list)(takeWhile((_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.gt)))(2), [0, 1, 2, 3])) == [0, 1]  #338 (line in Coconut source)
-    assert (list)(dropWhile((_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.gt)))(2), [0, 1, 2, 3])) == [2, 3]  #339 (line in Coconut source)
-    assert span((_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.gt)))(2), [0, 1, 2, 3]) == ([0, 1], [2, 3])  #340 (line in Coconut source)
-    assert break_((_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.lt)))(2), [1, 2, 3]) == ([1, 2], [3,])  #341 (line in Coconut source)
+    assert (list)(takeWhile((_coconut_partial(_coconut_partial, (_coconut.operator.gt)))(2), [0, 1, 2, 3])) == [0, 1]  #338 (line in Coconut source)
+    assert (list)(dropWhile((_coconut_partial(_coconut_partial, (_coconut.operator.gt)))(2), [0, 1, 2, 3])) == [2, 3]  #339 (line in Coconut source)
+    assert span((_coconut_partial(_coconut_partial, (_coconut.operator.gt)))(2), [0, 1, 2, 3]) == ([0, 1], [2, 3])  #340 (line in Coconut source)
+    assert break_((_coconut_partial(_coconut_partial, (_coconut.operator.lt)))(2), [1, 2, 3]) == ([1, 2], [3,])  #341 (line in Coconut source)
 
 
 def test_Searching_lists():  #343 (line in Coconut source)
@@ -511,7 +526,7 @@ def test_IO():  #383 (line in Coconut source)
     else:  #392 (line in Coconut source)
         assert False, "expected error"  #393 (line in Coconut source)
     assert 6 == (unIO)((bind)(pure(5), lambda x: pure(x + 1)))  #394 (line in Coconut source)
-    _coconut_decorator_1 = _coconut.functools.partial(do, [asIO(pure(1)), pure(2)])  #396 (line in Coconut source)
+    _coconut_decorator_1 = _coconut_partial(do, [asIO(pure(1)), pure(2)])  #396 (line in Coconut source)
     @unIO  #395 (line in Coconut source)
     @_coconut_decorator_1  #396 (line in Coconut source)
     @_coconut_tco  #396 (line in Coconut source)
@@ -534,9 +549,9 @@ def test_Exception_handling():  #400 (line in Coconut source)
 
 def test_function_monad():  #410 (line in Coconut source)
     assert liftA2(_coconut_comma_op)(id, id)(1) == (1, 1) == lift(_coconut_comma_op)(ident, ident)(1)  #411 (line in Coconut source)
-    assert ((fmap)((_coconut_partial(_coconut.operator.add, {1: 1}, 2, ())), (_coconut_partial(_coconut.operator.mul, {1: 2}, 2, ()))))(3) == 7  #412 (line in Coconut source)
+    assert ((fmap)((_coconut_complex_partial(_coconut.operator.add, {1: 1}, 2, ())), (_coconut_complex_partial(_coconut.operator.mul, {1: 2}, 2, ()))))(3) == 7  #412 (line in Coconut source)
     assert pure(5)(10) == 5  #413 (line in Coconut source)
-    assert ((ap)(_coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.mul)), (_coconut_partial(_coconut.operator.add, {1: 1}, 2, ()))))(3) == 12 == ((bind)((_coconut_partial(_coconut.operator.add, {1: 1}, 2, ())), _coconut.functools.partial(_coconut.functools.partial, (_coconut.operator.mul))))(3)  #414 (line in Coconut source)
+    assert ((ap)(_coconut_partial(_coconut_partial, (_coconut.operator.mul)), (_coconut_complex_partial(_coconut.operator.add, {1: 1}, 2, ()))))(3) == 12 == ((bind)((_coconut_complex_partial(_coconut.operator.add, {1: 1}, 2, ())), _coconut_partial(_coconut_partial, (_coconut.operator.mul))))(3)  #414 (line in Coconut source)
 
 
 # Run tests:
