@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xed49c3a4
+# __coconut_hash__ = 0x6dd9eb8d
 
-# Compiled with Coconut version 3.0.3-post_dev32
+# Compiled with Coconut version 3.0.3-post_dev33
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.0.3-post_dev32', '35', True)
+_coconut_header_info = ('3.0.3-post_dev33', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False
@@ -1832,7 +1832,7 @@ traverse = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typi
 if "__annotations__" not in _coconut.locals():  #804 (line in Coconut source)
     __annotations__ = {}  # type: ignore  #804 (line in Coconut source)
 __annotations__["traverse"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Applicative[Tb]], Traversable[Ta]], Applicative[Traversable[Tb]]]'  #804 (line in Coconut source)
-traverse = _coconut_forward_compose(fmap, sequenceA)  #805 (line in Coconut source)
+traverse = _coconut_forward_compose(fmap, sequenceA)  # type: ignore  #805 (line in Coconut source)
 
 sequence = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Traversable[Monad[Ta]]], Monad[Traversable[Ta]]]  #807 (line in Coconut source)
 if "__annotations__" not in _coconut.locals():  #807 (line in Coconut source)

@@ -802,7 +802,7 @@ def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] 
     reduce(liftA2(_snoc), fs, pure(())) |> fmap$(xs -> makedata(type(fs), *xs))
 
 traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
-traverse = sequenceA..fmap
+traverse = sequenceA..fmap  # type: ignore
 
 sequence: Traversable[Monad[Ta]] -> Monad[Traversable[Ta]]
 sequence = sequenceA
