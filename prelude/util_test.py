@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xcd348368
+# __coconut_hash__ = 0xb39552a8
 
-# Compiled with Coconut version 3.1.0-post_dev6
+# Compiled with Coconut version 3.1.0-post_dev7
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.1.0-post_dev6', '35', True)
+_coconut_header_info = ('3.1.0-post_dev7', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False
@@ -81,7 +81,7 @@ def test_definesBind():  #13 (line in Coconut source)
         def __eq__(self, other):  #15 (line in Coconut source)
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #15 (line in Coconut source)
         def __hash__(self):  #15 (line in Coconut source)
-            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #15 (line in Coconut source)
+            return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #15 (line in Coconut source)
         @staticmethod  #16 (line in Coconut source)
         @_coconut_tco  #17 (line in Coconut source)
         def __pure__(x: 'Ta') -> 'FunctionMonad':  #17 (line in Coconut source)

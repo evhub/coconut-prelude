@@ -3,41 +3,22 @@ from prelude.typevars import *  # type: ignore
 
 
 # Function application:
-if TYPE_CHECKING:
-    @T.overload  # type: ignore
-    def of(func: Ta -> Tb, _x: Ta) -> Tb:
-        ...
-    @T.overload
-    def of(func: (Ta, Tb) -> Tc, _x: Ta) -> Tb -> Tc:
-        ...
-    @T.overload
-    def of(func: (Ta, Tb, Tc) -> Td, _x: Ta) -> (Tb, Tc) -> Td:
-        ...
-    @T.overload
-    def of(func: -> Tb, _x: Ta) -> T.Any:
-        ...
-    @T.overload
-    def of(func: (Ta, Tb) -> Tc, _x: Ta, _y: Tb) -> Tc:
-        ...
-    @T.overload
-    def of(func: (Ta, Tb, Tc) -> Td, _x: Ta, _y: Tb) -> Tc -> Td:
-        ...
-    @T.overload
-    def of(func: (Ta, Tb, Tc) -> Td, _x: Ta, _y: Tb, _z: Tc) -> Td:
-        ...
-    @T.overload
-    def of(func: -> T.Any, *args: T.Any, **kwargs: T.Any) -> T.Any:
-        ...
-    def of(func, *args, **kwargs):
-        ...
-else:
-    def of(func, *args, **kwargs):
-        """
-        of = ($)
-        -- of(func, *args, **kwargs) attempts to call func(*args, **kwargs),
-        --  but in case of TypeError curries func$(*args, **kwargs) instead,
-        --  as in Haskell function application (see also curry, uncurry)
-        """
+case def of:  # type: ignore
+    """
+    of = ($)
+    -- of(func, *args, **kwargs) attempts to call func(*args, **kwargs),
+    --  but in case of TypeError curries func$(*args, **kwargs) instead,
+    --  as in Haskell function application (see also curry, uncurry)
+    """
+    type(func: Ta -> Tb, _x: Ta) -> Tb
+    type(func: (Ta, Tb) -> Tc, _x: Ta) -> Tb -> Tc
+    type(func: (Ta, Tb, Tc) -> Td, _x: Ta) -> (Tb, Tc) -> Td
+    type(func: -> Tb, _x: Ta) -> T.Any
+    type(func: (Ta, Tb) -> Tc, _x: Ta, _y: Tb) -> Tc
+    type(func: (Ta, Tb, Tc) -> Td, _x: Ta, _y: Tb) -> Tc -> Td
+    type(func: (Ta, Tb, Tc) -> Td, _x: Ta, _y: Tb, _z: Tc) -> Td
+    type(func: -> T.Any, *args: T.Any, **kwargs: T.Any) -> T.Any
+    match(func, *args, **kwargs):
         f = func$(*args, **kwargs)
         try:
             return f()

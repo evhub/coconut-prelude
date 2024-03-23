@@ -80,12 +80,11 @@ data Just(x) from Maybe
 
 derivingOrd(Nothing, Just)
 
-if TYPE_CHECKING:
-    def maybe(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb:
-        ...
-else:
-    match def maybe(default, _, Nothing()) = default
-    addpattern def maybe(_, func, Just(x)) = func x
+case def maybe:
+    type(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb
+
+    match(default, _, Nothing()) = default
+    match(_, func, Just(x)) = func x
 
 #### Either:
 class Either:
@@ -105,12 +104,11 @@ data Right(x) from Either
 
 derivingOrd(Left, Right)
 
-if TYPE_CHECKING:
-    def either(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc:
-        ...
-else:
-    match def either(left_func, _, Left(x)) = left_func x
-    addpattern def either(_, right_func, Right(x)) = right_func x
+case def either:
+    type(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc
+
+    match(left_func, _, Left(x)) = left_func x
+    match(_, right_func, Right(x)) = right_func x
 
 #### Ordering:
 class Ordering:
@@ -171,13 +169,11 @@ Eq = object
 Ord = Eq
 TOrd = T.TypeVar("TOrd", bound=Ord)
 
-if TYPE_CHECKING:
-    def compare(x: Ord, y: Ord) -> Ordering:
-        ...
-else:
-    match def compare(x, y if x == y) = eq
-    addpattern def compare(x, y if x < y) = lt
-    addpattern def compare(x, y if x > y) = gt
+case def compare:
+    type(x: Ord, y: Ord) -> Ordering
+    match(x, y if x == y) = eq
+    match(x, y if x < y) = lt
+    match(x, y if x > y) = gt
 
 \max: (TOrd, TOrd) -> TOrd  # type: ignore
 \max = _max
@@ -303,26 +299,22 @@ negate = (-)
 \abs: TNum -> TNum
 \abs = _abs
 
-if TYPE_CHECKING:
-    def signum(x: Num) -> int:
-        ...
-else:
-    match def signum(0) = 0
-    addpattern def signum(x if x > 0) = 1
-    addpattern def signum(x if x < 0) = -1
+case def signum:
+    type(x: Num) -> int
+    match(0) = 0
+    match(x if x > 0) = 1
+    match(x if x < 0) = -1
 
 def fromInteger(x: Integer) -> Num = x
 
 #### Real:
 Real = Num
 
-if TYPE_CHECKING:
-    def toRational(real: Real) -> Rational:
-        ...
-else:
-    match def toRational(real `isinstance` float) =
+case def toRational:
+    type(real: Real) -> Rational
+    match(real `isinstance` float) =
         Rational.from_float(real)
-    addpattern def toRational(real) =
+    match(real) =
         Rational(real)
 
 #### Integral:
@@ -451,13 +443,11 @@ def odd(x: int) -> bool =
 gcd: (int, int) -> int
 gcd = abs.._gcd
 
-if TYPE_CHECKING:
-    def lcm(x: int, y: int) -> int:
-        ...
-else:
-    match def lcm(_, 0) = 0
-    addpattern def lcm(0, _) = 0
-    addpattern def lcm(x, y) =
+case def lcm:
+    type(x: int, y: int) -> int
+    match(_, 0) = 0
+    match(0, _) = 0
+    match(x, y) =
         abs(y) * (abs(x) // gcd(x, y))
 
 fromIntegral: Integral -> Num
@@ -716,31 +706,32 @@ def join(ms: Monad[TMonad]) -> TMonad:
     else:
         raise TypeError("cannot join non-monad type " + str(type(ms)))
 
-if TYPE_CHECKING:
-    def do(monads: TMonad[], func: -> TMonad) -> TMonad:
-        ...
-else:
-    match def do([], func) = func()
-    addpattern def do([m] + ms, func) =
-        """
-        The call
-            do([m1, m2, ...], func)
-        is equivalent to the sequence of binds
-            m1 `bind` x1 ->
-                m2 `bind` x2 ->
-                    ...
-                        func(x1, x2, ...)
-        which is meant to mimic the do notation
-            x1 <- m1
-            x2 <- m2
-            ...
-            func(x1, x2, ...)
-        or do can also be used as a decorator such that
-            @do$([m1, m2, ...])
-            def func(x1, x2, ...) =
+case def do:
+    """
+    The call
+        do([m1, m2, ...], func)
+    is equivalent to the sequence of binds
+        m1 `bind` x1 ->
+            m2 `bind` x2 ->
                 ...
-        also does the same thing.
-        """
+                    func(x1, x2, ...)
+    which is meant to mimic the do notation
+        x1 <- m1
+        x2 <- m2
+        ...
+        func(x1, x2, ...)
+    or do can also be used as a decorator such that
+        @do$([m1, m2, ...])
+        def func(x1, x2, ...) =
+            ...
+    also does the same thing.
+    """
+    type(
+        monads: TMonad[],
+        func: -> TMonad,
+    ) -> TMonad
+    match([], func) = func()
+    match([m] + ms, func) =
         m `bind` x -> do(ms, func$(x))
 
 
@@ -822,30 +813,32 @@ def dot(f: Tb -> Tc, g: Ta -> Tb) -> Ta -> Tc =
     """
     f..g  # type: ignore
 
-if TYPE_CHECKING:
-    @T.overload
-    def apply(func: Ta -> Tb, arg: Ta) -> Tb:
-        ...
-    @T.overload
-    def apply(func: (Ta, Tb) -> Tc, arg: Ta) -> Tb -> Tc:
-        ...
-    @T.overload
-    def apply(func: (Ta, Tb, Tc) -> Td, arg: Ta) -> (Tb, Tc) -> Td:
-        ...
-    @T.overload
-    def apply(func: -> Tb, arg: Ta) -> T.Any:
-        ...
-    def apply(func, arg):
-        ...
-else:
-    def apply(func, arg) =
-        """
-        apply :: (a -> b) -> a -> b
-        apply = ($)
-        -- apply will automatically curry functions as in Haskell function
-        --  application (see also `of` for the more general version)
-        """
+case def apply:
+    """
+    apply :: (a -> b) -> a -> b
+    apply = ($)
+    -- apply will automatically curry functions as in Haskell function
+    --  application (see also `of` for the more general version)
+    """
+    type(
+        func: Ta -> Tb,
+        arg: Ta,
+    ) -> Tb
+    type(
+        func: (Ta, Tb) -> Tc,
+        arg: Ta,
+    ) -> Tb -> Tc
+    type(
+        func: (Ta, Tb, Tc) -> Td,
+        arg: Ta,
+    ) -> (Tb, Tc) -> Td
+    type(
+        func: -> Tb,
+        arg: Ta,
+    ) -> T.Any
+    match(func, arg) =
         func `of` arg
+
 ($$) = apply
 
 def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =
@@ -1021,15 +1014,14 @@ takeWhile = takewhile
 dropWhile: (Ta -> bool, Ta$[]) -> Ta$[]
 dropWhile = dropwhile
 
-if TYPE_CHECKING:
-    def span(cond: Ta -> bool, xs: Ta[]) -> (Ta[]; Ta[]):
-        ...
-else:
-    match def span(_, []) = ([], [])
-    addpattern def span(cond, [x] + xs if cond(x)) =
+case def span:
+    type(cond: Ta -> bool, xs: Ta[]) -> (Ta[]; Ta[])
+
+    match(_, []) = ([], [])
+    match(cond, [x] + xs if cond(x)) =
         ys, zs = span(cond, xs)
         ([x] + ys, zs)
-    addpattern def span(cond, xs) =
+    match(cond, xs) =
         ([], xs)
 
 def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
