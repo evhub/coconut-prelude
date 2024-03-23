@@ -838,7 +838,6 @@ case def apply:
     ) -> T.Any
     match(func, arg) =
         func `of` arg
-
 ($$) = apply
 
 def until(cond: Ta -> bool, func: Ta -> Ta, x: Ta) -> Ta =

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xabe928ce
+# __coconut_hash__ = 0xff1e998
 
 # Compiled with Coconut version 3.1.0-post_dev7
 
@@ -1953,464 +1953,463 @@ else:  #823 (line in Coconut source)
 
                     return _coconut_tail_call((of), func, arg)  #840 (line in Coconut source)
 
+        if not _coconut_match_check_8:  #841 (line in Coconut source)
+            raise _coconut_FunctionMatchError('case def apply:', _coconut_match_args)  #841 (line in Coconut source)
 
-        if not _coconut_match_check_8:  #842 (line in Coconut source)
-            raise _coconut_FunctionMatchError('case def apply:', _coconut_match_args)  #842 (line in Coconut source)
 
+_coconut_op_U24_U24 = apply  #841 (line in Coconut source)
 
-_coconut_op_U24_U24 = apply  #842 (line in Coconut source)
+@_coconut_tco  #843 (line in Coconut source)
+def until(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> 'Ta':  #843 (line in Coconut source)
+    while True:  #844 (line in Coconut source)
+        if cond(x):  #844 (line in Coconut source)
+            return (x)  #845 (line in Coconut source)
+        try:  # tail recursive  #846 (line in Coconut source)
+            _coconut_tre_check_0 = until is _coconut_recursive_func_57  # type: ignore  # tail recursive  #846 (line in Coconut source)
+        except _coconut.NameError:  # tail recursive  #846 (line in Coconut source)
+            _coconut_tre_check_0 = False  # tail recursive  #846 (line in Coconut source)
+        if _coconut_tre_check_0:  # tail recursive  #846 (line in Coconut source)
+            (cond, func, x,) = (cond, func, func(x),)  # tail recursive  #846 (line in Coconut source)
+            continue  # tail recursive  #846 (line in Coconut source)
+        else:  # tail recursive  #846 (line in Coconut source)
+            return _coconut_tail_call(until, cond, func, func(x))  #847 (line in Coconut source)
+        return None  #848 (line in Coconut source)
 
-@_coconut_tco  #844 (line in Coconut source)
-def until(cond: '_coconut.typing.Callable[[Ta], bool]', func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> 'Ta':  #844 (line in Coconut source)
-    while True:  #845 (line in Coconut source)
-        if cond(x):  #845 (line in Coconut source)
-            return (x)  #846 (line in Coconut source)
-        try:  # tail recursive  #847 (line in Coconut source)
-            _coconut_tre_check_0 = until is _coconut_recursive_func_57  # type: ignore  # tail recursive  #847 (line in Coconut source)
-        except _coconut.NameError:  # tail recursive  #847 (line in Coconut source)
-            _coconut_tre_check_0 = False  # tail recursive  #847 (line in Coconut source)
-        if _coconut_tre_check_0:  # tail recursive  #847 (line in Coconut source)
-            (cond, func, x,) = (cond, func, func(x),)  # tail recursive  #847 (line in Coconut source)
-            continue  # tail recursive  #847 (line in Coconut source)
-        else:  # tail recursive  #847 (line in Coconut source)
-            return _coconut_tail_call(until, cond, func, func(x))  #848 (line in Coconut source)
-        return None  #849 (line in Coconut source)
+_coconut_recursive_func_57 = until  #848 (line in Coconut source)
 
-_coconut_recursive_func_57 = until  #849 (line in Coconut source)
-
-def asTypeOf(x: 'Ta', y: 'Ta') -> 'Ta':  #849 (line in Coconut source)
+def asTypeOf(x: 'Ta', y: 'Ta') -> 'Ta':  #848 (line in Coconut source)
     """
     -- use asTypeOf to resolve pure, fail, and mempty to the correct type
     -- set asTypeOf.RECURSION_LIMIT to control recursive resolution
-    """  #853 (line in Coconut source)
-    if TYPE_CHECKING:  #854 (line in Coconut source)
-        return (x)  #854 (line in Coconut source)
+    """  #852 (line in Coconut source)
+    if TYPE_CHECKING:  #853 (line in Coconut source)
+        return (x)  #853 (line in Coconut source)
 
-    if not (isinstance)(y, (pure, fail, Mempty)):  #856 (line in Coconut source)
-        for i in ((takewhile)(lambda _=None: _ < asTypeOf.RECURSION_LIMIT, count())):  #857 (line in Coconut source)
-            if (isinstance)(x, pure):  #858 (line in Coconut source)
-                x = x.pure_as(y)  #859 (line in Coconut source)
-            elif (isinstance)(x, fail):  #860 (line in Coconut source)
-                x = x.fail_as(y)  #861 (line in Coconut source)
-            elif (isinstance)(x, Mempty):  #862 (line in Coconut source)
-                x = x.mempty_as(y)  #863 (line in Coconut source)
-            else:  #864 (line in Coconut source)
-                break  #865 (line in Coconut source)
-    return (x)  #866 (line in Coconut source)
+    if not (isinstance)(y, (pure, fail, Mempty)):  #855 (line in Coconut source)
+        for i in ((takewhile)(lambda _=None: _ < asTypeOf.RECURSION_LIMIT, count())):  #856 (line in Coconut source)
+            if (isinstance)(x, pure):  #857 (line in Coconut source)
+                x = x.pure_as(y)  #858 (line in Coconut source)
+            elif (isinstance)(x, fail):  #859 (line in Coconut source)
+                x = x.fail_as(y)  #860 (line in Coconut source)
+            elif (isinstance)(x, Mempty):  #861 (line in Coconut source)
+                x = x.mempty_as(y)  #862 (line in Coconut source)
+            else:  #863 (line in Coconut source)
+                break  #864 (line in Coconut source)
+    return (x)  #865 (line in Coconut source)
 
 # type: ignore
-asTypeOf.RECURSION_LIMIT = 3  # type: ignore  #868 (line in Coconut source)
+asTypeOf.RECURSION_LIMIT = 3  # type: ignore  #867 (line in Coconut source)
 
-def error(msg: 'str') -> 'None':  #870 (line in Coconut source)
-    raise Exception(msg)  #871 (line in Coconut source)
-
-
-def errorWithoutStackTrace(msg: 'str') -> 'None':  #873 (line in Coconut source)
-    raise Exception(msg) from None  #874 (line in Coconut source)
+def error(msg: 'str') -> 'None':  #869 (line in Coconut source)
+    raise Exception(msg)  #870 (line in Coconut source)
 
 
-undefined = None  # type: T.Any  #876 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #876 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #876 (line in Coconut source)
-__annotations__["undefined"] = 'T.Any'  #876 (line in Coconut source)
+def errorWithoutStackTrace(msg: 'str') -> 'None':  #872 (line in Coconut source)
+    raise Exception(msg) from None  #873 (line in Coconut source)
 
-def seq(x: 'Ta', y: 'Tb') -> 'Tb':  #878 (line in Coconut source)
+
+undefined = None  # type: T.Any  #875 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #875 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #875 (line in Coconut source)
+__annotations__["undefined"] = 'T.Any'  #875 (line in Coconut source)
+
+def seq(x: 'Ta', y: 'Tb') -> 'Tb':  #877 (line in Coconut source)
     """
     -- seq doesn't actually do anything here, since Python isn't lazy
-    """  #881 (line in Coconut source)
-    return (y)  #882 (line in Coconut source)
+    """  #880 (line in Coconut source)
+    return (y)  #881 (line in Coconut source)
 
 
-@_coconut_tco  #884 (line in Coconut source)
-def cbv(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':  #884 (line in Coconut source)
+@_coconut_tco  #883 (line in Coconut source)
+def cbv(func: '_coconut.typing.Callable[[Ta], Tb]', arg: 'Ta') -> 'Tb':  #883 (line in Coconut source)
     """
     cbv :: (a -> b) -> a -> b
     cbv = ($!)
     -- cbv is just an apply that doesn't curry the provided function
-    """  #889 (line in Coconut source)
-    return _coconut_tail_call((seq), arg, func(arg))  #890 (line in Coconut source)
+    """  #888 (line in Coconut source)
+    return _coconut_tail_call((seq), arg, func(arg))  #889 (line in Coconut source)
 
 
 
 
 # List operations:
 
-@_coconut_tco  #896 (line in Coconut source)
-def cons(x: 'Ta', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #896 (line in Coconut source)
+@_coconut_tco  #895 (line in Coconut source)
+def cons(x: 'Ta', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #895 (line in Coconut source)
     """
     cons :: a -> [a] -> [a]
     cons = (:)
-    """  #900 (line in Coconut source)
-    return _coconut_tail_call((_coconut.itertools.chain), [x,], xs)  #901 (line in Coconut source)
+    """  #899 (line in Coconut source)
+    return _coconut_tail_call((_coconut.itertools.chain), [x,], xs)  #900 (line in Coconut source)
 
 # type: ignore
-map = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]  # type: ignore  #903 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  # type: ignore  #903 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  # type: ignore  #903 (line in Coconut source)
-__annotations__["map"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]'  # type: ignore  #903 (line in Coconut source)
-map = _map  # type: ignore  #904 (line in Coconut source)
+map = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]  # type: ignore  #902 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  # type: ignore  #902 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  # type: ignore  #902 (line in Coconut source)
+__annotations__["map"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], Tb], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Tb]]'  # type: ignore  #902 (line in Coconut source)
+map = _map  # type: ignore  #903 (line in Coconut source)
 
-@_coconut_tco  #906 (line in Coconut source)
-def chain(xs: '_coconut.typing.Iterable[Ta]', ys: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #906 (line in Coconut source)
+@_coconut_tco  #905 (line in Coconut source)
+def chain(xs: '_coconut.typing.Iterable[Ta]', ys: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #905 (line in Coconut source)
     """
     chain :: [a] -> [a] -> [a]
     chain = (++)
-    """  #910 (line in Coconut source)
-    return _coconut_tail_call((_coconut.itertools.chain), xs, ys)  #911 (line in Coconut source)
+    """  #909 (line in Coconut source)
+    return _coconut_tail_call((_coconut.itertools.chain), xs, ys)  #910 (line in Coconut source)
 
-_coconut_op_U2b_U2b = chain  #912 (line in Coconut source)
+_coconut_op_U2b_U2b = chain  #911 (line in Coconut source)
 
-filter = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  # type: ignore  #914 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  # type: ignore  #914 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  # type: ignore  #914 (line in Coconut source)
-__annotations__["filter"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  # type: ignore  #914 (line in Coconut source)
-filter = _filter  # type: ignore  #915 (line in Coconut source)
+filter = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  # type: ignore  #913 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  # type: ignore  #913 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  # type: ignore  #913 (line in Coconut source)
+__annotations__["filter"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  # type: ignore  #913 (line in Coconut source)
+filter = _filter  # type: ignore  #914 (line in Coconut source)
 
-head = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]  #917 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #917 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #917 (line in Coconut source)
-__annotations__["head"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]'  #917 (line in Coconut source)
-head = _coconut_partial(_coconut_iter_getitem, index=(0))  #918 (line in Coconut source)
+head = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]  #916 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #916 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #916 (line in Coconut source)
+__annotations__["head"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]'  #916 (line in Coconut source)
+head = _coconut_partial(_coconut_iter_getitem, index=(0))  #917 (line in Coconut source)
 
-last = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]  #920 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #920 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #920 (line in Coconut source)
-__annotations__["last"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]'  #920 (line in Coconut source)
-last = _coconut_partial(_coconut_iter_getitem, index=(-1))  #921 (line in Coconut source)
+last = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]  #919 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #919 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #919 (line in Coconut source)
+__annotations__["last"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], Ta]'  #919 (line in Coconut source)
+last = _coconut_partial(_coconut_iter_getitem, index=(-1))  #920 (line in Coconut source)
 
-tail = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #923 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #923 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #923 (line in Coconut source)
-__annotations__["tail"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #923 (line in Coconut source)
-tail = _coconut_partial(_coconut_iter_getitem, index=(_coconut.slice(1, None)))  # type: ignore  #924 (line in Coconut source)
+tail = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #922 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #922 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #922 (line in Coconut source)
+__annotations__["tail"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #922 (line in Coconut source)
+tail = _coconut_partial(_coconut_iter_getitem, index=(_coconut.slice(1, None)))  # type: ignore  #923 (line in Coconut source)
 
-init = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #926 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #926 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #926 (line in Coconut source)
-__annotations__["init"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #926 (line in Coconut source)
-init = _coconut_partial(_coconut_iter_getitem, index=(_coconut.slice(None, -1)))  # type: ignore  #927 (line in Coconut source)
+init = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #925 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #925 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #925 (line in Coconut source)
+__annotations__["init"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #925 (line in Coconut source)
+init = _coconut_partial(_coconut_iter_getitem, index=(_coconut.slice(None, -1)))  # type: ignore  #926 (line in Coconut source)
 
-@_coconut_tco  #929 (line in Coconut source)
-def at(xs: '_coconut.typing.Iterable[Ta]', i: 'int') -> 'Ta':  #929 (line in Coconut source)
+@_coconut_tco  #928 (line in Coconut source)
+def at(xs: '_coconut.typing.Iterable[Ta]', i: 'int') -> 'Ta':  #928 (line in Coconut source)
     """
     at :: [a] -> Int -> a
     at = (!!)
-    """  #933 (line in Coconut source)
-    return _coconut_tail_call(_coconut_iter_getitem, xs, i)  #934 (line in Coconut source)
+    """  #932 (line in Coconut source)
+    return _coconut_tail_call(_coconut_iter_getitem, xs, i)  #933 (line in Coconut source)
 
-_coconut_op_U21_U21 = at  #935 (line in Coconut source)
+_coconut_op_U21_U21 = at  #934 (line in Coconut source)
 
-reverse = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[Ta]], _coconut.typing.Sequence[Ta]]  #937 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #937 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #937 (line in Coconut source)
-__annotations__["reverse"] = '_coconut.typing.Callable[[_coconut.typing.Sequence[Ta]], _coconut.typing.Sequence[Ta]]'  #937 (line in Coconut source)
-reverse = _reversed  #938 (line in Coconut source)
+reverse = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Sequence[Ta]], _coconut.typing.Sequence[Ta]]  #936 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #936 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #936 (line in Coconut source)
+__annotations__["reverse"] = '_coconut.typing.Callable[[_coconut.typing.Sequence[Ta]], _coconut.typing.Sequence[Ta]]'  #936 (line in Coconut source)
+reverse = _reversed  #937 (line in Coconut source)
 
 
 
 ## Special folds:
-and_ = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Foldable[bool]], bool]  #943 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #943 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #943 (line in Coconut source)
-__annotations__["and_"] = '_coconut.typing.Callable[[Foldable[bool]], bool]'  #943 (line in Coconut source)
-and_ = _all  #944 (line in Coconut source)
+and_ = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Foldable[bool]], bool]  #942 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #942 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #942 (line in Coconut source)
+__annotations__["and_"] = '_coconut.typing.Callable[[Foldable[bool]], bool]'  #942 (line in Coconut source)
+and_ = _all  #943 (line in Coconut source)
 
-or_ = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Foldable[bool]], bool]  #946 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #946 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #946 (line in Coconut source)
-__annotations__["or_"] = '_coconut.typing.Callable[[Foldable[bool]], bool]'  #946 (line in Coconut source)
-or_ = _any  #947 (line in Coconut source)
+or_ = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Foldable[bool]], bool]  #945 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #945 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #945 (line in Coconut source)
+__annotations__["or_"] = '_coconut.typing.Callable[[Foldable[bool]], bool]'  #945 (line in Coconut source)
+or_ = _any  #946 (line in Coconut source)
 
-any = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]  #949 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #949 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #949 (line in Coconut source)
-__annotations__["any"] = '_coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]'  #949 (line in Coconut source)
-any = _coconut_forward_compose(map, or_)  #950 (line in Coconut source)
+any = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]  #948 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #948 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #948 (line in Coconut source)
+__annotations__["any"] = '_coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]'  #948 (line in Coconut source)
+any = _coconut_forward_compose(map, or_)  #949 (line in Coconut source)
 
-all = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]  #952 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #952 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #952 (line in Coconut source)
-__annotations__["all"] = '_coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]'  #952 (line in Coconut source)
-all = _coconut_forward_compose(map, and_)  #953 (line in Coconut source)
+all = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]  #951 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #951 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #951 (line in Coconut source)
+__annotations__["all"] = '_coconut.typing.Callable[[(_coconut.typing.Callable[[Ta], bool]), Foldable[Ta]], bool]'  #951 (line in Coconut source)
+all = _coconut_forward_compose(map, and_)  #952 (line in Coconut source)
 
-@_coconut_tco  #955 (line in Coconut source)
-def concat(xs: 'Foldable[_coconut.typing.Iterable[Ta]]') -> '_coconut.typing.Iterable[Ta]':  #955 (line in Coconut source)
-    return _coconut_tail_call(_reduce, (_coconut.itertools.chain), xs, ())  #956 (line in Coconut source)
+@_coconut_tco  #954 (line in Coconut source)
+def concat(xs: 'Foldable[_coconut.typing.Iterable[Ta]]') -> '_coconut.typing.Iterable[Ta]':  #954 (line in Coconut source)
+    return _coconut_tail_call(_reduce, (_coconut.itertools.chain), xs, ())  #955 (line in Coconut source)
 
 
-concatMap = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], _coconut.typing.Iterable[Tb]], Foldable[Ta]], _coconut.typing.Iterable[Tb]]  #958 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #958 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #958 (line in Coconut source)
-__annotations__["concatMap"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], _coconut.typing.Iterable[Tb]], Foldable[Ta]], _coconut.typing.Iterable[Tb]]'  #958 (line in Coconut source)
-concatMap = _coconut_forward_compose(map, concat)  #959 (line in Coconut source)
+concatMap = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], _coconut.typing.Iterable[Tb]], Foldable[Ta]], _coconut.typing.Iterable[Tb]]  #957 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #957 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #957 (line in Coconut source)
+__annotations__["concatMap"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], _coconut.typing.Iterable[Tb]], Foldable[Ta]], _coconut.typing.Iterable[Tb]]'  #957 (line in Coconut source)
+concatMap = _coconut_forward_compose(map, concat)  #958 (line in Coconut source)
 
 
 
 ## Building lists:
 
 ### Scans:
-@_coconut_tco  #966 (line in Coconut source)
-def scanl(func: '_coconut.typing.Callable[[Ta, Tb], Ta]', init: 'Ta', xs: '_coconut.typing.Iterable[Tb]') -> '_coconut.typing.Iterable[Ta]':  #966 (line in Coconut source)
-    return _coconut_tail_call(scan, func, xs, init)  #967 (line in Coconut source)
+@_coconut_tco  #965 (line in Coconut source)
+def scanl(func: '_coconut.typing.Callable[[Ta, Tb], Ta]', init: 'Ta', xs: '_coconut.typing.Iterable[Tb]') -> '_coconut.typing.Iterable[Ta]':  #965 (line in Coconut source)
+    return _coconut_tail_call(scan, func, xs, init)  #966 (line in Coconut source)
 
 
-scanl1 = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta, Ta], Ta], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #969 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #969 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #969 (line in Coconut source)
-__annotations__["scanl1"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta, Ta], Ta], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #969 (line in Coconut source)
-scanl1 = scan  #970 (line in Coconut source)
+scanl1 = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta, Ta], Ta], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #968 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #968 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #968 (line in Coconut source)
+__annotations__["scanl1"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta, Ta], Ta], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #968 (line in Coconut source)
+scanl1 = scan  #969 (line in Coconut source)
 
-@_coconut_tco  #972 (line in Coconut source)
-def scanr(func: '_coconut.typing.Callable[[Ta, Tb], Ta]', init: 'Ta', xs: '_coconut.typing.Sequence[Tb]') -> '_coconut.typing.Iterable[Ta]':  #972 (line in Coconut source)
-    return _coconut_tail_call(_coconut_iter_getitem, scan(func, reversed(xs), init), _coconut.slice(None, None, -1))  #973 (line in Coconut source)
+@_coconut_tco  #971 (line in Coconut source)
+def scanr(func: '_coconut.typing.Callable[[Ta, Tb], Ta]', init: 'Ta', xs: '_coconut.typing.Sequence[Tb]') -> '_coconut.typing.Iterable[Ta]':  #971 (line in Coconut source)
+    return _coconut_tail_call(_coconut_iter_getitem, scan(func, reversed(xs), init), _coconut.slice(None, None, -1))  #972 (line in Coconut source)
 
 
-@_coconut_tco  #975 (line in Coconut source)
-def scanr1(func: '_coconut.typing.Callable[[Ta, Ta], Ta]', xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Iterable[Ta]':  #975 (line in Coconut source)
-    return _coconut_tail_call(_coconut_iter_getitem, scan(func, reversed(xs)), _coconut.slice(None, None, -1))  #976 (line in Coconut source)
+@_coconut_tco  #974 (line in Coconut source)
+def scanr1(func: '_coconut.typing.Callable[[Ta, Ta], Ta]', xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Iterable[Ta]':  #974 (line in Coconut source)
+    return _coconut_tail_call(_coconut_iter_getitem, scan(func, reversed(xs)), _coconut.slice(None, None, -1))  #975 (line in Coconut source)
 
 ### Infinite lists:
 
-@recursive_generator  #979 (line in Coconut source)
-@_coconut_tco  #980 (line in Coconut source)
-def iterate(func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':  #980 (line in Coconut source)
-    return _coconut_tail_call(_coconut_flatten, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: [x,], lambda: iterate(func, func(x)))))  #981 (line in Coconut source)
+@recursive_generator  #978 (line in Coconut source)
+@_coconut_tco  #979 (line in Coconut source)
+def iterate(func: '_coconut.typing.Callable[[Ta], Ta]', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':  #979 (line in Coconut source)
+    return _coconut_tail_call(_coconut_flatten, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: [x,], lambda: iterate(func, func(x)))))  #980 (line in Coconut source)
 
 
-@recursive_generator  #983 (line in Coconut source)
-@_coconut_tco  #984 (line in Coconut source)
-def repeat(x: 'Ta') -> '_coconut.typing.Iterable[Ta]':  #984 (line in Coconut source)
-    return _coconut_tail_call(_coconut_flatten, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: [x,], lambda: repeat(x))))  #985 (line in Coconut source)
+@recursive_generator  #982 (line in Coconut source)
+@_coconut_tco  #983 (line in Coconut source)
+def repeat(x: 'Ta') -> '_coconut.typing.Iterable[Ta]':  #983 (line in Coconut source)
+    return _coconut_tail_call(_coconut_flatten, _coconut_reiterable(_coconut_func() for _coconut_func in (lambda: [x,], lambda: repeat(x))))  #984 (line in Coconut source)
 
 
-@_coconut_tco  #987 (line in Coconut source)
-def replicate(n: 'int', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':  #987 (line in Coconut source)
-    return _coconut_tail_call(_coconut_iter_getitem, repeat(x), _coconut.slice(None, n))  #988 (line in Coconut source)
+@_coconut_tco  #986 (line in Coconut source)
+def replicate(n: 'int', x: 'Ta') -> '_coconut.typing.Iterable[Ta]':  #986 (line in Coconut source)
+    return _coconut_tail_call(_coconut_iter_getitem, repeat(x), _coconut.slice(None, n))  #987 (line in Coconut source)
 
 
-if TYPE_CHECKING:  #990 (line in Coconut source)
-    def cycle(xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Iterable[Ta]':  # type: ignore  #991 (line in Coconut source)
-        ...  #992 (line in Coconut source)
+if TYPE_CHECKING:  #989 (line in Coconut source)
+    def cycle(xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Iterable[Ta]':  # type: ignore  #990 (line in Coconut source)
+        ...  #991 (line in Coconut source)
 
-else:  #993 (line in Coconut source)
-    @recursive_generator  #994 (line in Coconut source)
-    @_coconut_tco  #995 (line in Coconut source)
-    @_coconut_mark_as_match  #995 (line in Coconut source)
-    def cycle(_coconut_match_first_arg=_coconut_sentinel, *_coconut_match_args, **_coconut_match_kwargs):  #995 (line in Coconut source)
-        _coconut_match_check_9 = False  #995 (line in Coconut source)
-        _coconut_match_set_name_xs = _coconut_sentinel  #995 (line in Coconut source)
-        _coconut_FunctionMatchError = _coconut_get_function_match_error()  #995 (line in Coconut source)
-        if _coconut_match_first_arg is not _coconut_sentinel:  #995 (line in Coconut source)
-            _coconut_match_args = (_coconut_match_first_arg,) + _coconut_match_args  #995 (line in Coconut source)
-        if (_coconut.len(_coconut_match_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 0, "xs" in _coconut_match_kwargs)) == 1):  #995 (line in Coconut source)
-            _coconut_match_temp_36 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("xs")  #995 (line in Coconut source)
-            _coconut_match_set_name_xs = _coconut_match_temp_36  #995 (line in Coconut source)
-            if not _coconut_match_kwargs:  #995 (line in Coconut source)
-                _coconut_match_check_9 = True  #995 (line in Coconut source)
-        if _coconut_match_check_9:  #995 (line in Coconut source)
-            if _coconut_match_set_name_xs is not _coconut_sentinel:  #995 (line in Coconut source)
-                xs = _coconut_match_set_name_xs  #995 (line in Coconut source)
-        if _coconut_match_check_9 and not (len(xs) > 0):  #995 (line in Coconut source)
-            _coconut_match_check_9 = False  #995 (line in Coconut source)
-        if not _coconut_match_check_9:  #995 (line in Coconut source)
-            raise _coconut_FunctionMatchError('def \\cycle(xs if len(xs) > 0) =', _coconut_match_args)  #995 (line in Coconut source)
+else:  #992 (line in Coconut source)
+    @recursive_generator  #993 (line in Coconut source)
+    @_coconut_tco  #994 (line in Coconut source)
+    @_coconut_mark_as_match  #994 (line in Coconut source)
+    def cycle(_coconut_match_first_arg=_coconut_sentinel, *_coconut_match_args, **_coconut_match_kwargs):  #994 (line in Coconut source)
+        _coconut_match_check_9 = False  #994 (line in Coconut source)
+        _coconut_match_set_name_xs = _coconut_sentinel  #994 (line in Coconut source)
+        _coconut_FunctionMatchError = _coconut_get_function_match_error()  #994 (line in Coconut source)
+        if _coconut_match_first_arg is not _coconut_sentinel:  #994 (line in Coconut source)
+            _coconut_match_args = (_coconut_match_first_arg,) + _coconut_match_args  #994 (line in Coconut source)
+        if (_coconut.len(_coconut_match_args) <= 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 0, "xs" in _coconut_match_kwargs)) == 1):  #994 (line in Coconut source)
+            _coconut_match_temp_36 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("xs")  #994 (line in Coconut source)
+            _coconut_match_set_name_xs = _coconut_match_temp_36  #994 (line in Coconut source)
+            if not _coconut_match_kwargs:  #994 (line in Coconut source)
+                _coconut_match_check_9 = True  #994 (line in Coconut source)
+        if _coconut_match_check_9:  #994 (line in Coconut source)
+            if _coconut_match_set_name_xs is not _coconut_sentinel:  #994 (line in Coconut source)
+                xs = _coconut_match_set_name_xs  #994 (line in Coconut source)
+        if _coconut_match_check_9 and not (len(xs) > 0):  #994 (line in Coconut source)
+            _coconut_match_check_9 = False  #994 (line in Coconut source)
+        if not _coconut_match_check_9:  #994 (line in Coconut source)
+            raise _coconut_FunctionMatchError('def \\cycle(xs if len(xs) > 0) =', _coconut_match_args)  #994 (line in Coconut source)
 
-        return _coconut_tail_call(_cycle, xs)  #996 (line in Coconut source)
+        return _coconut_tail_call(_cycle, xs)  #995 (line in Coconut source)
 
 
 
 ## Sublists:
 
-@_coconut_tco  #1001 (line in Coconut source)
-def take(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #1001 (line in Coconut source)
-    return _coconut_tail_call(_coconut_iter_getitem, xs, _coconut.slice(None, n))  #1002 (line in Coconut source)
+@_coconut_tco  #1000 (line in Coconut source)
+def take(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #1000 (line in Coconut source)
+    return _coconut_tail_call(_coconut_iter_getitem, xs, _coconut.slice(None, n))  #1001 (line in Coconut source)
 
 
-@_coconut_tco  #1004 (line in Coconut source)
-def drop(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #1004 (line in Coconut source)
-    return _coconut_tail_call(_coconut_iter_getitem, xs, _coconut.slice(n, None))  #1005 (line in Coconut source)
+@_coconut_tco  #1003 (line in Coconut source)
+def drop(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -> '_coconut.typing.Iterable[Ta]':  #1003 (line in Coconut source)
+    return _coconut_tail_call(_coconut_iter_getitem, xs, _coconut.slice(n, None))  #1004 (line in Coconut source)
 
 
-def splitAt(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -> '(_coconut.typing.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]])':  #1007 (line in Coconut source)
-    reit = reiterable(xs)  #1008 (line in Coconut source)
-    return (_coconut_iter_getitem(reit, _coconut.slice(None, n)), _coconut_iter_getitem(reit, _coconut.slice(n, None)))  #1009 (line in Coconut source)
+def splitAt(n: 'int', xs: '_coconut.typing.Iterable[Ta]') -> '(_coconut.typing.Tuple[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Ta]])':  #1006 (line in Coconut source)
+    reit = reiterable(xs)  #1007 (line in Coconut source)
+    return (_coconut_iter_getitem(reit, _coconut.slice(None, n)), _coconut_iter_getitem(reit, _coconut.slice(n, None)))  #1008 (line in Coconut source)
 
 
-takeWhile = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #1011 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1011 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1011 (line in Coconut source)
-__annotations__["takeWhile"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #1011 (line in Coconut source)
-takeWhile = takewhile  #1012 (line in Coconut source)
+takeWhile = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #1010 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1010 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1010 (line in Coconut source)
+__annotations__["takeWhile"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #1010 (line in Coconut source)
+takeWhile = takewhile  #1011 (line in Coconut source)
 
-dropWhile = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #1014 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1014 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1014 (line in Coconut source)
-__annotations__["dropWhile"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #1014 (line in Coconut source)
-dropWhile = dropwhile  #1015 (line in Coconut source)
+dropWhile = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]  #1013 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1013 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1013 (line in Coconut source)
+__annotations__["dropWhile"] = '_coconut.typing.Callable[[_coconut.typing.Callable[[Ta], bool], _coconut.typing.Iterable[Ta]], _coconut.typing.Iterable[Ta]]'  #1013 (line in Coconut source)
+dropWhile = dropwhile  #1014 (line in Coconut source)
 
-if _coconut.typing.TYPE_CHECKING:  #1017 (line in Coconut source)
-    @_coconut_mark_as_match  #1017 (line in Coconut source)
-    def span(cond: '_coconut.typing.Callable[[Ta], bool]', xs: '_coconut.typing.Sequence[Ta]') -> '(_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]])':  #1017 (line in Coconut source)
+if _coconut.typing.TYPE_CHECKING:  #1016 (line in Coconut source)
+    @_coconut_mark_as_match  #1016 (line in Coconut source)
+    def span(cond: '_coconut.typing.Callable[[Ta], bool]', xs: '_coconut.typing.Sequence[Ta]') -> '(_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Ta]])':  #1016 (line in Coconut source)
 
-        return _coconut.typing.cast(_coconut.typing.Any, ...)  #1017 (line in Coconut source)
-else:  #1017 (line in Coconut source)
-    @_coconut_mark_as_match  #1017 (line in Coconut source)
-    def span(_coconut_match_first_arg=_coconut_sentinel, *_coconut_match_args, **_coconut_match_kwargs):  #1017 (line in Coconut source)
+        return _coconut.typing.cast(_coconut.typing.Any, ...)  #1016 (line in Coconut source)
+else:  #1016 (line in Coconut source)
+    @_coconut_mark_as_match  #1016 (line in Coconut source)
+    def span(_coconut_match_first_arg=_coconut_sentinel, *_coconut_match_args, **_coconut_match_kwargs):  #1016 (line in Coconut source)
 
-        _coconut_match_check_10 = False  #1017 (line in Coconut source)
-        _coconut_FunctionMatchError = _coconut_get_function_match_error()  #1017 (line in Coconut source)
-        if _coconut_match_first_arg is not _coconut_sentinel:  #1017 (line in Coconut source)
-            _coconut_match_args = (_coconut_match_first_arg,) + _coconut_match_args  #1017 (line in Coconut source)
-        _coconut_match_kwargs_store = _coconut_match_kwargs  #1017 (line in Coconut source)
-        if not _coconut_match_check_10:  #1017 (line in Coconut source)
-            _coconut_match_kwargs = _coconut_match_kwargs_store.copy()  #1017 (line in Coconut source)
-            if _coconut.len(_coconut_match_args) == 2:  #1017 (line in Coconut source)
-                if (_coconut.isinstance(_coconut_match_args[1], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_args[1]) == 0):  #1017 (line in Coconut source)
-                    if not _coconut_match_kwargs:  #1017 (line in Coconut source)
-                        _coconut_match_check_10 = True  #1017 (line in Coconut source)
+        _coconut_match_check_10 = False  #1016 (line in Coconut source)
+        _coconut_FunctionMatchError = _coconut_get_function_match_error()  #1016 (line in Coconut source)
+        if _coconut_match_first_arg is not _coconut_sentinel:  #1016 (line in Coconut source)
+            _coconut_match_args = (_coconut_match_first_arg,) + _coconut_match_args  #1016 (line in Coconut source)
+        _coconut_match_kwargs_store = _coconut_match_kwargs  #1016 (line in Coconut source)
+        if not _coconut_match_check_10:  #1016 (line in Coconut source)
+            _coconut_match_kwargs = _coconut_match_kwargs_store.copy()  #1016 (line in Coconut source)
+            if _coconut.len(_coconut_match_args) == 2:  #1016 (line in Coconut source)
+                if (_coconut.isinstance(_coconut_match_args[1], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_args[1]) == 0):  #1016 (line in Coconut source)
+                    if not _coconut_match_kwargs:  #1016 (line in Coconut source)
+                        _coconut_match_check_10 = True  #1016 (line in Coconut source)
 
-            if _coconut_match_check_10:  #1017 (line in Coconut source)
+            if _coconut_match_check_10:  #1016 (line in Coconut source)
 
-                    return (([], []))  #1020 (line in Coconut source)
+                    return (([], []))  #1019 (line in Coconut source)
 
-        if not _coconut_match_check_10:  #1021 (line in Coconut source)
-            _coconut_match_kwargs = _coconut_match_kwargs_store.copy()  #1021 (line in Coconut source)
-            _coconut_match_set_name_cond = _coconut_sentinel  #1021 (line in Coconut source)
-            _coconut_match_set_name_x = _coconut_sentinel  #1021 (line in Coconut source)
-            _coconut_match_set_name_xs = _coconut_sentinel  #1021 (line in Coconut source)
-            if (_coconut.len(_coconut_match_args) == 2) and ("cond" not in _coconut_match_kwargs):  #1021 (line in Coconut source)
-                if (_coconut.isinstance(_coconut_match_args[1], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_args[1]) >= 1):  #1021 (line in Coconut source)
-                    _coconut_match_temp_37 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("cond")  #1021 (line in Coconut source)
-                    _coconut_match_set_name_x = _coconut_match_args[1][0]  #1021 (line in Coconut source)
-                    _coconut_match_set_name_cond = _coconut_match_temp_37  #1021 (line in Coconut source)
-                    _coconut_match_temp_38 = _coconut.list(_coconut_match_args[1][1:])  #1021 (line in Coconut source)
-                    _coconut_match_set_name_xs = _coconut_match_temp_38  #1021 (line in Coconut source)
-                    if not _coconut_match_kwargs:  #1021 (line in Coconut source)
-                        _coconut_match_check_10 = True  #1021 (line in Coconut source)
-            if _coconut_match_check_10:  #1021 (line in Coconut source)
-                if _coconut_match_set_name_cond is not _coconut_sentinel:  #1021 (line in Coconut source)
-                    cond = _coconut_match_set_name_cond  #1021 (line in Coconut source)
-                if _coconut_match_set_name_x is not _coconut_sentinel:  #1021 (line in Coconut source)
-                    x = _coconut_match_set_name_x  #1021 (line in Coconut source)
-                if _coconut_match_set_name_xs is not _coconut_sentinel:  #1021 (line in Coconut source)
-                    xs = _coconut_match_set_name_xs  #1021 (line in Coconut source)
-            if _coconut_match_check_10 and not (cond(x)):  #1021 (line in Coconut source)
-                _coconut_match_check_10 = False  #1021 (line in Coconut source)
+        if not _coconut_match_check_10:  #1020 (line in Coconut source)
+            _coconut_match_kwargs = _coconut_match_kwargs_store.copy()  #1020 (line in Coconut source)
+            _coconut_match_set_name_cond = _coconut_sentinel  #1020 (line in Coconut source)
+            _coconut_match_set_name_x = _coconut_sentinel  #1020 (line in Coconut source)
+            _coconut_match_set_name_xs = _coconut_sentinel  #1020 (line in Coconut source)
+            if (_coconut.len(_coconut_match_args) == 2) and ("cond" not in _coconut_match_kwargs):  #1020 (line in Coconut source)
+                if (_coconut.isinstance(_coconut_match_args[1], _coconut.abc.Sequence)) and (_coconut.len(_coconut_match_args[1]) >= 1):  #1020 (line in Coconut source)
+                    _coconut_match_temp_37 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("cond")  #1020 (line in Coconut source)
+                    _coconut_match_set_name_x = _coconut_match_args[1][0]  #1020 (line in Coconut source)
+                    _coconut_match_set_name_cond = _coconut_match_temp_37  #1020 (line in Coconut source)
+                    _coconut_match_temp_38 = _coconut.list(_coconut_match_args[1][1:])  #1020 (line in Coconut source)
+                    _coconut_match_set_name_xs = _coconut_match_temp_38  #1020 (line in Coconut source)
+                    if not _coconut_match_kwargs:  #1020 (line in Coconut source)
+                        _coconut_match_check_10 = True  #1020 (line in Coconut source)
+            if _coconut_match_check_10:  #1020 (line in Coconut source)
+                if _coconut_match_set_name_cond is not _coconut_sentinel:  #1020 (line in Coconut source)
+                    cond = _coconut_match_set_name_cond  #1020 (line in Coconut source)
+                if _coconut_match_set_name_x is not _coconut_sentinel:  #1020 (line in Coconut source)
+                    x = _coconut_match_set_name_x  #1020 (line in Coconut source)
+                if _coconut_match_set_name_xs is not _coconut_sentinel:  #1020 (line in Coconut source)
+                    xs = _coconut_match_set_name_xs  #1020 (line in Coconut source)
+            if _coconut_match_check_10 and not (cond(x)):  #1020 (line in Coconut source)
+                _coconut_match_check_10 = False  #1020 (line in Coconut source)
 
-            if _coconut_match_check_10:  #1021 (line in Coconut source)
+            if _coconut_match_check_10:  #1020 (line in Coconut source)
 
-                    ys, zs = span(cond, xs)  #1022 (line in Coconut source)
-                    return (([x,] + ys, zs))  #1023 (line in Coconut source)
+                    ys, zs = span(cond, xs)  #1021 (line in Coconut source)
+                    return (([x,] + ys, zs))  #1022 (line in Coconut source)
 
-        if not _coconut_match_check_10:  #1024 (line in Coconut source)
-            _coconut_match_kwargs = _coconut_match_kwargs_store.copy()  #1024 (line in Coconut source)
-            _coconut_match_set_name_cond = _coconut_sentinel  #1024 (line in Coconut source)
-            _coconut_match_set_name_xs = _coconut_sentinel  #1024 (line in Coconut source)
-            if (_coconut.len(_coconut_match_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_args) > 0, "cond" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 1, "xs" in _coconut_match_kwargs)) == 1):  #1024 (line in Coconut source)
-                _coconut_match_temp_39 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("cond")  #1024 (line in Coconut source)
-                _coconut_match_temp_40 = _coconut_match_args[1] if _coconut.len(_coconut_match_args) > 1 else _coconut_match_kwargs.pop("xs")  #1024 (line in Coconut source)
-                _coconut_match_set_name_cond = _coconut_match_temp_39  #1024 (line in Coconut source)
-                _coconut_match_set_name_xs = _coconut_match_temp_40  #1024 (line in Coconut source)
-                if not _coconut_match_kwargs:  #1024 (line in Coconut source)
-                    _coconut_match_check_10 = True  #1024 (line in Coconut source)
-            if _coconut_match_check_10:  #1024 (line in Coconut source)
-                if _coconut_match_set_name_cond is not _coconut_sentinel:  #1024 (line in Coconut source)
-                    cond = _coconut_match_set_name_cond  #1024 (line in Coconut source)
-                if _coconut_match_set_name_xs is not _coconut_sentinel:  #1024 (line in Coconut source)
-                    xs = _coconut_match_set_name_xs  #1024 (line in Coconut source)
+        if not _coconut_match_check_10:  #1023 (line in Coconut source)
+            _coconut_match_kwargs = _coconut_match_kwargs_store.copy()  #1023 (line in Coconut source)
+            _coconut_match_set_name_cond = _coconut_sentinel  #1023 (line in Coconut source)
+            _coconut_match_set_name_xs = _coconut_sentinel  #1023 (line in Coconut source)
+            if (_coconut.len(_coconut_match_args) <= 2) and (_coconut.sum((_coconut.len(_coconut_match_args) > 0, "cond" in _coconut_match_kwargs)) == 1) and (_coconut.sum((_coconut.len(_coconut_match_args) > 1, "xs" in _coconut_match_kwargs)) == 1):  #1023 (line in Coconut source)
+                _coconut_match_temp_39 = _coconut_match_args[0] if _coconut.len(_coconut_match_args) > 0 else _coconut_match_kwargs.pop("cond")  #1023 (line in Coconut source)
+                _coconut_match_temp_40 = _coconut_match_args[1] if _coconut.len(_coconut_match_args) > 1 else _coconut_match_kwargs.pop("xs")  #1023 (line in Coconut source)
+                _coconut_match_set_name_cond = _coconut_match_temp_39  #1023 (line in Coconut source)
+                _coconut_match_set_name_xs = _coconut_match_temp_40  #1023 (line in Coconut source)
+                if not _coconut_match_kwargs:  #1023 (line in Coconut source)
+                    _coconut_match_check_10 = True  #1023 (line in Coconut source)
+            if _coconut_match_check_10:  #1023 (line in Coconut source)
+                if _coconut_match_set_name_cond is not _coconut_sentinel:  #1023 (line in Coconut source)
+                    cond = _coconut_match_set_name_cond  #1023 (line in Coconut source)
+                if _coconut_match_set_name_xs is not _coconut_sentinel:  #1023 (line in Coconut source)
+                    xs = _coconut_match_set_name_xs  #1023 (line in Coconut source)
 
-            if _coconut_match_check_10:  #1024 (line in Coconut source)
+            if _coconut_match_check_10:  #1023 (line in Coconut source)
 
-                    return (([], xs))  #1025 (line in Coconut source)
-
-
-        if not _coconut_match_check_10:  #1027 (line in Coconut source)
-            raise _coconut_FunctionMatchError('case def span:', _coconut_match_args)  #1027 (line in Coconut source)
+                    return (([], xs))  #1024 (line in Coconut source)
 
 
-@_coconut_tco  #1027 (line in Coconut source)
-def break_(cond: '_coconut.typing.Callable[[Ta], bool]', xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Sequence[Ta]':  #1027 (line in Coconut source)
+        if not _coconut_match_check_10:  #1026 (line in Coconut source)
+            raise _coconut_FunctionMatchError('case def span:', _coconut_match_args)  #1026 (line in Coconut source)
+
+
+@_coconut_tco  #1026 (line in Coconut source)
+def break_(cond: '_coconut.typing.Callable[[Ta], bool]', xs: '_coconut.typing.Sequence[Ta]') -> '_coconut.typing.Sequence[Ta]':  #1026 (line in Coconut source)
     """
     break_ = break
-    """  #1030 (line in Coconut source)
-    return _coconut_tail_call(span, _coconut_forward_compose(cond, (_coconut.operator.not_)), xs)  # type: ignore  #1031 (line in Coconut source)
+    """  #1029 (line in Coconut source)
+    return _coconut_tail_call(span, _coconut_forward_compose(cond, (_coconut.operator.not_)), xs)  # type: ignore  #1030 (line in Coconut source)
 
 
 
 ## Searching lists:
 
-def notElem(e: 'Ta', xs: '_coconut.typing.Sequence[Ta]') -> 'bool':  #1036 (line in Coconut source)
-    return (e not in xs)  #1037 (line in Coconut source)
+def notElem(e: 'Ta', xs: '_coconut.typing.Sequence[Ta]') -> 'bool':  #1035 (line in Coconut source)
+    return (e not in xs)  #1036 (line in Coconut source)
 
 
-def lookup(key: 'Ta', assocs: '_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]') -> 'Maybe':  #1039 (line in Coconut source)
-    try:  #1040 (line in Coconut source)
-        return (((Just)((_coconut_iter_getitem(((dropwhile)(lambda pair: pair[0] != key, assocs)), (0)))[1])))  #1041 (line in Coconut source)
-    except IndexError:  #1048 (line in Coconut source)
-        return (nothing)  #1049 (line in Coconut source)
+def lookup(key: 'Ta', assocs: '_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]') -> 'Maybe':  #1038 (line in Coconut source)
+    try:  #1039 (line in Coconut source)
+        return (((Just)((_coconut_iter_getitem(((dropwhile)(lambda pair: pair[0] != key, assocs)), (0)))[1])))  #1040 (line in Coconut source)
+    except IndexError:  #1047 (line in Coconut source)
+        return (nothing)  #1048 (line in Coconut source)
 
 
 
 ## Zipping and unzipping lists:
 # type: ignore
-zip = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]]  # type: ignore  #1054 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  # type: ignore  #1054 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  # type: ignore  #1054 (line in Coconut source)
-__annotations__["zip"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]]'  # type: ignore  #1054 (line in Coconut source)
-zip = _zip  # type: ignore  #1055 (line in Coconut source)
+zip = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]]  # type: ignore  #1053 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  # type: ignore  #1053 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  # type: ignore  #1053 (line in Coconut source)
+__annotations__["zip"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]]'  # type: ignore  #1053 (line in Coconut source)
+zip = _zip  # type: ignore  #1054 (line in Coconut source)
 
-zip3 = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]]  #1057 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1057 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1057 (line in Coconut source)
-__annotations__["zip3"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]]'  #1057 (line in Coconut source)
-zip3 = _zip  #1058 (line in Coconut source)
+zip3 = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]]  #1056 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1056 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1056 (line in Coconut source)
+__annotations__["zip3"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[Ta], _coconut.typing.Iterable[Tb], _coconut.typing.Iterable[Tc]], _coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]]'  #1056 (line in Coconut source)
+zip3 = _zip  #1057 (line in Coconut source)
 
-@_coconut_tco  #1060 (line in Coconut source)
-def zipWith(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', xs1: '_coconut.typing.Iterable[Ta]', xs2: '_coconut.typing.Iterable[Tb]') -> '_coconut.typing.Iterable[Tc]':  #1060 (line in Coconut source)
-    return _coconut_tail_call(_map, func, xs1, xs2)  #1061 (line in Coconut source)
-
-
-@_coconut_tco  #1063 (line in Coconut source)
-def zipWith3(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', xs1: '_coconut.typing.Iterable[Ta]', xs2: '_coconut.typing.Iterable[Tb]', xs3: '_coconut.typing.Iterable[Tc]') -> '_coconut.typing.Iterable[Td]':  #1063 (line in Coconut source)
-    return _coconut_tail_call(_map, func, xs1, xs2, xs3)  #1064 (line in Coconut source)
+@_coconut_tco  #1059 (line in Coconut source)
+def zipWith(func: '_coconut.typing.Callable[[Ta, Tb], Tc]', xs1: '_coconut.typing.Iterable[Ta]', xs2: '_coconut.typing.Iterable[Tb]') -> '_coconut.typing.Iterable[Tc]':  #1059 (line in Coconut source)
+    return _coconut_tail_call(_map, func, xs1, xs2)  #1060 (line in Coconut source)
 
 
-@_coconut_tco  #1066 (line in Coconut source)
-def unzip(xs: '_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]') -> '(_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]])':  #1066 (line in Coconut source)
-    return _coconut_tail_call((tuple), (_map)(list, _zip(*xs)))  # type: ignore  #1067 (line in Coconut source)
+@_coconut_tco  #1062 (line in Coconut source)
+def zipWith3(func: '_coconut.typing.Callable[[Ta, Tb, Tc], Td]', xs1: '_coconut.typing.Iterable[Ta]', xs2: '_coconut.typing.Iterable[Tb]', xs3: '_coconut.typing.Iterable[Tc]') -> '_coconut.typing.Iterable[Td]':  #1062 (line in Coconut source)
+    return _coconut_tail_call(_map, func, xs1, xs2, xs3)  #1063 (line in Coconut source)
 
 
-unzip3 = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]], (_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]])]  #1069 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1069 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1069 (line in Coconut source)
-__annotations__["unzip3"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]], (_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]])]'  #1069 (line in Coconut source)
-unzip3 = unzip  # type: ignore  #1070 (line in Coconut source)
+@_coconut_tco  #1065 (line in Coconut source)
+def unzip(xs: '_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb])]') -> '(_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb]])':  #1065 (line in Coconut source)
+    return _coconut_tail_call((tuple), (_map)(list, _zip(*xs)))  # type: ignore  #1066 (line in Coconut source)
+
+
+unzip3 = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]], (_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]])]  #1068 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1068 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1068 (line in Coconut source)
+__annotations__["unzip3"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[(_coconut.typing.Tuple[Ta, Tb, Tc])]], (_coconut.typing.Tuple[_coconut.typing.Sequence[Ta], _coconut.typing.Sequence[Tb], _coconut.typing.Sequence[Tc]])]'  #1068 (line in Coconut source)
+unzip3 = unzip  # type: ignore  #1069 (line in Coconut source)
 
 
 
 ## Functions on strings:
-lines = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]  #1075 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1075 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1075 (line in Coconut source)
-__annotations__["lines"] = '_coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]'  #1075 (line in Coconut source)
-lines = _coconut.operator.methodcaller("splitlines")  #1076 (line in Coconut source)
+lines = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]  #1074 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1074 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1074 (line in Coconut source)
+__annotations__["lines"] = '_coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]'  #1074 (line in Coconut source)
+lines = _coconut.operator.methodcaller("splitlines")  #1075 (line in Coconut source)
 
-words = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]  #1078 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1078 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1078 (line in Coconut source)
-__annotations__["words"] = '_coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]'  #1078 (line in Coconut source)
-words = _coconut.operator.methodcaller("split")  #1079 (line in Coconut source)
+words = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]  #1077 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1077 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1077 (line in Coconut source)
+__annotations__["words"] = '_coconut.typing.Callable[[str], _coconut.typing.Sequence[str]]'  #1077 (line in Coconut source)
+words = _coconut.operator.methodcaller("split")  #1078 (line in Coconut source)
 
-@_coconut_tco  #1081 (line in Coconut source)
-def unlines(strs: '_coconut.typing.Iterable[str]') -> 'str':  #1081 (line in Coconut source)
-    return _coconut_tail_call("".join, (s + "\n" for s in strs))  #1082 (line in Coconut source)
+@_coconut_tco  #1080 (line in Coconut source)
+def unlines(strs: '_coconut.typing.Iterable[str]') -> 'str':  #1080 (line in Coconut source)
+    return _coconut_tail_call("".join, (s + "\n" for s in strs))  #1081 (line in Coconut source)
 
 
-unwords = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[str]], str]  #1084 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1084 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1084 (line in Coconut source)
-__annotations__["unwords"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[str]], str]'  #1084 (line in Coconut source)
-unwords = " ".join  #1085 (line in Coconut source)
+unwords = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[_coconut.typing.Iterable[str]], str]  #1083 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1083 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1083 (line in Coconut source)
+__annotations__["unwords"] = '_coconut.typing.Callable[[_coconut.typing.Iterable[str]], str]'  #1083 (line in Coconut source)
+unwords = " ".join  #1084 (line in Coconut source)
 
 
 
@@ -2418,61 +2417,61 @@ unwords = " ".join  #1085 (line in Coconut source)
 # Converting to and from String:
 
 ## Converting to String:
-ShowS = T.Callable[[str,], str]  #1093 (line in Coconut source)
+ShowS = T.Callable[[str,], str]  #1092 (line in Coconut source)
 
-Show = T.Any  #1095 (line in Coconut source)
+Show = T.Any  #1094 (line in Coconut source)
 
-showsPrec = NotImplemented  #1097 (line in Coconut source)
+showsPrec = NotImplemented  #1096 (line in Coconut source)
 
-show = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Ta], str]  #1099 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1099 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1099 (line in Coconut source)
-__annotations__["show"] = '_coconut.typing.Callable[[Ta], str]'  #1099 (line in Coconut source)
-show = repr  #1100 (line in Coconut source)
+show = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Ta], str]  #1098 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1098 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1098 (line in Coconut source)
+__annotations__["show"] = '_coconut.typing.Callable[[Ta], str]'  #1098 (line in Coconut source)
+show = repr  #1099 (line in Coconut source)
 
-def shows(x: 'Show') -> 'ShowS':  #1102 (line in Coconut source)
-    return (lambda s: repr(x) + s)  #1103 (line in Coconut source)
-
-
-def showList(xs: '_coconut.typing.Iterable[Show]') -> 'ShowS':  #1105 (line in Coconut source)
-    return (lambda s: repr(list(xs)) + s)  #1106 (line in Coconut source)
+def shows(x: 'Show') -> 'ShowS':  #1101 (line in Coconut source)
+    return (lambda s: repr(x) + s)  #1102 (line in Coconut source)
 
 
-def showString(x: 'str') -> 'ShowS':  #1108 (line in Coconut source)
-    return (lambda s: x + s)  #1109 (line in Coconut source)
+def showList(xs: '_coconut.typing.Iterable[Show]') -> 'ShowS':  #1104 (line in Coconut source)
+    return (lambda s: repr(list(xs)) + s)  #1105 (line in Coconut source)
 
 
-showChar = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Char], ShowS]  #1111 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1111 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1111 (line in Coconut source)
-__annotations__["showChar"] = '_coconut.typing.Callable[[Char], ShowS]'  #1111 (line in Coconut source)
-showChar = showString  #1112 (line in Coconut source)
+def showString(x: 'str') -> 'ShowS':  #1107 (line in Coconut source)
+    return (lambda s: x + s)  #1108 (line in Coconut source)
 
-def showParen(parens: 'bool', showFunc: 'ShowS') -> 'ShowS':  #1114 (line in Coconut source)
-    return (lambda s: ("(" + showFunc("") + ")" + s if parens else showFunc("") + s))  #1115 (line in Coconut source)
+
+showChar = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Char], ShowS]  #1110 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1110 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1110 (line in Coconut source)
+__annotations__["showChar"] = '_coconut.typing.Callable[[Char], ShowS]'  #1110 (line in Coconut source)
+showChar = showString  #1111 (line in Coconut source)
+
+def showParen(parens: 'bool', showFunc: 'ShowS') -> 'ShowS':  #1113 (line in Coconut source)
+    return (lambda s: ("(" + showFunc("") + ")" + s if parens else showFunc("") + s))  #1114 (line in Coconut source)
 
 
 
 ## Converting from String:
 
-ReadS = NotImplemented  #1123 (line in Coconut source)
+ReadS = NotImplemented  #1122 (line in Coconut source)
 
-Read = T.Union[str, int, float, bool, None, tuple, list, dict,]  #1125 (line in Coconut source)
+Read = T.Union[str, int, float, bool, None, tuple, list, dict,]  #1124 (line in Coconut source)
 
-readsPrec = NotImplemented  #1136 (line in Coconut source)
+readsPrec = NotImplemented  #1135 (line in Coconut source)
 
-readList = NotImplemented  #1138 (line in Coconut source)
+readList = NotImplemented  #1137 (line in Coconut source)
 
-reads = NotImplemented  #1140 (line in Coconut source)
+reads = NotImplemented  #1139 (line in Coconut source)
 
-readParen = NotImplemented  #1142 (line in Coconut source)
+readParen = NotImplemented  #1141 (line in Coconut source)
 
-@_coconut_tco  #1144 (line in Coconut source)
-def read(s: 'str') -> 'Read':  #1144 (line in Coconut source)
-    return _coconut_tail_call(_ast.literal_eval, s)  #1145 (line in Coconut source)
+@_coconut_tco  #1143 (line in Coconut source)
+def read(s: 'str') -> 'Read':  #1143 (line in Coconut source)
+    return _coconut_tail_call(_ast.literal_eval, s)  #1144 (line in Coconut source)
 
 
-lex = NotImplemented  #1147 (line in Coconut source)
+lex = NotImplemented  #1146 (line in Coconut source)
 
 
 
@@ -2480,72 +2479,72 @@ lex = NotImplemented  #1147 (line in Coconut source)
 # Basic input and output:
 
 #### IO:
-class IO(_coconut.collections.namedtuple("IO", ('io_func',))):  #1155 (line in Coconut source)
-    __slots__ = ()  #1155 (line in Coconut source)
-    _coconut_is_data = True  #1155 (line in Coconut source)
-    __match_args__ = ('io_func',)  #1155 (line in Coconut source)
-    def __add__(self, other): return _coconut.NotImplemented  #1155 (line in Coconut source)
-    def __mul__(self, other): return _coconut.NotImplemented  #1155 (line in Coconut source)
-    def __rmul__(self, other): return _coconut.NotImplemented  #1155 (line in Coconut source)
-    __ne__ = _coconut.object.__ne__  #1155 (line in Coconut source)
-    def __eq__(self, other):  #1155 (line in Coconut source)
-        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #1155 (line in Coconut source)
-    def __hash__(self):  #1155 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #1155 (line in Coconut source)
-    @staticmethod  #1156 (line in Coconut source)
-    @_coconut_tco  #1157 (line in Coconut source)
-    def __pure__(x: 'Ta') -> 'IO':  #1157 (line in Coconut source)
-        return _coconut_tail_call(IO, lambda: x)  #1158 (line in Coconut source)
+class IO(_coconut.collections.namedtuple("IO", ('io_func',))):  #1154 (line in Coconut source)
+    __slots__ = ()  #1154 (line in Coconut source)
+    _coconut_is_data = True  #1154 (line in Coconut source)
+    __match_args__ = ('io_func',)  #1154 (line in Coconut source)
+    def __add__(self, other): return _coconut.NotImplemented  #1154 (line in Coconut source)
+    def __mul__(self, other): return _coconut.NotImplemented  #1154 (line in Coconut source)
+    def __rmul__(self, other): return _coconut.NotImplemented  #1154 (line in Coconut source)
+    __ne__ = _coconut.object.__ne__  #1154 (line in Coconut source)
+    def __eq__(self, other):  #1154 (line in Coconut source)
+        return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #1154 (line in Coconut source)
+    def __hash__(self):  #1154 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #1154 (line in Coconut source)
+    @staticmethod  #1155 (line in Coconut source)
+    @_coconut_tco  #1156 (line in Coconut source)
+    def __pure__(x: 'Ta') -> 'IO':  #1156 (line in Coconut source)
+        return _coconut_tail_call(IO, lambda: x)  #1157 (line in Coconut source)
 
 
-    @staticmethod  #1160 (line in Coconut source)
-    @_coconut_tco  #1161 (line in Coconut source)
-    def __fail__(msg: 'str') -> 'IO':  #1161 (line in Coconut source)
-        def _coconut_lambda_0():  #1162 (line in Coconut source)
-            raise IOError(msg)  #1162 (line in Coconut source)
+    @staticmethod  #1159 (line in Coconut source)
+    @_coconut_tco  #1160 (line in Coconut source)
+    def __fail__(msg: 'str') -> 'IO':  #1160 (line in Coconut source)
+        def _coconut_lambda_0():  #1161 (line in Coconut source)
+            raise IOError(msg)  #1161 (line in Coconut source)
 
-        return _coconut_tail_call(IO, _coconut_lambda_0)  #1162 (line in Coconut source)
-
-
-    @_coconut_tco  #1164 (line in Coconut source)
-    def __fmap__(self, func: '_coconut.typing.Callable[[Ta], Tb]') -> 'IO':  #1164 (line in Coconut source)
-        return _coconut_tail_call(IO, _coconut_forward_compose(self.io_func, func))  #1165 (line in Coconut source)
+        return _coconut_tail_call(IO, _coconut_lambda_0)  #1161 (line in Coconut source)
 
 
-    @_coconut_tco  #1167 (line in Coconut source)
-    def __join__(self) -> 'IO':  #1167 (line in Coconut source)
-        return _coconut_tail_call(fmap, unIO, self)  # type: ignore  #1168 (line in Coconut source)
+    @_coconut_tco  #1163 (line in Coconut source)
+    def __fmap__(self, func: '_coconut.typing.Callable[[Ta], Tb]') -> 'IO':  #1163 (line in Coconut source)
+        return _coconut_tail_call(IO, _coconut_forward_compose(self.io_func, func))  #1164 (line in Coconut source)
 
 
-    @staticmethod  #1170 (line in Coconut source)
-    @_coconut_tco  #1171 (line in Coconut source)
-    def __mempty__() -> 'IO':  #1171 (line in Coconut source)
-        return _coconut_tail_call(IO, lambda: mempty)  #1172 (line in Coconut source)
+    @_coconut_tco  #1166 (line in Coconut source)
+    def __join__(self) -> 'IO':  #1166 (line in Coconut source)
+        return _coconut_tail_call(fmap, unIO, self)  # type: ignore  #1167 (line in Coconut source)
 
 
-    @_coconut_tco  #1174 (line in Coconut source)
-    def __mappend__(self, other: 'IO') -> 'IO':  #1174 (line in Coconut source)
-        return _coconut_tail_call(IO, lambda: mappend(self.io_func(), other.io_func()))  #1175 (line in Coconut source)
+    @staticmethod  #1169 (line in Coconut source)
+    @_coconut_tco  #1170 (line in Coconut source)
+    def __mempty__() -> 'IO':  #1170 (line in Coconut source)
+        return _coconut_tail_call(IO, lambda: mempty)  #1171 (line in Coconut source)
 
 
-_coconut_call_set_names(IO)  #1177 (line in Coconut source)
-_nullIO = IO(lambda: None)  # type: IO  #1177 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1177 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1177 (line in Coconut source)
-__annotations__["_nullIO"] = 'IO'  #1177 (line in Coconut source)
+    @_coconut_tco  #1173 (line in Coconut source)
+    def __mappend__(self, other: 'IO') -> 'IO':  #1173 (line in Coconut source)
+        return _coconut_tail_call(IO, lambda: mappend(self.io_func(), other.io_func()))  #1174 (line in Coconut source)
 
-@_coconut_tco  #1179 (line in Coconut source)
-def asIO(io: 'IO') -> 'IO':  #1179 (line in Coconut source)
+
+_coconut_call_set_names(IO)  #1176 (line in Coconut source)
+_nullIO = IO(lambda: None)  # type: IO  #1176 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1176 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1176 (line in Coconut source)
+__annotations__["_nullIO"] = 'IO'  #1176 (line in Coconut source)
+
+@_coconut_tco  #1178 (line in Coconut source)
+def asIO(io: 'IO') -> 'IO':  #1178 (line in Coconut source)
     """
     asIO :: IO a -> IO a
     asIO = id
     -- asIO(x) is equivalent to x `asTypeOf` IO(...)
-    """  #1184 (line in Coconut source)
-    return _coconut_tail_call((asTypeOf), io, _nullIO)  # type: ignore  #1185 (line in Coconut source)
+    """  #1183 (line in Coconut source)
+    return _coconut_tail_call((asTypeOf), io, _nullIO)  # type: ignore  #1184 (line in Coconut source)
 
 
-@_coconut_tco  #1187 (line in Coconut source)
-def unIO(io: 'IO') -> 'T.Any':  #1187 (line in Coconut source)
+@_coconut_tco  #1186 (line in Coconut source)
+def unIO(io: 'IO') -> 'T.Any':  #1186 (line in Coconut source)
     """
     The unIO function is an impure function which performs the
     I/O contained in the given IO object and returns the result.
@@ -2559,8 +2558,8 @@ def unIO(io: 'IO') -> 'T.Any':  #1187 (line in Coconut source)
             r1 <- io1
             r2 <- io2
             ...
-    """  #1201 (line in Coconut source)
-    return _coconut_tail_call(asIO(io).io_func)  #1202 (line in Coconut source)
+    """  #1200 (line in Coconut source)
+    return _coconut_tail_call(asIO(io).io_func)  #1201 (line in Coconut source)
 
 
 
@@ -2569,105 +2568,105 @@ def unIO(io: 'IO') -> 'T.Any':  #1187 (line in Coconut source)
 
 ### Output functions:
 
-@_coconut_tco  #1210 (line in Coconut source)
-def putStr(s: 'str') -> 'IO':  #1210 (line in Coconut source)
-    return _coconut_tail_call(IO, _coconut_partial(_print, s, end=""))  #1211 (line in Coconut source)
+@_coconut_tco  #1209 (line in Coconut source)
+def putStr(s: 'str') -> 'IO':  #1209 (line in Coconut source)
+    return _coconut_tail_call(IO, _coconut_partial(_print, s, end=""))  #1210 (line in Coconut source)
 
 
-putChar = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Char], IO]  #1213 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1213 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1213 (line in Coconut source)
-__annotations__["putChar"] = '_coconut.typing.Callable[[Char], IO]'  #1213 (line in Coconut source)
-putChar = putStr  #1214 (line in Coconut source)
+putChar = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[Char], IO]  #1212 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1212 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1212 (line in Coconut source)
+__annotations__["putChar"] = '_coconut.typing.Callable[[Char], IO]'  #1212 (line in Coconut source)
+putChar = putStr  #1213 (line in Coconut source)
 
-@_coconut_tco  #1216 (line in Coconut source)
-def putStrLn(s: 'str') -> 'IO':  #1216 (line in Coconut source)
-    return _coconut_tail_call(IO, _coconut_partial(_print, s))  #1217 (line in Coconut source)
+@_coconut_tco  #1215 (line in Coconut source)
+def putStrLn(s: 'str') -> 'IO':  #1215 (line in Coconut source)
+    return _coconut_tail_call(IO, _coconut_partial(_print, s))  #1216 (line in Coconut source)
 
 # type: ignore
-@_coconut_tco  # type: ignore  #1219 (line in Coconut source)
-def print(x: 'Ta') -> 'IO':  # type: ignore  #1219 (line in Coconut source)
-    return _coconut_tail_call(IO, _coconut_partial(_print, show(x)))  #1220 (line in Coconut source)
+@_coconut_tco  # type: ignore  #1218 (line in Coconut source)
+def print(x: 'Ta') -> 'IO':  # type: ignore  #1218 (line in Coconut source)
+    return _coconut_tail_call(IO, _coconut_partial(_print, show(x)))  #1219 (line in Coconut source)
 
 
 ### Input functions:
 
-getChar = IO(_coconut_partial(sys.stdin.read, 1))  # type: IO  #1224 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1224 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1224 (line in Coconut source)
-__annotations__["getChar"] = 'IO'  #1224 (line in Coconut source)
+getChar = IO(_coconut_partial(sys.stdin.read, 1))  # type: IO  #1223 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1223 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1223 (line in Coconut source)
+__annotations__["getChar"] = 'IO'  #1223 (line in Coconut source)
 
-getLine = IO(input)  # type: IO  #1226 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1226 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1226 (line in Coconut source)
-__annotations__["getLine"] = 'IO'  #1226 (line in Coconut source)
+getLine = IO(input)  # type: IO  #1225 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1225 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1225 (line in Coconut source)
+__annotations__["getLine"] = 'IO'  #1225 (line in Coconut source)
 
-getContents = IO(sys.stdin.read)  # type: IO  #1228 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #1228 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #1228 (line in Coconut source)
-__annotations__["getContents"] = 'IO'  #1228 (line in Coconut source)
+getContents = IO(sys.stdin.read)  # type: IO  #1227 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  #1227 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  #1227 (line in Coconut source)
+__annotations__["getContents"] = 'IO'  #1227 (line in Coconut source)
 
-@_coconut_tco  #1230 (line in Coconut source)
-def interact(func: '_coconut.typing.Callable[[str], str]') -> 'IO':  #1230 (line in Coconut source)
-    def do_interact():  #1231 (line in Coconut source)
-        while True:  #1232 (line in Coconut source)
-            (_print)((func)(input()))  #1233 (line in Coconut source)
+@_coconut_tco  #1229 (line in Coconut source)
+def interact(func: '_coconut.typing.Callable[[str], str]') -> 'IO':  #1229 (line in Coconut source)
+    def do_interact():  #1230 (line in Coconut source)
+        while True:  #1231 (line in Coconut source)
+            (_print)((func)(input()))  #1232 (line in Coconut source)
 
-    return _coconut_tail_call(IO, do_interact)  #1234 (line in Coconut source)
+    return _coconut_tail_call(IO, do_interact)  #1233 (line in Coconut source)
 
 
 ### Files:
 
-FilePath = str  #1238 (line in Coconut source)
+FilePath = str  #1237 (line in Coconut source)
 
-@_coconut_tco  #1240 (line in Coconut source)
-def readFile(fpath: 'FilePath') -> 'IO':  #1240 (line in Coconut source)
-    def do_readFile() -> 'str':  #1241 (line in Coconut source)
-        with open(fpath, "r+") as f:  #1242 (line in Coconut source)
-            return (f.read())  #1243 (line in Coconut source)
+@_coconut_tco  #1239 (line in Coconut source)
+def readFile(fpath: 'FilePath') -> 'IO':  #1239 (line in Coconut source)
+    def do_readFile() -> 'str':  #1240 (line in Coconut source)
+        with open(fpath, "r+") as f:  #1241 (line in Coconut source)
+            return (f.read())  #1242 (line in Coconut source)
 
-    return _coconut_tail_call(IO, do_readFile)  #1244 (line in Coconut source)
-
-
-@_coconut_tco  #1246 (line in Coconut source)
-def writeFile(fpath: 'FilePath', text: 'str') -> 'IO':  #1246 (line in Coconut source)
-    def do_writeFile() -> 'None':  #1247 (line in Coconut source)
-        with open(fpath, "w+") as f:  #1248 (line in Coconut source)
-            f.write(text)  #1249 (line in Coconut source)
-
-    return _coconut_tail_call(IO, do_writeFile)  #1250 (line in Coconut source)
+    return _coconut_tail_call(IO, do_readFile)  #1243 (line in Coconut source)
 
 
-@_coconut_tco  #1252 (line in Coconut source)
-def appendFile(fpath: 'FilePath', text: 'str') -> 'IO':  #1252 (line in Coconut source)
-    def do_appendFile() -> 'None':  #1253 (line in Coconut source)
-        with open(fpath, "a+") as f:  #1254 (line in Coconut source)
-            f.write(text)  #1255 (line in Coconut source)
+@_coconut_tco  #1245 (line in Coconut source)
+def writeFile(fpath: 'FilePath', text: 'str') -> 'IO':  #1245 (line in Coconut source)
+    def do_writeFile() -> 'None':  #1246 (line in Coconut source)
+        with open(fpath, "w+") as f:  #1247 (line in Coconut source)
+            f.write(text)  #1248 (line in Coconut source)
 
-    return _coconut_tail_call(IO, do_appendFile)  #1256 (line in Coconut source)
-
-
-@_coconut_tco  #1258 (line in Coconut source)
-def readIO(s: 'str') -> 'IO':  #1258 (line in Coconut source)
-    return _coconut_tail_call(IO, _coconut_partial(read, s))  #1259 (line in Coconut source)
+    return _coconut_tail_call(IO, do_writeFile)  #1249 (line in Coconut source)
 
 
-@_coconut_tco  #1261 (line in Coconut source)
-def readLn() -> 'IO':  #1261 (line in Coconut source)
-    return _coconut_tail_call((bind), getLine(), readIO)  # type: ignore  #1262 (line in Coconut source)
+@_coconut_tco  #1251 (line in Coconut source)
+def appendFile(fpath: 'FilePath', text: 'str') -> 'IO':  #1251 (line in Coconut source)
+    def do_appendFile() -> 'None':  #1252 (line in Coconut source)
+        with open(fpath, "a+") as f:  #1253 (line in Coconut source)
+            f.write(text)  #1254 (line in Coconut source)
+
+    return _coconut_tail_call(IO, do_appendFile)  #1255 (line in Coconut source)
+
+
+@_coconut_tco  #1257 (line in Coconut source)
+def readIO(s: 'str') -> 'IO':  #1257 (line in Coconut source)
+    return _coconut_tail_call(IO, _coconut_partial(read, s))  #1258 (line in Coconut source)
+
+
+@_coconut_tco  #1260 (line in Coconut source)
+def readLn() -> 'IO':  #1260 (line in Coconut source)
+    return _coconut_tail_call((bind), getLine(), readIO)  # type: ignore  #1261 (line in Coconut source)
 
 
 
 ## Exception handling:
 
-@_coconut_tco  #1267 (line in Coconut source)
-def ioError(err: 'IOError') -> 'IO':  #1267 (line in Coconut source)
-    def _coconut_lambda_1():  #1268 (line in Coconut source)
-        raise err  #1268 (line in Coconut source)
+@_coconut_tco  #1266 (line in Coconut source)
+def ioError(err: 'IOError') -> 'IO':  #1266 (line in Coconut source)
+    def _coconut_lambda_1():  #1267 (line in Coconut source)
+        raise err  #1267 (line in Coconut source)
 
-    return _coconut_tail_call(IO, _coconut_lambda_1)  #1268 (line in Coconut source)
+    return _coconut_tail_call(IO, _coconut_lambda_1)  #1267 (line in Coconut source)
 
 
-@_coconut_tco  #1270 (line in Coconut source)
-def userError(msg: 'str') -> 'IOError':  #1270 (line in Coconut source)
-    return _coconut_tail_call(IOError, msg)  #1271 (line in Coconut source)
+@_coconut_tco  #1269 (line in Coconut source)
+def userError(msg: 'str') -> 'IOError':  #1269 (line in Coconut source)
+    return _coconut_tail_call(IOError, msg)  #1270 (line in Coconut source)
