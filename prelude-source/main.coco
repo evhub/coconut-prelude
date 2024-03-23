@@ -179,10 +179,10 @@ else:
     addpattern def compare(x, y if x < y) = lt
     addpattern def compare(x, y if x > y) = gt
 
-\max: (TOrd, TOrd) -> TOrd
+\max: (TOrd, TOrd) -> TOrd  # type: ignore
 \max = _max
 
-\min: (TOrd, TOrd) -> TOrd
+\min: (TOrd, TOrd) -> TOrd  # type: ignore
 \min = _min
 
 #### Enum:

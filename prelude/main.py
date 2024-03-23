@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x6dd9eb8d
+# __coconut_hash__ = 0x12834248
 
-# Compiled with Coconut version 3.0.3-post_dev33
+# Compiled with Coconut version 3.1.0-post_dev6
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.0.3-post_dev33', '35', True)
+_coconut_header_info = ('3.1.0-post_dev6', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False
@@ -34,7 +34,7 @@ if _coconut_cached__coconut__ is None or getattr(_coconut_cached__coconut__, "_c
                         _coconut_v_type.__module__ = _coconut_full_module_name
         _coconut_sys.modules[_coconut_full_module_name] = _coconut__coconut__
 from __coconut__ import *
-from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_Expected, _coconut_MatchError, _coconut_SupportsAdd, _coconut_SupportsMinus, _coconut_SupportsMul, _coconut_SupportsPow, _coconut_SupportsTruediv, _coconut_SupportsFloordiv, _coconut_SupportsMod, _coconut_SupportsAnd, _coconut_SupportsXor, _coconut_SupportsOr, _coconut_SupportsLshift, _coconut_SupportsRshift, _coconut_SupportsMatmul, _coconut_SupportsInv, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_complex_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_multi_dim_arr, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset, _coconut_back_none_pipe, _coconut_back_none_star_pipe, _coconut_back_none_dubstar_pipe, _coconut_forward_none_compose, _coconut_back_none_compose, _coconut_forward_none_star_compose, _coconut_back_none_star_compose, _coconut_forward_none_dubstar_compose, _coconut_back_none_dubstar_compose, _coconut_call_or_coefficient, _coconut_in, _coconut_not_in, _coconut_attritemgetter
+from __coconut__ import _coconut_tail_call, _coconut_tco, _coconut_call_set_names, _namedtuple_of, _coconut, _coconut_Expected, _coconut_MatchError, _coconut_SupportsAdd, _coconut_SupportsMinus, _coconut_SupportsMul, _coconut_SupportsPow, _coconut_SupportsTruediv, _coconut_SupportsFloordiv, _coconut_SupportsMod, _coconut_SupportsAnd, _coconut_SupportsXor, _coconut_SupportsOr, _coconut_SupportsLshift, _coconut_SupportsRshift, _coconut_SupportsMatmul, _coconut_SupportsInv, _coconut_iter_getitem, _coconut_base_compose, _coconut_forward_compose, _coconut_back_compose, _coconut_forward_star_compose, _coconut_back_star_compose, _coconut_forward_dubstar_compose, _coconut_back_dubstar_compose, _coconut_pipe, _coconut_star_pipe, _coconut_dubstar_pipe, _coconut_back_pipe, _coconut_back_star_pipe, _coconut_back_dubstar_pipe, _coconut_none_pipe, _coconut_none_star_pipe, _coconut_none_dubstar_pipe, _coconut_bool_and, _coconut_bool_or, _coconut_none_coalesce, _coconut_minus, _coconut_map, _coconut_partial, _coconut_complex_partial, _coconut_get_function_match_error, _coconut_base_pattern_func, _coconut_addpattern, _coconut_sentinel, _coconut_assert, _coconut_raise, _coconut_mark_as_match, _coconut_reiterable, _coconut_self_match_types, _coconut_dict_merge, _coconut_exec, _coconut_comma_op, _coconut_arr_concat_op, _coconut_mk_anon_namedtuple, _coconut_matmul, _coconut_py_str, _coconut_flatten, _coconut_multiset, _coconut_back_none_pipe, _coconut_back_none_star_pipe, _coconut_back_none_dubstar_pipe, _coconut_forward_none_compose, _coconut_back_none_compose, _coconut_forward_none_star_compose, _coconut_back_none_star_compose, _coconut_forward_none_dubstar_compose, _coconut_back_none_dubstar_compose, _coconut_call_or_coefficient, _coconut_in, _coconut_not_in, _coconut_attritemgetter, _coconut_if_op
 if _coconut_pop_path:
     _coconut_sys.path.pop(0)
 try:
@@ -198,7 +198,7 @@ class Nothing(_coconut.collections.namedtuple("Nothing", ()), Maybe):  #72 (line
     def __eq__(self, other):  #77 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #77 (line in Coconut source)
     def __hash__(self):  #77 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #77 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #77 (line in Coconut source)
 _coconut_call_set_names(Nothing)  #77 (line in Coconut source)
 nothing = Nothing()  # type: Maybe  #77 (line in Coconut source)
 if "__annotations__" not in _coconut.locals():  #77 (line in Coconut source)
@@ -216,7 +216,7 @@ class Just(_coconut.collections.namedtuple("Just", ('x',)), Maybe):  #79 (line i
     def __eq__(self, other):  #79 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #79 (line in Coconut source)
     def __hash__(self):  #79 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #79 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #79 (line in Coconut source)
 
 
 _coconut_call_set_names(Just)  #81 (line in Coconut source)
@@ -377,7 +377,7 @@ class Left(_coconut.collections.namedtuple("Left", ('x',)), Either):  #98 (line 
     def __eq__(self, other):  #98 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #98 (line in Coconut source)
     def __hash__(self):  #98 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #98 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #98 (line in Coconut source)
     @staticmethod  #99 (line in Coconut source)
     def __bool__() -> 'bool':  #100 (line in Coconut source)
         return (False)  #100 (line in Coconut source)
@@ -399,7 +399,7 @@ class Right(_coconut.collections.namedtuple("Right", ('x',)), Either):  #104 (li
     def __eq__(self, other):  #104 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #104 (line in Coconut source)
     def __hash__(self):  #104 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #104 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #104 (line in Coconut source)
 
 
 _coconut_call_set_names(Right)  #106 (line in Coconut source)
@@ -571,7 +571,7 @@ class LT(_coconut.collections.namedtuple("LT", ()), Ordering):  #120 (line in Co
     def __eq__(self, other):  #120 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #120 (line in Coconut source)
     def __hash__(self):  #120 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #120 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #120 (line in Coconut source)
     @staticmethod  #121 (line in Coconut source)
     def __bool__() -> 'bool':  #122 (line in Coconut source)
         return (True)  #122 (line in Coconut source)
@@ -589,7 +589,7 @@ class EQ(_coconut.collections.namedtuple("EQ", ()), Ordering):  #124 (line in Co
     def __eq__(self, other):  #124 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #124 (line in Coconut source)
     def __hash__(self):  #124 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #124 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #124 (line in Coconut source)
 
 
 _coconut_call_set_names(EQ)  #126 (line in Coconut source)
@@ -604,7 +604,7 @@ class GT(_coconut.collections.namedtuple("GT", ()), Ordering):  #126 (line in Co
     def __eq__(self, other):  #126 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #126 (line in Coconut source)
     def __hash__(self):  #126 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #126 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #126 (line in Coconut source)
     @staticmethod  #127 (line in Coconut source)
     def __bool__() -> 'bool':  #128 (line in Coconut source)
         return (True)  #128 (line in Coconut source)
@@ -768,17 +768,17 @@ else:  #177 (line in Coconut source)
 
         return (gt)  #180 (line in Coconut source)
 
-
-max = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[TOrd, TOrd], TOrd]  #182 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #182 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #182 (line in Coconut source)
-__annotations__["max"] = '_coconut.typing.Callable[[TOrd, TOrd], TOrd]'  #182 (line in Coconut source)
+# type: ignore
+max = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[TOrd, TOrd], TOrd]  # type: ignore  #182 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  # type: ignore  #182 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  # type: ignore  #182 (line in Coconut source)
+__annotations__["max"] = '_coconut.typing.Callable[[TOrd, TOrd], TOrd]'  # type: ignore  #182 (line in Coconut source)
 max = _max  #183 (line in Coconut source)
 
-min = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[TOrd, TOrd], TOrd]  #185 (line in Coconut source)
-if "__annotations__" not in _coconut.locals():  #185 (line in Coconut source)
-    __annotations__ = {}  # type: ignore  #185 (line in Coconut source)
-__annotations__["min"] = '_coconut.typing.Callable[[TOrd, TOrd], TOrd]'  #185 (line in Coconut source)
+min = _coconut.typing.cast(_coconut.typing.Any, ...)  # type: _coconut.typing.Callable[[TOrd, TOrd], TOrd]  # type: ignore  #185 (line in Coconut source)
+if "__annotations__" not in _coconut.locals():  # type: ignore  #185 (line in Coconut source)
+    __annotations__ = {}  # type: ignore  # type: ignore  #185 (line in Coconut source)
+__annotations__["min"] = '_coconut.typing.Callable[[TOrd, TOrd], TOrd]'  # type: ignore  #185 (line in Coconut source)
 min = _min  #186 (line in Coconut source)
 
 #### Enum:
@@ -1334,7 +1334,7 @@ class Mempty(_coconut.collections.namedtuple("Mempty", ())):  #475 (line in Coco
     def __eq__(self, other):  #479 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #479 (line in Coconut source)
     def __hash__(self):  #479 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #479 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #479 (line in Coconut source)
     @staticmethod  #479 (line in Coconut source)
     @_coconut_tco  #480 (line in Coconut source)
     def mempty_as(M: 'TMonoid') -> 'TMonoid':  #480 (line in Coconut source)
@@ -1438,7 +1438,7 @@ else:  #550 (line in Coconut source)
         def __eq__(self, other):  #557 (line in Coconut source)
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #557 (line in Coconut source)
         def __hash__(self):  #557 (line in Coconut source)
-            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #557 (line in Coconut source)
+            return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #557 (line in Coconut source)
         def __join__(self) -> 'T.Any':  #557 (line in Coconut source)
             return (self.val)  #557 (line in Coconut source)
 
@@ -1565,7 +1565,7 @@ else:  #649 (line in Coconut source)
         def __eq__(self, other):  #655 (line in Coconut source)
             return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #655 (line in Coconut source)
         def __hash__(self):  #655 (line in Coconut source)
-            return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #655 (line in Coconut source)
+            return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #655 (line in Coconut source)
         @staticmethod  #655 (line in Coconut source)
         def __bool__() -> 'bool':  #656 (line in Coconut source)
             return (False)  #656 (line in Coconut source)
@@ -2436,7 +2436,7 @@ class IO(_coconut.collections.namedtuple("IO", ('io_func',))):  #1163 (line in C
     def __eq__(self, other):  #1163 (line in Coconut source)
         return self.__class__ is other.__class__ and _coconut.tuple.__eq__(self, other)  #1163 (line in Coconut source)
     def __hash__(self):  #1163 (line in Coconut source)
-        return _coconut.tuple.__hash__(self) ^ hash(self.__class__)  #1163 (line in Coconut source)
+        return _coconut.tuple.__hash__(self) ^ _coconut.hash(self.__class__)  #1163 (line in Coconut source)
     @staticmethod  #1164 (line in Coconut source)
     @_coconut_tco  #1165 (line in Coconut source)
     def __pure__(x: 'Ta') -> 'IO':  #1165 (line in Coconut source)

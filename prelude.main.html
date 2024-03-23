@@ -10,7 +10,7 @@
 <td class="title">&nbsp;<br><strong class="title"><a href="prelude.html" class="white">prelude</a>.main</strong></td>
 <td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Conedrive%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5Cmain.py">c:\users\evanj\onedrive\documents\github\coconut-prelude\prelude\main.py</a></td></tr></table>
     <p><span class="code">#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x6dd9eb8d</span></p>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x12834248</span></p>
 <p>
 <table class="section">
 <tr class="decor pkg-content-decor heading-text">
@@ -1810,6 +1810,20 @@ trailing&nbsp;newline&nbsp;before&nbsp;reading&nbsp;input.<br>
 &nbsp;<br>
 If&nbsp;the&nbsp;user&nbsp;hits&nbsp;EOF&nbsp;(*nix:&nbsp;Ctrl-D,&nbsp;Windows:&nbsp;Ctrl-Z+Return),&nbsp;raise&nbsp;EOFError.<br>
 On&nbsp;*nix&nbsp;systems,&nbsp;readline&nbsp;is&nbsp;used&nbsp;if&nbsp;available.</span></dd></dl>
+ <dl><dt><a name="-py_max"><strong>py_max</strong></a> = max(...)</dt><dd><span class="code"><a href="#-max">max</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+<a href="#-max">max</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;biggest&nbsp;item.&nbsp;The<br>
+default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
+the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
+With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;largest&nbsp;argument.</span></dd></dl>
+ <dl><dt><a name="-py_min"><strong>py_min</strong></a> = min(...)</dt><dd><span class="code"><a href="#-min">min</a>(iterable,&nbsp;*[,&nbsp;default=obj,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+<a href="#-min">min</a>(arg1,&nbsp;arg2,&nbsp;*args,&nbsp;*[,&nbsp;key=func])&nbsp;-&gt;&nbsp;value<br>
+&nbsp;<br>
+With&nbsp;a&nbsp;single&nbsp;iterable&nbsp;argument,&nbsp;return&nbsp;its&nbsp;smallest&nbsp;item.&nbsp;The<br>
+default&nbsp;keyword-only&nbsp;argument&nbsp;specifies&nbsp;an&nbsp;<a href="builtins.html#object">object</a>&nbsp;to&nbsp;return&nbsp;if<br>
+the&nbsp;provided&nbsp;iterable&nbsp;is&nbsp;empty.<br>
+With&nbsp;two&nbsp;or&nbsp;more&nbsp;arguments,&nbsp;return&nbsp;the&nbsp;smallest&nbsp;argument.</span></dd></dl>
  <dl><dt><a name="-py_oct"><strong>py_oct</strong></a> = oct(number, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;octal&nbsp;representation&nbsp;of&nbsp;an&nbsp;integer.<br>
 &nbsp;<br>
 &gt;&gt;&gt;&nbsp;<a href="#-oct">oct</a>(342391)<br>
@@ -2064,14 +2078,14 @@ Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-
 <strong>eq</strong> = EQ()<br>
 <strong>exponent</strong> = NotImplemented<br>
 <strong>fst</strong> = operator.itemgetter(0)<br>
-<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x000001CDD0BCF2A0&gt;, 1))<br>
-<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x000001CDD0BCF2A0&gt;)<br>
+<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x000001CBE10CF2A0&gt;, 1))<br>
+<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x000001CBE10CF2A0&gt;)<br>
 <strong>getLine</strong> = IO(io_func=&lt;built-in function input&gt;)<br>
 <strong>gt</strong> = GT()<br>
-<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001CDFF2B2AC0&gt;, index=0)<br>
-<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x000001CDFF2B2AC0&gt;, index=slice(None, -1, None))<br>
+<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001CBFF72B7E0&gt;, index=0)<br>
+<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x000001CBFF72B7E0&gt;, index=slice(None, -1, None))<br>
 <strong>isDenormalized</strong> = NotImplemented<br>
-<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001CDFF2B2AC0&gt;, index=-1)<br>
+<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001CBFF72B7E0&gt;, index=-1)<br>
 <strong>lex</strong> = NotImplemented<br>
 <strong>lines</strong> = operator.methodcaller('splitlines')<br>
 <strong>lt</strong> = LT()<br>
@@ -2089,7 +2103,7 @@ Example:&nbsp;'.'.<a href="#-join">join</a>(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-
 <strong>significand</strong> = NotImplemented<br>
 <strong>snd</strong> = operator.itemgetter(1)<br>
 <strong>succ</strong> = functools.partial(&lt;built-in function add&gt;, 1)<br>
-<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x000001CDFF2B2AC0&gt;, index=slice(1, None, None))<br>
+<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x000001CBFF72B7E0&gt;, index=slice(1, None, None))<br>
 <strong>toEnum</strong> = NotImplemented<br>
 <strong>undefined</strong> = None<br>
 <strong>words</strong> = operator.methodcaller('split')</td></tr></table>
