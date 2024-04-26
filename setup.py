@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x5d7b1b81
+# __coconut_hash__ = 0x7566135
 
-# Compiled with Coconut version 3.1.0-post_dev7
+# Compiled with Coconut version 3.1.0-post_dev11
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -301,6 +301,10 @@ def _coconut_xarray_to_numpy(obj):
         return obj.to_dataframe().to_numpy()
     else:
         return obj.to_numpy()
+class CoconutWarning(Warning):
+    """Exception class used for all Coconut warnings."""
+    __slots__ = ()
+_coconut_CoconutWarning = CoconutWarning
 class MatchError(_coconut_baseclass, Exception):
     """Pattern-matching error. Has attributes .pattern, .value, and .message."""
     max_val_repr_len = 500
@@ -1620,7 +1624,7 @@ def addpattern(base_func, *add_funcs, **kwargs):
     """
     allow_any_func = kwargs.pop("allow_any_func", False)
     if not allow_any_func and not _coconut.getattr(base_func, "_coconut_is_match", False):
-        _coconut.warnings.warn("Possible misuse of addpattern with non-pattern-matching function " + _coconut.repr(base_func) + " (pass allow_any_func=True to dismiss)", stacklevel=2)
+        _coconut.warnings.warn("Possible misuse of addpattern with non-pattern-matching function " + _coconut.repr(base_func) + " (pass allow_any_func=True to dismiss)", _coconut_CoconutWarning, 2)
     if kwargs:
         raise _coconut.TypeError("addpattern() got unexpected keyword arguments " + _coconut.repr(kwargs))
     if add_funcs:
@@ -1967,13 +1971,16 @@ def ident(x, **kwargs):
     if side_effect is not None:
         side_effect(x)
     return x
-def call(_coconut_f, *args, **kwargs):
-    """Function application operator function.
+if _coconut_sys.version_info < (3, 11):
+    def call(_coconut_f, *args, **kwargs):
+        """Function application operator function.
 
-    Equivalent to:
-        def call(f, /, *args, **kwargs) = f(*args, **kwargs).
-    """
-    return _coconut_f(*args, **kwargs)
+        Equivalent to:
+            def call(f, /, *args, **kwargs) = f(*args, **kwargs).
+        """
+        return _coconut_f(*args, **kwargs)
+else:
+    call = _coconut.operator.call
 def safe_call(_coconut_f, *args, **kwargs):
     """safe_call is a version of call that catches any Exceptions and
     returns an Expected containing either the result or the error.

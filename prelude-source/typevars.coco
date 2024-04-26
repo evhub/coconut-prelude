@@ -7,5 +7,7 @@ Ta = T.TypeVar("Ta")
 Tb = T.TypeVar("Tb")
 Tc = T.TypeVar("Tc")
 Td = T.TypeVar("Td")
+Tco = T.TypeVar("Tco", covariant=True)
+Tcontra = T.TypeVar("Tcontra", contravariant=True)
 
 TType = T.TypeVar("TType", bound=T.Type)

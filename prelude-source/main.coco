@@ -51,7 +51,7 @@ _floor: -> T.Any = _math.floor
 ## Basic data types:
 
 #### Bool:
-Bool = bool
+type Bool = bool
 
 not_: bool -> bool
 not_ = (not)
@@ -83,8 +83,8 @@ derivingOrd(Nothing, Just)
 case def maybe:
     type(default: Tb, func: Ta -> Tb, x: Maybe) -> Tb
 
-    match(default, _, Nothing()) = default
-    match(_, func, Just(x)) = func x
+    case(default, _, Nothing()) = default
+    case(_, func, Just(x)) = func x
 
 #### Either:
 class Either:
@@ -107,8 +107,8 @@ derivingOrd(Left, Right)
 case def either:
     type(left_func: Ta -> Tc, right_func: Tb -> Tc, x: Either) -> Tc
 
-    match(left_func, _, Left(x)) = left_func x
-    match(_, right_func, Right(x)) = right_func x
+    case(left_func, _, Left(x)) = left_func x
+    case(_, right_func, Right(x)) = right_func x
 
 #### Ordering:
 class Ordering:
@@ -136,7 +136,7 @@ gt: Ordering = GT()
 Char = T.NewType("Char", str)
 
 #### String:
-String = str
+type String = str
 
 
 ### Tuples:
@@ -163,17 +163,24 @@ def uncurry_tuple(func: (Ta, Tb) -> Tc) -> (Ta; Tb) -> Tc =
 ## Basic type classes:
 
 #### Eq:
-Eq = object
+class Eq(T.Protocol):
+    def __eq__(self, other: object) -> bool = bot
 
 #### Ord:
-Ord = Eq
+class Ord(Eq, T.Protocol):
+    def __lt__(self, other) -> bool = bot
+    def __gt__(self, other) -> bool = bot
+    def __le__(self, other) -> bool = bot
+    def __ge__(self, other) -> bool = bot
+
+
 TOrd = T.TypeVar("TOrd", bound=Ord)
 
 case def compare:
     type(x: Ord, y: Ord) -> Ordering
-    match(x, y if x == y) = eq
-    match(x, y if x < y) = lt
-    match(x, y if x > y) = gt
+    case(x, y if x == y) = eq
+    case(x, y if x < y) = lt
+    case(x, y if x > y) = gt
 
 \max: (TOrd, TOrd) -> TOrd  # type: ignore
 \max = _max
@@ -182,7 +189,7 @@ case def compare:
 \min = _min
 
 #### Enum:
-Enum = Ord
+type Enum = Ord &: (+) &: (-)
 TEnum = T.TypeVar("TEnum", bound=Enum)
 
 succ: TEnum -> TEnum
@@ -218,7 +225,11 @@ def enumFromThenTo(first: TEnum, second: TEnum, last: TEnum) -> TEnum$[] =
 
 
 #### Bounded:
-Bounded = T.Union[bool, T.Iterable]
+class _HasBounds(T.Protocol):
+    def __maxBound__(self) -> T.Any = bot
+    def __minBound__(self) -> T.Any = bot
+
+type Bounded = bool | _HasBounds | T.Iterable[Bounded]
 TBounded = T.TypeVar("TBounded", bound=Bounded)
 
 def minBound(b: TBounded) -> TBounded =
@@ -260,19 +271,19 @@ def maxBound(b: TBounded) -> TBounded =
 ### Numeric types:
 
 #### Int:
-Int = int
+type Int = int
 
 #### Integer:
-Integer = int
+type Integer = int
 
 #### Float:
-Float = float
+type Float = float
 
 #### Double:
-Double = float
+type Double = float
 
 #### Rational:
-Rational = _fractions.Fraction
+type Rational = _fractions.Fraction
 
 def over(x, y) =
     """
@@ -284,13 +295,13 @@ def over(x, y) =
 (%%) = over
 
 #### Word:
-Word = Int
+type Word = Int
 
 
 ### Numeric type classes:
 
 #### Num:
-Num = T.Union[int, float, Rational]
+type Num = int | float | Rational
 TNum = T.TypeVar("TNum", bound=Num)
 
 negate: TNum -> TNum
@@ -301,24 +312,24 @@ negate = (-)
 
 case def signum:
     type(x: Num) -> int
-    match(0) = 0
-    match(x if x > 0) = 1
-    match(x if x < 0) = -1
+    case(0) = 0
+    case(x if x > 0) = 1
+    case(x if x < 0) = -1
 
 def fromInteger(x: Integer) -> Num = x
 
 #### Real:
-Real = Num
+type Real = Num
 
 case def toRational:
     type(real: Real) -> Rational
-    match(real `isinstance` float) =
+    case(real `isinstance` float) =
         Rational.from_float(real)
-    match(real) =
+    case(real) =
         Rational(real)
 
 #### Integral:
-Integral = int
+type Integral = int
 
 def quot(x: int, y: int) -> int =
     divxy = x // y
@@ -345,7 +356,7 @@ toInteger: Integral -> Integer
 toInteger = _int
 
 #### Fractional:
-Fractional = Rational
+type Fractional = Rational
 
 recip: Fractional -> Fractional
 recip = (1/.)
@@ -353,7 +364,7 @@ recip = (1/.)
 def fromRational(x: Rational) -> Fractional = x
 
 #### Floating:
-Floating = float
+type Floating = float
 
 from math import (
     pi,
@@ -378,7 +389,7 @@ def logBase(base: float, x: float) -> float =
     log(x, base)
 
 #### RealFrac:
-RealFrac = Rational
+type RealFrac = Rational
 
 def properFraction(x: RealFrac) -> (int; RealFrac) =
     floor_x = floor(x)
@@ -397,7 +408,7 @@ floor: RealFrac -> int
 floor = _floor
 
 #### RealFloat:
-RealFloat = float
+type RealFloat = float
 
 def floatRadix(x: float) -> int = 2
 
@@ -445,9 +456,9 @@ gcd = abs.._gcd
 
 case def lcm:
     type(x: int, y: int) -> int
-    match(_, 0) = 0
-    match(0, _) = 0
-    match(x, y) =
+    case(_, 0) = 0
+    case(0, _) = 0
+    case(x, y) =
         abs(y) * (abs(x) // gcd(x, y))
 
 fromIntegral: Integral -> Num
@@ -459,7 +470,7 @@ realToFrac = toRational
 
 
 ## Monoids:
-Monoid = T.Iterable
+type Monoid = T.Iterable
 TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
 data Mempty():
@@ -505,7 +516,11 @@ def mconcat(ms: TMonoid[]) -> TMonoid =
 ## Monads and functors:
 
 #### Functor:
-Functor = T.Iterable
+class _HasFMap(T.Protocol, T.Generic[Tco]):
+    def __fmap__[B](self: Functor[Tco], func: Tco -> B) -> Functor[B] = bot
+
+type Functor[A] = T.Iterable[A] | ((...) -> A) | _HasFMap[A]
+TFunctor = T.TypeVar("TFunctor", bound=Functor)
 
 def \fmap(f: Ta -> Tb, xs: Functor[Ta]) -> Functor[Tb]:  # type: ignore
     """
@@ -531,7 +546,11 @@ def fmapConst(x: Ta, xs: Functor) -> Functor[Ta] =
 (<$) = fmapConst
 
 #### Applicative:
-Applicative = Functor
+class _DefinesApp(T.Protocol, T.Generic[Tco]):
+    def __fmap__[B](self: Functor[Tco], func: Tco -> B) -> Functor[B] = bot
+    def __pure__(self: Functor[Tco]) -> Tco = bot
+
+type Applicative[A] = T.Iterable[A] | ((...) -> A) | _DefinesApp[A] | pure
 TApp = T.TypeVar("TApp", bound=Applicative)
 
 if TYPE_CHECKING:
@@ -611,7 +630,16 @@ def liftA2(func: (Ta, Tb) -> Tc) -> (Applicative[Ta], Applicative[Tb]) -> Applic
     (f1, f2) -> fmap(func$, f1) `ap` f2  # type: ignore
 
 #### Monad:
-Monad = Applicative
+class _DefinesMonad(T.Protocol, T.Generic[Tco]):
+    def __fmap__[B](self: Functor[Tco], func: Tco -> B) -> Functor[B] = bot
+    def __pure__(self: Functor[Tco]) -> Tco = bot
+    def __join__(self: Functor[Functor[Tco]]) -> Functor[Tco] = bot
+
+class _DefaultMonad(T.Protocol, T.Generic[Tco]):
+    def __iter__(self) -> T.Iterator[Tco] = bot
+    def __bool__(self) -> bool = bot
+
+type Monad[A] = _DefaultMonad[A] | ((...) -> A) | _DefinesMonad[A] | pure | fail
 TMonad = T.TypeVar("TMonad", bound=Monad)
 
 def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
@@ -682,10 +710,10 @@ def join(ms: Monad[TMonad]) -> TMonad:
         return ms.__join__()  # type: ignore
 
     # Default implementation
-    cases ms:
+    match ms:
 
         # Iterable instance
-        match () :: _:
+        case () :: _:
             if not ms:
                 return ms  # type: ignore
             vals = []  # type: ignore
@@ -700,7 +728,7 @@ def join(ms: Monad[TMonad]) -> TMonad:
             return makedata(type(ms), *vals)  # type: ignore
 
         # Function instance
-        match _ if callable(ms):
+        case _ if callable(ms):
             return r -> ms(r)(r)  # type: ignore
 
     else:
@@ -730,8 +758,8 @@ case def do:
         monads: TMonad[],
         func: -> TMonad,
     ) -> TMonad
-    match([], func) = func()
-    match([m] + ms, func) =
+    case([], func) = func()
+    case([m] + ms, func) =
         m `bind` x -> do(ms, func$(x))
 
 
@@ -836,7 +864,7 @@ case def apply:
         func: -> Tb,
         arg: Ta,
     ) -> T.Any
-    match(func, arg) =
+    case(func, arg) =
         func `of` arg
 ($$) = apply
 
@@ -1016,11 +1044,11 @@ dropWhile = dropwhile
 case def span:
     type(cond: Ta -> bool, xs: Ta[]) -> (Ta[]; Ta[])
 
-    match(_, []) = ([], [])
-    match(cond, [x] + xs if cond(x)) =
+    case(_, []) = ([], [])
+    case(cond, [x] + xs if cond(x)) =
         ys, zs = span(cond, xs)
         ([x] + ys, zs)
-    match(cond, xs) =
+    case(cond, xs) =
         ([], xs)
 
 def break_(cond: Ta -> bool, xs: Ta[]) -> Ta[] =
