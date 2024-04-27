@@ -10,7 +10,7 @@
 <td class="title">&nbsp;<br><strong class="title">prelude</strong></td>
 <td class="extra"><a href=".">index</a><br><a href="file:c%3A%5Cusers%5Cevanj%5Conedrive%5Cdocuments%5Cgithub%5Ccoconut-prelude%5Cprelude%5C__init__.py">c:\users\evanj\onedrive\documents\github\coconut-prelude\prelude\__init__.py</a></td></tr></table>
     <p><span class="code">#&nbsp;-*-&nbsp;coding:&nbsp;utf-8&nbsp;-*-<br>
-#&nbsp;__coconut_hash__&nbsp;=&nbsp;0xabe3d2cb</span></p>
+#&nbsp;__coconut_hash__&nbsp;=&nbsp;0x42c59acb</span></p>
 <p>
 <table class="section">
 <tr class="decor pkg-content-decor heading-text">
@@ -48,6 +48,7 @@ The&nbsp;result&nbsp;is&nbsp;between&nbsp;-pi/2&nbsp;and&nbsp;pi/2.</span></dd><
 &nbsp;<br>
 Unlike&nbsp;<a href="#-atan">atan</a>(y/x),&nbsp;the&nbsp;signs&nbsp;of&nbsp;both&nbsp;x&nbsp;and&nbsp;y&nbsp;are&nbsp;considered.</span></dd></dl>
  <dl><dt><a name="-atanh"><strong>atanh</strong></a>(x, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;inverse&nbsp;hyperbolic&nbsp;tangent&nbsp;of&nbsp;x.</span></dd></dl>
+ <dl><dt><a name="-call"><strong>call</strong></a>(obj, /, *args, **kwargs)</dt><dd><span class="code">Same&nbsp;as&nbsp;obj(*args,&nbsp;**kwargs).</span></dd></dl>
  <dl><dt><a name="-ceiling"><strong>ceiling</strong></a> = ceil(x, /)</dt><dd><span class="code">Return&nbsp;the&nbsp;ceiling&nbsp;of&nbsp;x&nbsp;as&nbsp;an&nbsp;Integral.<br>
 &nbsp;<br>
 This&nbsp;is&nbsp;the&nbsp;smallest&nbsp;integer&nbsp;&gt;=&nbsp;x.</span></dd></dl>
@@ -438,21 +439,23 @@ Example:&nbsp;'.'.join(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-&gt;&nbsp;'ab.pq.rs'<
 <td class="section-title" colspan=3>&nbsp;<br><strong class="bigsection">Data</strong></td></tr>
     
 <tr><td class="decor data-decor"><span class="code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></td><td>&nbsp;</td>
-<td class="singlecolumn"><strong>Applicative</strong> = typing.Iterable<br>
-<strong>Bounded</strong> = typing.Union[bool, typing.Iterable]<br>
+<td class="singlecolumn"><strong>Applicative</strong> = '_coconut.typing.Union[Monad[_coconut_typevar_A_1..._typevar_A_1], _DefinesApp[_coconut_typevar_A_1]]'<br>
+<strong>Bounded</strong> = '_coconut.typing.Union[bool, _HasBounds, T.Iterable[Bounded]]'<br>
 <strong>Char</strong> = prelude.main.Char<br>
+<strong>Enum</strong> = '_coconut_protocol_intersection_0'<br>
 <strong>Foldable</strong> = typing.Sequence<br>
-<strong>Functor</strong> = typing.Iterable<br>
-<strong>Monad</strong> = typing.Iterable<br>
+<strong>Functor</strong> = '_coconut.typing.Union[Applicative[_coconut_typevar_A_0], _HasFMap[_coconut_typevar_A_0]]'<br>
+<strong>Monad</strong> = '_coconut.typing.Union[_DefaultMonad[_coconut_typ...pevar_A_2]), _DefinesMonad[_coconut_typevar_A_2]]'<br>
 <strong>Monoid</strong> = typing.Iterable<br>
-<strong>Num</strong> = typing.Union[int, float, fractions.Fraction]<br>
+<strong>Num</strong> = '_coconut.typing.Union[int, float, Rational]'<br>
 <strong>Read</strong> = typing.Union[str, int, float, bool, NoneType, tuple, list, dict]<br>
 <strong>ReadS</strong> = NotImplemented<br>
-<strong>Real</strong> = typing.Union[int, float, fractions.Fraction]<br>
+<strong>Real</strong> = '_coconut.typing.Union[int, float, Rational]'<br>
 <strong>ShowS</strong> = typing.Callable[[str], str]<br>
 <strong>TApp</strong> = ~TApp<br>
 <strong>TBounded</strong> = ~TBounded<br>
 <strong>TEnum</strong> = ~TEnum<br>
+<strong>TFunctor</strong> = ~TFunctor<br>
 <strong>TMonad</strong> = ~TMonad<br>
 <strong>TMonoid</strong> = ~TMonoid<br>
 <strong>TNum</strong> = ~TNum<br>
@@ -462,21 +465,24 @@ Example:&nbsp;'.'.join(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-&gt;&nbsp;'ab.pq.rs'<
 <strong>Ta</strong> = ~Ta<br>
 <strong>Tb</strong> = ~Tb<br>
 <strong>Tc</strong> = ~Tc<br>
+<strong>Tco</strong> = +Tco<br>
+<strong>Tcontra</strong> = -Tcontra<br>
 <strong>Td</strong> = ~Td<br>
 <strong>Traversable</strong> = typing.Iterable<br>
+<strong>bot</strong> = Ellipsis<br>
 <strong>decodeFloat</strong> = NotImplemented<br>
 <strong>encodeFloat</strong> = NotImplemented<br>
 <strong>eq</strong> = EQ()<br>
 <strong>exponent</strong> = NotImplemented<br>
 <strong>fst</strong> = operator.itemgetter(0)<br>
-<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x0000013761E1F2A0&gt;, 1))<br>
-<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x0000013761E1F2A0&gt;)<br>
+<strong>getChar</strong> = IO(io_func=functools.partial(&lt;built-in method re....TextIOWrapper object at 0x000002AA739DF2A0&gt;, 1))<br>
+<strong>getContents</strong> = IO(io_func=&lt;built-in method read of _io.TextIOWrapper object at 0x000002AA739DF2A0&gt;)<br>
 <strong>getLine</strong> = IO(io_func=&lt;built-in function input&gt;)<br>
 <strong>gt</strong> = GT()<br>
-<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001377F5307C0&gt;, index=0)<br>
-<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x000001377F5307C0&gt;, index=slice(None, -1, None))<br>
+<strong>head</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000002AA7F0F4860&gt;, index=0)<br>
+<strong>init</strong> = functools.partial(&lt;function _coconut_iter_getite...0x000002AA7F0F4860&gt;, index=slice(None, -1, None))<br>
 <strong>isDenormalized</strong> = NotImplemented<br>
-<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000001377F5307C0&gt;, index=-1)<br>
+<strong>last</strong> = functools.partial(&lt;function _coconut_iter_getitem at 0x000002AA7F0F4860&gt;, index=-1)<br>
 <strong>lex</strong> = NotImplemented<br>
 <strong>lines</strong> = operator.methodcaller('splitlines')<br>
 <strong>lt</strong> = LT()<br>
@@ -494,7 +500,7 @@ Example:&nbsp;'.'.join(['ab',&nbsp;'pq',&nbsp;'rs'])&nbsp;-&gt;&nbsp;'ab.pq.rs'<
 <strong>significand</strong> = NotImplemented<br>
 <strong>snd</strong> = operator.itemgetter(1)<br>
 <strong>succ</strong> = functools.partial(&lt;built-in function add&gt;, 1)<br>
-<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x000001377F5307C0&gt;, index=slice(1, None, None))<br>
+<strong>tail</strong> = functools.partial(&lt;function _coconut_iter_getite... 0x000002AA7F0F4860&gt;, index=slice(1, None, None))<br>
 <strong>toEnum</strong> = NotImplemented<br>
 <strong>undefined</strong> = None<br>
 <strong>words</strong> = operator.methodcaller('split')</td></tr></table>

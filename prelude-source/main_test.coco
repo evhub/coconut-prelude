@@ -3,12 +3,12 @@ from prelude import *  # type: ignore
 
 
 # Tests:
-def test_Bool() -> None:
+def test_Bool():
     assert True `isinstance` Bool
     assert `not_` True == False
     assert otherwise == True
 
-def test_Maybe() -> None:
+def test_Maybe():
     assert nothing `isinstance` Maybe
     assert Just(2) `isinstance` Maybe
     assert nothing == Nothing()
@@ -20,7 +20,7 @@ def test_Maybe() -> None:
     assert maybe(1, (+)$(1), nothing) == 1
     assert maybe(1, (+)$(1), Just(1)) == 2
 
-def test_Either() -> None:
+def test_Either():
     assert Left(1) `isinstance` Either
     assert Right(1) `isinstance` Either
     assert Left(10) < Right(1)
@@ -30,7 +30,7 @@ def test_Either() -> None:
     assert either(->_+1, ->_*2, Left(2)) == 3
     assert either(->_+1, ->_*2, Right(2)) == 4
 
-def test_Ordering() -> None:
+def test_Ordering():
     assert and_(x `isinstance` Ordering for x in (lt, eq, gt))
     assert lt == LT()
     assert eq == EQ()
@@ -41,7 +41,7 @@ def test_Ordering() -> None:
     assert `succ` eq == gt
     assert `pred` eq == lt
 
-def test_Tuples() -> None:
+def test_Tuples():
     assert `fst` (1, 2) == 1 == `snd` (2, 1)
     assert uncurry_tuple(+)((1, 2),) == 3 == curry_tuple(def ((x, y),) -> x + y)(1, 2)
     assert curry_tuple(uncurry_tuple(-))(3, 2) == 1
@@ -50,21 +50,22 @@ def test_Ord() -> None:
     x: Ord
     y: Eq
     x = y = True
-    x = y = nothing
+    x = y = nothing  # type: ignore
     x = y = Left(3)
-    x = y = lt
+    x = y = lt  # type: ignore
     x = y = 5
     x = y = (1, 2)
-    assert compare(1, 2) == lt == compare(nothing, Just(1))
+    assert compare(1, 2) == lt == compare(nothing, Just(1))  # type: ignore
     assert compare(2, 2) == eq == compare(Left(2), Left(2))
     assert compare(2, 1) == gt == compare(Right(1), Left(0))
     assert max(1, 2) == 2 == min(2, 3)
-    assert min(eq, gt) == eq == max(lt, eq)
+    assert min(eq, gt) == eq == max(lt, eq)  # type: ignore
 
 def test_Enum() -> None:
-    assert and_(x `isinstance` Enum for x in (
-        True, lt, 5,
-    ))
+    x: Enum
+    x = True
+    x = lt  # type: ignore
+    x = 5
     assert `succ` 5 == 6 == `pred` 7
     assert fromEnum(10) == 10
     assert enumFrom(2)$[:2] |> list == [2, 3]
@@ -77,7 +78,7 @@ def test_Enum() -> None:
     assert enumFromThen(1, 1)$[:3] |> list == [1,1,1] == enumFromThenTo(1, 1, 1)$[:3] |> list
     assert enumFromTo(1, 1) |> list == [1]
 
-def test_Bounded() -> None:
+def test_Bounded():
     assert minBound(True) is False
     assert maxBound(False) is True
     assert minBound(eq) == lt
@@ -85,10 +86,10 @@ def test_Bounded() -> None:
     assert minBound((False, gt)) == (False, lt)
     assert maxBound((True, lt)) == (True, gt)
 
-def test_Rational() -> None:
+def test_Rational():
     assert Rational(1, 3) == 1 `over` 3
 
-def test_Num() -> None:
+def test_Num():
     assert negate(2) == -2 == negate(2 `over` 1)
     assert abs(-10) == 10 == abs(10 `over` 1)
     assert signum(0) == 0
@@ -96,12 +97,12 @@ def test_Num() -> None:
     assert signum(10) == 1 == signum(2 `over` 2)
     assert fromInteger(10) == 10
 
-def test_Real() -> None:
+def test_Real():
     assert toRational(10) == 10 `over` 1
     assert toRational(1 `over` 3) == 1 `over` 3
     assert toRational(1.5) == 3 `over` 2
 
-def test_Integral() -> None:
+def test_Integral():
     assert 10 `isinstance` Integral
     assert quot(10, 3) == 3 == div(10, 3)
     assert rem(10, 3) == 1 == mod(10, 3)
@@ -116,11 +117,11 @@ def test_Integral() -> None:
     assert quotRem(-10, 3) == (-3, -1)
     assert toInteger(10) == 10
 
-def test_Fractional() -> None:
+def test_Fractional():
     assert 2 `over` 3 |> recip == 3 `over` 2
     assert fromRational <| 1 `over` 3 == 1 `over` 3
 
-def test_RealFrac() -> None:
+def test_RealFrac():
     assert properFraction(10 `over` 3) == (3, 1 `over` 3)
     assert 4 `over` 3 |> truncate == 1
     assert 5 `over` 3 |> round == 2
@@ -131,7 +132,7 @@ def test_RealFrac() -> None:
     assert 4 `over` 3 |> ceiling == 2
     assert 4 `over` 3 |> floor == 1
 
-def test_RealFloat() -> None:
+def test_RealFloat():
     assert floatRadix(1.2) == 2
     assert floatDigits(0.5) == 53
     assert floatRange(0.1) == (-1021, 1024)
@@ -140,7 +141,7 @@ def test_RealFloat() -> None:
     assert isNegativeZero(float("-0"))
     assert isIEEE(0.9) is True
 
-def test_Numeric_functions() -> None:
+def test_Numeric_functions():
     assert subtract(2, 1) == -1
     assert even(2)
     assert not even(3)
@@ -152,7 +153,7 @@ def test_Numeric_functions() -> None:
     assert fromIntegral(10) == 10
     assert realToFrac(0.5) == 1 `over` 2
 
-def test_Monoids() -> None:
+def test_Monoids():
     assert mappend(Just([]), mempty) == Just([]) == mappend(mempty, Just([]))
     assert mappend(nothing, Just([])) == Just([]) == mappend(Just([]), nothing)
     assert mappend(nothing, pure(1)) == Just(1)
@@ -165,7 +166,7 @@ def test_Monoids() -> None:
     assert mappend(([1], [2]), ([3], [4])) == ([1,3], [2,4])
     assert mconcat([[1], [2,3]]) == [1, 2, 3]
 
-def test_Functor() -> None:
+def test_Functor():
     assert error `fmap` nothing == nothing
     assert (+)$(1) `fmap` Just(2) == Just(3)
     assert (+)$(1) `fmap` Left(10) == Left(10)
@@ -173,7 +174,7 @@ def test_Functor() -> None:
     assert 10 `fmapConst` [1, 2, 3] == [10, 10, 10]
     assert (+)$(1) `fmap` f{1, 2} == f{2, 3}
 
-def test_Applicative() -> None:
+def test_Applicative():
     assert pure("12") == pure("1") |> fmap$(s -> s + "2")
     assert nothing `ap` Just(10) == nothing
     assert Just((+)$(1)) `ap` Just(2) == Just(3)
@@ -190,7 +191,7 @@ def test_Applicative() -> None:
     assert Just(1) `seqAr` Just(2) == Just(2) == Just(2) `seqAl` Just(1)
     assert liftA2((+))([1,2,3], [10,20,30]) == [11,21,31,12,22,32,13,23,33]
 
-def test_Monad() -> None:
+def test_Monad():
     assert nothing == nothing `bind` Just
     assert nothing == Just `bindFrom` nothing
     assert Just(2) == Just(1) `bind` x -> Just(x+1)
@@ -236,7 +237,7 @@ def test_Monad() -> None:
     assert nothing == nothing `bind` (def x -> global glob = 2; Just(glob))
     assert glob == 1
 
-def test_Foldable() -> None:
+def test_Foldable():
     assert sequence_([[1], [2], [3]]) == [()]
     assert sequence_([[1], [], [3]]) == []
     assert sequence_([Just(1), Just(2), Just(3)]) == Just(())
@@ -260,7 +261,7 @@ def test_Foldable() -> None:
     assert sum([2,3,4]) == 9
     assert product([2,3,4]) == 24
 
-def test_Traversable() -> None:
+def test_Traversable():
     for _sequence in [sequenceA, sequence]:
         assert _sequence([Just(1), nothing, Just(3)]) == nothing
         assert _sequence([Right(1), Right(2), Left(3), Right(4)]) == Left(3)
@@ -272,7 +273,7 @@ def test_Traversable() -> None:
         assert _traverse(x -> [x], [1, 2, 3]) == [[1, 2, 3]]
         assert _traverse(Just, [Just(1), nothing, Just(2)]) == Just([Just(1), nothing, Just(2)])
 
-def test_Miscellaneous_functions() -> None:
+def test_Miscellaneous_functions():
     assert id(10) == 10
     assert const(10)(5)
     assert (abs `dot` (+))(-2, -3) == 5
@@ -303,7 +304,7 @@ def test_Miscellaneous_functions() -> None:
     assert seq(1, 2) == 2
     assert abs `cbv` -2 == 2
 
-def test_List_operations() -> None:
+def test_List_operations():
     assert 1 `cons` [2, 3] |> list == [1, 2, 3]
     assert map((+)$(1), [1, 2, 3]) |> list == [2, 3, 4]
     assert [1, 2] `chain` [3, 4] |> list == [1, 2, 3, 4]
@@ -315,7 +316,7 @@ def test_List_operations() -> None:
     assert [1, 2, 3] `at` 1 == 2 == (|1, 2, 3|) `at` 1
     assert reverse([1, 2, 3]) |> list == [3, 2, 1]
 
-def test_Special_folds() -> None:
+def test_Special_folds():
     assert and_([True, True])
     assert or_([False, True])
     assert any((==)$(2), [1, 2, 3])
@@ -325,18 +326,18 @@ def test_Special_folds() -> None:
     assert concat([[1], [2, 3]]) |> list == [1, 2, 3]
     assert concatMap(x -> [x,x], [1, 2]) |> list == [1,1,2,2]
 
-def test_Scans() -> None:
+def test_Scans():
     assert scanl((+), 0, [1, 2, 3]) |> list == [0, 1, 3, 6]
     assert scanl1((+), [1, 2, 3]) |> list == [1, 3, 6]
     assert scanr((+), 0, [1, 2, 3]) |> list == [6, 5, 3, 0]
     assert scanr1((+), [1, 2, 3]) |> list == [6, 5, 3]
 
-def test_Infinite_lists() -> None:
+def test_Infinite_lists():
     assert iterate(subtract$(1), 3) |> take$(3) |> list == [3, 2, 1]
     assert repeat(1)$[:3] |> list == [1, 1, 1] == replicate(3, 1) |> list
     assert cycle([1,2])$[:4] |> list == [1,2,1,2]
 
-def test_Sublists() -> None:
+def test_Sublists():
     assert take(2, [1,2,3]) == [1, 2]
     assert drop(2, [1,2,3]) == [3]
     assert splitAt(2, [1,2,3,4]) |> fmap$(list) == ([1,2], [3,4])
@@ -345,13 +346,13 @@ def test_Sublists() -> None:
     assert span(2 `(>)$`, [0,1,2,3]) == ([0,1], [2,3])
     assert break_(2 `(<)$`, [1,2,3]) == ([1,2], [3])
 
-def test_Searching_lists() -> None:
+def test_Searching_lists():
     assert 10 `notElem` [1,2,3]
     assert lookup("b", [("a", 1), ("b", 2), ("c", 3)]) == Just(2)
     assert lookup("b", [("a", 1)]) == nothing
     assert lookup("a", []) == nothing
 
-def test_Zipping_and_unzipping_lists() -> None:
+def test_Zipping_and_unzipping_lists():
     assert zip([1,2], [3,4]) |> list == [(1,3), (2,4)]
     assert unzip([(1,3), (2,4)]) == ([1,2], [3,4])
     assert zip3([1,2], [3,4], [5,6]) |> list == [(1,3,5), (2,4,6)]
@@ -359,7 +360,7 @@ def test_Zipping_and_unzipping_lists() -> None:
     assert zipWith((+), [1,2], [10,20]) |> list == [11, 22]
     assert zipWith3((x,y,z) -> sum([x,y,z]), [1,2], [10,20], [100,200]) |> list == [111, 222]
 
-def test_Functions_on_strings() -> None:
+def test_Functions_on_strings():
     assert lines("\nabc\ndef\n") == ["", "abc", "def"]
     assert words(" abc def ") == ["abc", "def"]
     assert unlines(["abc", "def"]) == "abc\ndef\n"
@@ -369,7 +370,7 @@ def test_Functions_on_strings() -> None:
     assert unwords(["abc"]) == "abc"
     assert unwords([]) == ""
 
-def test_Converting_to_String() -> None:
+def test_Converting_to_String():
     assert show(1) == "1"
     assert show("abc") == "'abc'"
     assert 3 |> shows <| "abc" == "3abc"
@@ -380,12 +381,12 @@ def test_Converting_to_String() -> None:
     assert showString("abc") |> showParen$(True) <| "def" == "(abc)def"
     assert showString("abc") |> showParen$(False) <| "def" == "abcdef"
 
-def test_Converting_from_String() -> None:
+def test_Converting_from_String():
     assert read("[]") == []
     assert read("10") == 10
     assert read('"abc"') == "abc"
 
-def test_IO() -> None:
+def test_IO():
     assert unIO(pure(5)) == 5
     assert mempty |> unIO == mempty
     assert mappend(mempty, asIO(pure(gt))) |> unIO == gt
@@ -402,7 +403,7 @@ def test_IO() -> None:
     def three(x1, x2) = pure(x1 + x2)
     assert three == 3
 
-def test_Exception_handling() -> None:
+def test_Exception_handling():
     try:
         unIO <| ioError(IOError("derp"))
     except IOError as err:
@@ -412,7 +413,7 @@ def test_Exception_handling() -> None:
     assert userError("derp") `isinstance` IOError
     assert userError("derp") |> str == "derp"
 
-def test_function_monad() -> None:
+def test_function_monad():
     assert liftA2(,)(id, id)(1) == (1, 1) == lift(,)(ident, ident)(1)
     assert (.+1) `fmap` (.*2) <| 3 == 7
     assert pure(5)(10) == 5

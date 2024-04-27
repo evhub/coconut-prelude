@@ -51,7 +51,7 @@ _floor: -> T.Any = _math.floor
 ## Basic data types:
 
 #### Bool:
-type Bool = bool
+Bool = bool
 
 not_: bool -> bool
 not_ = (not)
@@ -136,7 +136,7 @@ gt: Ordering = GT()
 Char = T.NewType("Char", str)
 
 #### String:
-type String = str
+String = str
 
 
 ### Tuples:
@@ -167,11 +167,11 @@ class Eq(T.Protocol):
     def __eq__(self, other: object) -> bool = bot
 
 #### Ord:
-class Ord(Eq, T.Protocol):
-    def __lt__(self, other) -> bool = bot
-    def __gt__(self, other) -> bool = bot
-    def __le__(self, other) -> bool = bot
-    def __ge__(self, other) -> bool = bot
+class Ord(Eq, T.Protocol, T.Generic[Tcontra]):
+    def __lt__(self: Tcontra, other: Tcontra) -> bool = bot
+    def __gt__(self: Tcontra, other: Tcontra) -> bool = bot
+    def __le__(self: Tcontra, other: Tcontra) -> bool = bot
+    def __ge__(self: Tcontra, other: Tcontra) -> bool = bot
 
 
 TOrd = T.TypeVar("TOrd", bound=Ord)
@@ -271,19 +271,19 @@ def maxBound(b: TBounded) -> TBounded =
 ### Numeric types:
 
 #### Int:
-type Int = int
+Int = int
 
 #### Integer:
-type Integer = int
+Integer = int
 
 #### Float:
-type Float = float
+Float = float
 
 #### Double:
-type Double = float
+Double = float
 
 #### Rational:
-type Rational = _fractions.Fraction
+Rational = _fractions.Fraction
 
 def over(x, y) =
     """
@@ -295,7 +295,7 @@ def over(x, y) =
 (%%) = over
 
 #### Word:
-type Word = Int
+Word = Int
 
 
 ### Numeric type classes:
@@ -319,7 +319,7 @@ case def signum:
 def fromInteger(x: Integer) -> Num = x
 
 #### Real:
-type Real = Num
+Real = Num
 
 case def toRational:
     type(real: Real) -> Rational
@@ -329,7 +329,7 @@ case def toRational:
         Rational(real)
 
 #### Integral:
-type Integral = int
+Integral = int
 
 def quot(x: int, y: int) -> int =
     divxy = x // y
@@ -356,7 +356,7 @@ toInteger: Integral -> Integer
 toInteger = _int
 
 #### Fractional:
-type Fractional = Rational
+Fractional = Rational
 
 recip: Fractional -> Fractional
 recip = (1/.)
@@ -364,7 +364,7 @@ recip = (1/.)
 def fromRational(x: Rational) -> Fractional = x
 
 #### Floating:
-type Floating = float
+Floating = float
 
 from math import (
     pi,
@@ -389,7 +389,7 @@ def logBase(base: float, x: float) -> float =
     log(x, base)
 
 #### RealFrac:
-type RealFrac = Rational
+RealFrac = Rational
 
 def properFraction(x: RealFrac) -> (int; RealFrac) =
     floor_x = floor(x)
@@ -408,7 +408,7 @@ floor: RealFrac -> int
 floor = _floor
 
 #### RealFloat:
-type RealFloat = float
+RealFloat = float
 
 def floatRadix(x: float) -> int = 2
 
@@ -470,7 +470,7 @@ realToFrac = toRational
 
 
 ## Monoids:
-type Monoid = T.Iterable
+Monoid = T.Iterable
 TMonoid = T.TypeVar("TMonoid", bound=Monoid)
 
 data Mempty():
@@ -519,7 +519,7 @@ def mconcat(ms: TMonoid[]) -> TMonoid =
 class _HasFMap(T.Protocol, T.Generic[Tco]):
     def __fmap__[B](self: Functor[Tco], func: Tco -> B) -> Functor[B] = bot
 
-type Functor[A] = T.Iterable[A] | ((...) -> A) | _HasFMap[A]
+type Functor[A] = Applicative[A] | _HasFMap[A]
 TFunctor = T.TypeVar("TFunctor", bound=Functor)
 
 def \fmap(f: Ta -> Tb, xs: Functor[Ta]) -> Functor[Tb]:  # type: ignore
@@ -550,7 +550,7 @@ class _DefinesApp(T.Protocol, T.Generic[Tco]):
     def __fmap__[B](self: Functor[Tco], func: Tco -> B) -> Functor[B] = bot
     def __pure__(self: Functor[Tco]) -> Tco = bot
 
-type Applicative[A] = T.Iterable[A] | ((...) -> A) | _DefinesApp[A] | pure
+type Applicative[A] = Monad[A] | T.Iterable[A] | _DefinesApp[A]
 TApp = T.TypeVar("TApp", bound=Applicative)
 
 if TYPE_CHECKING:
@@ -581,7 +581,7 @@ else:
             except TypeError:
                 # Check for functions
                 if callable(M):
-                    return const(self.val)
+                    return const(self.val)  # type: ignore
 
                 # Fallback
                 raise
@@ -603,7 +603,7 @@ def ap(fs: Applicative[Ta -> Tb], xs: Applicative[Ta]) -> Applicative[Tb] =
         return fs.__ap__(xs)  # type: ignore
 
     # Default implementation
-    fs `bind` f -> fmap(f, xs)
+    fs `bind` f -> fmap(f, xs)  # type: ignore
 (<*>) = ap
 
 def seqAr(f1: Applicative, f2: TApp) -> TApp =
@@ -633,13 +633,13 @@ def liftA2(func: (Ta, Tb) -> Tc) -> (Applicative[Ta], Applicative[Tb]) -> Applic
 class _DefinesMonad(T.Protocol, T.Generic[Tco]):
     def __fmap__[B](self: Functor[Tco], func: Tco -> B) -> Functor[B] = bot
     def __pure__(self: Functor[Tco]) -> Tco = bot
-    def __join__(self: Functor[Functor[Tco]]) -> Functor[Tco] = bot
+    def __join__(self: Functor) -> Functor[Tco] = bot
 
 class _DefaultMonad(T.Protocol, T.Generic[Tco]):
     def __iter__(self) -> T.Iterator[Tco] = bot
     def __bool__(self) -> bool = bot
 
-type Monad[A] = _DefaultMonad[A] | ((...) -> A) | _DefinesMonad[A] | pure | fail
+type Monad[A] = _DefaultMonad[A] | ((...) -> A) | _DefinesMonad[A]
 TMonad = T.TypeVar("TMonad", bound=Monad)
 
 def bind(m: Monad[Ta], func: Ta -> TMonad) -> TMonad =
@@ -700,7 +700,7 @@ def join(ms: Monad[TMonad]) -> TMonad:
     """
     # Resolve ms being pure or fail
     match () :: _ in ms:
-        ms = reduce((ms, m) -> ms `asTypeOf` m, ms, ms)
+        ms = reduce((ms, m) -> ms `asTypeOf` m, ms, ms)  # type: ignore
 
     # Resolve pures and fails inside of ms
     ms = ms |> fmap$(m -> m `asTypeOf` ms)  # type: ignore
@@ -710,7 +710,7 @@ def join(ms: Monad[TMonad]) -> TMonad:
         return ms.__join__()  # type: ignore
 
     # Default implementation
-    match ms:
+    match ms:  # type: ignore
 
         # Iterable instance
         case () :: _:
@@ -817,17 +817,17 @@ Traversable = T.Iterable
 def _snoc(xs: Ta$[], x: Ta) -> Ta$[] =
     (::)(xs, (x,))
 
-def sequenceA(fs: Traversable[Applicative[Ta]]) -> Applicative[Traversable[Ta]] =
+def sequence(fs: Traversable[Monad[Ta]]) -> Monad[Traversable[Ta]] =
     reduce(liftA2(_snoc), fs, pure(())) |> fmap$(xs -> makedata(type(fs), *xs))
 
-traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
-traverse = sequenceA..fmap  # type: ignore
-
-sequence: Traversable[Monad[Ta]] -> Monad[Traversable[Ta]]
-sequence = sequenceA
+sequenceA: Traversable[Applicative[Ta]] -> Applicative[Traversable[Ta]]
+sequenceA = sequence  # type: ignore
 
 mapM: (Ta -> Monad[Tb], Traversable[Ta]) -> Monad[Traversable[Tb]]
-mapM = traverse
+mapM = sequence..fmap  # type: ignore
+
+traverse: (Ta -> Applicative[Tb], Traversable[Ta]) -> Applicative[Traversable[Tb]]
+traverse = mapM  # type: ignore
 
 
 
