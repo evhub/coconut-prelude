@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x7566135
+# __coconut_hash__ = 0x7d9a2329
 
-# Compiled with Coconut version 3.1.0-post_dev11
+# Compiled with Coconut version 3.1.1-post_dev3
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -218,7 +218,7 @@ class _coconut:
         numpy = _coconut_missing_module(numpy_import_err)
     else:
         abc.Sequence.register(numpy.ndarray)
-    numpy_modules = ('numpy', 'torch', 'xarray', 'pandas', 'jaxlib')
+    numpy_modules = ('numpy', 'torch', 'jaxlib', 'pandas', 'xarray')
     xarray_modules = ('xarray',)
     pandas_modules = ('pandas',)
     jax_numpy_modules = ('jaxlib',)
@@ -947,10 +947,7 @@ Additionally supports Cartesian products of numpy arrays."""
         if iterables:
             it_modules = [_coconut_get_base_module(it) for it in iterables]
             if _coconut.all(mod in _coconut.numpy_modules for mod in it_modules):
-                if _coconut.any(mod in _coconut.xarray_modules for mod in it_modules):
-                    iterables = tuple((_coconut_xarray_to_numpy(it) if mod in _coconut.xarray_modules else it) for it, mod in _coconut.zip(iterables, it_modules))
-                if _coconut.any(mod in _coconut.pandas_modules for mod in it_modules):
-                    iterables = tuple((it.to_numpy() if mod in _coconut.pandas_modules else it) for it, mod in _coconut.zip(iterables, it_modules))
+                iterables = tuple((it.to_numpy() if mod in _coconut.pandas_modules else _coconut_xarray_to_numpy(it) if mod in _coconut.xarray_modules else it) for it, mod in _coconut.zip(iterables, it_modules))
                 if _coconut.any(mod in _coconut.jax_numpy_modules for mod in it_modules):
                     from jax import numpy
                 else:
@@ -1283,12 +1280,7 @@ class multi_enumerate(_coconut_has_iter):
     through inner iterables and produces a tuple index representing the index
     in each inner iterable. Supports indexing.
 
-    For numpy arrays, effectively equivalent to:
-        it = np.nditer(iterable, flags=["multi_index", "refs_ok"])
-        for x in it:
-            yield it.multi_index, x
-
-    Also supports len for numpy arrays.
+    For numpy arrays, uses np.nditer under the hood and supports len.
     """
     __slots__ = ()
     def __repr__(self):
@@ -2227,10 +2219,10 @@ def all_equal(iterable, to=_coconut_sentinel):
     """
     iterable_module = _coconut_get_base_module(iterable)
     if iterable_module in _coconut.numpy_modules:
-        if iterable_module in _coconut.xarray_modules:
-            iterable = _coconut_xarray_to_numpy(iterable)
-        elif iterable_module in _coconut.pandas_modules:
+        if iterable_module in _coconut.pandas_modules:
             iterable = iterable.to_numpy()
+        elif iterable_module in _coconut.xarray_modules:
+            iterable = _coconut_xarray_to_numpy(iterable)
         return not _coconut.len(iterable) or (iterable == (iterable[0] if to is _coconut_sentinel else to)).all()
     first_item = to
     for item in iterable:

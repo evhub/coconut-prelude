@@ -718,7 +718,7 @@ def join(ms: Monad[TMonad]) -> TMonad:
                 return ms  # type: ignore
             vals = []  # type: ignore
             fallback = ms
-            for m in ms:
+            for m in ms:  # type: ignore
                 if m:
                     vals.extend(m)  # type: ignore
                 else:

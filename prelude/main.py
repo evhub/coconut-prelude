@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0xb4acf1b2
+# __coconut_hash__ = 0xe8b393ab
 
-# Compiled with Coconut version 3.1.0-post_dev11
+# Compiled with Coconut version 3.1.1-post_dev3
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.1.0-post_dev11', '35', True)
+_coconut_header_info = ('3.1.1-post_dev3', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False
@@ -1697,7 +1697,7 @@ def join(ms: 'Monad[TMonad]') -> 'TMonad':  #693 (line in Coconut source)
             return (ms)  # type: ignore  #718 (line in Coconut source)
         vals = []  # type: ignore  #719 (line in Coconut source)
         fallback = ms  #720 (line in Coconut source)
-        for m in (ms):  #721 (line in Coconut source)
+        for m in (ms):  # type: ignore  #721 (line in Coconut source)
             if m:  #722 (line in Coconut source)
                 vals.extend(m)  # type: ignore  #723 (line in Coconut source)
             else:  #724 (line in Coconut source)
