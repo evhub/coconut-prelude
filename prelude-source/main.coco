@@ -492,8 +492,8 @@ def mappend(x: TMonoid, y: TMonoid) -> TMonoid =
     -- the default implementation identifies non-identities using __bool__
     """
     # Resolve memptys
-    x = x `asTypeOf` y
-    y = y `asTypeOf` x
+    \x = x `asTypeOf` y
+    \y = y `asTypeOf` x
 
     # Check if overridden
     if x `hasattr` "__mappend__":

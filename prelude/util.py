@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x81cc9a70
+# __coconut_hash__ = 0x8f39be3b
 
-# Compiled with Coconut version 3.1.1-post_dev3
+# Compiled with Coconut version 3.2.0-post_dev6
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.1.1-post_dev3', '35', True)
+_coconut_header_info = ('3.2.0-post_dev6', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False

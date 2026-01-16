@@ -21,13 +21,13 @@ install-univ: build-univ base-install
 
 .PHONY: build
 build:
-	coconut setup.coco --strict --target 3.5
-	coconut "prelude-source" prelude --strict --target 3.5 --jobs sys --mypy
+	coconut setup.coco --strict --pure --target 3.5
+	coconut "prelude-source" prelude --strict --pure --target 3.5 --jobs sys --mypy
 
 .PHONY: build-univ
 build-univ:
-	coconut setup.coco --strict
-	coconut "prelude-source" prelude --strict --jobs sys
+	coconut setup.coco --strict --pure
+	coconut "prelude-source" prelude --strict --pure --jobs sys
 
 .PHONY: docs
 docs: install
@@ -51,11 +51,11 @@ upload: clean install-univ package
 
 .PHONY: clean
 clean:
-	rm -rf ./dist ./build ./prelude
-	find . -name "*.pyc" -delete
-	find . -name "__pycache__" -delete
-	find . -name "*.py" -delete
+	rm -rf ./dist ./build ./prelude ./__coconut_cache__ ./prelude-source/__coconut_cache__
+	-find . -name "*.pyc" -delete
+	-find . -name "__pycache__" -delete
+	-find . -name "*.py" -delete
 
 .PHONY: watch
 watch: install
-	coconut "prelude-source" prelude --watch --strict --target 3.5 --mypy
+	coconut "prelude-source" prelude --watch --strict --pure --target 3.5 --mypy

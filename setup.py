@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x7d9a2329
+# __coconut_hash__ = 0x237acc15
 
-# Compiled with Coconut version 3.1.1-post_dev3
+# Compiled with Coconut version 3.2.0-post_dev6
 
 # Coconut Header: -------------------------------------------------------------
 
@@ -25,10 +25,20 @@ else:
                 _coconut_file_comps.append(_coconut_file_comp)
         __file__ = _coconut_os.path.join(*reversed(_coconut_file_comps))
 _coconut_cached__coconut__ = _coconut_sys.modules.get('_coconut_cached__coconut__', _coconut_sys.modules.get('__coconut__'))
+
+import functools as _coconut_functools
+_coconut_getattr = getattr
+def _coconut_wraps(base_func):
+    def wrap(new_func):
+        new_func_module = _coconut_getattr(new_func, "__module__")
+        _coconut_functools.update_wrapper(new_func, base_func)
+        if new_func_module is not None:
+            new_func.__module__ = new_func_module
+        return new_func
+    return wrap
 from builtins import chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
 py_bytes, py_chr, py_dict, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_super, py_zip, py_filter, py_reversed, py_enumerate, py_repr, py_min, py_max = bytes, chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr, min, max
 _coconut_py_str, _coconut_py_super, _coconut_py_dict, _coconut_py_min, _coconut_py_max = str, super, dict, min, max
-from functools import wraps as _coconut_wraps
 exec("_coconut_exec = exec")
 if _coconut_sys.version_info >= (3, 7):
     py_breakpoint = breakpoint
@@ -156,6 +166,10 @@ class _coconut:
         import async_generator
     except ImportError as async_generator_import_err:
         async_generator = _coconut_missing_module(async_generator_import_err)
+    try:
+        import tstr
+    except ImportError as tstr_import_err:
+        tstr = _coconut_missing_module(tstr_import_err)
     import pickle
     OrderedDict = collections.OrderedDict
     import collections.abc as abc
@@ -227,7 +241,7 @@ class _coconut:
     fmappables = list, tuple, dict, set, frozenset, bytes, bytearray
     abc.Sequence.register(collections.deque)
     Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, chr, classmethod, complex, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, ord, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print = Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, chr, classmethod, complex, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, ord, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print
-@_coconut.functools.wraps(_coconut.functools.partial)
+@_coconut_wraps(_coconut.functools.partial)
 def _coconut_partial(_coconut_func, *args, **kwargs):
     partial_func = _coconut.functools.partial(_coconut_func, *args, **kwargs)
     partial_func.__name__ = _coconut.getattr(_coconut_func, "__name__", None)
@@ -352,7 +366,7 @@ class _coconut_tail_call(_coconut_baseclass):
         return (self.__class__, (self.func, self.args, self.kwargs))
 _coconut_tco_func_dict = _coconut.weakref.WeakValueDictionary()
 def _coconut_tco(func):
-    @_coconut.functools.wraps(func)
+    @_coconut_wraps(func)
     def tail_call_optimized_func(*args, **kwargs):
         call_func = func
         while True:
@@ -379,7 +393,7 @@ def _coconut_tco(func):
     tail_call_optimized_func.__qualname__ = _coconut.getattr(func, "__qualname__", None)
     _coconut_tco_func_dict[_coconut.id(tail_call_optimized_func)] = tail_call_optimized_func
     return tail_call_optimized_func
-@_coconut.functools.wraps(_coconut.itertools.tee)
+@_coconut_wraps(_coconut.itertools.tee)
 def tee(iterable, n=2):
     if n < 0:
         raise _coconut.ValueError("tee: n cannot be negative")
@@ -1896,17 +1910,46 @@ def fmap(func, obj, **kwargs):
     else:
         mapped_obj = _coconut_map(func, obj)
     return _coconut_base_makedata(obj.__class__, mapped_obj, from_fmap=True, fallback_to_init=fallback_to_init)
-def _coconut_memoize_helper(maxsize=None, typed=False):
-    return maxsize, typed
 def memoize(*args, **kwargs):
     """Decorator that memoizes a function, preventing it from being recomputed
     if it is called multiple times with the same arguments."""
     if not kwargs and _coconut.len(args) == 1 and _coconut.callable(args[0]):
-        return _coconut.functools.lru_cache(maxsize=None)(args[0])
+        return _coconut_memoize_helper()(args[0])
     if _coconut.len(kwargs) == 1 and "user_function" in kwargs and _coconut.callable(kwargs["user_function"]):
-        return _coconut.functools.lru_cache(maxsize=None)(kwargs["user_function"])
-    maxsize, typed = _coconut_memoize_helper(*args, **kwargs)
-    return _coconut.functools.lru_cache(maxsize, typed)
+        return _coconut_memoize_helper()(kwargs["user_function"])
+    return _coconut_memoize_helper(*args, **kwargs)
+memoize.RECURSIVE = _coconut_Sentinel()
+def _coconut_memoize_helper(maxsize=None, typed=False):
+    if maxsize is memoize.RECURSIVE:
+        def memoizer(func):
+            """memoize(...)"""
+            inside = [False]
+            cache = _coconut.dict()
+            @_coconut_wraps(func)
+            def memoized_func(*args, **kwargs):
+                if typed:
+                    key = (_coconut.tuple((x, _coconut.type(x)) for x in args), _coconut.tuple((k, _coconut.type(k), v, _coconut.type(v)) for k, v in kwargs.items()))
+                else:
+                    key = (args, _coconut.tuple(kwargs.items()))
+                got = cache.get(key, _coconut_sentinel)
+                if got is not _coconut_sentinel:
+                    return got
+                outer_inside, inside[0] = inside[0], True
+                try:
+                    got = func(*args, **kwargs)
+                    cache[key] = got
+                    return got
+                finally:
+                    inside[0] = outer_inside
+                    if not inside[0]:
+                        cache.clear()
+            memoized_func.__module__ = _coconut.getattr(func, "__module__", None)
+            memoized_func.__name__ = _coconut.getattr(func, "__name__", None)
+            memoized_func.__qualname__ = _coconut.getattr(func, "__qualname__", None)
+            return memoized_func
+        return memoizer
+    else:
+        return _coconut.functools.lru_cache(maxsize, typed)
 def _coconut_call_set_names(cls):
     if _coconut_sys.version_info < (3, 6):
         for k, v in _coconut.vars(cls).items():
@@ -2287,15 +2330,18 @@ def _namedtuple_of(**kwargs):
         raise _coconut.RuntimeError("_namedtuple_of is not available on Python < 3.6 (use anonymous namedtuple literals instead)")
     else:
         return _coconut_mk_anon_namedtuple(kwargs.keys(), of_kwargs=kwargs)
-def _coconut_mk_anon_namedtuple(fields, types=None, of_kwargs=None):
+def _coconut_mk_anon_namedtuple(fields, types=None, of_kwargs=_coconut.dict(), of_args=()):
     if types is None:
         NT = _coconut.collections.namedtuple("_namedtuple_of", fields)
     else:
         NT = _coconut.typing.NamedTuple("_namedtuple_of", [(f, t) for f, t in _coconut.zip(fields, types)])
     _coconut.copyreg.pickle(NT, lambda nt: (_coconut_mk_anon_namedtuple, (nt._fields, types, nt._asdict())))
-    if of_kwargs is None:
+    if _coconut_sys.version_info < (3, 10):
+        NT.__match_args__ = _coconut.property(lambda self: self._fields)
+    if of_kwargs or of_args:
+        return NT(*of_args, **of_kwargs)
+    else:
         return NT
-    return NT(**of_kwargs)
 def _coconut_ndim(arr):
     arr_mod = _coconut_get_base_module(arr)
     if (arr_mod in _coconut.numpy_modules or _coconut.hasattr(arr.__class__, "__matconcat__")) and _coconut.hasattr(arr, "ndim"):
@@ -2489,6 +2535,21 @@ class _coconut_SupportsInv(_coconut.typing.Protocol):
     """
     def __invert__(self):
         raise _coconut.NotImplementedError("Protocol methods cannot be called at runtime ((~) in a typing context is a Protocol)")
+@_coconut_wraps(_coconut.functools.reduce)
+def reduce(function, iterable, initial=_coconut_sentinel):
+    if initial is _coconut_sentinel:
+        return _coconut.functools.reduce(function, iterable)
+    return _coconut.functools.reduce(function, iterable, initial)
+class takewhile(_coconut.itertools.takewhile):
+    __slots__ = ()
+    __doc__ = _coconut.itertools.takewhile.__doc__
+    def __new__(cls, predicate, iterable):
+        return _coconut.itertools.takewhile.__new__(cls, predicate, iterable)
+class dropwhile(_coconut.itertools.dropwhile):
+    __slots__ = ()
+    __doc__ = _coconut.itertools.dropwhile.__doc__
+    def __new__(cls, predicate, iterable):
+        return _coconut.itertools.dropwhile.__new__(cls, predicate, iterable)
 async def async_map(async_func, *iters, strict=False):
     """Map async_func over iters asynchronously using anyio."""
     import anyio
@@ -2520,7 +2581,7 @@ def recursive_iterator(*args, **kwargs):
     """Deprecated Coconut built-in 'recursive_iterator' disabled by --strict compilation; use 'recursive_generator' instead."""
     raise _coconut.NameError("deprecated Coconut built-in 'recursive_iterator' disabled by --strict compilation; use 'recursive_generator' instead")
 _coconut_self_match_types = (bool, bytearray, bytes, dict, float, frozenset, int, py_int, list, set, str, py_str, tuple)
-_coconut_Expected, _coconut_MatchError, _coconut_cartesian_product, _coconut_count, _coconut_cycle, _coconut_enumerate, _coconut_flatten, _coconut_fmap, _coconut_filter, _coconut_groupsof, _coconut_ident, _coconut_lift, _coconut_map, _coconut_mapreduce, _coconut_multiset, _coconut_range, _coconut_reiterable, _coconut_reversed, _coconut_scan, _coconut_starmap, _coconut_tee, _coconut_windowsof, _coconut_zip, _coconut_zip_longest, TYPE_CHECKING, reduce, takewhile, dropwhile = Expected, MatchError, cartesian_product, count, cycle, enumerate, flatten, fmap, filter, groupsof, ident, lift, map, mapreduce, multiset, range, reiterable, reversed, scan, starmap, tee, windowsof, zip, zip_longest, False, _coconut.functools.reduce, _coconut.itertools.takewhile, _coconut.itertools.dropwhile
+TYPE_CHECKING, _coconut_Expected, _coconut_MatchError, _coconut_cartesian_product, _coconut_count, _coconut_cycle, _coconut_enumerate, _coconut_flatten, _coconut_fmap, _coconut_filter, _coconut_groupsof, _coconut_ident, _coconut_lift, _coconut_map, _coconut_mapreduce, _coconut_multiset, _coconut_range, _coconut_reiterable, _coconut_reversed, _coconut_scan, _coconut_starmap, _coconut_tee, _coconut_windowsof, _coconut_zip, _coconut_zip_longest = False, Expected, MatchError, cartesian_product, count, cycle, enumerate, flatten, fmap, filter, groupsof, ident, lift, map, mapreduce, multiset, range, reiterable, reversed, scan, starmap, tee, windowsof, zip, zip_longest
 
 # Compiled Coconut: -----------------------------------------------------------
 

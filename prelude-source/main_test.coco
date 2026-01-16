@@ -49,12 +49,12 @@ def test_Tuples():
 def test_Ord() -> None:
     x: Ord
     y: Eq
-    x = y = True
-    x = y = nothing  # type: ignore
-    x = y = Left(3)
-    x = y = lt  # type: ignore
-    x = y = 5
-    x = y = (1, 2)
+    \x = \y = True
+    \x = \y = nothing  # type: ignore
+    \x = \y = Left(3)
+    \x = \y = lt  # type: ignore
+    \x = \y = 5
+    \x = \y = (1, 2)
     assert compare(1, 2) == lt == compare(nothing, Just(1))  # type: ignore
     assert compare(2, 2) == eq == compare(Left(2), Left(2))
     assert compare(2, 1) == gt == compare(Right(1), Left(0))
@@ -63,9 +63,9 @@ def test_Ord() -> None:
 
 def test_Enum() -> None:
     x: Enum
-    x = True
-    x = lt  # type: ignore
-    x = 5
+    \x = True
+    \x = lt  # type: ignore
+    \x = 5
     assert `succ` 5 == 6 == `pred` 7
     assert fromEnum(10) == 10
     assert enumFrom(2)$[:2] |> list == [2, 3]
@@ -233,8 +233,8 @@ def test_Monad():
     @do$([Right(1), Right(2)])
     def right3(x, y) = Right(x + y)
     assert right3 == Right(3)
-    global glob = 1
-    assert nothing == nothing `bind` (def x -> global glob = 2; Just(glob))
+    global glob = 1  # noqa
+    assert nothing == nothing `bind` (def x -> \(global glob = 2); Just(glob))
     assert glob == 1
 
 def test_Foldable():
