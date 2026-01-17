@@ -233,9 +233,9 @@ def test_Monad():
     @do$([Right(1), Right(2)])
     def right3(x, y) = Right(x + y)
     assert right3 == Right(3)
-    global glob = 1  # noqa
-    assert nothing == nothing `bind` (def x -> \(global glob = 2); Just(glob))
-    assert glob == 1
+    glob = [1]
+    assert nothing == nothing `bind` (def x -> glob[0] = 2; Just(glob[0]))
+    assert glob[0] == 1
 
 def test_Foldable():
     assert sequence_([[1], [2], [3]]) == [()]

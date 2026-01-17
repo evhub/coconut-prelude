@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# __coconut_hash__ = 0x522d7b3d
+# __coconut_hash__ = 0x87849b41
 
-# Compiled with Coconut version 3.2.0-post_dev6
+# Compiled with Coconut version 3.2.0-post_dev7
 
 # Coconut Header: -------------------------------------------------------------
 
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.2.0-post_dev6', '35', True)
+_coconut_header_info = ('3.2.0-post_dev7', '35', True)
 _coconut_cached__coconut__ = _coconut_sys.modules.get('__coconut__')
 _coconut_file_dir = _coconut_os.path.dirname(_coconut_os.path.abspath(__file__))
 _coconut_pop_path = False
@@ -341,15 +341,14 @@ def test_Monad():  #194 (line in Coconut source)
         return _coconut_tail_call(Right, x + y)  #234 (line in Coconut source)
 
     assert right3 == Right(3)  #235 (line in Coconut source)
-    global glob  # noqa  #236 (line in Coconut source)
-    glob = 1  # noqa  #236 (line in Coconut source)
+    glob = [1,]  #236 (line in Coconut source)
     @_coconut_tco  #237 (line in Coconut source)
     def _coconut_lambda_1(x):  #237 (line in Coconut source)
-        global glob = 2  #237 (line in Coconut source)
-        return _coconut_tail_call(Just, glob)  #237 (line in Coconut source)
+        glob[0] = 2  #237 (line in Coconut source)
+        return _coconut_tail_call(Just, glob[0])  #237 (line in Coconut source)
 
     assert nothing == (bind)(nothing, (_coconut_lambda_1))  #237 (line in Coconut source)
-    assert glob == 1  #238 (line in Coconut source)
+    assert glob[0] == 1  #238 (line in Coconut source)
 
 
 def test_Foldable():  #240 (line in Coconut source)
