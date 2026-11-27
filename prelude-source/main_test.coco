@@ -234,7 +234,10 @@ def test_Monad():
     def right3(x, y) = Right(x + y)
     assert right3 == Right(3)
     glob = [1]
-    assert nothing == nothing `bind` (def x -> glob[0] = 2; Just(glob[0]))
+    def mutate_glob(x):
+        glob[0] = 2  # NOQA (deliberate mutation to check that bind doesn't call the function)
+        return Just(glob[0])
+    assert nothing == nothing `bind` mutate_glob
     assert glob[0] == 1
 
 def test_Foldable():

@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 # type: ignore
 
-# Compiled with Coconut version 3.2.0-post_dev7
+# Compiled with Coconut version 3.2.0-post_dev21
 
 """Built-in Coconut utilities."""
 
@@ -11,7 +11,7 @@
 from __future__ import generator_stop
 import sys as _coconut_sys
 import os as _coconut_os
-_coconut_header_info = ('3.2.0-post_dev7', '35', True)
+_coconut_header_info = ('3.2.0-post_dev21', '35', True)
 try:
     __file__ = _coconut_os.path.abspath(__file__) if __file__ else __file__
 except NameError:
@@ -39,10 +39,25 @@ def _coconut_wraps(base_func):
             new_func.__module__ = new_func_module
         return new_func
     return wrap
-from builtins import chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr
+from builtins import chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr, min, max, type
 py_bytes, py_chr, py_dict, py_hex, py_input, py_int, py_map, py_object, py_oct, py_open, py_print, py_range, py_str, py_super, py_zip, py_filter, py_reversed, py_enumerate, py_repr, py_min, py_max = bytes, chr, dict, hex, input, int, map, object, oct, open, print, range, str, super, zip, filter, reversed, enumerate, repr, min, max
-_coconut_py_str, _coconut_py_super, _coconut_py_dict, _coconut_py_min, _coconut_py_max = str, super, dict, min, max
+_coconut_py_str, _coconut_py_super, _coconut_py_dict, _coconut_py_min, _coconut_py_max, _coconut_type = str, super, dict, min, max, type
 exec("_coconut_exec = exec")
+class _coconut_partial(_coconut_functools.partial):
+    __slots__ = ()
+    def __new__(cls, *args, **kwargs):
+        self = _coconut_functools.partial.__new__(cls, *args, **kwargs)
+        self.__name__ = _coconut.getattr(args[0] if args else self.func, "__name__", None)
+        return self
+    def __get__(self, obj, objtype=None):
+        if obj is None:
+            return self
+        return _coconut.types.MethodType(self, obj)
+    @property
+    def __signature__(self):
+        return _coconut.inspect.signature(_coconut_functools.partial(self.func, *self.args, **self.keywords))
+    def __repr__(self):
+        return "functools.partial({0})".format(", ".join([_coconut.repr(self.func)] + [_coconut.repr(a) for a in self.args] + ["{0}={1}".format(k, _coconut.repr(v)) for k, v in self.keywords.items()]))
 if _coconut_sys.version_info >= (3, 7):
     py_breakpoint = breakpoint
 if _coconut_sys.version_info < (3, 4):
@@ -139,12 +154,60 @@ if _coconut_sys.version_info < (3, 11):
         class you_need_to_install_exceptiongroup(object):
             __slots__ = ()
         ExceptionGroup = BaseExceptionGroup = you_need_to_install_exceptiongroup()
-class _coconut_missing_module:
-    __slots__ = ("_import_err",)
-    def __init__(self, error):
-        self._import_err = error
-    def __getattr__(self, name):
-        raise self._import_err
+def _coconut_lazy_module(name, on_import=None, attr=None):
+    state = [None, None]
+    def load():
+        if state[0] is None and state[1] is None:
+            try:
+                import importlib
+                mod = importlib.import_module(name)
+            except _coconut.ImportError as err:
+                state[1] = err
+            else:
+                state[0] = mod
+                loaded = _coconut.getattr(state[0], attr) if attr is not None else state[0]
+                for cls in _coconut_type(loaded).__mro__:
+                    for attr_name, attr_val in _coconut.vars(cls).items():
+                        if attr_name.startswith("__") and attr_name.endswith("__") and _coconut.callable(attr_val):
+                            try:
+                                _coconut_type.__setattr__(lazy_obj, attr_name, make_lazy_method(attr_name))
+                            except _coconut.Exception:
+                                pass
+                if on_import is not None:
+                    on_import(mod)
+        if state[1] is not None:
+            raise state[1]
+        if attr is not None:
+            return _coconut.getattr(state[0], attr)
+        return state[0]
+    if attr is None:
+        from types import ModuleType as base
+    else:
+        base = _coconut_type
+    class lazy_obj(base):
+        def _coconut_lazy_load(cls):
+            return load()
+        def __getattr__(cls, name):
+            return _coconut.getattr(load(), name)
+        def __setattr__(cls, name, value):
+            _coconut.setattr(load(), name, value)
+        def __dir__(cls):
+            return _coconut.dir(load())
+        def __instancecheck__(cls, inst):
+            return _coconut.isinstance(inst, load())
+        def __subclasscheck__(cls, sub):
+            return _coconut.issubclass(sub, load())
+    def make_lazy_method(method_name):
+        def lazy_method(cls, *args, **kwargs):
+            loaded = load()
+            return _coconut.getattr(_coconut_type(loaded), method_name)(loaded, *args, **kwargs)
+        return lazy_method
+    for method_name in ("__repr__", "__call__", "__or__", "__ror__", "__reduce__", "__reduce_ex__", "__str__", "__hash__", "__format__", "__eq__", "__lt__", "__le__", "__gt__", "__ge__", "__contains__", "__iter__", "__reversed__", "__getitem__", "__setitem__", "__delitem__", "__missing__", "__add__", "__sub__", "__mul__", "__floordiv__", "__truediv__", "__mod__", "__pow__", "__matmul__", "__divmod__", "__neg__", "__pos__", "__abs__", "__invert__", "__and__", "__xor__",  "__lshift__", "__rshift__", "__enter__", "__exit__", "__aiter__", "__await__", "__aenter__", "__aexit__", "__copy__", "__deepcopy__"):
+        _coconut_type.__setattr__(lazy_obj, method_name, make_lazy_method(method_name))
+    return lazy_obj(_coconut_py_str(name)) if attr is None else lazy_obj(_coconut_py_str(name), (), {})
+def _coconut_lazy_get(obj):
+    lazy_load = _coconut_type(obj).__dict__.get("_coconut_lazy_load")
+    return obj if lazy_load is None else lazy_load(obj)
 @_coconut_wraps(_coconut_py_super)
 def _coconut_super(type=None, object_or_type=None):
     if type is None:
@@ -165,18 +228,12 @@ class _coconut:
     import copyreg
     import asyncio
     asyncio_Return = StopIteration
-    try:
-        import async_generator
-    except ImportError as async_generator_import_err:
-        async_generator = _coconut_missing_module(async_generator_import_err)
-    try:
-        import tstr
-    except ImportError as tstr_import_err:
-        tstr = _coconut_missing_module(tstr_import_err)
+    async_generator = _coconut_lazy_module("async_generator")
+    tstr = _coconut_lazy_module("tstr")
     import pickle
     OrderedDict = collections.OrderedDict
     import collections.abc as abc
-    typing = types.ModuleType(_coconut_py_str("typing"))
+    typing = types.ModuleType('typing')
     try:
         import typing_extensions
     except ImportError:
@@ -223,18 +280,27 @@ class _coconut:
             class you_need_to_install_typing_extensions:
                 __slots__ = ()
             typing.Unpack = you_need_to_install_typing_extensions()
+    if _coconut_sys.version_info < (3, 13):
+        try:
+            typing.TypeVar("_coconut_T", default=None)
+        except TypeError:
+            def _coconut_drop_type_param_default(func):
+                """Make type parameter defaults (PEP 696) work when the installed typing_extensions doesn't support them."""
+                def without_default(name, *args, **kwargs):
+                    kwargs.pop("default", None)
+                    return func(name, *args, **kwargs)
+                return without_default
+            for _name in ("TypeVar", "ParamSpec", "TypeVarTuple"):
+                if hasattr(typing, _name):
+                    setattr(typing, _name, _coconut_drop_type_param_default(getattr(typing, _name)))
+            _coconut_drop_type_param_default = staticmethod(_coconut_drop_type_param_default)
 
     def _typing_getattr(name):
         raise _coconut.AttributeError("typing.%s is not available on the current Python version and couldn't be looked up in typing_extensions; try hiding your typedefs behind an 'if TYPE_CHECKING:' block" % (name,))
     typing.__getattr__ = _typing_getattr
     _typing_getattr = staticmethod(_typing_getattr)
     zip_longest = itertools.zip_longest
-    try:
-        import numpy
-    except ImportError as numpy_import_err:
-        numpy = _coconut_missing_module(numpy_import_err)
-    else:
-        abc.Sequence.register(numpy.ndarray)
+    numpy = _coconut_lazy_module("numpy", on_import=lambda np: _coconut.abc.Sequence.register(np.ndarray))
     numpy_modules = ('numpy', 'torch', 'jaxlib', 'pandas', 'xarray')
     xarray_modules = ('xarray',)
     pandas_modules = ('pandas',)
@@ -243,12 +309,8 @@ class _coconut:
     reiterables = abc.Sequence, abc.Mapping, abc.Set
     fmappables = list, tuple, dict, set, frozenset, bytes, bytearray
     abc.Sequence.register(collections.deque)
-    Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, chr, classmethod, complex, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, ord, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print = Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, chr, classmethod, complex, dict, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, ord, property, range, reversed, set, setattr, slice, str, sum, super, tuple, type, vars, zip, repr, print
-@_coconut_wraps(_coconut.functools.partial)
-def _coconut_partial(_coconut_func, *args, **kwargs):
-    partial_func = _coconut.functools.partial(_coconut_func, *args, **kwargs)
-    partial_func.__name__ = _coconut.getattr(_coconut_func, "__name__", None)
-    return partial_func
+    Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, chr, classmethod, complex, dict, dir, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, ord, property, range, reversed, set, setattr, slice, str, sum, super, tuple, vars, zip, repr, print = Ellipsis, NotImplemented, NotImplementedError, Exception, AttributeError, ImportError, IndexError, KeyError, NameError, TypeError, ValueError, StopIteration, RuntimeError, all, any, bool, bytes, callable, chr, classmethod, complex, dict, dir, enumerate, filter, float, frozenset, getattr, hasattr, hash, id, int, isinstance, issubclass, iter, len, list, locals, globals, map, min, max, next, object, ord, property, range, reversed, set, setattr, slice, str, sum, super, tuple, vars, zip, repr, print
+    str_like_types = str, bytes, bytearray
 def _coconut_handle_cls_kwargs(**kwargs):
     """Some code taken from six under the terms of its MIT license."""
     metaclass = kwargs.pop("metaclass", None)
@@ -291,6 +353,8 @@ class _coconut_baseclass:
         if getitem is None:
             raise _coconut.NotImplementedError
         return getitem(index)
+    def __bool__(self):
+        return True
 class _coconut_base_callable(_coconut_baseclass):
     __slots__ = ()
     def __get__(self, obj, objtype=None):
@@ -767,6 +831,25 @@ def _coconut_assert(cond, msg=None):
     """Assert operator (assert). Asserts condition with optional message."""
     if not cond:
         assert False, msg if msg is not None else "(assert) got falsey value " + _coconut.repr(cond)
+def _coconut_eager_thunk(thunk):
+    """Evaluate thunk now if it doesn't raise NameError (used for iterator chain operands that are just names)."""
+    try:
+        value = thunk()
+    except _coconut.NameError:
+        return thunk
+    return lambda: value
+def _coconut_assert_msg(expr, *names_and_values):
+    """Build the error message for a failed assert of a simple comparison."""
+    shown_values = []
+    for i in _coconut.range(0, _coconut.len(names_and_values), 2):
+        try:
+            value_repr = _coconut.repr(names_and_values[i + 1])
+        except _coconut.Exception:
+            value_repr = "<unrepresentable value>"
+        if _coconut.len(value_repr) > 1000:
+            value_repr = value_repr[:1000] + "..."
+        shown_values.append(names_and_values[i] + " = " + value_repr)
+    return "assert " + expr + " failed (" + ", ".join(shown_values) + ")"
 def _coconut_raise(exc=None, from_exc=None):
     """Raise operator (raise). Raises exception with optional cause."""
     if exc is None:
@@ -888,7 +971,7 @@ class flatten(_coconut_has_iter):
             for i in _coconut.reversed(_coconut.range(0 if self.levels is None else self.levels + 1)):
                 mapper = reiterable
                 for _ in _coconut.range(i):
-                    mapper = _coconut.functools.partial(map, mapper)
+                    mapper = _coconut_partial(map, mapper)
                 self.iter = mapper(self.iter)
             self._made_reit = True
         return self.iter
@@ -914,7 +997,7 @@ class flatten(_coconut_has_iter):
         for i in _coconut.reversed(_coconut.range(self.levels + 1)):
             reverser = reversed
             for _ in _coconut.range(i):
-                reverser = _coconut.functools.partial(map, reverser)
+                reverser = _coconut_partial(map, reverser)
             reversed_iter = reverser(reversed_iter)
         return self.__class__(reversed_iter, self.levels)
     def __repr__(self):
@@ -1102,7 +1185,7 @@ class _coconut_base_parallel_map(map):
                 cls._get_pool_stack()[-1].terminate()
                 cls._get_pool_stack()[-1] = None
         elif max_workers is not None:
-            self.map_cls._get_pool_stack().append(cls._make_pool(max_workers))
+            cls._get_pool_stack().append(cls._make_pool(max_workers))
             try:
                 yield
             finally:
@@ -1129,7 +1212,7 @@ class _coconut_base_parallel_map(map):
     def to_stream(self):
         """Stream the map operation, yielding results one at a time."""
         if self._get_pool_stack()[-1] is None:
-            raise _coconut.RuntimeError("cannot stream outside of " + cls.__name__ + ".multiple_sequential_calls context")
+            raise _coconut.RuntimeError("cannot stream outside of " + self.__class__.__name__ + ".multiple_sequential_calls context")
         return self._execute_map()
     def __iter__(self):
         if self.stream:
@@ -1146,8 +1229,33 @@ class process_map(_coconut_base_parallel_map):
     __slots__ = ()
     _threadlocal_ns = _coconut.threading.local()
     @staticmethod
-    def _make_pool(max_workers=None):
+    def _main_is_interactive():
+        """Whether __main__ is interactive (e.g. the Coconut interpreter or a notebook), in which case only forked workers can find things defined in it."""
+        main_module = _coconut_sys.modules.get("__main__")
+        return main_module is not None and _coconut.getattr(main_module, "__file__", None) is None
+    @staticmethod
+    def _start_methods():
+        """The available multiprocessing start methods, or None if they can't be chosen (Python < 3.4)."""
+        get_all_start_methods = _coconut.getattr(_coconut.multiprocessing, "get_all_start_methods", None)
+        return None if get_all_start_methods is None else get_all_start_methods()
+    @classmethod
+    def _make_pool(cls, max_workers=None):
+        # prefer fork when __main__ is interactive (fork was the default on Linux before Python 3.14)
+        start_methods = cls._start_methods()
+        if start_methods is not None and "fork" in start_methods and cls._main_is_interactive():
+            return _coconut.multiprocessing.get_context("fork").Pool(max_workers)
         return _coconut.multiprocessing.Pool(max_workers)
+    def _execute_map(self):
+        # without fork, workers can't find interactively-defined functions and the pool would hang
+        start_methods = self._start_methods()
+        if (
+            start_methods is not None
+            and "fork" not in start_methods
+            and _coconut.getattr(self.func, "__module__", None) == "__main__"
+            and self._main_is_interactive()
+        ):
+            raise _coconut.TypeError("process_map can't use functions defined interactively on platforms without the 'fork' start method, since its worker processes can't find them (define the function in a module instead)")
+        return _coconut_base_parallel_map._execute_map(self)
 class thread_map(_coconut_base_parallel_map):
     """Multi-thread implementation of map.
 
@@ -1211,7 +1319,7 @@ class zip_longest(zip):
                 if self_len is _coconut.NotImplemented:
                     return self_len
             new_ind = _coconut.slice(index.start + self_len if index.start is not None and index.start < 0 else index.start, index.stop + self_len if index.stop is not None and index.stop < 0 else index.stop, index.step)
-            return self.__class__(*(_coconut_iter_getitem(it, new_ind) for it in self.iters))
+            return self.__class__(*(_coconut_iter_getitem(it, new_ind) for it in self.iters), fillvalue=self.fillvalue)
         if index < 0:
             if self_len is None:
                 self_len = self.__len__()
@@ -1230,6 +1338,11 @@ class zip_longest(zip):
         if not got_non_default:
             raise _coconut.IndexError("zip_longest index out of range")
         return _coconut.tuple(result)
+    def __reversed__(self):
+        if not _coconut.all(_coconut.isinstance(it, _coconut.abc.Sized) for it in self.iters):
+            raise _coconut.TypeError("can only reverse a zip_longest of sized iterables")
+        n = self.__len__()
+        return self.__class__(*(reversed(_coconut.tuple(it) + (self.fillvalue,) * (n - _coconut.len(it))) for it in self.iters), fillvalue=self.fillvalue)
     def __len__(self):
         if not _coconut.all(_coconut.isinstance(it, _coconut.abc.Sized) for it in self.iters):
             return _coconut.NotImplemented
@@ -1326,7 +1439,7 @@ class multi_enumerate(_coconut_has_iter):
                     ind.pop()
                     its.pop()
                 else:
-                    if _coconut.isinstance(x, _coconut.abc.Iterable):
+                    if _coconut.isinstance(x, _coconut.abc.Iterable) and not _coconut.isinstance(x, _coconut.str_like_types):
                         ind.append(-1)
                         its.append(_coconut.iter(x))
                     else:
@@ -1530,9 +1643,9 @@ class groupsof(_coconut_has_iter):
     def __repr__(self):
         return "groupsof(" + _coconut.repr(self.group_size) + ", " + _coconut.repr(self.iter) + (", fillvalue=" + _coconut.repr(self.fillvalue) if self.fillvalue is not _coconut_sentinel else "") + ")"
     def __reduce__(self):
-        return (self.__class__, (self.group_size, self.iter))
+        return (self.__class__, (self.group_size, self.iter, self.fillvalue))
     def __copy__(self):
-        return self.__class__(self.group_size, self.get_new_iter())
+        return self.__class__(self.group_size, self.get_new_iter(), self.fillvalue)
 class recursive_generator(_coconut_base_callable):
     """Decorator that memoizes a generator (or any function that returns an iterator).
     Particularly useful for recursive generators, which may require recursive_generator to function properly."""
@@ -1585,7 +1698,7 @@ def _coconut_get_function_match_error():
 class _coconut_base_pattern_func(_coconut_base_callable):
     _coconut_is_match = True
     def __init__(self, *funcs):
-        self.FunctionMatchError = _coconut.type(_coconut_py_str("MatchError"), (MatchError,), _coconut_py_dict())
+        self.FunctionMatchError = _coconut_type('MatchError', (MatchError,), _coconut_py_dict())
         self.patterns = []
         self.__doc__ = None
         self.__name__ = None
@@ -1712,7 +1825,7 @@ class starmap(_coconut_baseclass, _coconut.itertools.starmap):
             return self.__class__(self.func, _coconut_iter_getitem(self.iter, index))
         return self.func(*_coconut_iter_getitem(self.iter, index))
     def __reversed__(self):
-        return self.__class__(self.func, *reversed(self.iter))
+        return self.__class__(self.func, reversed(self.iter))
     def __len__(self):
         if not _coconut.isinstance(self.iter, _coconut.abc.Sized):
             return _coconut.NotImplemented
@@ -1931,7 +2044,7 @@ def _coconut_memoize_helper(maxsize=None, typed=False):
             @_coconut_wraps(func)
             def memoized_func(*args, **kwargs):
                 if typed:
-                    key = (_coconut.tuple((x, _coconut.type(x)) for x in args), _coconut.tuple((k, _coconut.type(k), v, _coconut.type(v)) for k, v in kwargs.items()))
+                    key = (_coconut.tuple((x, _coconut_type(x)) for x in args), _coconut.tuple((k, _coconut_type(k), v, _coconut_type(v)) for k, v in kwargs.items()))
                 else:
                     key = (args, _coconut.tuple(kwargs.items()))
                 got = cache.get(key, _coconut_sentinel)
@@ -1965,6 +2078,11 @@ class override(_coconut_baseclass):
     __slots__ = ("func",)
     def __init__(self, func):
         self.func = func
+        # mark the function as an override like typing.override does
+        try:
+            func.__override__ = True
+        except (_coconut.AttributeError, _coconut.TypeError):
+            pass
     def __get__(self, obj, objtype=None):
         self_func_get = _coconut.getattr(self.func, "__get__", None)
         if self_func_get is not None:
@@ -2067,7 +2185,7 @@ class Expected(_coconut.collections.namedtuple("Expected", ("result", "error")))
                 if not self and isinstance(self.error, err_type):
                     return self.__class__(handler(self.error))
                 return self
-            def expect_error(self, *err_types: BaseException) -> Expected[T]:
+            def expect_error(self, *err_types: Type[BaseException]) -> Expected[T]:
                 """Raise any errors that do not match the given error types."""
                 if not self and not isinstance(self.error, err_types):
                     raise self.error
@@ -2214,7 +2332,7 @@ class _coconut_lifted(_coconut_base_callable):
         else:
             return self.func(*(g(*args, **kwargs) for g in self.func_args), **_coconut_py_dict((k, h(*args, **kwargs)) for k, h in self.func_kwargs.items()))
     def __repr__(self):
-        return "lift%s(%r)(%s%s)" % (self.func, ("_apart" if self.apart else ""), ", ".join(_coconut.repr(g) for g in self.func_args), ", ".join(k + "=" + _coconut.repr(h) for k, h in self.func_kwargs.items()))
+        return "lift%s(%r)(%s)" % (("_apart" if self.apart else ""), self.func, ", ".join([_coconut.repr(g) for g in self.func_args] + [k + "=" + _coconut.repr(h) for k, h in self.func_kwargs.items()]))
 class lift(_coconut_base_callable):
     """Lift a function up so that all of its arguments are functions that all take the same arguments.
 
@@ -2283,7 +2401,7 @@ def mapreduce(key_value_func, iterable, **kwargs):
     If reduce_func is passed, instead of collecting the values into lists, reduce over
     the values for each key with reduce_func, effectively implementing a MapReduce operation.
 
-    If collect_in is passed, initialize the collection from .
+    If collect_in is passed, collect into it (in place) instead of into a new dictionary.
     """
     collect_in = kwargs.pop("collect_in", None)
     reduce_func = kwargs.pop("reduce_func", None if collect_in is None else False)
@@ -2308,7 +2426,7 @@ def mapreduce(key_value_func, iterable, **kwargs):
 def _coconut_parallel_mapreduce(mapreduce_func, map_cls, *args, **kwargs):
     if "map_using" in kwargs:
         raise _coconut.TypeError("redundant map_using argument to process/thread mapreduce/collectby")
-    kwargs["map_using"] = _coconut.functools.partial(map_cls, stream=True, ordered=kwargs.pop("ordered", False), chunksize=kwargs.pop("chunksize", 1))
+    kwargs["map_using"] = _coconut_partial(map_cls, stream=True, ordered=kwargs.pop("ordered", False), chunksize=kwargs.pop("chunksize", 1))
     with map_cls.multiple_sequential_calls(max_workers=kwargs.pop("max_workers", None)):
         return mapreduce_func(*args, **kwargs)
 mapreduce.using_processes = _coconut_partial(_coconut_parallel_mapreduce, mapreduce, process_map)

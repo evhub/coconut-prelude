@@ -130,5 +130,5 @@ def definesReturn(dataType: TType) -> TType:
     """
     if dataType `hasattr` "__pure__":
         raise TypeError("data types which define __return__ cannot define __pure__")
-    dataType.__pure__ = dataType.__return__
+    dataType.__pure__ = dataType.__return__  # NOQA (setting class attributes is this decorator's purpose)
     return dataType

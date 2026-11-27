@@ -716,15 +716,11 @@ def join(ms: Monad[TMonad]) -> TMonad:
         case () :: _:
             if not ms:
                 return ms  # type: ignore
-            vals = []  # type: ignore
-            fallback = ms
-            for m in ms:  # type: ignore
-                if m:
-                    vals.extend(m)  # type: ignore
-                else:
-                    \fallback = m  # type: ignore
+            ms_items = tuple(ms)  # type: ignore
+            vals = [x for m in ms_items if m for x in m]  # type: ignore
             if not vals:
-                return fallback  # type: ignore
+                # fall back to the last empty value, or ms itself if there are none
+                return reduce((fallback, m) -> fallback if m else m, ms_items, ms)  # type: ignore
             return makedata(type(ms), *vals)  # type: ignore
 
         # Function instance
@@ -892,7 +888,7 @@ def asTypeOf(x: Ta, y: Ta) -> Ta:
                 break
     return x
 
-asTypeOf.RECURSION_LIMIT = 3  # type: ignore
+asTypeOf.RECURSION_LIMIT = 3  # type: ignore  # NOQA (a public setting users can change)
 
 def error(msg: str) -> None:
     raise Exception(msg)
