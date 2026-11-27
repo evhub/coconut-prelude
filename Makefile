@@ -38,7 +38,7 @@ docs: install
 .PHONY: setup
 setup:
 	pip install -U setuptools wheel pip
-	pip install -U coconut-develop[watch,jobs,mypy]
+	pip install -U coconut-develop[watch,mypy]
 
 .PHONY: package
 package:
