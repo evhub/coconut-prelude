@@ -2,16 +2,17 @@ name: coconut-prelude tests
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # EOL Pythons have to be built from source, which fails on newer Ubuntus
+    runs-on: ${{ contains(fromJSON('["3.8", "3.9"]'), matrix.python-version) && 'ubuntu-24.04' || 'ubuntu-latest' }}
     strategy:
       matrix:
-        python-version: ['3.8', '3.9', '3.10']
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13', '3.14']
       fail-fast: false
     name: Python ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup python
-        uses: actions/setup-python@v4
+        uses: MatteoH2O1999/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
@@ -19,6 +20,8 @@ jobs:
       - run: make test
       - run: make package
       - name: Publish to PyPI
+        # only publish from master, never from feature branches
+        if: github.ref == 'refs/heads/master'
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           user: __token__
