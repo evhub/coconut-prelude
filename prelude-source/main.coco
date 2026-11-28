@@ -1000,7 +1000,7 @@ def scanr1(func: (Ta, Ta) -> Ta, xs: Ta[]) -> Ta$[] =
 
 ### Infinite lists:
 @recursive_generator
-def iterate(func: Ta -> Ta, x: Ta) -> Ta$[] =
+def \iterate(func: Ta -> Ta, x: Ta) -> Ta$[] =
     [x] :: iterate(func, func(x))
 
 @recursive_generator
